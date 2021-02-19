@@ -64,7 +64,7 @@ export default defineConfig({
         {
           path: '/',
           name: 'home',
-          component: './Welcome',
+          component: './Index/Welcome',
         },
         {
           path: '/',
