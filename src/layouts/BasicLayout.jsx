@@ -6,12 +6,11 @@
 import ProLayout, { DefaultFooter, SettingDrawer } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
-import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
-import logo from '../assets/logo.svg';
+import logo from '../assets/xzpt.png';
 
 const noMatch = (
   <Result
@@ -39,29 +38,7 @@ const menuDataRender = (menuList) =>
   });
 
 const defaultFooterDom = (
-  <DefaultFooter
-    copyright={`${new Date().getFullYear()} 蚂蚁集团体验技术部出品`}
-    links={[
-      {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
-        blankTarget: true,
-      },
-      {
-        key: 'github',
-        title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
-        blankTarget: true,
-      },
-      {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
-        blankTarget: true,
-      },
-    ]}
-  />
+  <DefaultFooter copyright={`${new Date().getFullYear()}  TOPSOFT-AI-PROPHET`} links={[]} />
 );
 
 const BasicLayout = (props) => {
@@ -105,12 +82,21 @@ const BasicLayout = (props) => {
   return (
     <>
       <ProLayout
-        logo={logo}
         formatMessage={formatMessage}
         {...props}
         {...settings}
         onCollapse={handleMenuCollapse}
-        onMenuHeaderClick={() => history.push('/')}
+        menuHeaderRender={() => (
+          <div
+            id="customize_menu_header"
+            onClick={() => {
+              history.push('/dash/dashboard/workplace');
+            }}
+            style={{ width: '100%' }}
+          >
+            <img src={logo} style={{ height: '65px' }} />
+          </div>
+        )}
         menuItemRender={(menuItemProps, defaultDom) => {
           if (
             menuItemProps.isUrl ||

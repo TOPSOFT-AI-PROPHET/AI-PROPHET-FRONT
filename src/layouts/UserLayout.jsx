@@ -2,7 +2,7 @@ import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link, SelectLang, useIntl, connect, FormattedMessage } from 'umi';
 import React from 'react';
-import logo from '../assets/logo.svg';
+import logo from '../assets/xzpt_b.png';
 import styles from './UserLayout.less';
 
 const UserLayout = (props) => {
@@ -42,7 +42,7 @@ const UserLayout = (props) => {
             <div className={styles.header}>
               <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+                <span className={styles.title}>AI-PROPHET</span>
               </Link>
             </div>
             <div className={styles.desc}>
@@ -54,7 +54,7 @@ const UserLayout = (props) => {
           </div>
           {children}
         </div>
-        <DefaultFooter />
+        <DefaultFooter copyright={`${new Date().getFullYear()}  TOPSOFT-AI-PROPHET`} links={[]} />
       </div>
     </HelmetProvider>
   );

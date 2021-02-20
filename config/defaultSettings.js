@@ -7,7 +7,7 @@ const proSettings = {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: 'THE PROPHET | OFFICIAL - TOPSOFT AI',
   pwa: false,
   iconfontUrl: '',
 };

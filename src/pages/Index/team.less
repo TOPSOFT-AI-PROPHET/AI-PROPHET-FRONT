@@ -1,0 +1,108 @@
+@teams3: teams3;
+
+.@{teams3}-wrapper {
+  min-height: 446px;
+  overflow: hidden;
+
+  .@{teams3} {
+    height: 100%;
+    padding: 64px 24px;
+    overflow: hidden;
+
+    .block-top-wrapper {
+      position: relative;
+      height: 100%;
+      padding: 20px 0;
+      overflow: hidden;
+      .block-top {
+        display: inline-block;
+        margin-bottom: 48px;
+        text-align: center;
+        &.queue-anim-leaving {
+          position: relative !important;
+        }
+      }
+    }
+    &-top-image,
+    &-top-title,
+    &-top-job,
+    &-top-content {
+      width: 200px;
+      margin: auto;
+      line-height: 1.5;
+    }
+    &-top-image {
+      color: #404040;
+      img {
+        width: 100%;
+      }
+    }
+    &-top-title {
+      margin: 24px auto 8px;
+      font-size: 24px;
+    }
+    &-top-job {
+      margin: 8px auto;
+    }
+    &-top-job,
+    &-top-content {
+      color: #919191;
+      font-size: 12px;
+    }
+
+    .block-wrapper {
+      position: relative;
+      height: 100%;
+      min-height: 456px;
+      margin-top: 48px;
+      padding: 20px 0;
+      overflow: hidden;
+      .block {
+        margin-bottom: 48px;
+        vertical-align: text-top;
+
+        &.queue-anim-leaving {
+          position: relative !important;
+        }
+      }
+    }
+
+    &-image {
+      width: 100%;
+      color: #404040;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-textWrapper {
+      padding-left: 16px;
+    }
+
+    &-title {
+      margin-bottom: 2px;
+      font-size: 18px;
+    }
+
+    &-job {
+      margin-bottom: 4px;
+    }
+
+    &-job,
+    &-content {
+      color: #919191;
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .@{teams3}-wrapper {
+    min-height: 1440px;
+
+    .@{teams3}.home-page {
+      padding-bottom: 0;
+    }
+  }
+}
