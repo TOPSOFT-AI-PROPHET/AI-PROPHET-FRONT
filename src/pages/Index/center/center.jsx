@@ -48,6 +48,7 @@ class center extends Component {
                   </span>
                   <br />
                   <Button
+                    ghost
                     className={styles.buttonstyle}
                     onClick={this.homeOpenTab.bind(this, item.buttonLink)}
                     size="large"

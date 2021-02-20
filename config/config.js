@@ -67,42 +67,56 @@ export default defineConfig({
           component: './Index/Welcome',
         },
         {
-          path: '/',
+          path: '/products',
+          name: 'products',
+          component: './Index/Products',
+        },
+        {
+          path: '/team',
+          name: 'team',
+          component: './Index/Team',
+        },
+        {
+          path: '/dash',
           component: '../layouts/BasicLayout',
           Routes: ['src/pages/Authorized'],
           authority: ['admin', 'user'],
           routes: [
             {
-              path: '/dashboard',
+              path: '/dash',
+              redirect: '/dash/dashboard/workplace',
+            },
+            {
+              path: '/dash/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
               routes: [
                 {
-                  path: '/',
-                  redirect: '/dashboard/analysis',
+                  path: '/dash/dashboard',
+                  redirect: '/dash/dashboard/workplace',
                 },
                 {
                   name: 'analysis',
                   icon: 'smile',
-                  path: '/dashboard/analysis',
+                  path: '/dash/dashboard/analysis',
                   component: './dashboard/analysis',
                 },
                 {
                   name: 'monitor',
                   icon: 'smile',
-                  path: '/dashboard/monitor',
+                  path: '/dash/dashboard/monitor',
                   component: './dashboard/monitor',
                 },
                 {
                   name: 'workplace',
                   icon: 'smile',
-                  path: '/dashboard/workplace',
+                  path: '/dash/dashboard/workplace',
                   component: './dashboard/workplace',
                 },
               ],
             },
             {
-              path: '/form',
+              path: '/dash/form',
               icon: 'form',
               name: 'form',
               routes: [
@@ -319,6 +333,9 @@ export default defineConfig({
               component: '404',
             },
           ],
+        },
+        {
+          component: '404',
         },
       ],
     },
