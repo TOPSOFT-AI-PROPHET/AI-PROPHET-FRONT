@@ -44,7 +44,6 @@ class center extends Component {
                     ghost
                     className={styles.buttonstyle}
                     onClick={this.homeOpenTab.bind(this, item.button_url)}
-                    size="large"
                   >
                     {item.button_title}
                   </Button>
