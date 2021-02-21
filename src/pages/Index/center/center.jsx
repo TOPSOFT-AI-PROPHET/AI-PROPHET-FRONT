@@ -10,13 +10,11 @@ class center extends Component {
   };
 
   componentDidMount() {
-    queryCarousel()
-      .then((e) => {
-        this.setState({
-          data: e.data,
-        });
-      })
-      .catch((e) => console.log(e));
+    queryCarousel().then((e) => {
+      this.setState({
+        data: e.data,
+      });
+    });
   }
 
   homeOpenTab = (e) => {
@@ -41,7 +39,7 @@ class center extends Component {
                     <br />
                     {item.t_span}
                   </span>
-                  <br />
+                  <div style={{ height: '1vh' }}>&nbsp;</div>
                   <Button
                     ghost
                     className={styles.buttonstyle}
