@@ -8,15 +8,6 @@ import { Menu } from 'antd';
 import { history, SelectLang, formatMessage } from 'umi';
 
 class Welcome extends Component {
-  state = {
-    current: 'mail',
-  };
-
-  handleClick = (e) => {
-    console.log('click ', e);
-    this.setState({ current: e.key });
-  };
-
   toHome = () => {
     history.push('/');
   };
@@ -38,7 +29,9 @@ class Welcome extends Component {
       <PageContainer>
         <Row>
           <Col span={12}>
-            <img src={logo} className={styles.img} />
+            <a href="/">
+              <img src={logo} className={styles.img} />
+            </a>
           </Col>
           <Col span={12}>
             <div style={{ float: 'right' }}>
