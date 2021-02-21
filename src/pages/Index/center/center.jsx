@@ -7,6 +7,7 @@ import { queryCarousel } from '@/services/home';
 class center extends Component {
   state = {
     data: [],
+    button_hover: false,
   };
 
   componentDidMount() {
@@ -21,6 +22,14 @@ class center extends Component {
     window.open(e);
   };
 
+  toggleHoverE = () => {
+    this.setState({ button_hover: true });
+  };
+
+  toggleHoverL = () => {
+    this.setState({ button_hover: false });
+  };
+
   render() {
     return (
       <PageContainer>
@@ -31,7 +40,7 @@ class center extends Component {
                 <div className={styles.contentstyle}>
                   <img width="100%" src={item.image_url} />
                 </div>
-                <div className={styles.contentstyle2}>
+                <div className={styles.contentstyle2} style={{ color: item.general_color }}>
                   <span>
                     {item.f_span}
                     <br />
@@ -44,6 +53,24 @@ class center extends Component {
                     ghost
                     className={styles.buttonstyle}
                     onClick={this.homeOpenTab.bind(this, item.button_url)}
+                    ref={(element) => {
+                      if (element) {
+                        if (this.state.button_hover) {
+                          element.style.setProperty(
+                            'background-color',
+                            item.general_color,
+                            'important',
+                          );
+                          element.style.setProperty('color', item.hover_text_color);
+                          element.style.setProperty('border', `1px solid ${item.general_color}`);
+                        } else {
+                          element.style.setProperty('color', item.general_color);
+                          element.style.removeProperty('background-color');
+                        }
+                      }
+                    }}
+                    onMouseEnter={this.toggleHoverE}
+                    onMouseLeave={this.toggleHoverL}
                   >
                     {item.button_title}
                   </Button>

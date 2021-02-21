@@ -9,6 +9,8 @@ function get_carousel(req, res, u, b) {
         t_span: 'Every One',
         button_title: 'Learn More',
         button_url: 'http://topsoftaiprophet.com',
+        general_color: '#FFFFFF',
+        hover_text_color: '#000000',
       },
       {
         image_url: 'http://1.15.48.81:8888/down/INBZ016ZsL6e',
@@ -17,6 +19,8 @@ function get_carousel(req, res, u, b) {
         t_span: 'Every One',
         button_title: 'Learn More',
         button_url: 'http://topsoftaiprophet.com',
+        general_color: '#FFFFFF',
+        hover_text_color: '#000000',
       },
     ],
   });
