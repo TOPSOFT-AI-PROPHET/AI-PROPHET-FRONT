@@ -1,6 +1,5 @@
 export default {
-  'pages.layouts.userLayout.title':
-    'Ant Design is the most influential web design specification in Xihu district',
+  'pages.layouts.userLayout.title': 'Welcome to THE PROPHET | OFFICIAL - TOPSOFT AI',
   'pages.login.accountLogin.tab': 'Account Login',
   'pages.login.accountLogin.errorMessage': 'Incorrect username/password（admin/admin)',
   'pages.login.username.placeholder': 'Username: admin or user',
