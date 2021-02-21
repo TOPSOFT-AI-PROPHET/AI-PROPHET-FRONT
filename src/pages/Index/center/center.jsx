@@ -29,12 +29,11 @@ class center extends Component {
         <Carousel autoplay>
           {this.state.data.map((item, index) => {
             return (
-              <div key={index}>
-                <div
-                  className={styles.contentstyle}
-                  style={{ backgroundImage: `url(${item.image_url})` }}
-                >
-                  <br />
+              <div key={index} className={styles.carouselbox}>
+                <div className={styles.contentstyle}>
+                  <img width="100%" src={item.image_url} />
+                </div>
+                <div className={styles.contentstyle2}>
                   <span>
                     {item.f_span}
                     <br />
