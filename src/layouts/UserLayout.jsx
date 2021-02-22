@@ -1,6 +1,6 @@
 import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Link, SelectLang, useIntl, connect, FormattedMessage } from 'umi';
+import { SelectLang, useIntl, connect, FormattedMessage } from 'umi';
 import React from 'react';
 import logo from '../assets/xzpt_b.png';
 import styles from './UserLayout.less';
@@ -40,10 +40,12 @@ const UserLayout = (props) => {
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
-              <Link to="/">
+              <a href="/">
                 <img alt="logo" className={styles.logo} src={logo} />
+              </a>
+              <a href="/">
                 <span className={styles.title}>THE PROPHET</span>
-              </Link>
+              </a>
             </div>
             <div className={styles.desc}>
               <FormattedMessage
