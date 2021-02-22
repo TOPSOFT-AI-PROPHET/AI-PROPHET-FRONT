@@ -6,6 +6,8 @@ import { Pricing20DataSource } from './products_data';
 import Header from './Header/header';
 import { Row, Col } from 'antd';
 import Footer from './footer/footer';
+import { formatMessage } from 'umi';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 class Products extends React.PureComponent {
   getColumns = (columns) => {
@@ -47,18 +49,26 @@ class Products extends React.PureComponent {
       dataSource: this.getDataSource(tableData.children, columns.children),
     };
     return (
-      <PageContainer>
-        <Header />
-        <div style={{ height: '70px' }}>&nbsp;</div>
-        <Row>
-          <Col span={4}></Col>
-          <Col span={16}>
-            <Table key="table" {...tableProps} pagination={false} bordered />
-          </Col>
-          <Col span={4}></Col>
-        </Row>
-        <Footer />
-      </PageContainer>
+      <HelmetProvider>
+        <Helmet>
+          <title>
+            {formatMessage({ id: 'menu.home.pricing', defaultMessage: 'Pricing' })} | THE PROPHET |
+            OFFICIAL - TOPSOFT AI
+          </title>
+        </Helmet>
+        <PageContainer>
+          <Header />
+          <div style={{ height: '70px' }}>&nbsp;</div>
+          <Row>
+            <Col span={4}></Col>
+            <Col span={16}>
+              <Table key="table" {...tableProps} pagination={false} bordered />
+            </Col>
+            <Col span={4}></Col>
+          </Row>
+          <Footer />
+        </PageContainer>
+      </HelmetProvider>
     );
   }
 }

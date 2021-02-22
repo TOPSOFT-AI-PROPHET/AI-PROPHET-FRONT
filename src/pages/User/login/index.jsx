@@ -66,7 +66,7 @@ const Login = (props) => {
           <LoginMessage
             content={intl.formatMessage({
               id: 'pages.login.accountLogin.errorMessage',
-              defaultMessage: '账户或密码错误（admin/ant.design)',
+              defaultMessage: '账户或密码错误（admin/admin)',
             })}
           />
         )}

@@ -19,7 +19,7 @@ class center extends Component {
   }
 
   homeOpenTab = (e) => {
-    window.open(e);
+    window.location = e;
   };
 
   toggleHoverE = () => {
@@ -33,7 +33,7 @@ class center extends Component {
   render() {
     return (
       <PageContainer>
-        <Carousel autoplay>
+        <Carousel autoplay dotPosition="top">
           {this.state.data.map((item, index) => {
             return (
               <div key={index} className={styles.carouselbox}>
