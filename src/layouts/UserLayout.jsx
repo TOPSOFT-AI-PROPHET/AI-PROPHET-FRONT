@@ -1,36 +1,28 @@
-import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout';
+import { DefaultFooter } from '@ant-design/pro-layout';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { SelectLang, useIntl, connect, FormattedMessage } from 'umi';
+import { Link, SelectLang, formatMessage, connect, FormattedMessage } from 'umi';
 import React from 'react';
 import logo from '../assets/xzpt_b.png';
 import styles from './UserLayout.less';
+import defaultSettings from '../../config/defaultSettings';
 
 const UserLayout = (props) => {
-  const {
-    route = {
-      routes: [],
-    },
-  } = props;
-  const { routes = [] } = route;
   const {
     children,
     location = {
       pathname: '',
     },
   } = props;
-  const { formatMessage } = useIntl();
-  const { breadcrumb } = getMenuData(routes);
-  const title = getPageTitle({
-    pathname: location.pathname,
-    formatMessage,
-    breadcrumb,
-    ...props,
-  });
+  let { title } = defaultSettings;
+  if (location.pathname === '/user/login') {
+    title = `${formatMessage({ id: 'menu.login', defaultMessage: 'Login' })} | ${
+      defaultSettings.title
+    }`;
+  }
   return (
     <HelmetProvider>
       <Helmet>
         <title>{title}</title>
-        <meta name="description" content={title} />
       </Helmet>
 
       <div className={styles.container}>
@@ -40,12 +32,12 @@ const UserLayout = (props) => {
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.header}>
-              <a href="/">
+              <Link to="/">
                 <img alt="logo" className={styles.logo} src={logo} />
-              </a>
-              <a href="/">
+              </Link>
+              <Link to="/">
                 <span className={styles.title}>THE PROPHET</span>
-              </a>
+              </Link>
             </div>
             <div className={styles.desc}>
               <FormattedMessage
