@@ -5,23 +5,23 @@ import styles from './header.less';
 import logo from './xzpt.png';
 import { UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
-import { SelectLang, formatMessage } from 'umi';
+import { history, SelectLang, formatMessage } from 'umi';
 
 class Welcome extends Component {
   toHome = () => {
-    window.location = '/';
+    history.push('/');
   };
 
   toProducts = () => {
-    window.location = '/products';
+    history.push('/products');
   };
 
   toTeam = () => {
-    window.location = '/team';
+    history.push('/team');
   };
 
   toLogin = () => {
-    window.location = '/user/login';
+    history.push('/user/login');
   };
 
   render() {
