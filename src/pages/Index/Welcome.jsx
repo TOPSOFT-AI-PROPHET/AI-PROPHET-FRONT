@@ -434,7 +434,7 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Qilin Kang</h3>
+                    <h3>Qingling Kang</h3>
                     <p>
                       TOPSOFT Board Member.
                       <br /> Head of Marketing Department
