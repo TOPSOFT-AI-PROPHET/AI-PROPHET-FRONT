@@ -336,7 +336,7 @@ class Welcome extends Component {
         {/* End Video */}
 
         {/* TEAMS */}
-        <section id="teams">
+        <section id="extra">
           <div className="container">
             <div className="row text-center">
               <div className="col-md-12">
@@ -562,7 +562,7 @@ class Welcome extends Component {
         {/* End Extra Features */}
 
         {/* MODULES */}
-        <section id="Modules">
+        <section id="screenshots">
           <div className="container">
             <div className="row text-center">
               <div className="col-md-12">
@@ -681,7 +681,7 @@ class Welcome extends Component {
         {/* End Screenshots */}
 
         {/* Search */}
-        <section id="search">
+        <section id="newsletter">
           <div className="container">
             <div className="row text-center">
               <div className="col-md-12">
@@ -689,7 +689,7 @@ class Welcome extends Component {
                   SEARCH MODULES<span className="dot">.</span>
                 </h2>
                 <div className="custom-style">
-                  <span className="ti-email"></span>
+                  <span className="ti-search"></span>
                 </div>
               </div>
             </div>
