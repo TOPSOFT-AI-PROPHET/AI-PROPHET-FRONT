@@ -354,14 +354,14 @@ class Welcome extends Component {
                   <div className="features">
                     <h3>Yuhang Song</h3>
                     <p>
-                      Founder of TOPSOFT, TOPSOFT board member.
+                      Founder of TOPSOFT, TOPSOFT Board Member.
                       <br /> Project Director of THE PROPHET. Head of AI Department.
                     </p>
                   </div>
                 </div>
                 <div className="col-md-6">
                   <img
-                    src="assets/img/phone03.jpg"
+                    src="assets/img/syh.jpg"
                     alt="phone"
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
@@ -370,42 +370,189 @@ class Welcome extends Component {
                 </div>
               </div>
               <div className="item">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="features">
-                    <h3>
-                      <span className="common-icon-style ti-check-box"></span>Application Cache
-                    </h3>
+                    <h3>Hongyu Chen</h3>
                     <p>
-                      AppCore application cache is an alternative to a native app’s ability to be
-                      downloaded and stored on a device.
-                    </p>
-                  </div>
-
-                  <div className="features">
-                    <h3>
-                      <span className="common-icon-style ti-check-box"></span>Local Storage
-                    </h3>
-                    <p>
-                      A standard system that retains local web app data (even when the browser is
-                      shut down) using a key/value system that works similarly to browser cookies.
-                    </p>
-                  </div>
-
-                  <div className="features">
-                    <h3>
-                      <span className="common-icon-style ti-check-box"></span>Local Database
-                    </h3>
-                    <p>
-                      Allows data to be indexed so that multiple properties can be queried quickly.
-                      This is only an HTML5 proposed standard at present.
+                      TOPSOFT Board Member.
+                      <br /> Head of WEB Back Department.
                     </p>
                   </div>
                 </div>
                 <div className="col-md-6">
                   <img
-                    src="assets/img/phone04.jpg"
+                    src="assets/img/chy.jpg"
                     alt="phone"
-                    className="img-responsive center-block"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Dursun Satiroglu</h3>
+                    <p>
+                      WEB Front Department Developer
+                      <br /> Project Documenting
+                      <br /> APP Department IOS Developer
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/ds.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Zhan Feng</h3>
+                    <p>
+                      TOPSOFT Board Member
+                      <br /> WEB Back Developer
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/fz.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Qilin Kang</h3>
+                    <p>
+                      TOPSOFT Board Member.
+                      <br /> Head of Marketing Department
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/kql.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Yilin Lu</h3>
+                    <p>
+                      AI Department Developer
+                      <br /> WEB Front Department Developer
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/lyl.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Yiming Li</h3>
+                    <p>
+                      WEB Back Department Developer
+                      <br /> Project Documenting
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/lym.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Yang Yang</h3>
+                    <p>
+                      TOPSOFT Chief technical advisor
+                      <br /> Project Director
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/yy.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Shenpu Zhou</h3>
+                    <p>
+                      WEB Back Department Developer
+                      <br /> WEB Front Department Developer
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/zsp.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Yang Zhang</h3>
+                    <p>
+                      AI Department Developer
+                      <br /> WEB Front Department Developer
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/zy.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
                   />
                 </div>
               </div>
