@@ -23,12 +23,21 @@ jobs:
         npm install
         yarn
         npm run build
-    
-    - name: 📂 Sync files
-      uses: airvzxf/ftp-deployment-action@latest
+        zip -q -r dist.zip dist/
+        
+    - name: 📂 Upload files
+      uses: zinh/ftp-uploader-action@v0.4
       with:
-        server: ${{ secrets.ftp_server }}
+        host: ${{ secrets.ftp_server }}
         user: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
-        local_dir: ./dist/
-        remote_dir: public_html/
+        src: dist.zip
+        dest: public_html/dist.zip
+        
+    - name: 🎉 Deploy
+      uses: fifsky/ssh-action@v0.0.5
+      with:
+        command: unzip ./public_html/dist.zip . && rm -rf ./public_html/dist.zip
+        user: ${{ secrets.ftp_user }}
+        key: ${{ secrets.ssh_private_key }}
+        REMOTE_HOST: ${{ secrets.ftp_server }}
