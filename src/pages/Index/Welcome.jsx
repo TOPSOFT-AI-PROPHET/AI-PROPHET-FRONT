@@ -164,7 +164,7 @@ class Welcome extends Component {
                     </a>
                   </li>
                   <li>
-                    <a className="page-scroll" href="#teams">
+                    <a className="page-scroll" href="#extra">
                       Team
                     </a>
                   </li>
