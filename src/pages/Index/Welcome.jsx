@@ -170,7 +170,7 @@ class Welcome extends Component {
                   </li>
 
                   <li>
-                    <a className="page-scroll" href="/user/login">
+                    <a className="page-scroll" href="/#/user/login">
                       Login
                     </a>
                   </li>
