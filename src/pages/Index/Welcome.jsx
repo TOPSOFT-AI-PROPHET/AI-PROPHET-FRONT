@@ -366,6 +366,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -386,6 +387,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -408,6 +410,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -428,6 +431,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -448,6 +452,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -469,6 +474,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -490,6 +496,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -511,6 +518,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -532,6 +540,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -553,6 +562,7 @@ class Welcome extends Component {
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
                     data-wow-delay=".2s"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -583,6 +593,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot1"
                       src="assets/img/screenshots/01.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/01.jpg"></a>
@@ -595,6 +606,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot2"
                       src="assets/img/screenshots/02.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/02.jpg"></a>
@@ -607,6 +619,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot3"
                       src="assets/img/screenshots/03.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/03.jpg"></a>
@@ -619,6 +632,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot4"
                       src="assets/img/screenshots/04.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/04.jpg"></a>
@@ -631,6 +645,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot5"
                       src="assets/img/screenshots/01.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/01.jpg"></a>
@@ -643,6 +658,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot6"
                       src="assets/img/screenshots/02.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/02.jpg"></a>
@@ -655,6 +671,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot7"
                       src="assets/img/screenshots/03.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/03.jpg"></a>
@@ -667,6 +684,7 @@ class Welcome extends Component {
                       className="img-responsive center-block"
                       alt="screenshot8"
                       src="assets/img/screenshots/04.jpg"
+                      loading="lazy"
                     />
                     <div className="overlay">
                       <a className="zoom" href="assets/img/screenshots/04.jpg"></a>
