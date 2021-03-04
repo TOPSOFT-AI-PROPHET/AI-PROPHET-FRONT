@@ -29,3 +29,7 @@ jobs:
       with:
         repo: TOPSOFT-AI-PROPHET/TOPSOFT-AI-PROPHET
         build_dir: dist/
+        committer: Silent YANG <568875138@qq.com>
+        author: Silent YANG <568875138@qq.com>
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
