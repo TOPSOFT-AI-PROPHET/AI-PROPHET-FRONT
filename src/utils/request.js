@@ -5,6 +5,9 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import defaultSettings from '../../config/defaultSettings';
+import { stringify } from 'querystring';
+import { history } from 'umi';
+import { getPageQuery } from '@/utils/utils';
 import {
   setAccessCode,
   getAccessCode,
@@ -44,6 +47,18 @@ const errorHandler = (error) => {
       message: `请求错误 ${status}: ${url}`,
       description: errorText,
     });
+    if (response.status === 401) {
+      const { redirect } = getPageQuery(); // Note: There may be security issues, please note
+
+      if (window.location.pathname !== '/user/login' && !redirect) {
+        history.replace({
+          pathname: '/user/login',
+          search: stringify({
+            redirect: window.location.href,
+          }),
+        });
+      }
+    }
   } else if (!response) {
     notification.error({
       description: '您的网络发生异常，无法连接服务器',
