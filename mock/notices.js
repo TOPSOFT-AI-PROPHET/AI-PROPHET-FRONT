@@ -99,5 +99,5 @@ const getNotices = (req, res) => {
 };
 
 export default {
-  'GET /api/notices': getNotices,
+  'POST /api/notices': getNotices,
 };

@@ -29,7 +29,7 @@ const Model = {
       yield put({
         type: 'save',
         payload: {
-          currentUser: response,
+          currentUser: response.data,
         },
       });
     },

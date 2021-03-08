@@ -52,17 +52,18 @@ const PageHeaderContent = ({ currentUser }) => {
   return (
     <div className={styles.pageHeaderContent}>
       <div className={styles.avatar}>
-        <Avatar size="large" src={currentUser.avatar} />
+        <Avatar
+          size="large"
+          src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+        />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTitle}>
           早安，
-          {currentUser.name}
+          {currentUser.nickname !== '' ? currentUser.nickname : '路人甲'}
           ，祝你开心每一天！
         </div>
-        <div>
-          {currentUser.title} |{currentUser.group}
-        </div>
+        <div>仰天大笑出门去，我辈岂是蓬蒿人。</div>
       </div>
     </div>
   );
@@ -140,7 +141,7 @@ class Workplace extends Component {
       radarData,
     } = this.props;
 
-    if (!currentUser || !currentUser.userid) {
+    if (!currentUser || !currentUser.username) {
       return null;
     }
 
