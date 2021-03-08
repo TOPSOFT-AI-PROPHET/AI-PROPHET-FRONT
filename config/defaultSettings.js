@@ -10,6 +10,6 @@ const proSettings = {
   title: 'THE PROPHET | OFFICIAL - TOPSOFT AI',
   pwa: false,
   iconfontUrl: '',
-  backURL: 'http://1.15.48.81:8000',
+  backURL: 'https://api.topsoftaiprophet.com:8000',
 };
 export default proSettings;
