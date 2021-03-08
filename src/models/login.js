@@ -1,7 +1,7 @@
 import { stringify } from 'querystring';
 import { history } from 'umi';
-import { fakeAccountLogin } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
+import { AccountLogin } from '@/services/login';
+import { setAuthority, setRefreshCode, setAccessCode, setAccessTime } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { message } from 'antd';
 
@@ -12,13 +12,13 @@ const Model = {
   },
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      const response = yield call(AccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       }); // Login successfully
 
-      if (response.status === 'ok') {
+      if (response.access) {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         message.success('🎉 🎉 🎉  登录成功！');
@@ -34,12 +34,12 @@ const Model = {
               redirect = redirect.substr(redirect.indexOf('#') + 1);
             }
           } else {
-            window.location.href = '/';
+            window.location.href = '/dash';
             return;
           }
         }
 
-        history.replace(redirect || '/');
+        history.replace(redirect || '/dash');
       }
     },
 
@@ -58,7 +58,10 @@ const Model = {
   },
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      setAuthority('user');
+      setRefreshCode(payload.refresh);
+      setAccessCode(payload.access);
+      setAccessTime(Date.now());
       return { ...state, status: payload.status, type: payload.type };
     },
   },

@@ -31,3 +31,33 @@ export function setAuthority(authority) {
 
   reloadAuthorized();
 }
+export function setRefreshCode(authority) {
+  localStorage.setItem('iRefreshCode', authority);
+}
+export function setAccessCode(authority) {
+  localStorage.setItem('iAccessCode', authority);
+}
+export function setAccessTime(authority) {
+  localStorage.setItem('iAccessTime', authority);
+}
+export function getRefreshCode() {
+  const authorityString =
+    typeof localStorage.getItem('iRefreshCode') === 'string'
+      ? localStorage.getItem('iRefreshCode')
+      : '';
+  return authorityString;
+}
+export function getAccessCode() {
+  const authorityString =
+    typeof localStorage.getItem('iAccessCode') === 'string'
+      ? localStorage.getItem('iAccessCode')
+      : '';
+  return authorityString;
+}
+export function getAccessTime() {
+  const authorityString =
+    typeof localStorage.getItem('iAccessTime') === 'string'
+      ? localStorage.getItem('iAccessTime')
+      : '';
+  return authorityString;
+}

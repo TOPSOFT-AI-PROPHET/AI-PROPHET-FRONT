@@ -5,6 +5,13 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import defaultSettings from '../../config/defaultSettings';
+import {
+  setAccessCode,
+  getAccessCode,
+  getAccessTime,
+  getRefreshCode,
+  setAccessTime,
+} from './authority';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -56,13 +63,32 @@ const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
 });
 
-request.interceptors.request.use(async (url) => {
+request.interceptors.request.use(async (url, options) => {
+  if (
+    getAccessTime() <= Date.now() - 5 * 55 * 1000 &&
+    url !== '/users/refresh' &&
+    getAccessCode() !== '' &&
+    getRefreshCode() !== ''
+  ) {
+    setAccessTime(Date.now());
+    const data = await request('/users/refresh', {
+      method: 'POST',
+      data: {
+        refresh: getRefreshCode(),
+      },
+    });
+    setAccessCode(data.access);
+    console.log('已更新 ACCESS 密钥');
+  }
+  const myOptions = options;
+  myOptions.headers.Authorization = `Bearer ${getAccessCode()}`;
   if (process.env.NODE_ENV !== 'development') {
     return {
       url: defaultSettings.backURL + url,
+      myOptions,
     };
   }
-  return {};
+  return { myOptions };
 });
 
 export default request;
