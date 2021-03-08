@@ -46,7 +46,7 @@ const Model = {
     logout() {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
 
-      if (window.location.pathname !== '/user/login' && !redirect) {
+      if (window.location.hash.indexOf('/user/login') === -1 && !redirect) {
         history.replace({
           pathname: '/user/login',
           search: stringify({
