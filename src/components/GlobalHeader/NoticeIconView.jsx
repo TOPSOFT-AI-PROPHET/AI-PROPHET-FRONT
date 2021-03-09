@@ -8,13 +8,13 @@ import styles from './index.less';
 
 class GlobalHeaderRight extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-
-    if (dispatch) {
-      dispatch({
-        type: 'global/fetchNotices',
-      });
-    }
+    // const { dispatch } = this.props;
+    // 解决未完成的通知功能报错
+    // if (dispatch) {
+    //   dispatch({
+    //     type: 'global/fetchNotices',
+    //   });
+    // }
   }
 
   changeReadState = (clickedItem) => {
