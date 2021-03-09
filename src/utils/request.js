@@ -80,10 +80,11 @@ const request = extend({
 });
 
 request.interceptors.request.use(async (url, options) => {
+  let AccessCode = getAccessCode();
   if (
     getAccessTime() <= Date.now() - 5 * 55 * 1000 &&
     url !== '/users/refresh' &&
-    getAccessCode() !== '' &&
+    AccessCode !== '' &&
     getRefreshCode() !== ''
   ) {
     setAccessTime(Date.now());
@@ -94,10 +95,11 @@ request.interceptors.request.use(async (url, options) => {
       },
     });
     setAccessCode(data.access);
+    AccessCode = data.access;
     console.log('已更新 ACCESS 密钥');
   }
   const myOptions = options;
-  myOptions.headers.Authorization = `Bearer ${getAccessCode()}`;
+  myOptions.headers.Authorization = `Bearer ${AccessCode}`;
   if (process.env.NODE_ENV !== 'development') {
     return {
       url: defaultSettings.backURL + url,
