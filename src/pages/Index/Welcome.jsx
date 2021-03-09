@@ -15,6 +15,53 @@ class Welcome extends Component {
     return e;
   }
 
+  removeCss(href) {
+    const links = document.getElementsByTagName('link');
+    for (let i = 0; i < links.length; i += 1) {
+      if (links[i] && links[i].href && links[i].href.indexOf(href) !== -1) {
+        links[i].parentNode.removeChild(links[i]);
+      }
+    }
+  }
+
+  removeScript(src) {
+    const scripts = document.getElementsByTagName('script');
+    for (let i = 0; i < scripts.length; i += 1) {
+      if (scripts[i] && scripts[i].src && scripts[i].src.indexOf(src) !== -1) {
+        scripts[i].parentNode.removeChild(scripts[i]);
+      }
+    }
+  }
+
+  goLogin() {
+    if (process.env.NODE_ENV !== 'development') {
+      window.location.href = '/user/login';
+    } else {
+      window.location.href = '/#/user/login';
+    }
+  }
+
+  componentWillUnmount() {
+    this.removeCss('assets/css/bootstrap.min.css');
+    this.removeCss('assets/css/custom.css');
+    this.removeCss('assets/css/animate.css');
+    this.removeCss('assets/css/owl.carousel.css');
+    this.removeCss('assets/css/owl.theme.css');
+    this.removeCss('assets/css/owl.transitions.css');
+    this.removeCss('assets/css/magnific-popup.css');
+    this.removeCss('assets/themify-icons/themify-icons.css');
+    this.removeScript('assets/js/jquery-1.11.1.min.js');
+    this.removeScript('assets/js/bootstrap.min.js');
+    this.removeScript('assets/js/jquery.easing.1.3.min.js');
+    this.removeScript('assets/js/owl.carousel.min.js');
+    this.removeScript('assets/js/jquery.magnific-popup.min.js');
+    this.removeScript('assets/js/jquery.ajaxchimp.min.js');
+    this.removeScript('assets/js/jquery.backstretch.min.js');
+    this.removeScript('assets/js/wow.min.js');
+    this.removeScript('assets/js/jquery.textrotator.min.js');
+    this.removeScript('assets/js/custom.js');
+  }
+
   componentDidMount() {
     document.title = 'THE PROPHET | OFFICIAL - TOPSOFT AI';
     document
@@ -170,7 +217,7 @@ class Welcome extends Component {
                   </li>
 
                   <li>
-                    <a className="page-scroll" href="/user/login">
+                    <a className="page-scroll" onClick={this.goLogin}>
                       Login
                     </a>
                   </li>
