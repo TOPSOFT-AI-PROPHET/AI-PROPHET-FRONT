@@ -87,7 +87,6 @@ request.interceptors.request.use(async (url, options) => {
     AccessCode !== '' &&
     getRefreshCode() !== ''
   ) {
-    setAccessTime(Date.now());
     const data = await request('/users/refresh', {
       method: 'POST',
       data: {
@@ -95,6 +94,7 @@ request.interceptors.request.use(async (url, options) => {
       },
     });
     setAccessCode(data.access);
+    setAccessTime(Date.now());
     AccessCode = data.access;
     console.log('已更新 ACCESS 密钥');
   }
