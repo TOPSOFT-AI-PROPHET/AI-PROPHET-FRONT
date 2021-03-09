@@ -2,8 +2,9 @@ import { LockTwoTone, UserOutlined } from '@ant-design/icons';
 import { Alert, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { useIntl, connect, FormattedMessage } from 'umi';
+import { useIntl, connect, FormattedMessage, history } from 'umi';
 import styles from './index.less';
+import { getRefreshCode } from '@/utils/authority';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -21,6 +22,10 @@ const Login = (props) => {
   const { status, type: loginType } = userLogin;
   const [type, setType] = useState('account');
   const intl = useIntl();
+
+  if (getRefreshCode()) {
+    history.push('/dash');
+  }
 
   const handleSubmit = (values) => {
     const { dispatch } = props;
