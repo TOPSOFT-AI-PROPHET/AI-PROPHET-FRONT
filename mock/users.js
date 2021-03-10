@@ -53,7 +53,6 @@ export default {
       ],
     });
   },
-
   'POST /users/register': async (req, res) => {
     if (req.body.username !== 'admin') {
       res.send({
