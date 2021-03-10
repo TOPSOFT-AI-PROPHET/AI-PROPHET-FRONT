@@ -99,7 +99,9 @@ request.interceptors.request.use(async (url, options) => {
     console.log('已更新 ACCESS 密钥');
   }
   const myOptions = options;
-  myOptions.headers.Authorization = `Bearer ${AccessCode}`;
+  if (AccessCode !== '') {
+    myOptions.headers.Authorization = `Bearer ${AccessCode}`;
+  }
   if (process.env.NODE_ENV !== 'development') {
     return {
       url: defaultSettings.backURL + url,
