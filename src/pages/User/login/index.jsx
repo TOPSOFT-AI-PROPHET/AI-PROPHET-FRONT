@@ -131,11 +131,15 @@ const Login = (props) => {
             <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
           </ProFormCheckbox>
           <a
+            id="pages.login.register"
+            onClick={() => {
+              history.push('/user/register');
+            }}
             style={{
               float: 'right',
             }}
           >
-            <FormattedMessage id="pages.login.forgotPassword" defaultMessage="忘记密码" />
+            <FormattedMessage id="pages.login.register" defaultMessage="注册" />
           </a>
         </div>
       </ProForm>
