@@ -2,7 +2,7 @@ export default {
   'pages.layouts.userLayout.title': 'Welcome to THE PROPHET | OFFICIAL - TOPSOFT AI',
   'pages.login.accountLogin.tab': '账户密码登录',
   'pages.login.accountLogin.errorMessage': '错误的用户名和密码',
-  'pages.login.username.placeholder': '请输入用户名',
+  'pages.login.username.placeholder': '请输入用户名或邮箱',
   'pages.login.username.required': '用户名是必填项！',
   'pages.login.password.placeholder': '请输入密码',
   'pages.login.password.required': '密码是必填项！',
