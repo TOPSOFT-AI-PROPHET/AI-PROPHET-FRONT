@@ -3,7 +3,7 @@ import { fakeRegister } from './service';
 const Model = {
   namespace: 'userAndregister',
   state: {
-    status: undefined,
+    code: undefined,
   },
   effects: {
     *submit({ payload }, { call, put }) {
@@ -16,7 +16,7 @@ const Model = {
   },
   reducers: {
     registerHandle(state, { payload }) {
-      return { ...state, status: payload.status };
+      return { ...state, code: payload.code };
     },
   },
 };

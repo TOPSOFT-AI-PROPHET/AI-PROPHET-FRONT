@@ -53,4 +53,18 @@ export default {
       ],
     });
   },
+
+  'POST /users/register': async (req, res) => {
+    if (req.body.username !== 'admin') {
+      res.send({
+        code: 200,
+        message: 'Registered!',
+      });
+      return;
+    }
+    res.send({
+      code: 403,
+      message: 'Mulyiple registration.',
+    });
+  },
 };

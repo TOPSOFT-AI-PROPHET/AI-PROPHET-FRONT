@@ -16,7 +16,7 @@ export default {
   'pages.login.phoneLogin.getVerificationCode': 'Get Code',
   'pages.getCaptchaSecondText': 'sec(s)',
   'pages.login.rememberMe': 'Remember me',
-  'pages.login.forgotPassword': 'Forgot Password ?',
+  'pages.login.register': 'New here ?',
   'pages.login.submit': 'Submit',
   'pages.login.loginWith': 'Login with :',
   'pages.login.registerAccount': 'Register Account',
