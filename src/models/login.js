@@ -59,11 +59,13 @@ const Model = {
   },
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority('user');
-      setRefreshCode(payload.refresh);
-      setAccessCode(payload.access);
-      setAccessTime(Date.now());
-      return { ...state, status: payload.status, type: payload.type };
+      if (payload.access) {
+        setAuthority('user');
+        setRefreshCode(payload.refresh);
+        setAccessCode(payload.access);
+        setAccessTime(Date.now());
+      }
+      return { ...state };
     },
   },
 };
