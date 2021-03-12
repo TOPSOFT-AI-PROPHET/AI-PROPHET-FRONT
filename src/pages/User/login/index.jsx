@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ProForm, { ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, connect, FormattedMessage, history } from 'umi';
 import styles from './index.less';
-import { getRefreshCode } from '@/utils/authority';
+import { getRefreshCode, getAccessTime } from '@/utils/authority';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -23,7 +23,7 @@ const Login = (props) => {
   const [type, setType] = useState('account');
   const intl = useIntl();
 
-  if (getRefreshCode()) {
+  if (getRefreshCode() && getAccessTime() > Date.now() - 23 * 60 * 60 * 1000) {
     history.push('/dash');
   }
 
