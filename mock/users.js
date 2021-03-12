@@ -56,7 +56,6 @@ export default {
       ],
     });
   },
-
   'POST /tasks/list': async (req, res) => {
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
@@ -108,6 +107,20 @@ export default {
           message: 'Token is invalid or expired',
         },
       ],
+    });
+  },
+  'POST /users/register': async (req, res) => {
+    if (req.body.username !== 'admin') {
+      res.send({
+        code: 200,
+        message: 'Registered!',
+      });
+      return;
+    }
+
+    res.send({
+      code: 403,
+      message: 'Mulyiple registration.',
     });
   },
 };

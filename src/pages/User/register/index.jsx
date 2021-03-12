@@ -1,10 +1,9 @@
-import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
+import { Form, Button, Input, Popover, Progress, message } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link, connect, history, FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 
 const FormItem = Form.Item;
-const { Option } = Select;
 const InputGroup = Input.Group;
 const passwordStatusMap = {
   ok: (
@@ -30,9 +29,8 @@ const passwordProgressMap = {
 };
 
 const Register = ({ submitting, dispatch, userAndregister }) => {
-  const [count, setcount] = useState(0);
   const [visible, setvisible] = useState(false);
-  const [prefix, setprefix] = useState('86');
+  const [prefix] = useState('86');
   const [popover, setpopover] = useState(false);
   const confirmDirty = false;
   let interval;
@@ -42,16 +40,16 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
       return;
     }
 
-    const account = form.getFieldValue('mail');
-
-    if (userAndregister.status === 'ok') {
+    console.log(userAndregister);
+    if (userAndregister.code === 200) {
+      // eslint-disable-next-line
+      userAndregister.code = undefined;
       message.success('注册成功！');
       history.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
+        pathname: '/user/login',
       });
+    } else if (userAndregister.code === 403) {
+      message.error('用户名或邮箱不可用');
     }
   }, [userAndregister]);
   useEffect(
@@ -60,19 +58,6 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     },
     [],
   );
-
-  const onGetCaptcha = () => {
-    let counts = 59;
-    setcount(counts);
-    interval = window.setInterval(() => {
-      counts -= 1;
-      setcount(counts);
-
-      if (counts === 0) {
-        clearInterval(interval);
-      }
-    }, 1000);
-  };
 
   const getPasswordStatus = () => {
     const value = form.getFieldValue('password');
@@ -138,10 +123,6 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     return promise.resolve();
   };
 
-  const changePrefix = (value) => {
-    setprefix(value);
-  };
-
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
     const passwordStatus = getPasswordStatus();
@@ -164,8 +145,38 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
         <FormattedMessage id="userandregister.register.register" />
       </h3>
       <Form form={form} name="UserRegister" onFinish={onFinish}>
+        <InputGroup compact>
+          <FormItem
+            style={{
+              width: '100%',
+            }}
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: formatMessage({
+                  id: 'userandregister.Username.required',
+                }),
+              },
+              {
+                pattern: /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/,
+                message: formatMessage({
+                  id: 'userandregister.Username.wrong-format',
+                }),
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              placeholder={formatMessage({
+                id: 'userandregister.Username.required',
+              })}
+            />
+          </FormItem>
+        </InputGroup>
+
         <FormItem
-          name="mail"
+          name="email"
           rules={[
             {
               required: true,
@@ -265,82 +276,7 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
             })}
           />
         </FormItem>
-        <InputGroup compact>
-          <Select
-            size="large"
-            value={prefix}
-            onChange={changePrefix}
-            style={{
-              width: '20%',
-            }}
-          >
-            <Option value="86">+86</Option>
-            <Option value="87">+87</Option>
-          </Select>
-          <FormItem
-            style={{
-              width: '80%',
-            }}
-            name="mobile"
-            rules={[
-              {
-                required: true,
-                message: formatMessage({
-                  id: 'userandregister.phone-number.required',
-                }),
-              },
-              {
-                pattern: /^\d{11}$/,
-                message: formatMessage({
-                  id: 'userandregister.phone-number.wrong-format',
-                }),
-              },
-            ]}
-          >
-            <Input
-              size="large"
-              placeholder={formatMessage({
-                id: 'userandregister.phone-number.placeholder',
-              })}
-            />
-          </FormItem>
-        </InputGroup>
-        <Row gutter={8}>
-          <Col span={16}>
-            <FormItem
-              name="captcha"
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({
-                    id: 'userandregister.verification-code.required',
-                  }),
-                },
-              ]}
-            >
-              <Input
-                size="large"
-                placeholder={formatMessage({
-                  id: 'userandregister.verification-code.placeholder',
-                })}
-              />
-            </FormItem>
-          </Col>
-          <Col span={8}>
-            <Button
-              size="large"
-              disabled={!!count}
-              className={styles.getCaptcha}
-              onClick={onGetCaptcha}
-            >
-              {count
-                ? `${count} s`
-                : formatMessage({
-                    id: 'userandregister.register.get-verification-code',
-                  })}
-            </Button>
-          </Col>
-        </Row>
+
         <FormItem>
           <Button
             size="large"
