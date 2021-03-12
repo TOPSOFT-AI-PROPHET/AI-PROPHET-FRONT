@@ -112,6 +112,12 @@ export default defineConfig({
                   path: '/dash/dashboard/workplace',
                   component: './dashboard/workplace',
                 },
+                {
+                  name: 'basic-list',
+                  icon: 'smile',
+                  path: '/dash/dashboard/list/basic-list',
+                  component: './list/basic-list',
+                },
               ],
             },
             {

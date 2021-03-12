@@ -64,4 +64,6 @@ export default {
   'pages.searchTable.tenThousand': '0000',
   'pages.searchTable.batchDeletion': 'bacth deletion',
   'pages.searchTable.batchApproval': 'batch approval',
+  'pages.dashboardandworkplace.workplace.numtask': 'Processed Predictions',
+  'pages.dashboardandworkplace.workplace.balance': 'Balance',
 };
