@@ -18,7 +18,7 @@ const UserModel = {
     saveCurrentUser(state, action) {
       const myAction = action;
       if (action.payload.data.nickname === '') {
-        myAction.payload.data.nickname = '路人甲';
+        myAction.payload.data.nickname = 'John doe';
       }
       return { ...state, currentUser: myAction.payload.data || {} };
     },
