@@ -23,7 +23,7 @@ const Login = (props) => {
   const [type, setType] = useState('account');
   const intl = useIntl();
 
-  if (getRefreshCode() && getAccessTime() > Date.now() - 23 * 60 * 60 * 1000) {
+  if (getRefreshCode() && getAccessTime() > Date.now() - 10 * 60 * 60 * 1000) {
     history.push('/dash');
   }
 
