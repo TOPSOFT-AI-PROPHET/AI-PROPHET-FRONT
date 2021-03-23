@@ -46,7 +46,7 @@ const ExtraContent = ({ currentUser }) => (
         title={
           <FormattedMessage
             id="pages.dashboardandworkplace.workplace.numtask"
-            defaultMessage="已完成预测"
+            defaultMessage="Processed Predictions"
           />
         }
         value={currentUser.total_tasks}
@@ -57,7 +57,7 @@ const ExtraContent = ({ currentUser }) => (
         title={
           <FormattedMessage
             id="pages.dashboardandworkplace.workplace.balance"
-            defaultMessage="余额"
+            defaultMessage="Balance"
           />
         }
         value={currentUser.balance}
@@ -120,7 +120,7 @@ class Workplace extends Component {
                 history.push('/dash/dashboard/list/basic-list');
               }}
             >
-              Total Predictions
+              All Predictions
             </a>
           }
           bodyStyle={{
