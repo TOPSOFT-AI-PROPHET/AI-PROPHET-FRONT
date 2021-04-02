@@ -71,7 +71,6 @@ class Workplace extends Component {
     super(props);
     this.state = {
       data: [],
-      newdata: [],
     };
   }
 

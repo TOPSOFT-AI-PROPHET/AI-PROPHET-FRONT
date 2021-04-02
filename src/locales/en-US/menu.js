@@ -12,6 +12,7 @@ export default {
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',
   'menu.dashboard.basic-list': 'basic-list',
+  'menu.dashboard.card-list': 'AI Module List',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',
