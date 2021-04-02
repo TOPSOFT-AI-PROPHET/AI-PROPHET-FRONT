@@ -123,4 +123,73 @@ export default {
       message: 'Mulyiple registration.',
     });
   },
+
+  'POST /tasks/listAIM': async (req, res) => {
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'Bingo',
+        data: {
+          totalCount: 1,
+          numPerPage: 1,
+          totalPage: 1,
+          pageNum: 1,
+          list: [
+            {
+              model: 'tasks.aimodel1',
+              pk: 1,
+              fields: {
+                ai_name: 1,
+                ai_url: 'www.baidu.com',
+                ai_status: 1,
+                ai_description:
+                  'aimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodels',
+                ai_type: 1,
+                ai_credit: 1,
+              },
+            },
+            {
+              model: 'tasks.aimodel2',
+              pk: 2,
+              fields: {
+                ai_name: 2,
+                ai_url: 'www.baidu.com',
+                ai_status: 1,
+                ai_description:
+                  'aimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodels',
+                ai_type: 1,
+                ai_credit: 1,
+              },
+            },
+            {
+              model: 'tasks.aimodel3',
+              pk: 3,
+              fields: {
+                ai_name: 3,
+                ai_url: 'www.baidu.com',
+                ai_status: 1,
+                ai_description:
+                  'aimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodelsaimodels',
+                ai_type: 1,
+                ai_credit: 1,
+              },
+            },
+          ],
+        },
+      });
+      return;
+    }
+
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
 };
