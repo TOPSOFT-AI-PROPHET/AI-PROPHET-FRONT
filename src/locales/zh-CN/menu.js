@@ -12,6 +12,7 @@ export default {
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   'menu.dashboard.basic-list': '标准列表',
+  'menu.dashboard.card-list': 'AI模型列表',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',
