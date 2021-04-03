@@ -1,29 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import {
-  Avatar,
-  Button,
-  Card,
-  Col,
-  Dropdown,
-  Input,
-  List,
-  Menu,
-  Modal,
-  Progress,
-  Radio,
-  Row,
-} from 'antd';
+import { Button, Card, Col, Dropdown, List, Menu, Modal, Progress, Row } from 'antd';
 import { findDOMNode } from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
 import { connect } from 'umi';
 import moment from 'moment';
 import OperationModal from './components/OperationModal';
 import styles from './style.less';
-
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
-const { Search } = Input;
+import request from '@/utils/request';
 
 const Info = ({ title, value, bordered }) => (
   <div className={styles.headerInfo}>
@@ -33,20 +17,22 @@ const Info = ({ title, value, bordered }) => (
   </div>
 );
 
-const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
+// eslint-disable-next-line
+const ListContent = ({
+  data: {
+    fields: { time_start },
+  },
+}) => (
   <div className={styles.listContent}>
     <div className={styles.listContentItem}>
-      <span>Owner</span>
-      <p>{owner}</p>
-    </div>
-    <div className={styles.listContentItem}>
-      <span>开始时间</span>
-      <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
+      <span>Start Time</span>
+      {/* eslint-disable-next-line  */}
+      <p>{moment(time_start).format('YYYY-MM-DD HH:mm')}</p>
     </div>
     <div className={styles.listContentItem}>
       <Progress
-        percent={percent}
-        status={status}
+        percent={100}
+        status={'success'}
         strokeWidth={6}
         style={{
           width: 180,
@@ -58,27 +44,31 @@ const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
 
 export const BasicList = (props) => {
   const addBtn = useRef(null);
-  const {
-    loading,
-    dispatch,
-    listAndbasicList: { list },
-  } = props;
+  const { loading, dispatch } = props;
   const [done, setDone] = useState(false);
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState(undefined);
+  const [ilist, setIlist] = useState([]);
+  const [total, setTotal] = useState(1);
+  const [numppage, setPpage] = useState(1);
   useEffect(() => {
-    dispatch({
-      type: 'listAndbasicList/fetch',
-      payload: {
-        count: 5,
-      },
+    request('/tasks/list', { method: 'POST' }).then((result) => {
+      setIlist(result.data.list);
+      setTotal(result.data.totalCount);
+      setPpage(result.data.numPerPage);
     });
+
+    // dispatch({
+    //  type: 'listAndbasicList/fetch',
+    //  payload: {
+    //    count: 5,
+    //  },
+    // });
   }, [1]);
   const paginationProps = {
-    showSizeChanger: true,
     showQuickJumper: true,
-    pageSize: 5,
-    total: 50,
+    pageSize: numppage,
+    total,
   };
 
   const showModal = () => {
@@ -104,37 +94,28 @@ export const BasicList = (props) => {
     if (key === 'edit') showEditModal(currentItem);
     else if (key === 'delete') {
       Modal.confirm({
-        title: '删除任务',
-        content: '确定删除该任务吗？',
-        okText: '确认',
-        cancelText: '取消',
+        title: 'Delete Processed Predictions',
+        content: 'Are you sure you want delete',
+        okText: 'Yes',
+        cancelText: 'No',
         onOk: () => deleteItem(currentItem.id),
       });
     }
   };
 
-  const extraContent = (
-    <div className={styles.extraContent}>
-      <RadioGroup defaultValue="all">
-        <RadioButton value="all">全部</RadioButton>
-        <RadioButton value="progress">进行中</RadioButton>
-        <RadioButton value="waiting">等待中</RadioButton>
-      </RadioGroup>
-      <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
-    </div>
-  );
+  const extraContent = <div className={styles.extraContent}></div>;
 
   const MoreBtn = ({ item }) => (
     <Dropdown
       overlay={
         <Menu onClick={({ key }) => editAndDelete(key, item)}>
-          <Menu.Item key="edit">编辑</Menu.Item>
-          <Menu.Item key="delete">删除</Menu.Item>
+          <Menu.Item key="edit">Details</Menu.Item>
+          <Menu.Item key="delete">Delete</Menu.Item>
         </Menu>
       }
     >
       <a>
-        更多 <DownOutlined />
+        more <DownOutlined />
       </a>
     </Dropdown>
   );
@@ -178,13 +159,13 @@ export const BasicList = (props) => {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="我的待办" value="8个任务" bordered />
+                <Info title="Processed Predictions" value="8" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="本周任务平均处理时间" value="32分钟" bordered />
+                <Info title="Balace" value="$32" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="本周完成任务数" value="24个任务" />
+                <Info title="Total Tasks" value="24" />
               </Col>
             </Row>
           </Card>
@@ -192,7 +173,7 @@ export const BasicList = (props) => {
           <Card
             className={styles.listCard}
             bordered={false}
-            title="基本列表"
+            title="My task list"
             style={{
               marginTop: 24,
             }}
@@ -211,7 +192,7 @@ export const BasicList = (props) => {
               ref={addBtn}
             >
               <PlusOutlined />
-              添加
+              ADD
             </Button>
 
             <List
@@ -219,7 +200,7 @@ export const BasicList = (props) => {
               rowKey="id"
               loading={loading}
               pagination={paginationProps}
-              dataSource={list}
+              dataSource={ilist}
               renderItem={(item) => (
                 <List.Item
                   actions={[
@@ -230,15 +211,15 @@ export const BasicList = (props) => {
                         showEditModal(item);
                       }}
                     >
-                      编辑
+                      Edit
                     </a>,
                     <MoreBtn key="more" item={item} />,
                   ]}
                 >
                   <List.Item.Meta
-                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
-                    title={<a href={item.href}>{item.title}</a>}
-                    description={item.subDescription}
+                    // avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                    title={<a>{item.fields.description}</a>}
+                    description={item.fields.description}
                   />
                   <ListContent data={item} />
                 </List.Item>
