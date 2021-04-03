@@ -82,7 +82,7 @@ class Workplace extends Component {
 
     request('/tasks/list', { method: 'POST' }).then((result) => {
       this.setState({
-        data: result.data.slice(0, 9),
+        data: result.data.list.slice(0, 9),
       });
     });
   }
