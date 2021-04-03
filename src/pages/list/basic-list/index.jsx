@@ -51,8 +51,9 @@ export const BasicList = (props) => {
   const [ilist, setIlist] = useState([]);
   const [total, setTotal] = useState(1);
   const [numppage, setPpage] = useState(1);
+  const [currentPage, setCurrentpage] = useState(1);
   useEffect(() => {
-    request('/tasks/list', { method: 'POST' }).then((result) => {
+    request('/tasks/list', { method: 'POST', data: { page: 1 } }).then((result) => {
       setIlist(result.data.list);
       setTotal(result.data.totalCount);
       setPpage(result.data.numPerPage);
@@ -65,10 +66,21 @@ export const BasicList = (props) => {
     //  },
     // });
   }, [1]);
+
+  const pageChange = (item) => {
+    setCurrentpage(item);
+    request('/tasks/list', { method: 'POST', data: { page: item } }).then((result) => {
+      setIlist(result.data.list);
+      setTotal(result.data.totalCount);
+      setPpage(result.data.numPerPage);
+    });
+  };
+
   const paginationProps = {
     showQuickJumper: true,
     pageSize: numppage,
-    total,
+    total: total * 5,
+    onChange: pageChange.bind(this),
   };
 
   const showModal = () => {
@@ -159,13 +171,13 @@ export const BasicList = (props) => {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="Processed Predictions" value="8" bordered />
+                <Info title="Processed Predictions" value="0" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="Balace" value="$32" bordered />
+                <Info title="Balace" value="$0" bordered />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="Total Tasks" value="24" />
+                <Info title="Total Tasks" value="0" />
               </Col>
             </Row>
           </Card>
