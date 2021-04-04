@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Dropdown, List, Menu, Modal, Progress, Row } from 'antd';
+import { Button, Card, Col, Dropdown, List, Menu, Modal, Progress, Row, message } from 'antd';
 import { findDOMNode } from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
-import { connect } from 'umi';
+import { connect, history } from 'umi';
 import moment from 'moment';
 import OperationModal from './components/OperationModal';
 import styles from './style.less';
@@ -20,7 +20,7 @@ const Info = ({ title, value, bordered }) => (
 // eslint-disable-next-line
 const ListContent = ({
   data: {
-    fields: { time_start },
+    fields: { time_start, status },
   },
 }) => (
   <div className={styles.listContent}>
@@ -31,8 +31,8 @@ const ListContent = ({
     </div>
     <div className={styles.listContentItem}>
       <Progress
-        percent={100}
-        status={'success'}
+        percent={status}
+        status={status == 100 ? 'success' : 'active'}
         strokeWidth={6}
         style={{
           width: 180,
@@ -79,13 +79,12 @@ export const BasicList = (props) => {
   const paginationProps = {
     showQuickJumper: true,
     pageSize: numppage,
-    total: total * 5,
+    total: total,
     onChange: pageChange.bind(this),
   };
 
   const showModal = () => {
-    setVisible(true);
-    setCurrent(undefined);
+    history.push('/dash/dashboard/aimodels');
   };
 
   const showEditModal = (item) => {
@@ -217,15 +216,29 @@ export const BasicList = (props) => {
                 <List.Item
                   actions={[
                     <a
-                      key="edit"
+                      key="Details"
                       onClick={(e) => {
-                        e.preventDefault();
-                        showEditModal(item);
+                        history.push('/dash/dashboard/taskdetails');
                       }}
                     >
-                      Edit
+                      Details
                     </a>,
-                    <MoreBtn key="more" item={item} />,
+                    <a
+                      key="delete"
+                      onClick={(e) => {
+                        request('/tasks/del', { method: 'POST', data: { task_id: item.pk } }).then(
+                          (result) => {
+                            if (result.code == 200) {
+                              pageChange(currentPage);
+                            } else {
+                              message.error('Delete failed due to unknown reason');
+                            }
+                          },
+                        );
+                      }}
+                    >
+                      Delete
+                    </a>,
                   ]}
                 >
                   <List.Item.Meta
