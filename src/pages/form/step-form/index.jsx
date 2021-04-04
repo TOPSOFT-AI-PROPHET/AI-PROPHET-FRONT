@@ -32,21 +32,30 @@ const getCurrentStepAndComponent = (current) => {
   }
 };
 
-const StepForm = ({ current }) => {
-  const [stepComponent, setStepComponent] = useState(<Step1 />);
+const StepForm = (props) => {
+  const [stepComponent, setStepComponent] = useState();
   const [currentStep, setCurrentStep] = useState(0);
+  const { dispatch } = props;
   useEffect(() => {
-    const { step, component } = getCurrentStepAndComponent(current);
+    const { step, component } = getCurrentStepAndComponent(props.current);
     setCurrentStep(step);
+    if (dispatch) {
+      dispatch({
+        type: 'formAndstepForm/saveMid',
+        payload: {
+          id: props.match.params.id,
+        },
+      });
+    }
     setStepComponent(component);
-  }, [current]);
+  }, [props.current]);
   return (
-    <PageContainer content="将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。">
+    <PageContainer content="给出相应的ai model的输入参数栏">
       <Card bordered={false}>
         <>
           <Steps current={currentStep} className={styles.steps}>
-            <Step title="填写转账信息" />
-            <Step title="确认转账信息" />
+            <Step title="输入参数" />
+            <Step title="确认参数信息" />
             <Step title="完成" />
           </Steps>
           {stepComponent}

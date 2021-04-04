@@ -1,4 +1,4 @@
-import { Button, Result, Descriptions, Statistic } from 'antd';
+import { Button, Result, Descriptions } from 'antd';
 import React from 'react';
 import { connect } from 'umi';
 import styles from './index.less';
@@ -9,8 +9,6 @@ const Step3 = (props) => {
   if (!data) {
     return null;
   }
-
-  const { payAccount, receiverAccount, receiverName, amount } = data;
 
   const onFinish = () => {
     if (dispatch) {
@@ -24,31 +22,26 @@ const Step3 = (props) => {
   const information = (
     <div className={styles.information}>
       <Descriptions column={1}>
-        <Descriptions.Item label="付款账户"> {payAccount}</Descriptions.Item>
-        <Descriptions.Item label="收款账户"> {receiverAccount}</Descriptions.Item>
-        <Descriptions.Item label="收款人姓名"> {receiverName}</Descriptions.Item>
-        <Descriptions.Item label="转账金额">
-          <Statistic value={amount} suffix="元" />
-        </Descriptions.Item>
+        {data.ilist.map((item) => {
+          return (
+            <Descriptions.Item key={item.name} label={item.ai_description}>
+              {data.values[item.name]}
+            </Descriptions.Item>
+          );
+        })}
       </Descriptions>
     </div>
   );
   const extra = (
     <>
       <Button type="primary" onClick={onFinish}>
-        再转一笔
+        再测一次
       </Button>
-      <Button>查看账单</Button>
+      <Button>返回列表</Button>
     </>
   );
   return (
-    <Result
-      status="success"
-      title="操作成功"
-      subTitle="预计两小时内到账"
-      extra={extra}
-      className={styles.result}
-    >
+    <Result status="success" title="提交成功" extra={extra} className={styles.result}>
       {information}
     </Result>
   );

@@ -1,19 +1,14 @@
-import { fakeSubmitForm } from './service';
-
 const Model = {
   namespace: 'formAndstepForm',
   state: {
     current: 'info',
-    step: {
-      payAccount: 'ant-design@alipay.com',
-      receiverAccount: 'test@example.com',
-      receiverName: 'Alex',
-      amount: '500',
+    step: {},
+    mid: {
+      id: 0,
     },
   },
   effects: {
-    *submitStepForm({ payload }, { call, put }) {
-      yield call(fakeSubmitForm, payload);
+    *submitStepForm({ payload }, { put }) {
       yield put({
         type: 'saveStepFormData',
         payload,
@@ -31,6 +26,10 @@ const Model = {
 
     saveStepFormData(state, { payload }) {
       return { ...state, step: { ...state.step, ...payload } };
+    },
+
+    saveMid(state, { payload }) {
+      return { ...state, mid: { ...state.mid, ...payload } };
     },
   },
 };
