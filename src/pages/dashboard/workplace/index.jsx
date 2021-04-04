@@ -80,7 +80,7 @@ class Workplace extends Component {
       type: 'dashboardAndworkplace/init',
     });
 
-    request('/tasks/list', { method: 'POST' }).then((result) => {
+    request('/tasks/list', { method: 'POST', data: { page: 1 } }).then((result) => {
       this.setState({
         data: result.data.list.slice(0, 9),
       });
