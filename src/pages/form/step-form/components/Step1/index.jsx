@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Divider, Input } from 'antd';
-import { connect } from 'umi';
+import { connect, FormattedMessage, formatMessage } from 'umi';
 import styles from './index.less';
 import request from '@/utils/request';
 
@@ -62,7 +62,11 @@ const Step1 = (props) => {
         {ilist.map((item) => {
           return (
             <Form.Item label={item.ai_description} name={item.name} key={item.name}>
-              <Input placeholder="请输入选项" />
+              <Input
+                placeholder={formatMessage({
+                  id: 'getparam.input.option',
+                })}
+              />
             </Form.Item>
           );
         })}
@@ -79,7 +83,7 @@ const Step1 = (props) => {
           }}
         >
           <Button type="primary" onClick={onValidateForm}>
-            下一步
+            <FormattedMessage id="getparam.finishStep1" />
           </Button>
         </Form.Item>
       </Form>

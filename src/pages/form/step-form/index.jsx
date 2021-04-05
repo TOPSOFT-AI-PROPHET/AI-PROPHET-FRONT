@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Steps } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
-import { connect } from 'umi';
+import { connect, formatMessage } from 'umi';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
@@ -54,9 +54,9 @@ const StepForm = (props) => {
       <Card bordered={false}>
         <>
           <Steps current={currentStep} className={styles.steps}>
-            <Step title="输入参数" />
-            <Step title="确认参数信息" />
-            <Step title="完成" />
+            <Step title={formatMessage({ id: 'getparam.rotation.inputParam' })} />
+            <Step title={formatMessage({ id: 'getparam.rotation.checkParam' })} />
+            <Step title={formatMessage({ id: 'getparam.rotation.complete' })} />
           </Steps>
           {stepComponent}
         </>

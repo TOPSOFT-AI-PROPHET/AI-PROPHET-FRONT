@@ -1,6 +1,6 @@
 import { Button, Result, Descriptions } from 'antd';
 import React from 'react';
-import { connect } from 'umi';
+import { connect, FormattedMessage, formatMessage } from 'umi';
 import styles from './index.less';
 
 const Step3 = (props) => {
@@ -35,13 +35,22 @@ const Step3 = (props) => {
   const extra = (
     <>
       <Button type="primary" onClick={onFinish}>
-        再测一次
+        <FormattedMessage id="getparam.step3.again" />
       </Button>
-      <Button>返回列表</Button>
+      <Button>
+        <FormattedMessage id="getparam.step3.backToList" />
+      </Button>
     </>
   );
   return (
-    <Result status="success" title="提交成功" extra={extra} className={styles.result}>
+    <Result
+      status="success"
+      title={formatMessage({
+        id: 'getparam.step3.completed',
+      })}
+      extra={extra}
+      className={styles.result}
+    >
       {information}
     </Result>
   );

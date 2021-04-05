@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Descriptions, Divider } from 'antd';
-import { connect } from 'umi';
+import { connect, FormattedMessage } from 'umi';
 import styles from './index.less';
 
 const formItemLayout = {
@@ -87,7 +87,7 @@ const Step2 = (props) => {
         }}
       >
         <Button type="primary" onClick={onValidateForm} loading={submitting}>
-          提交
+          <FormattedMessage id="getparam.finishAllSteps" />
         </Button>
         <Button
           onClick={onPrev}
@@ -95,7 +95,7 @@ const Step2 = (props) => {
             marginLeft: 8,
           }}
         >
-          上一步
+          <FormattedMessage id="getparam.step2.laststep" />
         </Button>
       </Form.Item>
     </Form>
