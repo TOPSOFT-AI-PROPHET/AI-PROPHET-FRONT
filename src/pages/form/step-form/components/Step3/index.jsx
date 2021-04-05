@@ -35,10 +35,10 @@ const Step3 = (props) => {
   const extra = (
     <>
       <Button type="primary" onClick={onFinish}>
-        <FormattedMessage id="getparam.step3.again" />
+        <FormattedMessage id="formandstep-form.getparam.step3.again" />
       </Button>
       <Button>
-        <FormattedMessage id="getparam.step3.backToList" />
+        <FormattedMessage id="formandstep-form.getparam.step3.backToList" />
       </Button>
     </>
   );
@@ -46,7 +46,7 @@ const Step3 = (props) => {
     <Result
       status="success"
       title={formatMessage({
-        id: 'getparam.step3.completed',
+        id: 'formandstep-form.getparam.step3.completed',
       })}
       extra={extra}
       className={styles.result}
