@@ -54,9 +54,9 @@ const StepForm = (props) => {
       <Card bordered={false}>
         <>
           <Steps current={currentStep} className={styles.steps}>
-            <Step title={formatMessage({ id: 'getparam.rotation.inputParam' })} />
-            <Step title={formatMessage({ id: 'getparam.rotation.checkParam' })} />
-            <Step title={formatMessage({ id: 'getparam.rotation.complete' })} />
+            <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.inputParam' })} />
+            <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.checkParam' })} />
+            <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.complete' })} />
           </Steps>
           {stepComponent}
         </>

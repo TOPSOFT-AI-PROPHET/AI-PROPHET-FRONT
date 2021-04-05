@@ -87,7 +87,7 @@ const Step2 = (props) => {
         }}
       >
         <Button type="primary" onClick={onValidateForm} loading={submitting}>
-          <FormattedMessage id="getparam.finishAllSteps" />
+          <FormattedMessage id="formandstep-form.getparam.finishAllSteps" />
         </Button>
         <Button
           onClick={onPrev}
@@ -95,7 +95,7 @@ const Step2 = (props) => {
             marginLeft: 8,
           }}
         >
-          <FormattedMessage id="getparam.step2.laststep" />
+          <FormattedMessage id="formandstep-form.getparam.step2.laststep" />
         </Button>
       </Form.Item>
     </Form>

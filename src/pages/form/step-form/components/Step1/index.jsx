@@ -64,7 +64,7 @@ const Step1 = (props) => {
             <Form.Item label={item.ai_description} name={item.name} key={item.name}>
               <Input
                 placeholder={formatMessage({
-                  id: 'getparam.input.option',
+                  id: 'formandstep-form.getparam.input.option',
                 })}
               />
             </Form.Item>
@@ -83,7 +83,7 @@ const Step1 = (props) => {
           }}
         >
           <Button type="primary" onClick={onValidateForm}>
-            <FormattedMessage id="getparam.finishStep1" />
+            <FormattedMessage id="formandstep-form.getparam.finishStep1" />
           </Button>
         </Form.Item>
       </Form>
