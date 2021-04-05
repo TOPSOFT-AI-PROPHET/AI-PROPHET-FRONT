@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect, history } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
 import moment from 'moment';
-import { FormattedMessage } from 'umi';
+import { FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
 import { Empty } from 'antd';
@@ -111,7 +111,7 @@ class Workplace extends Component {
           style={{
             marginBottom: 24,
           }}
-          title="My Predictions"
+          title={<FormattedMessage id="pages.dashboardandworkplace.workplace.cardtitle" />}
           bordered={false}
           extra={
             <a
@@ -119,7 +119,7 @@ class Workplace extends Component {
                 history.push('/dash/dashboard/list/basic-list');
               }}
             >
-              All Predictions
+              {formatMessage({ id: 'pages.dashboardandworkplace.workplace.extratxt' })}
             </a>
           }
           bodyStyle={{

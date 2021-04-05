@@ -66,4 +66,8 @@ export default {
   'pages.searchTable.batchApproval': 'batch approval',
   'pages.dashboardandworkplace.workplace.numtask': 'Processed Predictions',
   'pages.dashboardandworkplace.workplace.balance': 'Balance',
+  'pages.dashboardandworkplace.workplace.cardtitle': 'My Predictions',
+  'pages.dashboardandworkplace.workplace.extratxt': 'All Predicitons',
+  'pages.dash.dashboard.list.card-list.contentlink':
+    'TOPSOFT AI The Prophet | AI Model Usage White Paper',
 };

@@ -62,6 +62,9 @@ export default {
   'pages.searchTable.tenThousand': '万',
   'pages.searchTable.batchDeletion': '批量删除',
   'pages.searchTable.batchApproval': '批量审批',
-  'dashboardandworkplace.workplace.numtask': '已完成预测',
-  'dashboardandworkplace.workplace.balance': '余额',
+  'pages.dashboardandworkplace.workplace.numtask': '已完成预测',
+  'pages.dashboardandworkplace.workplace.balance': '余额',
+  'pages.dashboardandworkplace.workplace.cardtitle': '我的预测',
+  'pages.dashboardandworkplace.workplace.extratxt': '全部预测',
+  'pages.dash.dashboard.list.card-list.contentlink': 'TOPSOFT AI 先知系统 ｜ AI模型使用白皮书',
 };
