@@ -1,11 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Dropdown, List, Menu, Modal, Progress, Row, message } from 'antd';
-import { findDOMNode } from 'react-dom';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Card, Col, List, Progress, Row, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import { connect, history } from 'umi';
 import moment from 'moment';
-import OperationModal from './components/OperationModal';
 import styles from './style.less';
 import request from '@/utils/request';
 
@@ -17,9 +15,9 @@ const Info = ({ title, value, bordered }) => (
   </div>
 );
 
-// eslint-disable-next-line
 const ListContent = ({
   data: {
+    // eslint-disable-next-line
     fields: { time_start, status },
   },
 }) => (
@@ -32,7 +30,7 @@ const ListContent = ({
     <div className={styles.listContentItem}>
       <Progress
         percent={status}
-        status={status == 100 ? 'success' : 'active'}
+        status={status === 100 ? 'success' : 'active'}
         strokeWidth={6}
         style={{
           width: 180,
@@ -44,10 +42,7 @@ const ListContent = ({
 
 export const BasicList = (props) => {
   const addBtn = useRef(null);
-  const { loading, dispatch } = props;
-  const [done, setDone] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [current, setCurrent] = useState(undefined);
+  const { loading } = props;
   const [ilist, setIlist] = useState([]);
   const [total, setTotal] = useState(1);
   const [numppage, setPpage] = useState(1);
@@ -58,13 +53,6 @@ export const BasicList = (props) => {
       setTotal(result.data.totalCount);
       setPpage(result.data.numPerPage);
     });
-
-    // dispatch({
-    //  type: 'listAndbasicList/fetch',
-    //  payload: {
-    //    count: 5,
-    //  },
-    // });
   }, [1]);
 
   const pageChange = (item) => {
@@ -79,7 +67,7 @@ export const BasicList = (props) => {
   const paginationProps = {
     showQuickJumper: true,
     pageSize: numppage,
-    total: total,
+    total,
     onChange: pageChange.bind(this),
   };
 
@@ -87,81 +75,7 @@ export const BasicList = (props) => {
     history.push('/dash/dashboard/aimodels');
   };
 
-  const showEditModal = (item) => {
-    setVisible(true);
-    setCurrent(item);
-  };
-
-  const deleteItem = (id) => {
-    dispatch({
-      type: 'listAndbasicList/submit',
-      payload: {
-        id,
-      },
-    });
-  };
-
-  const editAndDelete = (key, currentItem) => {
-    if (key === 'edit') showEditModal(currentItem);
-    else if (key === 'delete') {
-      Modal.confirm({
-        title: 'Delete Processed Predictions',
-        content: 'Are you sure you want delete',
-        okText: 'Yes',
-        cancelText: 'No',
-        onOk: () => deleteItem(currentItem.id),
-      });
-    }
-  };
-
   const extraContent = <div className={styles.extraContent}></div>;
-
-  const MoreBtn = ({ item }) => (
-    <Dropdown
-      overlay={
-        <Menu onClick={({ key }) => editAndDelete(key, item)}>
-          <Menu.Item key="edit">Details</Menu.Item>
-          <Menu.Item key="delete">Delete</Menu.Item>
-        </Menu>
-      }
-    >
-      <a>
-        more <DownOutlined />
-      </a>
-    </Dropdown>
-  );
-
-  const setAddBtnblur = () => {
-    if (addBtn.current) {
-      // eslint-disable-next-line react/no-find-dom-node
-      const addBtnDom = findDOMNode(addBtn.current);
-      setTimeout(() => addBtnDom.blur(), 0);
-    }
-  };
-
-  const handleDone = () => {
-    setAddBtnblur();
-    setDone(false);
-    setVisible(false);
-  };
-
-  const handleCancel = () => {
-    setAddBtnblur();
-    setVisible(false);
-  };
-
-  const handleSubmit = (values) => {
-    const id = current ? current.id : '';
-    setAddBtnblur();
-    setDone(true);
-    dispatch({
-      type: 'listAndbasicList/submit',
-      payload: {
-        id,
-        ...values,
-      },
-    });
-  };
 
   return (
     <div>
@@ -217,7 +131,7 @@ export const BasicList = (props) => {
                   actions={[
                     <a
                       key="Details"
-                      onClick={(e) => {
+                      onClick={() => {
                         history.push('/dash/dashboard/taskdetails');
                       }}
                     >
@@ -225,10 +139,10 @@ export const BasicList = (props) => {
                     </a>,
                     <a
                       key="delete"
-                      onClick={(e) => {
+                      onClick={() => {
                         request('/tasks/del', { method: 'POST', data: { task_id: item.pk } }).then(
                           (result) => {
-                            if (result.code == 200) {
+                            if (result.code === 200) {
                               pageChange(currentPage);
                             } else {
                               message.error('Delete failed due to unknown reason');
@@ -253,15 +167,6 @@ export const BasicList = (props) => {
           </Card>
         </div>
       </PageContainer>
-
-      <OperationModal
-        done={done}
-        current={current}
-        visible={visible}
-        onDone={handleDone}
-        onCancel={handleCancel}
-        onSubmit={handleSubmit}
-      />
     </div>
   );
 };
