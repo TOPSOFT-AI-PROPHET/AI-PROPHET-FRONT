@@ -99,23 +99,34 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/dash/dashboard/workplace',
                   component: './dashboard/workplace',
+                }
+              ],
+            },
+            {
+              name: 'prediction',
+              icon: 'dashboard',
+              path: '/prediction',
+              routes: [
+                {
+                  path: '/dash/prediction',
+                  redirect: '/dash/prediction/predictions'
                 },
                 {
                   name: 'predictions',
                   icon: 'smile',
-                  path: '/dash/dashboard/predictions',
+                  path: '/dash/prediction/predictions',
                   component: './dashboard/predictions',
                 },
                 {
                   name: 'aimodels',
                   hideInMenu: true,
-                  path: '/dash/dashboard/aimodels',
+                  path: '/dash/prediction/aimodels',
                   component: './dashboard/aimodels',
                 },
                 {
                   name: 'newprediction',
                   hideInMenu: true,
-                  path: '/dash/dashboard/newprediction/:id',
+                  path: '/dash/prediction/newprediction/:id',
                   component: './dashboard/newprediction',
                 },
               ],
@@ -126,19 +137,19 @@ export default defineConfig({
               path: '/account',
               routes: [
                 {
-                  path: '/',
-                  redirect: '/account/center',
+                  path: '/dash/account',
+                  redirect: '/dash/account/center',
                 },
                 {
                   name: 'center',
                   icon: 'smile',
-                  path: '/account/center',
+                  path: '/dash/account/center',
                   component: './account/center',
                 },
                 {
                   name: 'settings',
                   icon: 'smile',
-                  path: '/account/settings',
+                  path: '/dash/account/settings',
                   component: './account/settings',
                 },
               ],
