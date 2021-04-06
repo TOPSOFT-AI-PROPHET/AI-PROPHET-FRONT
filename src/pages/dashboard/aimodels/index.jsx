@@ -32,6 +32,10 @@ class CardList extends Component {
     });
   }
 
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
   render() {
     const content = (
       <div className={styles.pageHeaderContent}>

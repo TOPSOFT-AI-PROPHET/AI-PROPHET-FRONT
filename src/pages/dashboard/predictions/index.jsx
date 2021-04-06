@@ -48,11 +48,13 @@ export const BasicList = (props) => {
   const [numppage, setPpage] = useState(1);
   const [currentPage, setCurrentpage] = useState(1);
   useEffect(() => {
-    request('/tasks/list', { method: 'POST', data: { page: 1 } }).then((result) => {
-      setIlist(result.data.list);
-      setTotal(result.data.totalCount);
-      setPpage(result.data.numPerPage);
-    });
+    request('/tasks/list', { method: 'POST', data: { page: 1 } })
+      .then((result) => {
+        setIlist(result.data.list);
+        setTotal(result.data.totalCount);
+        setPpage(result.data.numPerPage);
+      })
+      .catch((e) => console.log(e));
   }, [1]);
 
   const pageChange = (item) => {

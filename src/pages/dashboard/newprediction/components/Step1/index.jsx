@@ -16,11 +16,11 @@ const formItemLayout = {
 const Step1 = (props) => {
   const [ilist, setIlist] = useState([]);
   useEffect(() => {
-    request('/getAIM', { method: 'POST', data: { ai_id: parseInt(props.modelid.id, 10) } }).then(
-      (result) => {
+    request('/getAIM', { method: 'POST', data: { ai_id: parseInt(props.modelid.id, 10) } })
+      .then((result) => {
         setIlist(result.data.ai_description.details);
-      },
-    );
+      })
+      .catch((e) => console.log(e));
   }, [1]);
 
   const { dispatch, data } = props;
