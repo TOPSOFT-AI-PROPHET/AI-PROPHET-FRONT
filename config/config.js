@@ -103,25 +103,20 @@ export default defineConfig({
               ],
             },
             {
+              path: '/dash/prediction',
               name: 'prediction',
               icon: 'dashboard',
-              path: '/prediction',
               routes: [
                 {
-                  path: '/dash/prediction',
-                  redirect: '/dash/prediction/predictions'
+                  name: 'aimodels',
+                  path: '/dash/prediction/aimodels',
+                  component: './dashboard/aimodels',
                 },
                 {
                   name: 'predictions',
                   icon: 'smile',
                   path: '/dash/prediction/predictions',
                   component: './dashboard/predictions',
-                },
-                {
-                  name: 'aimodels',
-                  hideInMenu: true,
-                  path: '/dash/prediction/aimodels',
-                  component: './dashboard/aimodels',
                 },
                 {
                   name: 'newprediction',
