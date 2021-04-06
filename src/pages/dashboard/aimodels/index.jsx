@@ -25,15 +25,15 @@ class CardList extends Component {
       },
     });
 
-    request('/tasks/listAIM', { method: 'POST' }).then((result) => {
-      this.setState({
-        data: result.data,
-      });
-    });
-  }
-
-  componentDidCatch(error, info) {
-    console.log(error, info);
+    request('/tasks/listAIM', { method: 'POST' })
+      .then((result) => {
+        if (result.data) {
+          this.setState({
+            data: result.data,
+          });
+        }
+      })
+      .catch((e) => console.log(e));
   }
 
   render() {
