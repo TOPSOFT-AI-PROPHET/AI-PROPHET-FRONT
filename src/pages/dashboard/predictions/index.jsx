@@ -74,7 +74,7 @@ export const BasicList = (props) => {
   };
 
   const showModal = () => {
-    history.push('/dash/dashboard/aimodels');
+    history.push('/dash/prediction/aimodels');
   };
 
   const extraContent = <div className={styles.extraContent}></div>;
@@ -134,7 +134,7 @@ export const BasicList = (props) => {
                     <a
                       key="Details"
                       onClick={() => {
-                        history.push('/dash/dashboard/taskdetails');
+                        history.push('/dash/prediction/details');
                       }}
                     >
                       Details
