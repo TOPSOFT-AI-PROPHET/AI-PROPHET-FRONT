@@ -92,7 +92,7 @@ class CardList extends Component {
                       title={
                         <a
                           onClick={() => {
-                            history.push(`/dash/dashboard/newprediction/${item.pk}`);
+                            history.push(`/dash/prediction/newprediction/${item.pk}`);
                           }}
                         >
                           {item.model}
