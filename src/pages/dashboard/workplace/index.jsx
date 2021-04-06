@@ -80,11 +80,13 @@ class Workplace extends Component {
       type: 'dashboardAndworkplace/init',
     });
 
-    request('/tasks/list', { method: 'POST', data: { page: 1 } }).then((result) => {
-      this.setState({
-        data: result.data.list.slice(0, 9),
-      });
-    });
+    request('/tasks/list', { method: 'POST', data: { page: 1 } })
+      .then((result) => {
+        this.setState({
+          data: result.data.list.slice(0, 9),
+        });
+      })
+      .catch((e) => console.log(e));
   }
 
   componentWillUnmount() {
@@ -92,10 +94,6 @@ class Workplace extends Component {
     dispatch({
       type: 'dashboardAndworkplace/clear',
     });
-  }
-
-  componentDidCatch(error, info) {
-    console.log(error, info);
   }
 
   render() {
