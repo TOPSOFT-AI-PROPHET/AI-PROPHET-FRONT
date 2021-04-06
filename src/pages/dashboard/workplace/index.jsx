@@ -94,6 +94,10 @@ class Workplace extends Component {
     });
   }
 
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
   render() {
     const { currentUser } = this.props;
 
