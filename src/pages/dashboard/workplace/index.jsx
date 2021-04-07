@@ -118,7 +118,7 @@ class Workplace extends Component {
           extra={
             <a
               onClick={() => {
-                history.push('/dash/dashboard/list/basic-list');
+                history.push('/dash/prediction/predictions');
               }}
             >
               {formatMessage({ id: 'pages.dashboardandworkplace.workplace.extratxt' })}
