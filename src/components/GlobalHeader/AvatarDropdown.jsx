@@ -21,7 +21,7 @@ class AvatarDropdown extends React.Component {
       return;
     }
 
-    history.push(`/account/${key}`);
+    history.push(`/dash/account/${key}`);
   };
 
   render() {
