@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Card, Col, List, Progress, Row, message } from 'antd';
+import { findDOMNode } from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
-import { connect, history } from 'umi';
+import { connect, history, formatMessage, FormattedMessage } from 'umi';
 import moment from 'moment';
+import OperationModal from './components/OperationModal';
 import styles from './style.less';
 import request from '@/utils/request';
 
@@ -23,7 +25,9 @@ const ListContent = ({
 }) => (
   <div className={styles.listContent}>
     <div className={styles.listContentItem}>
-      <span>Start Time</span>
+      <span>
+        <FormattedMessage id="basic.list.starttime" />
+      </span>
       {/* eslint-disable-next-line  */}
       <p>{moment(time_start).format('YYYY-MM-DD HH:mm')}</p>
     </div>
@@ -42,19 +46,30 @@ const ListContent = ({
 
 export const BasicList = (props) => {
   const addBtn = useRef(null);
-  const { loading } = props;
+  const { loading, dispatch } = props;
+  const [done, setDone] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [current] = useState(undefined);
   const [ilist, setIlist] = useState([]);
   const [total, setTotal] = useState(1);
   const [numppage, setPpage] = useState(1);
   const [currentPage, setCurrentpage] = useState(1);
+  const [balance, setBalance] = useState(1);
+  const [numtask, setNumTask] = useState(undefined);
+  const [numfinishedtasks, setNumFinishedTasks] = useState(undefined);
   useEffect(() => {
-    request('/tasks/list', { method: 'POST', data: { page: 1 } })
-      .then((result) => {
-        setIlist(result.data.list);
-        setTotal(result.data.totalCount);
-        setPpage(result.data.numPerPage);
-      })
-      .catch((e) => console.log(e));
+    request('/tasks/list', { method: 'POST', data: { page: 1 } }).then((result) => {
+      setIlist(result.data.list);
+      setTotal(result.data.totalCount);
+      setPpage(result.data.numPerPage);
+    });
+
+    // dispatch({
+    //  type: 'listAndbasicList/fetch',
+    //  payload: {
+    //    count: 5,
+    //  },
+    // });
   }, [1]);
 
   const pageChange = (item) => {
@@ -66,6 +81,19 @@ export const BasicList = (props) => {
     });
   };
 
+  useEffect(() => {
+    request('/users/getUserInfo', { method: 'POST' }).then((result) => {
+      setBalance(result.data.balance);
+    });
+  }, [1]);
+
+  useEffect(() => {
+    request('/tasks/numTask', { method: 'POST' }).then((result) => {
+      setNumTask(result.data.number_of_task);
+      setNumFinishedTasks(result.data.number_of_finished_tasks);
+    });
+  }, [1]);
+
   const paginationProps = {
     showQuickJumper: true,
     pageSize: numppage,
@@ -74,10 +102,42 @@ export const BasicList = (props) => {
   };
 
   const showModal = () => {
-    history.push('/dash/prediction/aimodels');
+    history.push('/dash/dashboard/aimodels');
   };
 
   const extraContent = <div className={styles.extraContent}></div>;
+
+  const setAddBtnblur = () => {
+    if (addBtn.current) {
+      // eslint-disable-next-line react/no-find-dom-node
+      const addBtnDom = findDOMNode(addBtn.current);
+      setTimeout(() => addBtnDom.blur(), 0);
+    }
+  };
+
+  const handleDone = () => {
+    setAddBtnblur();
+    setDone(false);
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setAddBtnblur();
+    setVisible(false);
+  };
+
+  const handleSubmit = (values) => {
+    const id = current ? current.id : '';
+    setAddBtnblur();
+    setDone(true);
+    dispatch({
+      type: 'listAndbasicList/submit',
+      payload: {
+        id,
+        ...values,
+      },
+    });
+  };
 
   return (
     <div>
@@ -86,13 +146,21 @@ export const BasicList = (props) => {
           <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
-                <Info title="Processed Predictions" value="0" bordered />
+                <Info
+                  title={formatMessage({ id: 'basic.list.prediction' })}
+                  value={numfinishedtasks}
+                  bordered
+                />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="Balace" value="$0" bordered />
+                <Info
+                  title={formatMessage({ id: 'basic.list.balance' })}
+                  value={`$${balance}`}
+                  bordered
+                />
               </Col>
               <Col sm={8} xs={24}>
-                <Info title="Total Tasks" value="0" />
+                <Info title={formatMessage({ id: 'basic.list.numtask' })} value={numtask} />
               </Col>
             </Row>
           </Card>
@@ -100,7 +168,7 @@ export const BasicList = (props) => {
           <Card
             className={styles.listCard}
             bordered={false}
-            title="My task list"
+            title={formatMessage({ id: 'basic.list.tasklist' })}
             style={{
               marginTop: 24,
             }}
@@ -119,7 +187,7 @@ export const BasicList = (props) => {
               ref={addBtn}
             >
               <PlusOutlined />
-              ADD
+              <FormattedMessage id="basic.list.add" />
             </Button>
 
             <List
@@ -134,10 +202,10 @@ export const BasicList = (props) => {
                     <a
                       key="Details"
                       onClick={() => {
-                        history.push('/dash/prediction/details');
+                        history.push('/dash/dashboard/taskdetails');
                       }}
                     >
-                      Details
+                      <FormattedMessage id="basic.list.details" />
                     </a>,
                     <a
                       key="delete"
@@ -153,7 +221,7 @@ export const BasicList = (props) => {
                         );
                       }}
                     >
-                      Delete
+                      <FormattedMessage id="basic.list.delete" />
                     </a>,
                   ]}
                 >
@@ -169,6 +237,15 @@ export const BasicList = (props) => {
           </Card>
         </div>
       </PageContainer>
+
+      <OperationModal
+        done={done}
+        current={current}
+        visible={visible}
+        onDone={handleDone}
+        onCancel={handleCancel}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };
