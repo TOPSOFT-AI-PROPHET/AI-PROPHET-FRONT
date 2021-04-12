@@ -127,7 +127,8 @@ class Settings extends Component {
   render() {
     const { currentUser } = this.props;
 
-    if (!currentUser.userid) {
+    if (!currentUser.email) {
+      // console.log("123456");
       return '';
     }
 

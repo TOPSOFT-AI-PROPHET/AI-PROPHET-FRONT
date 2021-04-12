@@ -1,12 +1,11 @@
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Input, Select, Upload, Form, message } from 'antd';
+import { UploadOutlined, DollarOutlined } from '@ant-design/icons';
+import { Button, Input, Upload, Form, message, Space } from 'antd';
 import { connect, FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
-import GeographicView from './GeographicView';
 import PhoneView from './PhoneView';
 import styles from './BaseView.less';
 
-const { Option } = Select; // 头像组件 方便以后独立，增加裁剪之类的功能
+// const { Option } = Select; // 头像组件 方便以后独立，增加裁剪之类的功能
 
 const AvatarView = ({ avatar }) => (
   <>
@@ -30,21 +29,7 @@ const AvatarView = ({ avatar }) => (
   </>
 );
 
-const validatorGeographic = (_, value, callback) => {
-  const { province, city } = value;
-
-  if (!province.key) {
-    callback('Please input your province!');
-  }
-
-  if (!city.key) {
-    callback('Please input your city!');
-  }
-
-  callback();
-};
-
-const validatorPhone = (rule, value, callback) => {
+const validatorPhone = (value, callback) => {
   const values = value.split('-');
 
   if (!values[0]) {
@@ -63,13 +48,14 @@ class BaseView extends Component {
 
   getAvatarURL() {
     const { currentUser } = this.props;
+    console.log(currentUser);
 
     if (currentUser) {
-      if (currentUser.avatar) {
-        return currentUser.avatar;
+      if (currentUser.profile_image_url) {
+        return currentUser.profile_image_url;
       }
 
-      const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+      const url = 'http://1.15.48.81:8888/down/THIcVYCRNDs5';
       return url;
     }
 
@@ -90,6 +76,8 @@ class BaseView extends Component {
 
   render() {
     const { currentUser } = this.props;
+    console.log(currentUser);
+
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
@@ -99,7 +87,7 @@ class BaseView extends Component {
             initialValues={currentUser}
             hideRequiredMark
           >
-            <Form.Item
+            {/* <Form.Item
               name="email"
               label={formatMessage({
                 id: 'accountandsettings.basic.email',
@@ -117,9 +105,9 @@ class BaseView extends Component {
               ]}
             >
               <Input />
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item
-              name="name"
+              name="nickname"
               label={formatMessage({
                 id: 'accountandsettings.basic.nickname',
               })}
@@ -138,7 +126,7 @@ class BaseView extends Component {
               <Input />
             </Form.Item>
             <Form.Item
-              name="profile"
+              name="user_sing"
               label={formatMessage({
                 id: 'accountandsettings.basic.profile',
               })}
@@ -161,7 +149,8 @@ class BaseView extends Component {
                 rows={4}
               />
             </Form.Item>
-            <Form.Item
+
+            {/* <Form.Item
               name="country"
               label={formatMessage({
                 id: 'accountandsettings.basic.country',
@@ -185,6 +174,7 @@ class BaseView extends Component {
               >
                 <Option value="China">中国</Option>
               </Select>
+
             </Form.Item>
             <Form.Item
               name="geographic"
@@ -226,9 +216,10 @@ class BaseView extends Component {
               ]}
             >
               <Input />
-            </Form.Item>
+            </Form.Item> */}
+
             <Form.Item
-              name="phone"
+              name="contact_number"
               label={formatMessage({
                 id: 'accountandsettings.basic.phone',
               })}
@@ -249,6 +240,32 @@ class BaseView extends Component {
             >
               <PhoneView />
             </Form.Item>
+
+            <div>
+              <Space size={12} align={'center'}>
+                {formatMessage({
+                  id: 'accountandsettings.basic.credit',
+                })}
+
+                {/* currentUser.credit */}
+                <Input
+                  prefix="￥"
+                  placeholder={currentUser.credit}
+                  suffix="RMB"
+                  disabled
+                  bordered={false}
+                />
+
+                <Button style={{}}>
+                  <DollarOutlined />
+                  {formatMessage({
+                    id: 'accountandsettings.basic.topup',
+                  })}
+                </Button>
+              </Space>
+            </div>
+            <br />
+
             <Form.Item>
               <Button htmlType="submit" type="primary">
                 <FormattedMessage
