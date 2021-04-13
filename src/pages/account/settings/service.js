@@ -1,7 +1,7 @@
 import request from 'umi-request';
 
 export async function queryCurrent() {
-  return request('users/getUserInfo', { method: 'POST' });
+  return request('/users/getUserInfo', { method: 'POST' });
 }
 export async function queryProvince() {
   return request('/api/geographic/province');
