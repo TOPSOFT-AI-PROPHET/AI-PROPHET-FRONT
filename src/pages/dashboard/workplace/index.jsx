@@ -28,11 +28,7 @@ const PageHeaderContent = ({ currentUser }) => {
       <div className={styles.avatar}>
         <Avatar
           size="large"
-          src={
-            currentUser.profile_image_url !== ''
-              ? currentUser.profile_image_url
-              : 'http://1.15.48.81:8888/down/THIcVYCRNDs5'
-          }
+          src={'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png'}
         />
       </div>
       <div className={styles.content}>
@@ -40,11 +36,7 @@ const PageHeaderContent = ({ currentUser }) => {
           Hello，
           {currentUser.nickname !== '' ? currentUser.nickname : 'John doe'}
         </div>
-        <div>
-          {currentUser.user_sing !== ''
-            ? currentUser.user_sing
-            : '仰天大笑出门去，我辈岂是蓬蒿人。'}
-        </div>
+        <div>{'仰天大笑出门去，我辈岂是蓬蒿人。'}</div>
       </div>
     </div>
   );
@@ -71,7 +63,8 @@ const ExtraContent = ({ currentUser }) => (
             defaultMessage="Balance"
           />
         }
-        value={currentUser.credit}
+        prefix="￥"
+        value={`${currentUser.credit}`}
       />
     </div>
   </div>
@@ -158,8 +151,8 @@ class Workplace extends Component {
                     title={
                       <div className={styles.cardTitle}>
                         <Avatar
-                          size="small"
-                          src="http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg"
+                          size="large"
+                          src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
                         />
                         <a>{item.model}</a>
                       </div>

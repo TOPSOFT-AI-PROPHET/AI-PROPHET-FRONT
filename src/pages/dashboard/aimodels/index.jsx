@@ -90,7 +90,12 @@ class CardList extends Component {
                     <Card.Meta
                       title={
                         <div className={styles.cardAvatar}>
-                          <Avatar size={'large'} src={'http://1.15.48.81:8888/down/THIcVYCRNDs5'} />
+                          <Avatar
+                            size={'large'}
+                            src={
+                              'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png'
+                            }
+                          />
                           <a
                             onClick={() => {
                               history.push(`/dash/prediction/newprediction/${item.pk}`);

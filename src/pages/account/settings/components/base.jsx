@@ -55,7 +55,7 @@ class BaseView extends Component {
         return currentUser.profile_image_url;
       }
 
-      const url = 'http://1.15.48.81:8888/down/THIcVYCRNDs5';
+      const url = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
       return url;
     }
 
@@ -256,7 +256,7 @@ class BaseView extends Component {
                   bordered={false}
                 />
 
-                <Button style={{}}>
+                <Button>
                   <DollarOutlined />
                   {formatMessage({
                     id: 'accountandsettings.basic.topup',
