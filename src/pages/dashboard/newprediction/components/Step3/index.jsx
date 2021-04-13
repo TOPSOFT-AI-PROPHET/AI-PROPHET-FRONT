@@ -8,7 +8,7 @@ const Step3 = (props) => {
   const { data, dispatch } = props;
 
   useEffect(() => {
-    const newilist = new Array([]);
+    const newilist = [];
     data.ilist.forEach((item) => {
       const obj = {};
       obj.value = data.values[item.name];
@@ -22,6 +22,7 @@ const Step3 = (props) => {
         data: newilist,
       },
     }).then(() => {});
+    console.log(newilist);
   }, [1]);
 
   if (!data) {
