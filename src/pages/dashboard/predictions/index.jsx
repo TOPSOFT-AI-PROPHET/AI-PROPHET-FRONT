@@ -83,7 +83,7 @@ export const BasicList = (props) => {
 
   useEffect(() => {
     request('/users/getUserInfo', { method: 'POST' }).then((result) => {
-      setBalance(result.data.balance);
+      setBalance(result.data.credit);
     });
   }, [1]);
 
@@ -155,7 +155,7 @@ export const BasicList = (props) => {
               <Col sm={8} xs={24}>
                 <Info
                   title={formatMessage({ id: 'basic.list.balance' })}
-                  value={`$${balance}`}
+                  value={`¥${balance}`}
                   bordered
                 />
               </Col>
