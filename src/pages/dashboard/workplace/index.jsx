@@ -26,14 +26,25 @@ const PageHeaderContent = ({ currentUser }) => {
   return (
     <div className={styles.pageHeaderContent}>
       <div className={styles.avatar}>
-        <Avatar size="large" src={currentUser.profile_url} />
+        <Avatar
+          size="large"
+          src={
+            currentUser.profile_image_url !== ''
+              ? currentUser.profile_image_url
+              : 'http://1.15.48.81:8888/down/THIcVYCRNDs5'
+          }
+        />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTitle}>
           Hello，
           {currentUser.nickname !== '' ? currentUser.nickname : 'John doe'}
         </div>
-        <div>仰天大笑出门去，我辈岂是蓬蒿人。</div>
+        <div>
+          {currentUser.user_sing !== ''
+            ? currentUser.user_sing
+            : '仰天大笑出门去，我辈岂是蓬蒿人。'}
+        </div>
       </div>
     </div>
   );
@@ -60,7 +71,7 @@ const ExtraContent = ({ currentUser }) => (
             defaultMessage="Balance"
           />
         }
-        value={currentUser.balance}
+        value={currentUser.credit}
       />
     </div>
   </div>

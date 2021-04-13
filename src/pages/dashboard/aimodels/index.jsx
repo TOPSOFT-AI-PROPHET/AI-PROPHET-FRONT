@@ -5,6 +5,7 @@ import { connect, history, formatMessage } from 'umi';
 import request from '@/utils/request';
 import styles from './style.less';
 import { CoffeeOutlined } from '@ant-design/icons';
+import Avatar from 'antd/lib/avatar/avatar';
 
 const { Paragraph } = Typography;
 
@@ -40,8 +41,7 @@ class CardList extends Component {
     const content = (
       <div className={styles.pageHeaderContent}>
         <p>
-          段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，
-          提供跨越设计与开发的体验解决方案。
+          先知系统模型市场汇聚来自全球各领域的数据集，依赖于TSAI模型生态，您可在此挑选心仪的机器学习/神经网络模型进行在线模型预测或者获取该模型API接口接入到您的独立应用程序。
         </p>
         <div className={styles.contentLink}>
           <a>
@@ -88,15 +88,17 @@ class CardList extends Component {
                 <List.Item key={item.pk}>
                   <Card hoverable className={styles.card}>
                     <Card.Meta
-                      avatar={<img alt="" className={styles.cardAvatar} src={item.ai_avatar} />}
                       title={
-                        <a
-                          onClick={() => {
-                            history.push(`/dash/prediction/newprediction/${item.pk}`);
-                          }}
-                        >
-                          {item.model}
-                        </a>
+                        <div className={styles.cardAvatar}>
+                          <Avatar size={'large'} src={'http://1.15.48.81:8888/down/THIcVYCRNDs5'} />
+                          <a
+                            onClick={() => {
+                              history.push(`/dash/prediction/newprediction/${item.pk}`);
+                            }}
+                          >
+                            {item.fields.ai_name}
+                          </a>
+                        </div>
                       }
                       description={
                         <Paragraph
@@ -105,7 +107,7 @@ class CardList extends Component {
                             rows: 3,
                           }}
                         >
-                          {item.fields.ai_description}
+                          {/* item.fields.ai_description */}
                         </Paragraph>
                       }
                     />
