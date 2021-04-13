@@ -129,18 +129,8 @@ export default defineConfig({
             {
               name: 'account',
               icon: 'user',
-              path: '/account',
+              path: '/dash/account',
               routes: [
-                {
-                  path: '/dash/account',
-                  redirect: '/dash/account/center',
-                },
-                {
-                  name: 'center',
-                  icon: 'smile',
-                  path: '/dash/account/center',
-                  component: './account/center',
-                },
                 {
                   name: 'settings',
                   icon: 'smile',
