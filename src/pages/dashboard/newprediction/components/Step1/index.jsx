@@ -17,7 +17,7 @@ const Step1 = (props) => {
   useEffect(() => {
     request('/tasks/getAIM', { method: 'POST', data: { ai_id: parseInt(props.modelid.id, 10) } })
       .then((result) => {
-        setIlist(result.data.ai_description.details);
+        setIlist(result.data.details);
       })
       .catch((e) => console.log(e));
   }, [1]);
