@@ -26,11 +26,6 @@ const passwordStrength = {
 };
 
 class SecurityView extends Component {
-  // componentDidMount(){
-  //  const { currentUser } = this.props;
-  //  console.log(currentUser);
-  // }
-
   passwordsLevel = (password) => {
     let Modes = 0;
     for (let i = 0; i < password.length; i += 1) {
@@ -69,14 +64,19 @@ class SecurityView extends Component {
   };
 
   handlephoneNumber = (phoneNumber) => {
-    // console.log(phoneNumber);
-    let entity = new Array(2);
-    entity = phoneNumber.split('-');
-    // console.log(entity);
-    const newPhone = new Array(2);
-    newPhone[0] = entity[1].substr(0, 2);
-    newPhone[1] = entity[1].substr(entity[1].length - 2, entity[1].length);
-    return newPhone.join('*****');
+    if (phoneNumber) {
+      // console.log(phoneNumber);
+      let entity = new Array(2);
+      entity = phoneNumber.split('-');
+      // console.log(entity);
+      const newPhone = new Array(2);
+      newPhone[0] = entity[1].substr(0, 2);
+      newPhone[1] = entity[1].substr(entity[1].length - 2, entity[1].length);
+      return newPhone.join('*****');
+    }
+    return formatMessage({
+      id: 'accountandsettings.security.phone-content',
+    });
   };
 
   charMode = (iN) => {
@@ -96,27 +96,6 @@ class SecurityView extends Component {
   };
 
   getData = (currentUser) => [
-    {
-      title: formatMessage(
-        {
-          id: 'accountandsettings.security.password',
-        },
-        {},
-      ),
-      description: (
-        <>
-          {formatMessage({
-            id: 'accountandsettings.security.password-description',
-          })}
-          {this.passwordsLevel(currentUser.password)}
-        </>
-      ),
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
-    },
     {
       title: formatMessage(
         {
@@ -178,8 +157,6 @@ class SecurityView extends Component {
 
   render() {
     const { currentUser } = this.props;
-    // console.log(currentUser);
-
     const data = this.getData(currentUser);
     return (
       <>
