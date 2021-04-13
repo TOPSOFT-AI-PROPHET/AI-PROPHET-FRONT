@@ -32,6 +32,7 @@ export default {
   'accountandsettings.security.password-description': '当前密码强度：',
   'accountandsettings.security.phone': '密保手机',
   'accountandsettings.security.phone-description': '已绑定手机：',
+  'accountandsettings.security.phone-content': '空',
   'accountandsettings.security.question': '密保问题',
   'accountandsettings.security.question-description': '未设置密保问题，密保问题可有效保护账户安全',
   'accountandsettings.security.email': '密保邮箱',

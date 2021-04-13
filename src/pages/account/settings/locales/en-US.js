@@ -32,6 +32,7 @@ export default {
   'accountandsettings.security.password-description': 'Current password strength：',
   'accountandsettings.security.phone': 'Security Phone',
   'accountandsettings.security.phone-description': 'Bound phone：',
+  'accountandsettings.security.phone-content': 'Empty',
   'accountandsettings.security.question': 'Security Question',
   'accountandsettings.security.question-description':
     'The security question is not set, and the security policy can effectively protect the account security',

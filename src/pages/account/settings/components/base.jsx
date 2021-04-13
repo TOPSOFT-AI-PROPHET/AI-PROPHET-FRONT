@@ -76,8 +76,6 @@ class BaseView extends Component {
 
   render() {
     const { currentUser } = this.props;
-    console.log(currentUser);
-
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
