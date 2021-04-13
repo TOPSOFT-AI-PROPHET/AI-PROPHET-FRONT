@@ -1,10 +1,28 @@
 import { Button, Result, Descriptions } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect, FormattedMessage, formatMessage } from 'umi';
 import styles from './index.less';
+import request from '@/utils/request';
 
 const Step3 = (props) => {
   const { data, dispatch } = props;
+
+  useEffect(() => {
+    const newilist = new Array([]);
+    data.ilist.forEach((item) => {
+      const obj = {};
+      obj.value = data.values[item.name];
+      newilist.push(obj);
+    });
+    request('/tasks/prediction', {
+      method: 'POST',
+      data: {
+        ai_id: parseInt(props.modelid.id, 10),
+        total_para: data.ilist.length,
+        data: newilist,
+      },
+    }).then(() => {});
+  }, [1]);
 
   if (!data) {
     return null;
@@ -58,4 +76,5 @@ const Step3 = (props) => {
 
 export default connect(({ formAndstepForm }) => ({
   data: formAndstepForm.step,
+  modelid: formAndstepForm.mid,
 }))(Step3);

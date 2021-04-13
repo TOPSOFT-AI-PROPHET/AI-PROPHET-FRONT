@@ -5,10 +5,10 @@ import styles from './index.less';
 
 const formItemLayout = {
   labelCol: {
-    span: 5,
+    span: 24,
   },
   wrapperCol: {
-    span: 19,
+    span: 24,
   },
 };
 
@@ -86,13 +86,14 @@ const Step2 = (props) => {
           },
         }}
       >
-        <Button type="primary" onClick={onValidateForm} loading={submitting}>
+        <Button type="primary" onClick={onValidateForm} loading={submitting} layout="Responsive">
           <FormattedMessage id="formandstep-form.getparam.finishAllSteps" />
         </Button>
+
         <Button
           onClick={onPrev}
           style={{
-            marginLeft: 8,
+            marginBottom: 8,
           }}
         >
           <FormattedMessage id="formandstep-form.getparam.step2.laststep" />

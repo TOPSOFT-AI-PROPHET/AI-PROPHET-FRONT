@@ -6,17 +6,16 @@ import request from '@/utils/request';
 
 const formItemLayout = {
   labelCol: {
-    span: 5,
+    span: 24,
   },
   wrapperCol: {
-    span: 19,
+    span: 24,
   },
 };
-
 const Step1 = (props) => {
   const [ilist, setIlist] = useState([]);
   useEffect(() => {
-    request('/getAIM', { method: 'POST', data: { ai_id: parseInt(props.modelid.id, 10) } })
+    request('/tasks/getAIM', { method: 'POST', data: { ai_id: parseInt(props.modelid.id, 10) } })
       .then((result) => {
         setIlist(result.data.ai_description.details);
       })
@@ -55,7 +54,7 @@ const Step1 = (props) => {
       <Form
         {...formItemLayout}
         form={form}
-        layout="horizontal"
+        layout="vertical"
         className={styles.stepForm}
         hideRequiredMark
       >
@@ -82,6 +81,7 @@ const Step1 = (props) => {
             },
           }}
         >
+          <br />
           <Button type="primary" onClick={onValidateForm}>
             <FormattedMessage id="formandstep-form.getparam.finishStep1" />
           </Button>
