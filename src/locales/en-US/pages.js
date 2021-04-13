@@ -70,4 +70,14 @@ export default {
   'pages.dashboardandworkplace.workplace.extratxt': 'All Predicitons',
   'pages.dash.dashboard.list.card-list.contentlink':
     'TOPSOFT AI The Prophet | AI Model Usage White Paper',
+  'dashboardandworkplace.workplace.numtask': 'Processed Predictions',
+  'dashboardandworkplace.workplace.balance': 'Balance',
+  'dashboard.pred.prediction': 'processd prediction',
+  'basic.list.balance': 'balance',
+  'basic.list.numtask': 'total tasks',
+  'basic.list.tasklist': 'Tasks',
+  'basic.list.add': 'ADD',
+  'basic.list.details': 'Details',
+  'basic.list.delete': 'Delete',
+  'basic.list.starttime': 'Start Time',
 };
