@@ -88,7 +88,7 @@ export const BasicList = (props) => {
   }, [1]);
 
   useEffect(() => {
-    request('/tasks/count', { method: 'POST' }).then((result) => {
+    request('/tasks/numTask', { method: 'POST' }).then((result) => {
       setNumTask(result.data.num_of_task);
       setNumFinishedTasks(result.data.num_of_finished_tasks);
     });
