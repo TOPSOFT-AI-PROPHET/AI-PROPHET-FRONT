@@ -33,7 +33,10 @@ class Basic extends Component {
   }
 
   componentDidMount() {
-    request('/tasks/details', { method: 'POST', data: { task_id: 1 } }).then((result) => {
+    request('/tasks/details', {
+      method: 'POST',
+      data: { task_id: this.props.match.params.id },
+    }).then((result) => {
       this.setState({
         taskdescription: result.data.task_description,
         aiurl: result.data.ai_url,

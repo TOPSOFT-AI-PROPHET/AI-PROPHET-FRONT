@@ -48,7 +48,6 @@ const Step1 = (props) => {
       });
     }
   };
-
   return (
     <>
       <Form
@@ -60,7 +59,12 @@ const Step1 = (props) => {
       >
         {ilist.map((item) => {
           return (
-            <Form.Item label={item.ai_description} name={item.name} key={item.name}>
+            <Form.Item
+              label={item.ai_description}
+              name={item.name}
+              key={item.name}
+              rules={[{ required: true, message: 'Please enter the parameter !' }]}
+            >
               <Input
                 placeholder={formatMessage({
                   id: 'formandstep-form.getparam.input.option',
