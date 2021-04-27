@@ -46,6 +46,7 @@ export default {
   'menu.exception.trigger': 'Trigger',
   'menu.account': 'Account',
   'menu.account.center': 'Account Center',
+  'menu.account.topup': 'CDKEY',
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
