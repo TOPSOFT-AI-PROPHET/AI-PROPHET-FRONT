@@ -109,12 +109,21 @@ class BaseView extends Component {
         user_sing: this.state.user_sing,
       },
     }).then((result) => {
-      if (result.data.code === 200) {
-        message.success(
-          formatMessage({
-            id: 'accountandsettings.basic.update.success',
-          }),
-        );
+      console.log(result.code);
+      if (result.code) {
+        if (result.code === 200) {
+          message.success(
+            formatMessage({
+              id: 'accountandsettings.basic.update.success',
+            }),
+          );
+        } else {
+          message.error(
+            formatMessage({
+              id: 'accountandsettings.basic.update.fail',
+            }),
+          );
+        }
       } else {
         message.error(
           formatMessage({
