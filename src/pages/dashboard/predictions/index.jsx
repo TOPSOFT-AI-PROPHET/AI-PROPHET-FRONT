@@ -202,7 +202,7 @@ export const BasicList = (props) => {
                     <a
                       key="Details"
                       onClick={() => {
-                        history.push('/dash/prediction/details/' + item.pk);
+                        history.push(`/dash/prediction/details/${item.pk}`);
                       }}
                     >
                       <FormattedMessage id="basic.list.details" />
