@@ -22,7 +22,7 @@ class Basic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskdescription: '加载中',
+      description: '加载中',
       aiurl: '加载中',
       airesult: '加载中',
       aistatus: 1,
@@ -38,7 +38,7 @@ class Basic extends Component {
       data: { task_id: this.props.match.params.id },
     }).then((result) => {
       this.setState({
-        taskdescription: result.data.task_description,
+        description: result.data.description,
         aiurl: result.data.ai_url,
         airesult: result.data.ai_result,
         aistatus: result.data.status,
@@ -60,7 +60,7 @@ class Basic extends Component {
             }}
           >
             <Descriptions.Item label="任务ID">12345</Descriptions.Item>
-            <Descriptions.Item label="任务描述">{this.state.taskdescription}</Descriptions.Item>
+            <Descriptions.Item label="任务描述">{this.state.description}</Descriptions.Item>
             <Descriptions.Item label="AI模型">{this.state.aiurl}</Descriptions.Item>
             <Descriptions.Item label="提交时间">{this.state.time}</Descriptions.Item>
             <Descriptions.Item label="当前进度">{this.state.aistatus}</Descriptions.Item>
