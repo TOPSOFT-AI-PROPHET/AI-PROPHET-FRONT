@@ -1,31 +1,16 @@
-import { Button, Input, Form, Skeleton } from 'antd';
+import { Button, Input, Form, message } from 'antd';
 import React, { Component } from 'react';
 import { connect, formatMessage, FormattedMessage } from 'umi';
 import styles from './style.less';
+import request from '@/utils/request';
+import { Item } from 'gg-editor';
 
-const PageHeaderContent = ({ currentUser }) => {
-  const loading = currentUser && Object.keys(currentUser).length;
-  if (!loading) {
-    return (
-      <Skeleton
-        avatar
-        paragraph={{
-          rows: 1,
-        }}
-        active
-      />
-    );
-  }
+const PageHeaderContent = () => {
   return <div className={styles.pageHeaderContent}></div>;
 };
 
 class Basic extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'profileAndbasic/fetchBasic',
-    });
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -41,7 +26,21 @@ class Basic extends Component {
         </Form.Item>
 
         <Form.Item>
-          <Button htmlType="submit" type="primary">
+          <Button
+            htmlType="submit"
+            type="primary"
+            onClick={() => {
+              request('/pay/codecharge', { method: 'POST', data: { code: Item.code } }).then(
+                (result) => {
+                  if (result.code === 200) {
+                    message.success(result.message);
+                  } else {
+                    message.error(result.message);
+                  }
+                },
+              );
+            }}
+          >
             <FormattedMessage id="pages.profile.basic.submit" defaultMessage="Update Information" />
           </Button>
         </Form.Item>
@@ -50,7 +49,6 @@ class Basic extends Component {
   }
 }
 
-export default connect(({ profileAndbasic, loading }) => ({
+export default connect(({ profileAndbasic }) => ({
   profileAndbasic,
-  loading: loading.effects['profileAndbasic/fetchBasic'],
 }))(Basic);
