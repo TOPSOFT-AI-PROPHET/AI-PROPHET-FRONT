@@ -9,6 +9,7 @@ export default {
   'accountandsettings.basic.email-message': '请输入您的邮箱!',
   'accountandsettings.basic.nickname': '昵称',
   'accountandsettings.basic.nickname-message': '请输入您的昵称!',
+  'accountandsettings.basic.nickname-placeHolder': '请在这里输入你的昵称',
   'accountandsettings.basic.profile': '个性签名',
   'accountandsettings.basic.profile-message': '请输入个性签名!',
   'accountandsettings.basic.profile-placeholder': '个性签名',

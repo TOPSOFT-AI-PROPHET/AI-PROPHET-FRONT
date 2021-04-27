@@ -86,7 +86,21 @@ class CardList extends Component {
             renderItem={(item) => {
               return (
                 <List.Item key={item.pk}>
-                  <Card hoverable className={styles.card}>
+                  <Card
+                    hoverable
+                    className={styles.card}
+                    actions={[
+                      <a
+                        key="option1"
+                        onClick={() => {
+                          history.push(`/dash/prediction/newprediction/${item.pk}`);
+                        }}
+                      >
+                        在线预测
+                      </a>,
+                      <a key="option2">API预测</a>,
+                    ]}
+                  >
                     <Card.Meta
                       title={
                         <div className={styles.cardAvatar}>

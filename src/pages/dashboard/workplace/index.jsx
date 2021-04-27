@@ -42,7 +42,7 @@ const PageHeaderContent = ({ currentUser }) => {
   );
 };
 
-const ExtraContent = ({ currentUser }) => (
+const ExtraContent = ({ currentUser, value }) => (
   <div className={styles.extraContent}>
     <div className={styles.statItem}>
       <Statistic
@@ -52,7 +52,7 @@ const ExtraContent = ({ currentUser }) => (
             defaultMessage="Processed Predictions"
           />
         }
-        value={currentUser.total_tasks}
+        value={value.num_of_finished_tasks}
       />
     </div>
     <div className={styles.statItem}>
@@ -64,7 +64,7 @@ const ExtraContent = ({ currentUser }) => (
           />
         }
         prefix="￥"
-        value={`${currentUser.credit}`}
+        value={currentUser.credit}
       />
     </div>
   </div>
@@ -75,6 +75,10 @@ class Workplace extends Component {
     super(props);
     this.state = {
       data: [],
+      data_task: {
+        num_of_task: '',
+        num_of_finished_tasks: '',
+      },
     };
   }
 
@@ -91,6 +95,16 @@ class Workplace extends Component {
         });
       })
       .catch((e) => console.log(e));
+
+    request('/tasks/numTask', { method: 'POST' })
+      .then((result) => {
+        if (result.data) {
+          this.setState({
+            data_task: result.data,
+          });
+        }
+      })
+      .catch((e) => console.log(e));
   }
 
   componentWillUnmount() {
@@ -102,7 +116,6 @@ class Workplace extends Component {
 
   render() {
     const { currentUser } = this.props;
-
     if (!currentUser || !currentUser.username) {
       return null;
     }
@@ -110,7 +123,7 @@ class Workplace extends Component {
     return (
       <PageContainer
         content={<PageHeaderContent currentUser={currentUser} />}
-        extraContent={<ExtraContent currentUser={currentUser} />}
+        extraContent={<ExtraContent currentUser={currentUser} value={this.state.data_task} />}
       >
         <Card
           className={styles.projectList}
