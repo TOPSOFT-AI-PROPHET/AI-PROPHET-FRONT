@@ -124,6 +124,12 @@ export default defineConfig({
                   path: '/dash/prediction/newprediction/:id',
                   component: './dashboard/newprediction',
                 },
+                {
+                  name: 'details',
+                  hideInMenu: true,
+                  path: '/dash/prediction/details/:id',
+                  component: './dashboard/predictiondetails',
+                },
               ],
             },
             {
