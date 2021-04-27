@@ -22,7 +22,8 @@ export default {
   'accountandsettings.basic.phone': 'Phone Number',
   'accountandsettings.basic.phone-message': 'Please input your phone!',
   'accountandsettings.basic.update': 'Update Information',
-  'accountandsettings.basic.update.success': 'Update basic information successfully',
+  'accountandsettings.basic.update.success': 'Update personal information successfully',
+  'accountandsettings.basic.update.fail': 'Personal information update failed',
   'accountandsettings.basic.credit': 'Account Credit',
   'accountandsettings.basic.topup': 'Topup',
   'accountandsettings.security.veryStrong': 'Very Strong',
@@ -63,4 +64,8 @@ export default {
     'The to-do list will be notified in the form of a letter from the station',
   'accountandsettings.settings.open': 'Open',
   'accountandsettings.settings.close': 'Close',
+  'accountandsettings.headerContent':
+    'The prophet system AI model market gathers data sets with various fields form all over the world. Relies on TSAI model ecology, you could select your favorite machine learning / neural network model here for online model prediction or access the API of the model to your own independent application.',
+  'accountandsettings.option1': 'Online Predict',
+  'accountandsettings.option2': 'API Predict',
 };

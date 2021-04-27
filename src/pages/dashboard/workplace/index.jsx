@@ -1,4 +1,4 @@
-import { Avatar, Card, Skeleton, Statistic } from 'antd';
+import { Button, Avatar, Card, Skeleton, Statistic } from 'antd';
 import React, { Component } from 'react';
 import { connect, history } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
@@ -7,6 +7,7 @@ import { FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
 import { Empty } from 'antd';
+import { DollarOutlined } from '@ant-design/icons';
 
 const PageHeaderContent = ({ currentUser }) => {
   const loading = currentUser && Object.keys(currentUser).length;
@@ -36,7 +37,11 @@ const PageHeaderContent = ({ currentUser }) => {
           Hello，
           {currentUser.nickname !== '' ? currentUser.nickname : 'John doe'}
         </div>
-        <div>{'仰天大笑出门去，我辈岂是蓬蒿人。'}</div>
+        <div>
+          {currentUser.user_sing !== ''
+            ? currentUser.user_sing
+            : '仰天大笑出门去，我辈岂是蓬蒿人。'}
+        </div>
       </div>
     </div>
   );
@@ -66,6 +71,18 @@ const ExtraContent = ({ currentUser, value }) => (
         prefix="￥"
         value={currentUser.credit}
       />
+    </div>
+    <div>
+      <Button
+        onClick={() => {
+          history.push('/dash/account/topup');
+        }}
+      >
+        <DollarOutlined />
+        {formatMessage({
+          id: 'accountandsettings.basic.topup',
+        })}
+      </Button>
     </div>
   </div>
 );
@@ -167,7 +184,7 @@ class Workplace extends Component {
                           size="large"
                           src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
                         />
-                        <a>{item.model}</a>
+                        <a>{item.fields.ai_name}</a>
                       </div>
                     }
                     description={item.fields.description}
@@ -175,13 +192,13 @@ class Workplace extends Component {
                   {/* <p>{item.fields.description}</p> */}
                   <div style={{ textAlign: 'right', fontSize: 12 }}>
                     {/* <span  className = {styles.datatime} >
-                    {item.fields.time_start}
-                  </span>
-                  {/*item.updatedAt && (
-                    <span className={styles.datetime} title={item.updatedAt}>
-                      {moment(item.updatedAt).fromNow()}
-                    </span>
-                  )} */}
+                       {item.fields.time_start}
+                        </span>
+                       {/*item.updatedAt && (
+                       <span className={styles.datetime} title={item.updatedAt}>
+                       {moment(item.updatedAt).fromNow()}
+                         </span>
+                     )} */}
                     <p> {moment(item.fields.time_start).fromNow()} </p>
                   </div>
                 </Card>

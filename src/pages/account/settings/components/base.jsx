@@ -1,10 +1,11 @@
 import { UploadOutlined, DollarOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Button, Input, Upload, Form, message, Space } from 'antd';
-import { connect, FormattedMessage, formatMessage } from 'umi';
+import { connect, FormattedMessage, formatMessage, history } from 'umi';
 import React, { Component } from 'react';
 import PhoneView from './PhoneView';
 import styles from './BaseView.less';
 import request from '@/utils/request';
+import defaultSettings from '../../../../../config/defaultSettings';
 
 // const { Option } = Select; // 头像组件 方便以后独立，增加裁剪之类的功能
 
@@ -27,7 +28,9 @@ class BaseView extends Component {
       nickname: '',
       contact_number: '',
       user_sing: '',
+      email: '',
       loading: 'false',
+      code: 0,
     };
   }
 
@@ -40,6 +43,7 @@ class BaseView extends Component {
       nickname: currentUser.nickname,
       contact_number: currentUser.contact_number,
       user_sing: currentUser.user_sing,
+      email: currentUser.email,
     });
   }
 
@@ -81,13 +85,7 @@ class BaseView extends Component {
     this.view = ref;
   };
 
-  handleFinish = () => {
-    message.success(
-      formatMessage({
-        id: 'accountandsettings.basic.update.success',
-      }),
-    );
-  };
+  handleFinish = () => {};
 
   beforeUpload(file) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -107,9 +105,24 @@ class BaseView extends Component {
       data: {
         nickname: this.state.nickname,
         contact_number: this.state.contact_number,
-        // user_sing: this.state.user_sing,
+        email: this.state.email,
+        user_sing: this.state.user_sing,
       },
-    }).then(() => {});
+    }).then((result) => {
+      if (result.data.code === 200) {
+        message.success(
+          formatMessage({
+            id: 'accountandsettings.basic.update.success',
+          }),
+        );
+      } else {
+        message.error(
+          formatMessage({
+            id: 'accountandsettings.basic.update.fail',
+          }),
+        );
+      }
+    });
   };
 
   render() {
@@ -119,7 +132,7 @@ class BaseView extends Component {
         <div className={styles.left}>
           <Form
             layout="vertical"
-            onFinish={this.handleFinish}
+            // onFinish={this.handleFinish}
             initialValues={currentUser}
             hideRequiredMark
           >
@@ -188,6 +201,8 @@ class BaseView extends Component {
               ]}
             >
               <Input.TextArea
+                showCount
+                maxLength={50}
                 placeholder={formatMessage({
                   id: 'accountandsettings.basic.profile-placeholder',
                 })}
@@ -315,7 +330,11 @@ class BaseView extends Component {
                   bordered={false}
                 />
 
-                <Button>
+                <Button
+                  onClick={() => {
+                    history.push('/dash/account/topup');
+                  }}
+                >
                   <DollarOutlined />
                   {formatMessage({
                     id: 'accountandsettings.basic.topup',
@@ -335,6 +354,7 @@ class BaseView extends Component {
             </Form.Item>
           </Form>
         </div>
+
         <div className={styles.right}>
           <>
             <div className={styles.avatar_title}>
@@ -343,25 +363,28 @@ class BaseView extends Component {
             <div className={styles.avatar}>
               <img src={this.getAvatarURL()} alt="avatar" />
             </div>
-            <Upload
-              showUploadList={false}
-              name="avater"
-              className="avatar-uploader"
-              beforeUpload={this.beforeUpload}
-              onChange={this.handleAvaterChange}
-              action="/users/uploadProfile"
-              method="POST"
-            >
-              <div className={styles.button_view}>
-                <Button>
-                  {this.state.loading ? <UploadOutlined /> : <LoadingOutlined />}{' '}
-                  <FormattedMessage
-                    id="accountandsettings.basic.change-avatar"
-                    defaultMessage="Change avatar"
-                  />
-                </Button>
-              </div>
-            </Upload>
+
+            <>
+              <Upload
+                showUploadList={false}
+                name="avater"
+                className="avatar-uploader"
+                beforeUpload={this.beforeUpload}
+                onChange={this.handleAvaterChange}
+                action={`${defaultSettings.backURL}/users/uploadProfile`}
+                method="POST"
+              >
+                <div className={styles.button_view}>
+                  <Button>
+                    {this.state.loading ? <UploadOutlined /> : <LoadingOutlined />}{' '}
+                    <FormattedMessage
+                      id="accountandsettings.basic.change-avatar"
+                      defaultMessage="Change avatar"
+                    />
+                  </Button>
+                </div>
+              </Upload>
+            </>
           </>
         </div>
       </div>
