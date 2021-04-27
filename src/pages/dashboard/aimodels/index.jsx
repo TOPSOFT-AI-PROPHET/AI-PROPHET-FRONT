@@ -6,6 +6,7 @@ import request from '@/utils/request';
 import styles from './style.less';
 import { CoffeeOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
+import { FormattedMessage } from 'umi';
 
 const { Paragraph } = Typography;
 
@@ -41,7 +42,7 @@ class CardList extends Component {
     const content = (
       <div className={styles.pageHeaderContent}>
         <p>
-          先知系统模型市场汇聚来自全球各领域的数据集，依赖于TSAI模型生态，您可在此挑选心仪的机器学习/神经网络模型进行在线模型预测或者获取该模型API接口接入到您的独立应用程序。
+          <FormattedMessage id="accountandsettings.headerContent" />
         </p>
         <div className={styles.contentLink}>
           <a>
@@ -96,9 +97,11 @@ class CardList extends Component {
                           history.push(`/dash/prediction/newprediction/${item.pk}`);
                         }}
                       >
-                        在线预测
+                        <FormattedMessage id="accountandsettings.option1" />
                       </a>,
-                      <a key="option2">API预测</a>,
+                      <a key="option2">
+                        <FormattedMessage id="accountandsettings.option2" />
+                      </a>,
                     ]}
                   >
                     <Card.Meta
@@ -126,7 +129,7 @@ class CardList extends Component {
                             rows: 3,
                           }}
                         >
-                          {/* item.fields.ai_description */}
+                          {item.fields.ai_true_description}
                         </Paragraph>
                       }
                     />
