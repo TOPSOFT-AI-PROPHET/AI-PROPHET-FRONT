@@ -9,6 +9,7 @@ export default {
   'accountandsettings.basic.email-message': 'Please input your email!',
   'accountandsettings.basic.nickname': 'Nickname',
   'accountandsettings.basic.nickname-message': 'Please input your Nickname!',
+  'accountandsettings.basic.nickname-placeHolder': 'Please input your Nickname here',
   'accountandsettings.basic.profile': 'Personal status',
   'accountandsettings.basic.profile-message': 'Please input your personal status!',
   'accountandsettings.basic.profile-placeholder': 'Brief introduction to yourself',
