@@ -38,13 +38,13 @@ class Basic extends Component {
       data: { task_id: this.props.match.params.id },
     }).then((result) => {
       this.setState({
-        description: result.data.description,
-        aiurl: result.data.ai_url,
-        airesult: result.data.ai_result,
-        aistatus: result.data.status,
-        time: result.data.time_start,
-        cost: result.data.cost,
-        aiparams: result.data.ai_params,
+        description: result.description,
+        aiurl: result.ai_url,
+        airesult: result.ai_result,
+        aistatus: result.status,
+        time: result.time_start,
+        cost: result.cost,
+        aiparams: result.ai_params,
       });
     });
   }
