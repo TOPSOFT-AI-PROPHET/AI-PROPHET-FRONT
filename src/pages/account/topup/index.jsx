@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect, formatMessage, FormattedMessage } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
-import { Item } from 'gg-editor';
 
 const PageHeaderContent = () => {
   return <div className={styles.pageHeaderContent}></div>;
@@ -11,6 +10,16 @@ const PageHeaderContent = () => {
 
 class Basic extends Component {
   componentDidMount() {}
+
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
 
   render() {
     return (
@@ -22,7 +31,7 @@ class Basic extends Component {
             id: 'pages.profile.basic.activationcode',
           })}
         >
-          <Input />
+          <Input value={this.state.value} onChange={this.handleChange} />
         </Form.Item>
 
         <Form.Item>
@@ -30,7 +39,7 @@ class Basic extends Component {
             htmlType="submit"
             type="primary"
             onClick={() => {
-              request('/pay/codecharge', { method: 'POST', data: { code: Item.code } }).then(
+              request('/pay/codecharge', { method: 'POST', data: { code: this.state.value } }).then(
                 (result) => {
                   if (result.code === 200) {
                     message.success(result.message);
