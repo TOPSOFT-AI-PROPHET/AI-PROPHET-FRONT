@@ -227,7 +227,7 @@ export const BasicList = (props) => {
                 >
                   <List.Item.Meta
                     // avatar={<Avatar src={item.logo} shape="square" size="large" />}
-                    title={<a>{item.fields.description}</a>}
+                    title={<a>{item.fields.ai_name}</a>}
                     description={item.fields.description}
                   />
                   <ListContent data={item} />
