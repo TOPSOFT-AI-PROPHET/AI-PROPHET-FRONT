@@ -807,6 +807,7 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <p>@TOPSOFT AI | 2021 All Rights Reserved.</p>
+                <p>We believe our diversity is our strength. With people from every background, gender, creed and religion</p>
               </div>
             </div>
           </div>
