@@ -1,6 +1,6 @@
 import { Button, Result, Descriptions } from 'antd';
 import React, { useEffect } from 'react';
-import { connect, FormattedMessage, formatMessage } from 'umi';
+import { connect, FormattedMessage, formatMessage, history } from 'umi';
 import styles from './index.less';
 import request from '@/utils/request';
 
@@ -56,7 +56,11 @@ const Step3 = (props) => {
       <Button type="primary" onClick={onFinish}>
         <FormattedMessage id="formandstep-form.getparam.step3.again" />
       </Button>
-      <Button>
+      <Button
+        onClick={() => {
+          history.push('/dash/prediction/aimodels');
+        }}
+      >
         <FormattedMessage id="formandstep-form.getparam.step3.backToList" />
       </Button>
     </>
