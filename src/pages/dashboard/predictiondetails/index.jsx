@@ -4,6 +4,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { connect } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
+import moment from 'moment';
 
 const progressColumns = [
   {
@@ -42,7 +43,7 @@ class Basic extends Component {
         aiurl: result.ai_url,
         airesult: result.ai_result,
         aistatus: result.status,
-        time: result.time_start,
+        time: moment(result.time_start).format('YYYY-MM-DD HH:mm'),
         cost: result.cost,
         aiparams: result.ai_params,
       });
@@ -59,11 +60,11 @@ class Basic extends Component {
               marginBottom: 32,
             }}
           >
-            <Descriptions.Item label="任务ID">12345</Descriptions.Item>
+            <Descriptions.Item label="任务ID">{this.props.match.params.id}</Descriptions.Item>
             <Descriptions.Item label="任务描述">{this.state.description}</Descriptions.Item>
             <Descriptions.Item label="AI模型">{this.state.aiurl}</Descriptions.Item>
             <Descriptions.Item label="提交时间">{this.state.time}</Descriptions.Item>
-            <Descriptions.Item label="当前进度">{this.state.aistatus}</Descriptions.Item>
+            <Descriptions.Item label="当前进度">{this.state.aistatus}%</Descriptions.Item>
             <Descriptions.Item label="任务花费">{this.state.cost}</Descriptions.Item>
             <Descriptions.Item label="预测结果">{this.state.airesult}</Descriptions.Item>
           </Descriptions>
