@@ -1,0 +1,17 @@
+export default {
+  'details.form.description': '参数',
+  'details.form.paramters': '输入',
+  'details.info.description': '加载中',
+  'details.info.aiurl': '加载中',
+  'details.info.airesult': '加载中',
+  'details.info.time': '加载中',
+  'details.title.taskinfo': '任务详情',
+  'details.label.taskid': '任务ID',
+  'details.label.taskdescription': '任务描述',
+  'details.label.AImodels': 'AI模型',
+  'details.label.updatetime': '提交时间',
+  'details.label.status': '当前状态',
+  'details.label.cost': '任务花费',
+  'details.label.result': '预测结果',
+  'details.title.content': '模型内容',
+};

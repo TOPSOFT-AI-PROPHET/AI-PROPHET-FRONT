@@ -1,19 +1,19 @@
 import { Card, Descriptions, Divider, Table } from 'antd';
 import React, { Component } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { connect } from 'umi';
+import { connect, FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
 import moment from 'moment';
 
 const progressColumns = [
   {
-    title: '参数',
+    title: formatMessage({ id: 'details.form.description' }),
     dataIndex: 'para_name',
     key: 'para_name',
   },
   {
-    title: '输入',
+    title: formatMessage({ id: 'details.form.paramters' }),
     dataIndex: 'para_value',
     key: 'para_value',
   },
@@ -23,11 +23,11 @@ class Basic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: '加载中',
-      aiurl: '加载中',
-      airesult: '加载中',
+      description: formatMessage({ id: 'details.info.description' }),
+      aiurl: formatMessage({ id: 'details.info.aiurl' }),
+      airesult: formatMessage({ id: 'details.info.airesult' }),
       aistatus: 1,
-      time: '加载中',
+      time: formatMessage({ id: 'details.info.time' }),
       cost: 1,
       aiparams: [],
     };
@@ -55,25 +55,41 @@ class Basic extends Component {
       <PageContainer>
         <Card bordered={false}>
           <Descriptions
-            title="任务详情"
+            title={formatMessage({ id: 'details.title.taskinfo' })}
             style={{
               marginBottom: 32,
             }}
           >
-            <Descriptions.Item label="任务ID">{this.props.match.params.id}</Descriptions.Item>
-            <Descriptions.Item label="任务描述">{this.state.description}</Descriptions.Item>
-            <Descriptions.Item label="AI模型">{this.state.aiurl}</Descriptions.Item>
-            <Descriptions.Item label="提交时间">{this.state.time}</Descriptions.Item>
-            <Descriptions.Item label="当前进度">{this.state.aistatus}%</Descriptions.Item>
-            <Descriptions.Item label="任务花费">{this.state.cost}</Descriptions.Item>
-            <Descriptions.Item label="预测结果">{this.state.airesult}</Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.taskid' })}>
+              {this.props.match.params.id}
+            </Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.taskdescription' })}>
+              {this.state.description}
+            </Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.AImodels' })}>
+              {this.state.aiurl}
+            </Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.updatetime' })}>
+              {this.state.time}
+            </Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.status' })}>
+              {this.state.aistatus}%
+            </Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.cost' })}>
+              {this.state.cost}
+            </Descriptions.Item>
+            <Descriptions.Item label={formatMessage({ id: 'details.label.result' })}>
+              {this.state.airesult}
+            </Descriptions.Item>
           </Descriptions>
           <Divider
             style={{
               marginBottom: 32,
             }}
           />
-          <div className={styles.title}>模型内容</div>
+          <div className={styles.title}>
+            <FormattedMessage id="details.title.content" />
+          </div>
           <Table
             style={{
               marginBottom: 16,
