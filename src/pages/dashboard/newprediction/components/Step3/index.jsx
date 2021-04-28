@@ -58,7 +58,7 @@ const Step3 = (props) => {
       </Button>
       <Button
         onClick={() => {
-          history.push('/dash/prediction/aimodels');
+          history.push('/dash/prediction/predictions');
         }}
       >
         <FormattedMessage id="formandstep-form.getparam.step3.backToList" />
