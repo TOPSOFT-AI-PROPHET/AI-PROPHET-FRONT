@@ -19,14 +19,6 @@ class CardList extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'listAndcardList/fetch',
-      payload: {
-        count: 8,
-      },
-    });
-
     request('/tasks/listAIM', { method: 'POST' })
       .then((result) => {
         if (result.data) {
@@ -144,7 +136,6 @@ class CardList extends Component {
   }
 }
 
-export default connect(({ listAndcardList, loading }) => ({
-  listAndcardList,
-  loading: loading.models.listAndcardList,
+export default connect(({ listAndcardList }) => ({
+  listAndcardList
 }))(CardList);
