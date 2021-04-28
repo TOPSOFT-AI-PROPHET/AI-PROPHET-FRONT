@@ -22,7 +22,14 @@ const Step3 = (props) => {
         data: newilist,
       },
     }).then(() => {});
-    console.log(newilist);
+    return function clearup() {
+      if (dispatch) {
+        dispatch({
+          type: 'formAndstepForm/saveCurrentStep',
+          payload: 'info',
+        });
+      }
+    };
   }, [1]);
 
   if (!data) {
