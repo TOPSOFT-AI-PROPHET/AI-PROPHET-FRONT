@@ -19,24 +19,24 @@ class Settings extends Component {
       base: (
         <FormattedMessage id="accountandsettings.menuMap.basic" defaultMessage="Basic Settings" />
       ),
-      security: (
-        <FormattedMessage
-          id="accountandsettings.menuMap.security"
-          defaultMessage="Security Settings"
-        />
-      ),
-      binding: (
-        <FormattedMessage
-          id="accountandsettings.menuMap.binding"
-          defaultMessage="Account Binding"
-        />
-      ),
-      notification: (
-        <FormattedMessage
-          id="accountandsettings.menuMap.notification"
-          defaultMessage="New Message Notification"
-        />
-      ),
+      // security: (
+      // <FormattedMessage
+      // id="accountandsettings.menuMap.security"
+      // defaultMessage="Security Settings"
+      /// >
+      // ),
+      // binding: (
+      // <FormattedMessage
+      //  id="accountandsettings.menuMap.binding"
+      //  defaultMessage="Account Binding"
+      // />
+      // ),
+      // notification: (
+      //  <FormattedMessage
+      //   id="accountandsettings.menuMap.notification"
+      //   defaultMessage="New Message Notification"
+      //  />
+      // ),
     };
     this.state = {
       mode: 'inline',

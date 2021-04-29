@@ -1,5 +1,5 @@
 import { UploadOutlined, DollarOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Button, Input, Upload, Form, message, Space } from 'antd';
+import { Button, Input, Upload, Form, message, Space, Empty } from 'antd';
 import { connect, FormattedMessage, formatMessage, history } from 'umi';
 import React, { Component } from 'react';
 import PhoneView from './PhoneView';
@@ -13,10 +13,10 @@ const validatorPhone = (rule, value, callback) => {
   const values = value.split('-');
 
   if (!values[0]) {
-    callback('Please input your area code!');
+    // callback('Please input your area code!');
   }
   if (!values[1]) {
-    callback('Please input your phone number!');
+    // callback('Please input your phone number!');
   }
   callback();
 };
@@ -24,27 +24,25 @@ const validatorPhone = (rule, value, callback) => {
 class BaseView extends Component {
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
-      nickname: '',
-      contact_number: '',
-      user_sing: '',
-      email: '',
       loading: 'false',
-      code: 0,
+      data: {},
     };
   }
 
   view = undefined;
 
   componentDidMount() {
-    const { currentUser } = this.props;
-
-    this.setState({
-      nickname: currentUser.nickname,
-      contact_number: currentUser.contact_number,
-      user_sing: currentUser.user_sing,
-      email: currentUser.email,
-    });
+    request('/users/getUserInfo', { method: 'POST' })
+      .then((result) => {
+        if (result.data) {
+          this.setState({
+            data: result.data,
+          });
+        }
+      })
+      .catch((e) => console.log(e));
   }
 
   getAvatarURL() {
@@ -85,8 +83,6 @@ class BaseView extends Component {
     this.view = ref;
   };
 
-  handleFinish = () => {};
-
   beforeUpload(file) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
@@ -103,13 +99,12 @@ class BaseView extends Component {
     request('/users/updateUserProfile', {
       method: 'POST',
       data: {
-        nickname: this.state.nickname,
-        contact_number: this.state.contact_number,
-        email: this.state.email,
-        user_sing: this.state.user_sing,
+        nickname: this.formRef.current.getFieldValue('nickname'),
+        contact_number: this.formRef.current.getFieldValue('contact_number'),
+        email: this.formRef.current.getFieldValue('email'),
+        user_sing: this.formRef.current.getFieldValue('user_sing'),
       },
     }).then((result) => {
-      console.log(result.code);
       if (result.code) {
         if (result.code === 200) {
           message.success(
@@ -136,16 +131,19 @@ class BaseView extends Component {
 
   render() {
     const { currentUser } = this.props;
-    return (
-      <div className={styles.baseView} ref={this.getViewDom}>
-        <div className={styles.left}>
-          <Form
-            layout="vertical"
-            // onFinish={this.handleFinish}
-            initialValues={currentUser}
-            hideRequiredMark
-          >
-            {/* <Form.Item
+    if (this.state.data.username) {
+      console.log(this.state.data);
+      return (
+        <div className={styles.baseView} ref={this.getViewDom}>
+          <div className={styles.left}>
+            <Form
+              ref={this.formRef}
+              layout="vertical"
+              // onFinish={this.handleFinish}
+              initialValues={this.state.data}
+              hideRequiredMark
+            >
+              {/* <Form.Item
               name="email"
               label={formatMessage({
                 id: 'accountandsettings.basic.email',
@@ -164,69 +162,67 @@ class BaseView extends Component {
             >
               <Input />
             </Form.Item> */}
-            <Form.Item
-              name="nickname"
-              label={formatMessage({
-                id: 'accountandsettings.basic.nickname',
-              })}
-              rules={[
-                {
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.nickname-message',
-                    },
-                    {},
-                  ),
-                },
-              ]}
-            >
-              <Input
-                placeholder={formatMessage({
-                  id: 'accountandsettings.basic.nickname-placeHolder',
+              <Form.Item
+                name="nickname"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.nickname',
                 })}
-                onChange={(e) => {
-                  if (e) {
-                    this.setState({
-                      nickname: e.target.value,
-                    });
-                  }
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-              name="user_sing"
-              label={formatMessage({
-                id: 'accountandsettings.basic.profile',
-              })}
-              rules={[
-                {
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.profile-message',
-                    },
-                    {},
-                  ),
-                },
-              ]}
-            >
-              <Input.TextArea
-                showCount
-                maxLength={50}
-                placeholder={formatMessage({
-                  id: 'accountandsettings.basic.profile-placeholder',
+                rules={[
+                  {
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.nickname-message',
+                      },
+                      {},
+                    ),
+                  },
+                ]}
+              >
+                <Input
+                  placeholder={formatMessage({
+                    id: 'accountandsettings.basic.nickname-placeHolder',
+                  })}
+                  onChange={(e) => {
+                    if (e) {
+                      this.formRef.current.setFieldsValue({ nickname: e.target.value });
+                      console.log(this.formRef.current.getFieldsValue());
+                    }
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                name="user_sing"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.profile',
                 })}
-                rows={4}
-                onChange={(e) => {
-                  if (e) {
-                    this.setState({
-                      user_sing: e.target.value,
-                    });
-                  }
-                }}
-              />
-            </Form.Item>
+                rules={[
+                  {
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.profile-message',
+                      },
+                      {},
+                    ),
+                  },
+                ]}
+              >
+                <Input.TextArea
+                  showCount
+                  maxLength={50}
+                  placeholder={formatMessage({
+                    id: 'accountandsettings.basic.profile-placeholder',
+                  })}
+                  rows={4}
+                  onChange={(e) => {
+                    if (e) {
+                      this.formRef.current.setFieldsValue({ user_sing: e.target.value });
+                      console.log(this.formRef.current.getFieldsValue());
+                    }
+                  }}
+                />
+              </Form.Item>
 
-            {/* <Form.Item
+              {/* <Form.Item
               name="country"
               label={formatMessage({
                 id: 'accountandsettings.basic.country',
@@ -294,110 +290,111 @@ class BaseView extends Component {
               <Input />
             </Form.Item> */}
 
-            <Form.Item
-              name="contact_number"
-              label={formatMessage({
-                id: 'accountandsettings.basic.phone',
-              })}
-              rules={[
-                {
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.phone-message',
-                    },
-                    {},
-                  ),
-                },
-                {
-                  validator: validatorPhone,
-                },
-              ]}
-            >
-              <PhoneView
-                onChange={(e) => {
-                  if (e) {
-                    this.setState({
-                      contact_number: e,
-                    });
-                  }
-                }}
-              />
-            </Form.Item>
-
-            <div>
-              <Space size={12} align={'center'}>
-                {formatMessage({
-                  id: 'accountandsettings.basic.credit',
+              <Form.Item
+                name="contact_number"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.phone',
                 })}
-
-                {/* currentUser.credit */}
-                <Input
-                  prefix="￥"
-                  placeholder={currentUser.credit}
-                  suffix="RMB"
-                  disabled
-                  bordered={false}
-                />
-
-                <Button
-                  onClick={() => {
-                    history.push('/dash/account/topup');
-                  }}
-                >
-                  <DollarOutlined />
-                  {formatMessage({
-                    id: 'accountandsettings.basic.topup',
-                  })}
-                </Button>
-              </Space>
-            </div>
-            <br />
-
-            <Form.Item>
-              <Button htmlType="submit" type="primary" onClick={this.handleSubmit}>
-                <FormattedMessage
-                  id="accountandsettings.basic.update"
-                  defaultMessage="Update Information"
-                />
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
-
-        <div className={styles.right}>
-          <>
-            <div className={styles.avatar_title}>
-              <FormattedMessage id="accountandsettings.basic.avatar" defaultMessage="Avatar" />
-            </div>
-            <div className={styles.avatar}>
-              <img src={this.getAvatarURL()} alt="avatar" />
-            </div>
-
-            <>
-              <Upload
-                showUploadList={false}
-                name="avater"
-                className="avatar-uploader"
-                beforeUpload={this.beforeUpload}
-                onChange={this.handleAvaterChange}
-                action={`${defaultSettings.backURL}/users/uploadProfile`}
-                method="POST"
+                rules={[
+                  {
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.phone-message',
+                      },
+                      {},
+                    ),
+                  },
+                  {
+                    validator: validatorPhone,
+                  },
+                ]}
               >
-                <div className={styles.button_view}>
-                  <Button>
-                    {this.state.loading ? <UploadOutlined /> : <LoadingOutlined />}{' '}
-                    <FormattedMessage
-                      id="accountandsettings.basic.change-avatar"
-                      defaultMessage="Change avatar"
-                    />
+                <PhoneView
+                  onChange={(e) => {
+                    if (e) {
+                      this.formRef.current.setFieldsValue({ contact_number: e });
+                      console.log(this.formRef.current.getFieldsValue());
+                    }
+                  }}
+                />
+              </Form.Item>
+
+              <div>
+                <Space size={12} align={'center'}>
+                  {formatMessage({
+                    id: 'accountandsettings.basic.credit',
+                  })}
+
+                  {/* currentUser.credit */}
+                  <Input
+                    prefix="￥"
+                    placeholder={currentUser.credit}
+                    suffix="RMB"
+                    disabled
+                    bordered={false}
+                  />
+
+                  <Button
+                    onClick={() => {
+                      history.push('/dash/account/topup');
+                    }}
+                  >
+                    <DollarOutlined />
+                    {formatMessage({
+                      id: 'accountandsettings.basic.topup',
+                    })}
                   </Button>
-                </div>
-              </Upload>
+                </Space>
+              </div>
+              <br />
+
+              <Form.Item>
+                <Button htmlType="submit" type="primary" onClick={this.handleSubmit}>
+                  <FormattedMessage
+                    id="accountandsettings.basic.update"
+                    defaultMessage="Update Information"
+                  />
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+
+          <div className={styles.right}>
+            <>
+              <div className={styles.avatar_title}>
+                <FormattedMessage id="accountandsettings.basic.avatar" defaultMessage="Avatar" />
+              </div>
+              <div className={styles.avatar}>
+                <img src={this.getAvatarURL()} alt="avatar" />
+              </div>
+
+              <>
+                <Upload
+                  showUploadList={false}
+                  name="avater"
+                  className="avatar-uploader"
+                  beforeUpload={this.beforeUpload}
+                  onChange={this.handleAvaterChange}
+                  action={`${defaultSettings.backURL}/users/uploadProfile`}
+                  method="POST"
+                >
+                  <div className={styles.button_view}>
+                    <Button>
+                      {this.state.loading ? <UploadOutlined /> : <LoadingOutlined />}{' '}
+                      <FormattedMessage
+                        id="accountandsettings.basic.change-avatar"
+                        defaultMessage="Change avatar"
+                      />
+                    </Button>
+                  </div>
+                </Upload>
+              </>
             </>
-          </>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <Empty />;
   }
 }
 

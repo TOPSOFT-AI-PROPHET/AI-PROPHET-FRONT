@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input, Form, Select } from 'antd';
+import { Input, Select } from 'antd';
+import { formatMessage } from 'umi';
 
 const PhoneView = (props) => {
-  // console.log(props);
   const { value, onChange } = props;
   let values = ['', ''];
   if (value) {
@@ -10,21 +10,26 @@ const PhoneView = (props) => {
   }
 
   const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{ width: 70 }}
-        defaultValue={values[0]}
-        onChange={(e) => {
-          // console.log(onChange);
-          if (e) {
-            onChange(`${e}-${values[1]}`);
-          }
-        }}
-      >
-        <Select.Option value="+86">+86</Select.Option>
-        <Select.Option value="+44">+44</Select.Option>
-      </Select>
-    </Form.Item>
+    <Select
+      style={{ width: 100 }}
+      value={values[0]}
+      onChange={(e) => {
+        if (e) {
+          onChange(`${e}-${values[1]}`);
+        }
+      }}
+    >
+      <Select.Option value="+86">
+        {formatMessage({
+          id: 'accountandsettings.areaCodeCN',
+        })}
+      </Select.Option>
+      <Select.Option value="+44">
+        {formatMessage({
+          id: 'accountandsettings.areaCodeUK',
+        })}
+      </Select.Option>
+    </Select>
   );
 
   return (
