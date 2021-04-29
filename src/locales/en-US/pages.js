@@ -81,6 +81,6 @@ export default {
   'basic.list.details': 'Details',
   'basic.list.delete': 'Delete',
   'basic.list.starttime': 'Start Time',
-  'pages.profile.basic.activationcode': 'SDK',
+  'pages.profile.basic.activationcode': 'CDK',
   'pages.profile.basic.submit': 'submit',
 };
