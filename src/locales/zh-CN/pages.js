@@ -75,6 +75,6 @@ export default {
   'basic.list.details': '详情',
   'basic.list.delete': '删除',
   'basic.list.starttime': '开始时间',
-  'pages.profile.basic.activationcode': '激活码',
+  'pages.profile.basic.activationcode': 'CDK',
   'pages.profile.basic.submit': '提交',
 };
