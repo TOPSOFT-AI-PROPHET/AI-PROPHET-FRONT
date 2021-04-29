@@ -73,6 +73,7 @@ export default {
   'dashboardandworkplace.workplace.numtask': 'Processed Predictions',
   'dashboardandworkplace.workplace.balance': 'Balance',
   'dashboard.pred.prediction': 'processd prediction',
+  'basic.list.prediction': 'processd prediction',
   'basic.list.balance': 'balance',
   'basic.list.numtask': 'total tasks',
   'basic.list.tasklist': 'Tasks',
