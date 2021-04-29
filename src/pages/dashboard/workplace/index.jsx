@@ -1,4 +1,4 @@
-import { Button, Avatar, Card, Skeleton, Statistic } from 'antd';
+import { Avatar, Card, Skeleton, Statistic } from 'antd';
 import React, { Component } from 'react';
 import { connect, history } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
@@ -7,7 +7,6 @@ import { FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
 import { Empty } from 'antd';
-import { DollarOutlined } from '@ant-design/icons';
 
 const PageHeaderContent = ({ currentUser }) => {
   const loading = currentUser && Object.keys(currentUser).length;
@@ -71,18 +70,6 @@ const ExtraContent = ({ currentUser, value }) => (
         prefix="￥"
         value={currentUser.credit}
       />
-    </div>
-    <div>
-      <Button
-        onClick={() => {
-          history.push('/dash/account/topup');
-        }}
-      >
-        <DollarOutlined />
-        {formatMessage({
-          id: 'accountandsettings.basic.topup',
-        })}
-      </Button>
     </div>
   </div>
 );

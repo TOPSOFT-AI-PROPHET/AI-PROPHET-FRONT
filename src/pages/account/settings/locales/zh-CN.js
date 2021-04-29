@@ -22,7 +22,7 @@ export default {
   'accountandsettings.basic.phone': '联系电话',
   'accountandsettings.basic.phone-message': '请输入您的联系电话!',
   'accountandsettings.basic.update': '更新基本信息',
-  'accountandsettings.basic.update.success': '成功个人信息更新',
+  'accountandsettings.basic.update.success': '成功更新个人信息',
   'accountandsettings.basic.update.fail': '个人信息更新失败',
   'accountandsettings.basic.credit': '账户余额',
   'accountandsettings.basic.topup': '充值',
@@ -63,4 +63,6 @@ export default {
     '先知系统模型市场汇聚来自全球各领域的数据集，依赖于TSAI模型生态，您可在此挑选心仪的机器学习/神经网络模型进行在线模型预测或者获取该模型API接口接入到您的独立应用程序。',
   'accountandsettings.option1': '在线预测',
   'accountandsettings.option2': 'API预测',
+  'accountandsettings.areaCodeCN': '+86 中国',
+  'accountandsettings.areaCodeUK': '+44 英国',
 };

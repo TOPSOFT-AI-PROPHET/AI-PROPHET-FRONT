@@ -1,9 +1,10 @@
-import { Tag } from 'antd';
+import { Tag, Button } from 'antd';
 import React from 'react';
-import { connect, SelectLang } from 'umi';
+import { connect, SelectLang, history, formatMessage } from 'umi';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
+import { DollarOutlined } from '@ant-design/icons';
 
 const ENVTagColor = {
   dev: 'orange',
@@ -59,6 +60,17 @@ const GlobalHeaderRight = (props) => {
           <QuestionCircleOutlined />
         </a>
       </Tooltip> */}
+      <Button
+        className={styles.button}
+        onClick={() => {
+          history.push('/dash/account/topup');
+        }}
+      >
+        <DollarOutlined />
+        {formatMessage({
+          id: 'accountandsettings.basic.topup',
+        })}
+      </Button>
       <NoticeIconView />
       <Avatar menu />
       {REACT_APP_ENV && (
