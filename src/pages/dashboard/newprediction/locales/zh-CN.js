@@ -64,4 +64,5 @@ export default {
   'formandstep-form.getparam.rotation.inputParam': '输入参数',
   'formandstep-form.getparam.rotation.checkParam': '确认参数信息',
   'formandstep-form.getparam.rotation.complete': '完成',
+  'formandstep-form.getparam.rotation.title': '给出相应的AI Model的输入参数栏',
 };
