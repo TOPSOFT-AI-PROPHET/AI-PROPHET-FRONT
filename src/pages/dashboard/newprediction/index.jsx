@@ -50,7 +50,7 @@ const StepForm = (props) => {
     setStepComponent(component);
   }, [props.current]);
   return (
-    <PageContainer content="给出相应的ai model的输入参数栏">
+    <PageContainer content={formatMessage({ id: 'formandstep-form.getparam.rotation.title' })}>
       <Card bordered={false}>
         <>
           <Steps current={currentStep} className={styles.steps}>
