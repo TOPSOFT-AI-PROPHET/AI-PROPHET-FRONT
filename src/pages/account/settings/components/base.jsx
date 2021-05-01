@@ -33,7 +33,7 @@ class BaseView extends Component {
     super(props);
     this.formRef = React.createRef();
     this.state = {
-      loading: 'false',
+      loading: false,
       data: {},
       code: '',
     };
@@ -428,7 +428,7 @@ class BaseView extends Component {
                 >
                   <div className={styles.button_view}>
                     <Button>
-                      {this.state.loading ? <UploadOutlined /> : <LoadingOutlined />}{' '}
+                      {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
                       <FormattedMessage
                         id="accountandsettings.basic.change-avatar"
                         defaultMessage="Change avatar"
