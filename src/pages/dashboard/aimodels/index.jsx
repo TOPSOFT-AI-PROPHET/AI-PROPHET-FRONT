@@ -90,7 +90,7 @@ class CardList extends Component {
                       <a
                         key="option1"
                         onClick={() => {
-                          request('/validate', {
+                          request('/tasks/validate', {
                             method: 'POST',
                             data: { ai_id: item.pk },
                           }).then((result) => {
