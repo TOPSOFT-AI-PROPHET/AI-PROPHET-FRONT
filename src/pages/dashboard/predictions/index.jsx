@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Card, Col, List, Progress, Row, message } from 'antd';
+import { Modal, Button, Card, Col, List, Progress, Row, message } from 'antd';
 import { findDOMNode } from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { connect, history, formatMessage, FormattedMessage } from 'umi';
 import moment from 'moment';
 import OperationModal from './components/OperationModal';
@@ -16,6 +17,8 @@ const Info = ({ title, value, bordered }) => (
     {bordered && <em />}
   </div>
 );
+
+const { confirm } = Modal;
 
 const ListContent = ({
   data: {
@@ -80,6 +83,28 @@ export const BasicList = (props) => {
       setPpage(result.data.numPerPage);
     });
   };
+
+  function showDeleteConfirm(item) {
+    confirm({
+      title: 'Are you sure delete this task?',
+      icon: <ExclamationCircleOutlined />,
+      content: '',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK');
+        request('/tasks/del', { method: 'POST', data: { task_id: item.pk } }).then((result) => {
+          if (result.code === 200) {
+            pageChange(currentPage);
+          } else {
+            message.error('Delete failed due to unknown reason');
+          }
+        });
+      },
+      onCancel() {},
+    });
+  }
 
   useEffect(() => {
     request('/users/getUserInfo', { method: 'POST' }).then((result) => {
@@ -207,20 +232,7 @@ export const BasicList = (props) => {
                     >
                       <FormattedMessage id="basic.list.details" />
                     </a>,
-                    <a
-                      key="delete"
-                      onClick={() => {
-                        request('/tasks/del', { method: 'POST', data: { task_id: item.pk } }).then(
-                          (result) => {
-                            if (result.code === 200) {
-                              pageChange(currentPage);
-                            } else {
-                              message.error('Delete failed due to unknown reason');
-                            }
-                          },
-                        );
-                      }}
-                    >
+                    <a key="delete" onClick={showDeleteConfirm}>
                       <FormattedMessage id="basic.list.delete" />
                     </a>,
                   ]}
