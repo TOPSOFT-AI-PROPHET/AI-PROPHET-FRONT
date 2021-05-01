@@ -6,6 +6,13 @@ import PhoneView from './PhoneView';
 import styles from './BaseView.less';
 import request from '@/utils/request';
 import defaultSettings from '../../../../../config/defaultSettings';
+import {
+  setAccessCode,
+  getAccessCode,
+  getAccessTime,
+  getRefreshCode,
+  setAccessTime,
+} from '../../../../utils/authority';
 
 // const { Option } = Select; // 头像组件 方便以后独立，增加裁剪之类的功能
 
@@ -28,6 +35,7 @@ class BaseView extends Component {
     this.state = {
       loading: 'false',
       data: {},
+      code: '',
     };
   }
 
@@ -43,6 +51,16 @@ class BaseView extends Component {
         }
       })
       .catch((e) => console.log(e));
+
+    this.handleAccessCode(
+      process.env.NODE_ENV !== 'development'
+        ? `${defaultSettings.backURL}/users/uploadProfile`
+        : `/users/uploadProfile`,
+    ).then((result) => {
+      this.setState({
+        code: result,
+      });
+    });
   }
 
   getAvatarURL() {
@@ -129,10 +147,35 @@ class BaseView extends Component {
     });
   };
 
+  async handleAccessCode(url) {
+    let AccessCode = getAccessCode();
+    if (
+      getAccessTime() <= Date.now() - 5 * 55 * 1000 &&
+      url !== '/users/refresh' &&
+      AccessCode !== '' &&
+      getRefreshCode() !== ''
+    ) {
+      const data = await request('/users/refresh', {
+        method: 'POST',
+        data: {
+          refresh: getRefreshCode(),
+        },
+      });
+      setAccessCode(data.access);
+      setAccessTime(Date.now());
+      AccessCode = data.access;
+      console.log('已更新 ACCESS 密钥');
+    }
+    if (AccessCode !== '') {
+      return AccessCode;
+    }
+    // console.log(AccessCode)
+    return AccessCode;
+  }
+
   render() {
     const { currentUser } = this.props;
     if (this.state.data.username) {
-      console.log(this.state.data);
       return (
         <div className={styles.baseView} ref={this.getViewDom}>
           <div className={styles.left}>
@@ -179,13 +222,13 @@ class BaseView extends Component {
                 ]}
               >
                 <Input
+                  maxLength={18}
                   placeholder={formatMessage({
                     id: 'accountandsettings.basic.nickname-placeHolder',
                   })}
                   onChange={(e) => {
                     if (e) {
                       this.formRef.current.setFieldsValue({ nickname: e.target.value });
-                      console.log(this.formRef.current.getFieldsValue());
                     }
                   }}
                 />
@@ -216,7 +259,6 @@ class BaseView extends Component {
                   onChange={(e) => {
                     if (e) {
                       this.formRef.current.setFieldsValue({ user_sing: e.target.value });
-                      console.log(this.formRef.current.getFieldsValue());
                     }
                   }}
                 />
@@ -313,7 +355,6 @@ class BaseView extends Component {
                   onChange={(e) => {
                     if (e) {
                       this.formRef.current.setFieldsValue({ contact_number: e });
-                      console.log(this.formRef.current.getFieldsValue());
                     }
                   }}
                 />
@@ -375,8 +416,15 @@ class BaseView extends Component {
                   className="avatar-uploader"
                   beforeUpload={this.beforeUpload}
                   onChange={this.handleAvaterChange}
-                  action={`${defaultSettings.backURL}/users/uploadProfile`}
+                  action={
+                    process.env.NODE_ENV !== 'development'
+                      ? `${defaultSettings.backURL}/users/uploadProfile`
+                      : `/users/uploadProfile`
+                  }
                   method="POST"
+                  headers={{
+                    authorization: `Bearer ${this.state.code}`,
+                  }}
                 >
                   <div className={styles.button_view}>
                     <Button>

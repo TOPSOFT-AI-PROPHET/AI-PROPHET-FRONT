@@ -35,6 +35,7 @@ const PhoneView = (props) => {
   return (
     <>
       <Input
+        maxLength={18}
         addonBefore={prefixSelector}
         // className={styles.phone_number}
         onChange={(e) => {

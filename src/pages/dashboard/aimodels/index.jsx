@@ -1,12 +1,11 @@
-import { Card, List, Typography } from 'antd';
+import { Card, List, Typography, Modal, Button } from 'antd';
 import React, { Component } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { connect, history, formatMessage } from 'umi';
+import { connect, history, formatMessage, FormattedMessage } from 'umi';
 import request from '@/utils/request';
 import styles from './style.less';
-import { CoffeeOutlined } from '@ant-design/icons';
+import { CoffeeOutlined, DollarOutlined, ImportOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import { FormattedMessage } from 'umi';
 
 const { Paragraph } = Typography;
 
@@ -15,6 +14,7 @@ class CardList extends Component {
     super(props);
     this.state = {
       data: [],
+      creditModalVisible: false,
     };
   }
 
@@ -28,6 +28,10 @@ class CardList extends Component {
         }
       })
       .catch((e) => console.log(e));
+  }
+
+  setcreditModalVisible(creditModalVisible) {
+    this.setState({ creditModalVisible });
   }
 
   render() {
@@ -86,7 +90,16 @@ class CardList extends Component {
                       <a
                         key="option1"
                         onClick={() => {
-                          history.push(`/dash/prediction/newprediction/${item.pk}`);
+                          request('/validate', {
+                            method: 'POST',
+                            data: { ai_id: item.fields.ai_id },
+                          }).then((result) => {
+                            if (result.code === 200) {
+                              history.push(`/dash/prediction/newprediction/${item.pk}`);
+                            } else {
+                              this.setcreditModalVisible(true);
+                            }
+                          });
                         }}
                       >
                         <FormattedMessage id="accountandsettings.option1" />
@@ -107,7 +120,16 @@ class CardList extends Component {
                           />
                           <a
                             onClick={() => {
-                              history.push(`/dash/prediction/newprediction/${item.pk}`);
+                              request('/validate', {
+                                method: 'POST',
+                                data: { ai_id: item.fields.ai_id },
+                              }).then((result) => {
+                                if (result.code === 200) {
+                                  history.push(`/dash/prediction/newprediction/${item.pk}`);
+                                } else {
+                                  this.setcreditModalVisible(true);
+                                }
+                              });
                             }}
                           >
                             {item.fields.ai_name}
@@ -130,6 +152,50 @@ class CardList extends Component {
               );
             }}
           />
+          <Modal
+            title={formatMessage({
+              id: 'pages.dashboard.aimodels.cardModal.title',
+            })}
+            centered
+            visible={this.state.creditModalVisible}
+            onOk={() => this.setcreditModalVisible(false)}
+            onCancel={() => this.setcreditModalVisible(false)}
+            footer={[
+              <Button
+                key="back"
+                onClick={() => {
+                  this.setcreditModalVisible(false);
+                }}
+              >
+                <ImportOutlined />
+                {formatMessage({
+                  id: 'pages.dashboard.aimodels.button1',
+                })}
+              </Button>,
+              <Button
+                key="TopUp"
+                onClick={() => {
+                  history.push(`/dash/account/topup`);
+                }}
+              >
+                <DollarOutlined />
+                {formatMessage({
+                  id: 'accountandsettings.basic.topup',
+                })}
+              </Button>,
+            ]}
+          >
+            <p>
+              {formatMessage({
+                id: 'pages.dashboard.aimodels.modalcontent1',
+              })}
+            </p>
+            <p>
+              {formatMessage({
+                id: 'pages.dashboard.aimodels.modalcontent2',
+              })}
+            </p>
+          </Modal>
         </div>
       </PageContainer>
     );
@@ -137,5 +203,5 @@ class CardList extends Component {
 }
 
 export default connect(({ listAndcardList }) => ({
-  listAndcardList
+  listAndcardList,
 }))(CardList);

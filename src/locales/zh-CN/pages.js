@@ -77,4 +77,8 @@ export default {
   'basic.list.starttime': '开始时间',
   'pages.profile.basic.activationcode': 'CDK',
   'pages.profile.basic.submit': '提交',
+  'pages.dashboard.aimodels.modalcontent1': '账户余额不足,',
+  'pages.dashboard.aimodels.modalcontent2': '请充值后再试。',
+  'pages.dashboard.aimodels.button1': '返回',
+  'pages.dashboard.aimodels.cardModal.title': '注意！',
 };
