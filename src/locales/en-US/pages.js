@@ -83,4 +83,8 @@ export default {
   'basic.list.starttime': 'Start Time',
   'pages.profile.basic.activationcode': 'CDK',
   'pages.profile.basic.submit': 'submit',
+  'pages.dashboard.aimodels.modalcontent1': 'Insufficient account balance,',
+  'pages.dashboard.aimodels.modalcontent2': 'Please topup your account and try again.....',
+  'pages.dashboard.aimodels.button1': 'Return',
+  'pages.dashboard.aimodels.cardModal.title': 'Attention！',
 };
