@@ -92,7 +92,7 @@ class CardList extends Component {
                         onClick={() => {
                           request('/validate', {
                             method: 'POST',
-                            data: { ai_id: item.fields.ai_id },
+                            data: { ai_id: item.pk },
                           }).then((result) => {
                             if (result.code === 200) {
                               history.push(`/dash/prediction/newprediction/${item.pk}`);
