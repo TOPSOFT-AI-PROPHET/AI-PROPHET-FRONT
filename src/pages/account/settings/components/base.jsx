@@ -54,8 +54,8 @@ class BaseView extends Component {
 
     this.handleAccessCode(
       process.env.NODE_ENV !== 'development'
-        ? `${defaultSettings.backURL}/users/uploadProfile`
-        : `/users/uploadProfile`,
+        ? `${defaultSettings.backURL}/users/updateUserProfileImage`
+        : `/users/updateUserProfileImage`,
     ).then((result) => {
       this.setState({
         code: result,
@@ -412,14 +412,14 @@ class BaseView extends Component {
               <>
                 <Upload
                   showUploadList={false}
-                  name="avater"
+                  name="avatar"
                   className="avatar-uploader"
                   beforeUpload={this.beforeUpload}
                   onChange={this.handleAvaterChange}
                   action={
                     process.env.NODE_ENV !== 'development'
-                      ? `${defaultSettings.backURL}/users/uploadProfile`
-                      : `/users/uploadProfile`
+                      ? `${defaultSettings.backURL}/users/updateUserProfileImage`
+                      : `/users/updateUserProfileImage`
                   }
                   method="POST"
                   headers={{
