@@ -84,28 +84,6 @@ export const BasicList = (props) => {
     });
   };
 
-  function showDeleteConfirm(item) {
-    confirm({
-      title: 'Are you sure delete this task?',
-      icon: <ExclamationCircleOutlined />,
-      content: '',
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK');
-        request('/tasks/del', { method: 'POST', data: { task_id: item.pk } }).then((result) => {
-          if (result.code === 200) {
-            pageChange(currentPage);
-          } else {
-            message.error('Delete failed due to unknown reason');
-          }
-        });
-      },
-      onCancel() {},
-    });
-  }
-
   useEffect(() => {
     request('/users/getUserInfo', { method: 'POST' }).then((result) => {
       setBalance(result.data.credit);
@@ -232,7 +210,33 @@ export const BasicList = (props) => {
                     >
                       <FormattedMessage id="basic.list.details" />
                     </a>,
-                    <a key="delete" onClick={showDeleteConfirm}>
+                    <a
+                      key="delete"
+                      onClick={() => {
+                        confirm({
+                          title: 'Are you sure delete this task?',
+                          icon: <ExclamationCircleOutlined />,
+                          content: '',
+                          okText: 'Yes',
+                          okType: 'danger',
+                          cancelText: 'No',
+                          onOk() {
+                            console.log('OK');
+                            request('/tasks/del', {
+                              method: 'POST',
+                              data: { task_id: item.pk },
+                            }).then((result) => {
+                              if (result.code === 200) {
+                                pageChange(currentPage);
+                              } else {
+                                message.error('Delete failed due to unknown reason');
+                              }
+                            });
+                          },
+                          onCancel() {},
+                        });
+                      }}
+                    >
                       <FormattedMessage id="basic.list.delete" />
                     </a>,
                   ]}
