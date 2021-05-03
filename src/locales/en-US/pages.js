@@ -87,4 +87,7 @@ export default {
   'pages.dashboard.aimodels.modalcontent2': 'Please topup your account and try again.....',
   'pages.dashboard.aimodels.button1': 'Return',
   'pages.dashboard.aimodels.cardModal.title': 'Attention！',
+  'basic.list.suredelete': 'Are you sure delete this task?',
+  'basic.list.yes': 'Yes',
+  'basic.list.no': 'No',
 };
