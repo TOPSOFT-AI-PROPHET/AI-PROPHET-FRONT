@@ -7,10 +7,10 @@ import { FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 import request from '@/utils/request';
 import { Empty } from 'antd';
+import COS from 'cos-js-sdk-v5';
 
-const PageHeaderContent = ({ currentUser }) => {
+const PageHeaderContent = ({ currentUser, url }) => {
   const loading = currentUser && Object.keys(currentUser).length;
-
   if (!loading) {
     return (
       <Skeleton
@@ -26,10 +26,7 @@ const PageHeaderContent = ({ currentUser }) => {
   return (
     <div className={styles.pageHeaderContent}>
       <div className={styles.avatar}>
-        <Avatar
-          size="large"
-          src={'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png'}
-        />
+        <Avatar size="large" src={url} />
       </div>
       <div className={styles.content}>
         <div className={styles.contentTitle}>
@@ -83,6 +80,7 @@ class Workplace extends Component {
         num_of_task: '',
         num_of_finished_tasks: '',
       },
+      imageURL: '',
     };
   }
 
@@ -109,6 +107,12 @@ class Workplace extends Component {
         }
       })
       .catch((e) => console.log(e));
+
+    request('/users/getUserInfo', { method: 'POST' })
+      .then((result) => {
+        this.handleAvatar(result.data.profile_image_uuid);
+      })
+      .catch((e) => console.log(e));
   }
 
   componentWillUnmount() {
@@ -118,15 +122,39 @@ class Workplace extends Component {
     });
   }
 
+  handleAvatar(uuid) {
+    if (uuid) {
+      const cos = new COS({
+        SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
+        SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
+      });
+      cos.getObjectUrl(
+        {
+          Bucket: 'prophetsrc-1305001068' /* 必须 */,
+          Region: 'ap-chengdu' /* 必须 */,
+          Key: `${uuid}.jpg` /* 必须 */,
+        },
+        (err, data) => {
+          this.setState({
+            imageURL: data.Url,
+          });
+        },
+      );
+    } else {
+      this.setState({
+        imageURL: 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png',
+      });
+    }
+  }
+
   render() {
     const { currentUser } = this.props;
     if (!currentUser || !currentUser.username) {
       return null;
     }
-
     return (
       <PageContainer
-        content={<PageHeaderContent currentUser={currentUser} />}
+        content={<PageHeaderContent currentUser={currentUser} url={this.state.imageURL} />}
         extraContent={<ExtraContent currentUser={currentUser} value={this.state.data_task} />}
       >
         <Card

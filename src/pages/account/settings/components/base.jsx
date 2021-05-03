@@ -13,6 +13,7 @@ import {
   getRefreshCode,
   setAccessTime,
 } from '../../../../utils/authority';
+import COS from 'cos-js-sdk-v5';
 
 // const { Option } = Select; // 头像组件 方便以后独立，增加裁剪之类的功能
 
@@ -36,6 +37,7 @@ class BaseView extends Component {
       loading: false,
       data: {},
       code: '',
+      imageURL: '',
     };
   }
 
@@ -48,6 +50,7 @@ class BaseView extends Component {
           this.setState({
             data: result.data,
           });
+          this.handleAvatar(result.data.profile_image_uuid);
         }
       })
       .catch((e) => console.log(e));
@@ -63,18 +66,29 @@ class BaseView extends Component {
     });
   }
 
-  getAvatarURL() {
-    const { currentUser } = this.props;
-    if (currentUser) {
-      if (currentUser.profile_image_url) {
-        return currentUser.profile_image_url;
-      }
-
-      const url = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
-      return url;
+  handleAvatar(uuid) {
+    if (uuid) {
+      const cos = new COS({
+        SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
+        SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
+      });
+      cos.getObjectUrl(
+        {
+          Bucket: 'prophetsrc-1305001068' /* 必须 */,
+          Region: 'ap-chengdu' /* 必须 */,
+          Key: `${uuid}.jpg` /* 必须 */,
+        },
+        (err, data) => {
+          this.setState({
+            imageURL: data.Url,
+          });
+        },
+      );
+    } else {
+      this.setState({
+        imageURL: 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png',
+      });
     }
-
-    return '';
   }
 
   handleAvaterChange = (info) => {
@@ -406,7 +420,7 @@ class BaseView extends Component {
                 <FormattedMessage id="accountandsettings.basic.avatar" defaultMessage="Avatar" />
               </div>
               <div className={styles.avatar}>
-                <img src={this.getAvatarURL()} alt="avatar" />
+                <img src={this.state.imageURL} alt="avatar" />
               </div>
 
               <>
