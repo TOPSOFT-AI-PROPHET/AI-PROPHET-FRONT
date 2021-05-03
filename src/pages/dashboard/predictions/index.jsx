@@ -214,12 +214,12 @@ export const BasicList = (props) => {
                       key="delete"
                       onClick={() => {
                         confirm({
-                          title: 'Are you sure delete this task?',
+                          title: `${formatMessage({ id: 'basic.list.suredelete' })}`,
                           icon: <ExclamationCircleOutlined />,
                           content: '',
-                          okText: 'Yes',
+                          okText: `${formatMessage({ id: 'basic.list.yes' })}`,
                           okType: 'danger',
-                          cancelText: 'No',
+                          cancelText: `${formatMessage({ id: 'basic.list.no' })}`,
                           onOk() {
                             console.log('OK');
                             request('/tasks/del', {

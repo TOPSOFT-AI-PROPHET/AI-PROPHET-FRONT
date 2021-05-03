@@ -81,4 +81,7 @@ export default {
   'pages.dashboard.aimodels.modalcontent2': '请充值后再试。',
   'pages.dashboard.aimodels.button1': '返回',
   'pages.dashboard.aimodels.cardModal.title': '注意！',
+  'basic.list.suredelete': '是否确认删除此任务？',
+  'basic.list.yes': '确定',
+  'basic.list.no': '取消',
 };
