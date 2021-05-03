@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { history } from 'umi';
 
 class Welcome extends Component {
   createLink(rel, type, href) {
@@ -639,11 +640,11 @@ class Welcome extends Component {
                     <img
                       className="img-responsive center-block"
                       alt="screenshot1"
-                      src="assets/img/screenshots/01.jpg"
+                      src="assets/img/model1.jpg"
                       loading="lazy"
                     />
                     <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/01.jpg"></a>
+                      <a className="zoom" href="assets/img/model1.jpg"></a>
                     </div>
                   </div>
                   {/* End Screenshot 1 */}
@@ -652,11 +653,11 @@ class Welcome extends Component {
                     <img
                       className="img-responsive center-block"
                       alt="screenshot2"
-                      src="assets/img/screenshots/02.jpg"
+                      src="assets/img/model2.jpg"
                       loading="lazy"
                     />
                     <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/02.jpg"></a>
+                      <a className="zoom" href="assets/img/model2.jpg"></a>
                     </div>
                   </div>
                   {/* End Screenshot 2 */}
@@ -665,11 +666,11 @@ class Welcome extends Component {
                     <img
                       className="img-responsive center-block"
                       alt="screenshot3"
-                      src="assets/img/screenshots/03.jpg"
+                      src="assets/img/model-emp.jpg"
                       loading="lazy"
                     />
                     <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/03.jpg"></a>
+                      <a className="zoom" href="assets/img/model-emp.jpg"></a>
                     </div>
                   </div>
                   {/* End Screenshot 3 */}
@@ -678,66 +679,14 @@ class Welcome extends Component {
                     <img
                       className="img-responsive center-block"
                       alt="screenshot4"
-                      src="assets/img/screenshots/04.jpg"
+                      src="assets/img/model-emp.jpg"
                       loading="lazy"
                     />
                     <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/04.jpg"></a>
+                      <a className="zoom" href="assets/img/model-emp.jpg"></a>
                     </div>
                   </div>
                   {/* End Screenshot 4 */}
-                  {/* Screenshot 5 */}
-                  <div className="img-wrap">
-                    <img
-                      className="img-responsive center-block"
-                      alt="screenshot5"
-                      src="assets/img/screenshots/01.jpg"
-                      loading="lazy"
-                    />
-                    <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/01.jpg"></a>
-                    </div>
-                  </div>
-                  {/* End Screenshot 5 */}
-                  {/* Screenshot 6 */}
-                  <div className="img-wrap">
-                    <img
-                      className="img-responsive center-block"
-                      alt="screenshot6"
-                      src="assets/img/screenshots/02.jpg"
-                      loading="lazy"
-                    />
-                    <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/02.jpg"></a>
-                    </div>
-                  </div>
-                  {/* End Screenshot 6 */}
-                  {/* Screenshot 7 */}
-                  <div className="img-wrap">
-                    <img
-                      className="img-responsive center-block"
-                      alt="screenshot7"
-                      src="assets/img/screenshots/03.jpg"
-                      loading="lazy"
-                    />
-                    <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/03.jpg"></a>
-                    </div>
-                  </div>
-                  {/* End Screenshot 7 */}
-                  {/* Screenshot 8 */}
-                  <div className="img-wrap">
-                    <img
-                      className="img-responsive center-block"
-                      alt="screenshot8"
-                      src="assets/img/screenshots/04.jpg"
-                      loading="lazy"
-                    />
-                    <div className="overlay">
-                      <a className="zoom" href="assets/img/screenshots/04.jpg"></a>
-                    </div>
-                  </div>
-                  {/* End Screenshot 8 */}
                 </div>
               </div>
             </div>
@@ -780,7 +729,13 @@ class Welcome extends Component {
                       data-wow-duration="1s"
                       data-wow-delay=".1s"
                     >
-                      <button type="submit" className="btn custom-button-1">
+                      <button
+                        type="submit"
+                        className="btn custom-button-1"
+                        onClick={() => {
+                          history.push(`/user/login`);
+                        }}
+                      >
                         <span className="subscribe ti-mouse"></span>GO
                       </button>
                     </div>
@@ -807,7 +762,10 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <p>@TOPSOFT AI | 2021 All Rights Reserved.</p>
-                <p>We believe our diversity is our strength. With people from every background, gender, creed and religion</p>
+                <p>
+                  We believe our diversity is our strength. With people from every background,
+                  gender, creed and religion
+                </p>
               </div>
             </div>
           </div>
