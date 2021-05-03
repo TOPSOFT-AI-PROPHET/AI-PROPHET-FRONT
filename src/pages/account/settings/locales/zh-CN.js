@@ -24,6 +24,7 @@ export default {
   'accountandsettings.basic.update': '更新基本信息',
   'accountandsettings.basic.update.success': '成功更新个人信息',
   'accountandsettings.basic.update.fail': '个人信息更新失败',
+  'accountandsettings.basic.upload.success': '成功上传头像',
   'accountandsettings.basic.credit': '账户余额',
   'accountandsettings.basic.topup': '充值',
   'accountandsettings.security.veryStrong': '很强',
@@ -65,4 +66,6 @@ export default {
   'accountandsettings.option2': 'API预测',
   'accountandsettings.areaCodeCN': '+86 中国',
   'accountandsettings.areaCodeUK': '+44 英国',
+  'accountandsettings.upload_message1': '文件应为PNG/JPG格式 ！',
+  'accountandsettings.upload_message2': '图片应当小于2MB ',
 };
