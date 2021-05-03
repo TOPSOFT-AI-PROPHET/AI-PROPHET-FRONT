@@ -199,7 +199,13 @@ class Workplace extends Component {
                           size="large"
                           src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
                         />
-                        <a>{item.fields.ai_name}</a>
+                        <a
+                          onClick={() => {
+                            history.push(`/dash/prediction/details/${item.pk}`);
+                          }}
+                        >
+                          {item.fields.ai_name}
+                        </a>
                       </div>
                     }
                     description={item.fields.description}

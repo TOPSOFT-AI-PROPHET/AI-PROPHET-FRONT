@@ -14,6 +14,8 @@ import {
   setAccessTime,
 } from '../../../../utils/authority';
 import COS from 'cos-js-sdk-v5';
+import ImgCrop from 'antd-img-crop';
+import 'antd/es/modal/style';
 
 // const { Option } = Select; // 头像组件 方便以后独立，增加裁剪之类的功能
 
@@ -98,10 +100,16 @@ class BaseView extends Component {
     }
     if (info.file.status === 'done') {
       // update avater for uesr
+      message.success(
+        formatMessage({
+          id: 'accountandsettings.basic.upload.success',
+        }),
+      );
       this.setState({
         loading: false,
         // imageUrl,
       });
+      window.location.reload();
     }
   };
 
@@ -118,10 +126,40 @@ class BaseView extends Component {
   beforeUpload(file) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+      message.error(
+        formatMessage({
+          id: 'accountandsettings.upload_message1',
+        }),
+      );
     }
     const isLt2M = file.size / 1024 / 1024 < 2; // limited picture size(not using)
     if (!isLt2M) {
+      message.error(
+        formatMessage({
+          id: 'accountandsettings.upload_message2',
+        }),
+      );
+      // error message for valid size
+    }
+    return isJpgOrPng && isLt2M;
+  }
+
+  beforeCrop(file) {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error(
+        formatMessage({
+          id: 'accountandsettings.upload_message1',
+        }),
+      );
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2; // limited picture size(not using)
+    if (!isLt2M) {
+      message.error(
+        formatMessage({
+          id: 'accountandsettings.upload_message2',
+        }),
+      );
       // error message for valid size
     }
     return isJpgOrPng && isLt2M;
@@ -144,6 +182,7 @@ class BaseView extends Component {
               id: 'accountandsettings.basic.update.success',
             }),
           );
+          window.location.reload();
         } else {
           message.error(
             formatMessage({
@@ -188,7 +227,6 @@ class BaseView extends Component {
   }
 
   render() {
-    const { currentUser } = this.props;
     if (this.state.data.username) {
       return (
         <div className={styles.baseView} ref={this.getViewDom}>
@@ -383,7 +421,7 @@ class BaseView extends Component {
                   {/* currentUser.credit */}
                   <Input
                     prefix="￥"
-                    placeholder={currentUser.credit}
+                    placeholder={this.state.data.credit}
                     suffix="RMB"
                     disabled
                     bordered={false}
@@ -424,32 +462,34 @@ class BaseView extends Component {
               </div>
 
               <>
-                <Upload
-                  showUploadList={false}
-                  name="avatar"
-                  className="avatar-uploader"
-                  beforeUpload={this.beforeUpload}
-                  onChange={this.handleAvaterChange}
-                  action={
-                    process.env.NODE_ENV !== 'development'
-                      ? `${defaultSettings.backURL}/users/updateUserProfileImage`
-                      : `/users/updateUserProfileImage`
-                  }
-                  method="POST"
-                  headers={{
-                    authorization: `Bearer ${this.state.code}`,
-                  }}
-                >
-                  <div className={styles.button_view}>
-                    <Button>
-                      {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
-                      <FormattedMessage
-                        id="accountandsettings.basic.change-avatar"
-                        defaultMessage="Change avatar"
-                      />
-                    </Button>
-                  </div>
-                </Upload>
+                <ImgCrop grid rotate shape={'round'} beforeCrop={this.beforeCrop}>
+                  <Upload
+                    showUploadList={false}
+                    name="avatar"
+                    className="avatar-uploader"
+                    beforeUpload={this.beforeUpload}
+                    onChange={this.handleAvaterChange}
+                    action={
+                      process.env.NODE_ENV !== 'development'
+                        ? `${defaultSettings.backURL}/users/updateUserProfileImage`
+                        : `/users/updateUserProfileImage`
+                    }
+                    method="POST"
+                    headers={{
+                      authorization: `Bearer ${this.state.code}`,
+                    }}
+                  >
+                    <div className={styles.button_view}>
+                      <Button>
+                        {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
+                        <FormattedMessage
+                          id="accountandsettings.basic.change-avatar"
+                          defaultMessage="Change avatar"
+                        />
+                      </Button>
+                    </div>
+                  </Upload>
+                </ImgCrop>
               </>
             </>
           </div>

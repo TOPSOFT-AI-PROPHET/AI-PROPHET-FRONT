@@ -24,6 +24,7 @@ export default {
   'accountandsettings.basic.update': 'Update Information',
   'accountandsettings.basic.update.success': 'Update personal information successfully',
   'accountandsettings.basic.update.fail': 'Personal information update failed',
+  'accountandsettings.basic.upload.success': 'Upload image successfully',
   'accountandsettings.basic.credit': 'Account Credit',
   'accountandsettings.basic.topup': 'TopUp',
   'accountandsettings.security.veryStrong': 'Very Strong',
@@ -70,4 +71,6 @@ export default {
   'accountandsettings.option2': 'API Predict',
   'accountandsettings.areaCodeCN': '+86 CN',
   'accountandsettings.areaCodeUK': '+44 UK',
+  'accountandsettings.upload_message1': 'You can only upload JPG/PNG file!',
+  'accountandsettings.upload_message2': 'Image must smaller than 2MB!',
 };

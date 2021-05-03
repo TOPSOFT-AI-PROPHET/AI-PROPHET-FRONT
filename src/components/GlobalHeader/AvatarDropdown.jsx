@@ -4,8 +4,17 @@ import React from 'react';
 import { history, connect, formatMessage } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
+import request from '@/utils/request';
+import COS from 'cos-js-sdk-v5';
 
 class AvatarDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageURL: '',
+    };
+  }
+
   onMenuClick = (event) => {
     const { key } = event;
 
@@ -23,6 +32,41 @@ class AvatarDropdown extends React.Component {
 
     history.push(`/dash/account/${key}`);
   };
+
+  handleAvatar(uuid) {
+    if (uuid) {
+      const cos = new COS({
+        SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
+        SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
+      });
+      cos.getObjectUrl(
+        {
+          Bucket: 'prophetsrc-1305001068' /* 必须 */,
+          Region: 'ap-chengdu' /* 必须 */,
+          Key: `${uuid}.jpg` /* 必须 */,
+        },
+        (err, data) => {
+          this.setState({
+            imageURL: data.Url,
+          });
+        },
+      );
+    } else {
+      this.setState({
+        imageURL: 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png',
+      });
+    }
+  }
+
+  componentDidMount() {
+    request('/users/getUserInfo', { method: 'POST' })
+      .then((result) => {
+        if (result.data) {
+          this.handleAvatar(result.data.profile_image_uuid);
+        }
+      })
+      .catch((e) => console.log(e));
+  }
 
   render() {
     const {
@@ -61,12 +105,7 @@ class AvatarDropdown extends React.Component {
     return currentUser && currentUser.nickname ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar
-            size="small"
-            className={styles.avatar}
-            src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
-            alt="avatar"
-          />
+          <Avatar size="small" className={styles.avatar} src={this.state.imageURL} alt="avatar" />
           <span className={`${styles.name} anticon`}>{currentUser.nickname}</span>
         </span>
       </HeaderDropdown>
