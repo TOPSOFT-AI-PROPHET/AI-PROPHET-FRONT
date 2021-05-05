@@ -1,5 +1,6 @@
 export default {
   'pages.layouts.userLayout.title': 'Welcome to THE PROPHET | OFFICIAL - TOPSOFT AI',
+  'pages.login.successMessage': '🎉 🎉 🎉  Successfully logged in！',
   'pages.login.accountLogin.tab': 'Account Login',
   'pages.login.accountLogin.errorMessage': 'Incorrect username/password',
   'pages.login.username.placeholder': 'Username or e-mail address',

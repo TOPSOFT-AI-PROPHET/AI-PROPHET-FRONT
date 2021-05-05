@@ -60,17 +60,19 @@ const GlobalHeaderRight = (props) => {
           <QuestionCircleOutlined />
         </a>
       </Tooltip> */}
-      <Button
-        className={styles.button}
-        onClick={() => {
-          history.push('/dash/account/topup');
-        }}
-      >
-        <DollarOutlined />
-        {formatMessage({
-          id: 'accountandsettings.basic.topup',
-        })}
-      </Button>
+      <span className={styles.topup}>
+        <Button
+          className={styles.button}
+          onClick={() => {
+            history.push('/dash/account/topup');
+          }}
+        >
+          <DollarOutlined />
+          {formatMessage({
+            id: 'accountandsettings.basic.topup',
+          })}
+        </Button>
+      </span>
       <NoticeIconView />
       <Avatar menu />
       {REACT_APP_ENV && (
