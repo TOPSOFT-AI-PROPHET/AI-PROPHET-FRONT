@@ -1,5 +1,5 @@
 import { stringify } from 'querystring';
-import { history } from 'umi';
+import { history, formatMessage } from 'umi';
 import { AccountLogin } from '@/services/login';
 import { setAuthority, setRefreshCode, setAccessCode, setAccessTime } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
@@ -21,7 +21,11 @@ const Model = {
       if (response.access) {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
-        message.success('🎉 🎉 🎉  登录成功！');
+        message.success(
+          formatMessage({
+            id: 'pages.login.successMessage',
+          }),
+        );
         let { redirect } = params;
 
         if (redirect) {
