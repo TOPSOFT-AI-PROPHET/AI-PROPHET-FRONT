@@ -84,4 +84,6 @@ export default {
   'basic.list.suredelete': '是否确认删除此任务？',
   'basic.list.yes': '确定',
   'basic.list.no': '取消',
+  'basic.cdk.success': '充值成功',
+  'basic.cdk.failed': '无效兑换码',
 };

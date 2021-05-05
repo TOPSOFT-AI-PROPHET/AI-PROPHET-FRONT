@@ -42,9 +42,9 @@ class Basic extends Component {
               request('/pay/codecharge', { method: 'POST', data: { code: this.state.value } }).then(
                 (result) => {
                   if (result.code === 200) {
-                    message.success(result.message);
+                    message.success(`${formatMessage({ id: 'basic.cdk.success' })}`);
                   } else {
-                    message.error(result.message);
+                    message.error(`${formatMessage({ id: 'basic.cdk.failed' })}`);
                   }
                 },
               );

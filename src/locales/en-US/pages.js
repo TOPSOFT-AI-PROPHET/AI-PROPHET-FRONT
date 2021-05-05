@@ -90,4 +90,6 @@ export default {
   'basic.list.suredelete': 'Are you sure delete this task?',
   'basic.list.yes': 'Yes',
   'basic.list.no': 'No',
+  'basic.cdk.success': 'Success',
+  'basic.cdk.failed': 'Invalid CDKEY',
 };
