@@ -54,7 +54,7 @@ export default {
   'welcomepage.fourthpage.memberintroduction14': '先知系统后端部门工程师',
   'welcomepage.fourthpage.memberintroduction15': '项目文档负责人',
   'welcomepage.fourthpage.membername8': 'Yang Yang',
-  'welcomepage.fourthpage.memberintroduction16': '极致网络科技公司首席技术员',
+  'welcomepage.fourthpage.memberintroduction16': '极致网络科技公司首席工程师',
   'welcomepage.fourthpage.memberintroduction17': '先知系统技术指导',
   'welcomepage.fourthpage.membername9': '周慎浦',
   'welcomepage.fourthpage.memberintroduction18': '先知系统后端部门工程师',
@@ -64,5 +64,5 @@ export default {
   'welcomepage.fourthpage.memberintroduction21': '先知系统前端部门工程师',
   'welcomepage.fifthpage.aimodules': 'AI模型',
   'welcomepage.fifthpage.searchmodules': '搜索模型',
-  'welcomepage.fifthpage.bottom': '我们坚信团队的多元化就是我们的力量，',
+  'welcomepage.fifthpage.bottom': '我们坚信团队的多元化就是我们的力量',
 };

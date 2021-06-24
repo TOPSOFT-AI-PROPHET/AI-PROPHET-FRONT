@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { history, FormattedMessage } from 'umi';
+import { history, FormattedMessage, SelectLang } from 'umi';
+import styles from './Welcome.less';
 
 class Welcome extends Component {
   createLink(rel, type, href) {
@@ -227,6 +228,10 @@ class Welcome extends Component {
                     <a className="page-scroll" onClick={this.goLogin}>
                       <FormattedMessage id="welcomepage.button.login" />
                     </a>
+                  </li>
+
+                  <li>
+                    <SelectLang className={styles.action} />
                   </li>
                 </ul>
               </div>
