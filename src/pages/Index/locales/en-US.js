@@ -67,4 +67,5 @@ export default {
   'welcomepage.fifthpage.searchmodules': 'SEARCH MODULES',
   'welcomepage.fifthpage.bottom':
     'We believe our diversity is our strength. With people from every background, gender, creed and religion',
+  'welcomepage.button.changelang': '中文界面',
 };
