@@ -508,35 +508,10 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>
-                      <FormattedMessage id="welcomepage.fourthpage.membername4" />
-                    </h3>
+                    <h3>Qingling Kang</h3>
                     <p>
-                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction8" />
-                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction9" />
-                    </p>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <img
-                    src="assets/img/fz.jpg"
-                    alt="phone"
-                    className="img-responsive center-block wow fadeIn"
-                    data-wow-duration="2s"
-                    data-wow-delay=".2s"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-md-4">
-                  <div className="features">
-                    <h3>
-                      <FormattedMessage id="welcomepage.fourthpage.membername5" />
-                    </h3>
-                    <p>
-                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction10" />
-                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction11" />
+                      TOPSOFT Board Member
+                      <br /> Head of Marketing Department
                     </p>
                   </div>
                 </div>
@@ -663,6 +638,63 @@ class Welcome extends Component {
                 <div className="col-md-6">
                   <img
                     src="assets/img/zy.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Xiaodan Zi</h3>
+                    <p>WEB Front Department Developer</p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/zxd.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Xinyi Liu</h3>
+                    <p>WEB Back Department Developer</p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/lxy.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>Huaxuan Xie</h3>
+                    <p>head of product department</p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/xhx.jpg"
                     alt="phone"
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
