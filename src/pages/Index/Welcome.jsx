@@ -650,7 +650,7 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Xiaodan Zi</h3>
+                    <h3>Yaodan Zi</h3>
                     <p>WEB Front Department Developer</p>
                   </div>
                 </div>
