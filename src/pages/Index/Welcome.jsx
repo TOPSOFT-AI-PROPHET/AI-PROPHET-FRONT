@@ -175,6 +175,7 @@ class Welcome extends Component {
                         <span className="arrow ti-arrow-circle-down"></span>
                       </a>
                     </div>
+                    <SelectLang className={styles.action} />
                   </div>
                 </div>
               </div>
@@ -228,10 +229,6 @@ class Welcome extends Component {
                     <a className="page-scroll" onClick={this.goLogin}>
                       <FormattedMessage id="welcomepage.button.login" />
                     </a>
-                  </li>
-
-                  <li>
-                    <SelectLang className={styles.action} />
                   </li>
                 </ul>
               </div>
