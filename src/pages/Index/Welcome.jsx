@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { history } from 'umi';
+import { history, FormattedMessage, SelectLang } from 'umi';
+import styles from './Welcome.less';
 
 class Welcome extends Component {
   createLink(rel, type, href) {
@@ -150,13 +151,19 @@ class Welcome extends Component {
                     <div className="col-md-12 text-center">
                       <ul id="intro">
                         <li>
-                          <h2>Artificial Intelligence For Everyone</h2>
+                          <h2>
+                            <FormattedMessage id="welcomepage.slogan1" />
+                          </h2>
                         </li>
                         <li>
-                          <h2>Explore The Future</h2>
+                          <h2>
+                            <FormattedMessage id="welcomepage.slogan2" />
+                          </h2>
                         </li>
                         <li>
-                          <h2>Dataset From Entire World</h2>
+                          <h2>
+                            <FormattedMessage id="welcomepage.slogan3" />
+                          </h2>
                         </li>
                       </ul>
                     </div>
@@ -203,24 +210,28 @@ class Welcome extends Component {
                 <ul className="nav navbar-nav navbar-right">
                   <li>
                     <a className="page-scroll" href="#page-top">
-                      Home
+                      <FormattedMessage id="welcomepage.button.home" />
                     </a>
                   </li>
                   <li>
                     <a className="page-scroll" href="#features">
-                      Features
+                      <FormattedMessage id="welcomepage.button.features" />
                     </a>
                   </li>
                   <li>
                     <a className="page-scroll" href="#extra">
-                      Team
+                      <FormattedMessage id="welcomepage.button.team" />
                     </a>
                   </li>
 
                   <li>
                     <a className="page-scroll" onClick={this.goLogin}>
-                      Login
+                      <FormattedMessage id="welcomepage.button.login" />
                     </a>
+                  </li>
+
+                  <li>
+                    <SelectLang className={styles.action} />
                   </li>
                 </ul>
               </div>
@@ -235,7 +246,8 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <h2 className="headline wow fadeInDown">
-                  We Offering<span className="dot">.</span>
+                  <FormattedMessage id="welcomepage.secondpage.introduction1" />
+                  <span className="dot">.</span>
                 </h2>
                 <div className="custom-style">
                   <span className="ti-announcement"></span>
@@ -250,8 +262,12 @@ class Welcome extends Component {
               >
                 <div className="services">
                   <span className="services-icon-style ti-heart"></span>
-                  <h3>AI-onlin Prediction</h3>
-                  <p>For Everyone.</p>
+                  <h3>
+                    <FormattedMessage id="welcomepage.secondpage.introduction2" />
+                  </h3>
+                  <p>
+                    <FormattedMessage id="welcomepage.secondpage.introduction3" />
+                  </p>
                   <div className="divider center-block"></div>
                 </div>
               </div>
@@ -262,8 +278,13 @@ class Welcome extends Component {
               >
                 <div className="services">
                   <span className="services-icon-style ti-mobile"></span>
-                  <h3>Open-sourse AI Modules</h3>
-                  <p>100% Free &amp; Open.</p>
+                  <h3>
+                    <FormattedMessage id="welcomepage.secondpage.introduction4" />
+                  </h3>
+                  <p>
+                    <FormattedMessage id="welcomepage.secondpage.introduction5" /> &amp;{' '}
+                    <FormattedMessage id="welcomepage.secondpage.introduction6" />
+                  </p>
                   <div className="divider center-block"></div>
                 </div>
               </div>
@@ -274,8 +295,12 @@ class Welcome extends Component {
               >
                 <div className="services">
                   <span className="services-icon-style ti-pencil-alt"></span>
-                  <h3>Customised AI Training</h3>
-                  <p>Train Your AI online.</p>
+                  <h3>
+                    <FormattedMessage id="welcomepage.secondpage.introduction7" />
+                  </h3>
+                  <p>
+                    <FormattedMessage id="welcomepage.secondpage.introduction8" />
+                  </p>
                   <div className="divider center-block"></div>
                 </div>
               </div>
@@ -286,8 +311,12 @@ class Welcome extends Component {
               >
                 <div className="services">
                   <span className="services-icon-style ti-support"></span>
-                  <h3>TSAI Exclusive Datasets</h3>
-                  <p>Fully Collected, Maintained Datasets.</p>
+                  <h3>
+                    <FormattedMessage id="welcomepage.secondpage.introduction9" />
+                  </h3>
+                  <p>
+                    <FormattedMessage id="welcomepage.secondpage.introduction10" />
+                  </p>
                   <div className="divider center-block"></div>
                 </div>
               </div>
@@ -302,7 +331,9 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <h2 className="headline wow fadeInDown">
-                  PROPHET SYSTEM & TOPSOFT FAMILY<span className="dot">.</span>
+                  <FormattedMessage id="welcomepage.thirdpage.systemintroduction1" /> &{' '}
+                  <FormattedMessage id="welcomepage.thirdpage.systemintroduction2" />
+                  <span className="dot">.</span>
                 </h2>
                 <div className="custom-style">
                   <img
@@ -324,37 +355,41 @@ class Welcome extends Component {
               </div>
               <div className="col-md-7">
                 <div className="features">
-                  <h3 className="wow fadeInDown">THE PROPPHET SYSTEM</h3>
+                  <h3 className="wow fadeInDown">
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction3" />{' '}
+                  </h3>
                   <p className="wow fadeIn">
-                    THE PROPHET system project is an on-line AI manipulating system consists of
-                    multiple internal subsystems which allow users to request existing, and
-                    well-trained AI modules to perform prediction tasks by providing certain
-                    parameters.
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction4" />
                   </p>
                 </div>
 
                 <div className="features">
-                  <h3 className="wow fadeInDown">TOPSOFT INT</h3>
+                  <h3 className="wow fadeInDown">
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction5" />
+                  </h3>
                   <p className="wow fadeIn">
-                    Members from over 12 countries / regions, full of professions, reserchers,
-                    university students, we are a huge international computer science community to
-                    work with.
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction6" />
                   </p>
                 </div>
 
                 <div className="features">
-                  <h3 className="wow fadeInDown">TOPSOFT AI</h3>
+                  <h3 className="wow fadeInDown">
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction7" />
+                  </h3>
                   <p className="wow fadeIn">
-                    &quot;By using artificial intelligence, we wish to build a new way for people to
-                    live with. We have members from widly separated top universities around the
-                    world including University of Liverpool, University of Oxford, Nanyang
-                    Technological University etc. &quot;
+                    &quot;
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction8" />
+                    &quot;
                   </p>
                 </div>
 
                 <div className="features">
-                  <h3 className="wow fadeInDown">TOPSOFT</h3>
-                  <p className="wow fadeIn">Founded in 2015, Mainland China.</p>
+                  <h3 className="wow fadeInDown">
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction9" />
+                  </h3>
+                  <p className="wow fadeIn">
+                    <FormattedMessage id="welcomepage.thirdpage.systemintroduction10" />
+                  </p>
                 </div>
               </div>
             </div>
@@ -368,7 +403,8 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <h2 className="wow fadeInDown">
-                  VIDEO<span className="dot">.</span>
+                  <FormattedMessage id="welcomepage.video" />
+                  <span className="dot">.</span>
                 </h2>
               </div>
             </div>
@@ -389,7 +425,8 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <h2 className="headline wow fadeInDown">
-                  DEVELOPING / RESEARCH TEAMS<span className="dot">.</span>
+                  <FormattedMessage id="welcomepage.fourthpage.teamintroduction" />
+                  <span className="dot">.</span>
                 </h2>
                 <div className="custom-style">
                   <span className="ti-flickr-alt"></span>
@@ -400,10 +437,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Yuhang Song</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername1" />
+                    </h3>
                     <p>
-                      Founder of TOPSOFT, TOPSOFT Board Member
-                      <br /> Project Director of THE PROPHET. Head of AI Department
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction1" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction2" />
                     </p>
                   </div>
                 </div>
@@ -421,10 +460,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Hongyu Chen</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername2" />
+                    </h3>
                     <p>
-                      TOPSOFT Board Member
-                      <br /> Head of WEB Back Department
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction3" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction4" />
                     </p>
                   </div>
                 </div>
@@ -443,11 +484,13 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Dursun Satiroglu</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername3" />
+                    </h3>
                     <p>
-                      WEB Front Department Developer
-                      <br /> Project Documenting
-                      <br /> APP Department IOS Developer
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction5" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction6" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction7" />
                     </p>
                   </div>
                 </div>
@@ -487,10 +530,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Yilin Lu</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername6" />
+                    </h3>
                     <p>
-                      AI Department Developer
-                      <br /> WEB Front Department Developer
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction12" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction13" />
                     </p>
                   </div>
                 </div>
@@ -509,10 +554,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Yiming Li</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername7" />
+                    </h3>
                     <p>
-                      WEB Back Department Developer
-                      <br /> Project Documenting
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction14" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction15" />
                     </p>
                   </div>
                 </div>
@@ -531,10 +578,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Yang Yang</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername8" />
+                    </h3>
                     <p>
-                      TOPSOFT Chief technical advisor
-                      <br /> Project Director
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction16" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction17" />
                     </p>
                   </div>
                 </div>
@@ -553,10 +602,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Shenpu Zhou</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername9" />
+                    </h3>
                     <p>
-                      TOPSOFT Board Member
-                      <br /> WEB Back & Front Department Developer
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction18" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction19" />
                     </p>
                   </div>
                 </div>
@@ -575,10 +626,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Yang Zhang</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername10" />
+                    </h3>
                     <p>
-                      AI Department Developer
-                      <br /> WEB Front Department Developer
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction20" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction21" />
                     </p>
                   </div>
                 </div>
@@ -661,7 +714,8 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <h2 className="headline wow fadeInDown">
-                  AI MODULES<span className="dot">.</span>
+                  <FormattedMessage id="welcomepage.fifthpage.aimodules" />
+                  <span className="dot">.</span>
                 </h2>
                 <div className="custom-style">
                   <span className="ti-palette"></span>
@@ -736,7 +790,8 @@ class Welcome extends Component {
             <div className="row text-center">
               <div className="col-md-12">
                 <h2 className="headline wow fadeInDown">
-                  SEARCH MODULES<span className="dot">.</span>
+                  <FormattedMessage id="welcomepage.fifthpage.searchmodules" />
+                  <span className="dot">.</span>
                 </h2>
                 <div className="custom-style">
                   <span className="ti-search"></span>
@@ -799,8 +854,7 @@ class Welcome extends Component {
               <div className="col-md-12">
                 <p>@TOPSOFT AI | 2021 All Rights Reserved.</p>
                 <p>
-                  We believe our diversity is our strength. With people from every background,
-                  gender, creed and religion
+                  <FormattedMessage id="welcomepage.fifthpage.bottom" />
                 </p>
               </div>
             </div>
