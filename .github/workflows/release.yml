@@ -24,7 +24,7 @@ jobs:
         yarn
         npm run build
 
-    - name: 🎉 GitHub Pages MAIN
+    - name: 🎉 GitHub Pages RELEASE
       uses: crazy-max/ghaction-github-pages@v2.2.0
       with:
         repo: TOPSOFT-AI-PROPHET/TOPSOFT-AI-PROPHET
