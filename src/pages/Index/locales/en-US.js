@@ -67,5 +67,10 @@ export default {
   'welcomepage.fifthpage.searchmodules': 'SEARCH MODULES',
   'welcomepage.fifthpage.bottom':
     'We believe our diversity is our strength. With people from every background, gender, creed and religion',
-  'welcomepage.button.changelang': '中文界面',
+  'welcomepage.fourthpage.membername11': 'Yaodan Zi',
+  'welcomepage.fourthpage.memberintroduction22': 'WEB Front Department Developer',
+  'welcomepage.fourthpage.membername12': 'Xinyi Liu',
+  'welcomepage.fourthpage.memberintroduction23': 'WEB Back Department Developer',
+  'welcomepage.fourthpage.membername13': 'Huaxuan Xie',
+  'welcomepage.fourthpage.memberintroduction24': 'Head of product department',
 };

@@ -202,7 +202,9 @@ class Welcome extends Component {
                 </button>
                 {/* Brand */}
                 <a className="navbar-brand page-scroll logo" href="#page-top">
-                  <img src="assets\img\logo_g_pph.png" style={{ height: '16px', width: '16px' }} />
+                  <img src="assets\img\logo_g_pph.png" style={{ height: '20px', width: '20px' }} />
+                </a>
+                <a className="navbar-brand page-scroll logo" href="#page-top">
                   THE PROPHET<span className="dot">.</span>
                 </a>
                 {/* End Brand */}
@@ -647,8 +649,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Yaodan Zi</h3>
-                    <p>WEB Front Department Developer</p>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername11" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction22" />
+                    </p>
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -666,8 +672,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Xinyi Liu</h3>
-                    <p>WEB Back Department Developer</p>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername12" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction23" />
+                    </p>
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -685,8 +695,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Huaxuan Xie</h3>
-                    <p>head of product department</p>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername13" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction24" />
+                    </p>
                   </div>
                 </div>
                 <div className="col-md-6">
