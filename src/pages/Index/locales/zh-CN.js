@@ -65,5 +65,10 @@ export default {
   'welcomepage.fifthpage.aimodules': 'AI模型',
   'welcomepage.fifthpage.searchmodules': '搜索模型',
   'welcomepage.fifthpage.bottom': '我们坚信团队的多元化就是我们的力量',
-  'welcomepage.button.changelang': 'English Version',
+  'welcomepage.fourthpage.membername11': '资尧丹',
+  'welcomepage.fourthpage.memberintroduction22': '先知系统前端部门工程师',
+  'welcomepage.fourthpage.membername12': '刘欣怡',
+  'welcomepage.fourthpage.memberintroduction23': '先知系统后端部门工程师',
+  'welcomepage.fourthpage.membername13': '谢桦渲',
+  'welcomepage.fourthpage.memberintroduction24': '先知系统产品部门负责人',
 };
