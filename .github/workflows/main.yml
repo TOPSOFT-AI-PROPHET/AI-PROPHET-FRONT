@@ -1,4 +1,4 @@
-name: AUTODEPLOY
+name: AUTODEPLOY INSIDER
 
 on:
   push:
