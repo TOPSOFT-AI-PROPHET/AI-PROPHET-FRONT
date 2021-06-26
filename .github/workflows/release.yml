@@ -1,0 +1,35 @@
+name: AUTODEPLOY
+
+on:
+  push:
+    tags:
+      - *
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-20.04
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2.3.2
+
+    - name: Use Node.js 14
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '14'
+      
+    - name: 🔨 Build Project
+      run: |
+        npm install
+        yarn
+        npm run build
+
+    - name: 🎉 GitHub Pages MAIN
+      uses: crazy-max/ghaction-github-pages@v2.2.0
+      with:
+        repo: TOPSOFT-AI-PROPHET/TOPSOFT-AI-PROPHET
+        build_dir: dist/
+        committer: Silent YANG <568875138@qq.com>
+        author: Silent YANG <568875138@qq.com>
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
