@@ -1,9 +1,9 @@
-name: AUTODEPLOY
+name: AUTODEPLOY RELEASE
 
 on:
   push:
     tags:
-      - *
+      - v*
 
 jobs:
   web-deploy:
