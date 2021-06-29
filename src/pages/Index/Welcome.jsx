@@ -507,10 +507,12 @@ class Welcome extends Component {
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
-                    <h3>Qingling Kang</h3>
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername5" />
+                    </h3>
                     <p>
-                      TOPSOFT Board Member
-                      <br /> Head of Marketing Department
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction10" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction11" />
                     </p>
                   </div>
                 </div>
