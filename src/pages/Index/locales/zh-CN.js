@@ -6,6 +6,7 @@ export default {
   'welcomepage.button.features': '功能',
   'welcomepage.button.team': '开发团队',
   'welcomepage.button.login': '登陆',
+  'welcomepage.button.infocenter': '研究及公众信息中心',
   'welcomepage.secondpage.introduction1': '先知系统',
   'welcomepage.secondpage.introduction2': '在线AI训练及预测',
   'welcomepage.secondpage.introduction3': '无任何操作或技术门槛',
