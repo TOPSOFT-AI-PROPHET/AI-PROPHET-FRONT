@@ -201,42 +201,35 @@ class Welcome extends Component {
                   <span className="icon-bar"></span>
                 </button>
                 {/* Brand */}
+                <a className="navbar-brand page-scroll logo" href="#page-top">
+                  <img src="assets\img\logo_g_pph.png" style={{ height: '20px', width: '20px' }} />
+                </a>
+                <a className="navbar-brand page-scroll logo" href="#page-top">
+                  THE PROPHET<span className="dot">.</span>
+                </a>
               </div>
-
-              <ul className="nav navbar-nav navbar-left">
-                <li>
-                  <a className="page-scroll" href="#page-top">
-                    <FormattedMessage id="welcomepage.button.home" />
-                  </a>
-                </li>
-                <li>
-                  <a className="page-scroll" href="#features">
-                    <FormattedMessage id="welcomepage.button.features" />
-                  </a>
-                </li>
-                <li>
-                  <a className="page-scroll" href="#extra">
-                    <FormattedMessage id="welcomepage.button.team" />
-                  </a>
-                </li>
-                <li>
-                  <a className="page-scroll" href="#screenshots">
-                    <FormattedMessage id="welcomepage.button.infocenter" />
-                  </a>
-                </li>
-              </ul>
-
               <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
-                  <a className="navbar-brand page-scroll logo" href="#page-top">
-                    <img
-                      src="assets\img\logo_g_pph.png"
-                      style={{ height: '20px', width: '20px' }}
-                    />
-                  </a>
-                  <a className="navbar-brand page-scroll logo" href="#page-top">
-                    TOPSOFT AI<span className="dot">.</span>
-                  </a>
+                  <li>
+                    <a className="page-scroll" href="#page-top">
+                      <FormattedMessage id="welcomepage.button.home" />
+                    </a>
+                  </li>
+                  <li>
+                    <a className="page-scroll" href="#features">
+                      <FormattedMessage id="welcomepage.button.features" />
+                    </a>
+                  </li>
+                  <li>
+                    <a className="page-scroll" href="#extra">
+                      <FormattedMessage id="welcomepage.button.team" />
+                    </a>
+                  </li>
+                  <li>
+                    <a className="page-scroll" href="#screenshots">
+                      <FormattedMessage id="welcomepage.button.infocenter" />
+                    </a>
+                  </li>
                   <li>
                     <a className="page-scroll" onClick={this.goLogin}>
                       <FormattedMessage id="welcomepage.button.login" />
