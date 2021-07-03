@@ -7,6 +7,7 @@ export default {
   'welcomepage.button.team': 'Team',
   'welcomepage.button.login': 'Login',
   'welcomepage.button.infocenter': 'Research and Information Center',
+  'welcomepage.button.mainweb': '@TOPSOFT AI | 2021 All Rights Reserved.',
   'welcomepage.secondpage.introduction1': 'We Offering',
   'welcomepage.secondpage.introduction2': 'AI-online Prediction',
   'welcomepage.secondpage.introduction3': 'For Everyone.',

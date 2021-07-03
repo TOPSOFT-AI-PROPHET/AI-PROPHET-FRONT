@@ -201,42 +201,39 @@ class Welcome extends Component {
                   <span className="icon-bar"></span>
                 </button>
                 {/* Brand */}
+                <a className="navbar-brand page-scroll logo" href="#page-top">
+                  <img src="assets\img\logo_g_pph.png" style={{ height: '20px', width: '20px' }} />
+                </a>
+                <a className="navbar-brand page-scroll logo" href="#page-top">
+                  THE PROPHET<span className="dot">.</span>
+                </a>
               </div>
-
-              <ul className="nav navbar-nav navbar-left">
-                <li>
-                  <a className="page-scroll" href="#page-top">
-                    <FormattedMessage id="welcomepage.button.home" />
-                  </a>
-                </li>
-                <li>
-                  <a className="page-scroll" href="#features">
-                    <FormattedMessage id="welcomepage.button.features" />
-                  </a>
-                </li>
-                <li>
-                  <a className="page-scroll" href="#extra">
-                    <FormattedMessage id="welcomepage.button.team" />
-                  </a>
-                </li>
-                <li>
-                  <a className="page-scroll" href="#screenshots">
-                    <FormattedMessage id="welcomepage.button.infocenter" />
-                  </a>
-                </li>
-              </ul>
 
               <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
-                  <a className="navbar-brand page-scroll logo" href="#page-top">
-                    <img
-                      src="assets\img\logo_g_pph.png"
-                      style={{ height: '20px', width: '20px' }}
-                    />
-                  </a>
-                  <a className="navbar-brand page-scroll logo" href="#page-top">
-                    TOPSOFT AI<span className="dot">.</span>
-                  </a>
+                  <li>
+                    <a className="page-scroll" href="#page-top">
+                      <FormattedMessage id="welcomepage.button.home" />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a className="page-scroll" href="#features">
+                      <FormattedMessage id="welcomepage.button.features" />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a className="page-scroll" href="#extra">
+                      <FormattedMessage id="welcomepage.button.team" />
+                    </a>
+                  </li>
+
+                  <li>
+                    <a className="page-scroll" href="http://1.15.48.81:8889/">
+                      <FormattedMessage id="welcomepage.button.infocenter" />
+                    </a>
+                  </li>
                   <li>
                     <a className="page-scroll" onClick={this.goLogin}>
                       <FormattedMessage id="welcomepage.button.login" />
@@ -875,7 +872,12 @@ class Welcome extends Component {
           <div className="container">
             <div className="row text-center">
               <div className="col-md-12">
-                <p>@TOPSOFT AI | 2021 All Rights Reserved.</p>
+                <a
+                  href="https://topsoft-ai-prophet.github.io/TOPSOFTAI-MAIN/"
+                  style={{ color: '#000000' }}
+                >
+                  <FormattedMessage id="welcomepage.button.mainweb" />
+                </a>
                 <p>
                   <FormattedMessage id="welcomepage.fifthpage.bottom" />
                 </p>
