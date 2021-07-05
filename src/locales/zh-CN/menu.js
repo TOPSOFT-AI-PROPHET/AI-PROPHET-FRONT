@@ -15,6 +15,7 @@ export default {
   'menu.prediction.predictions': '预测任务',
   'menu.prediction.aimodels': '模型市场',
   'menu.prediction.newprediction': '开始预测',
+  'menu.prediction.modelinfo': '模型信息',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',
@@ -54,4 +55,7 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  'menu.model': '我的模型',
+  'menu.model.model': '模型管理',
+  'menu.model.creator': '创建新模型',
 };

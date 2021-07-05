@@ -15,6 +15,7 @@ export default {
   'menu.prediction.predictions': 'All Predicitons',
   'menu.prediction.aimodels': 'Model Store',
   'menu.prediction.newprediction': 'New Prediciton',
+  'menu.prediction.modelinfo': 'Model Details',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',
@@ -54,4 +55,7 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+  'menu.model': 'My Models',
+  'menu.model.model': 'Models',
+  'menu.model.creator': 'Create Model',
 };

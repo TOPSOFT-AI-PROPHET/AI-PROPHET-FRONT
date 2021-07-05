@@ -99,7 +99,7 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/dash/dashboard/workplace',
                   component: './dashboard/workplace',
-                }
+                },
               ],
             },
             {
@@ -111,6 +111,11 @@ export default defineConfig({
                   name: 'aimodels',
                   path: '/dash/prediction/aimodels',
                   component: './dashboard/aimodels',
+                },
+                {
+                  name: 'modelinfo',
+                  path: '/dash/prediction/modelinfo/:id',
+                  component: './dashboard/selectedModelPage',
                 },
                 {
                   name: 'predictions',
@@ -129,6 +134,29 @@ export default defineConfig({
                   hideInMenu: true,
                   path: '/dash/prediction/details/:id',
                   component: './dashboard/predictiondetails',
+                },
+              ],
+            },
+            {
+              path: '/dash/model',
+              name: 'model',
+              icon: 'dashboard',
+              routes: [
+                {
+                  name: 'model',
+                  path: '/dash/model/model',
+                  component: './dashboard/modellist',
+                },
+                {
+                  name: 'creator',
+                  path: '/dash/model/creator',
+                  component: './dashboard/modelCreator',
+                },
+                {
+                  name: 'editor',
+                  hideInMenu: true,
+                  path: '/dash/model/editor/:id',
+                  component: './dashboard/editor',
                 },
               ],
             },
