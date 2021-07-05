@@ -114,6 +114,7 @@ export default defineConfig({
                 },
                 {
                   name: 'modelinfo',
+                  hideInMenu: true,
                   path: '/dash/prediction/modelinfo/:id',
                   component: './dashboard/selectedModelPage',
                 },
