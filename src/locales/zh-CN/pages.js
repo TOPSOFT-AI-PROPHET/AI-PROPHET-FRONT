@@ -87,4 +87,9 @@ export default {
   'basic.list.no': '取消',
   'basic.cdk.success': '充值成功',
   'basic.cdk.failed': '无效兑换码',
+  'basic.modellist.balance': '我的余额',
+  'basic.modellist.modelused': '模型被使用了',
+  'basic.modellist.pageviewed': '主页被浏览了',
+  'basic.modellist.buildmodel': '开始制作模型',
+  'basic.modellist.mymodel': '我的模型',
 };
