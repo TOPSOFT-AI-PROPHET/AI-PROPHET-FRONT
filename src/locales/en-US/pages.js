@@ -143,11 +143,12 @@ export default {
   'pages.dashboard.modelCreator.card3-content-treeSelect1': 'Traditional machine learning',
   'pages.dashboard.modelCreator.card3-content-treeSelect1-1': 'Decision tree',
   'pages.dashboard.modelCreator.card3-content-treeSelect1-2': 'Random forest',
-  'pages.dashboard.modelCreator.card3-content-para1': '你选择了使用',
-  'pages.dashboard.modelCreator.card3-content-para2': '，请查阅',
-  'pages.dashboard.modelCreator.card3-content-para3': '《先知系统',
-  'pages.dashboard.modelCreator.card3-content-para4': '数据上传规范》',
-  'pages.dashboard.modelCreator.card3-content-para5': '后在下方上传您的数据集。',
+  'pages.dashboard.modelCreator.card3-content-para1': 'You have chosen ',
+  'pages.dashboard.modelCreator.card3-content-para2': ' ,please check',
+  'pages.dashboard.modelCreator.card3-content-para3': ' "',
+  'pages.dashboard.modelCreator.card3-content-para4':
+    ' Data Upload Specification of Prophet System" ',
+  'pages.dashboard.modelCreator.card3-content-para5': ' ,before you upload datasets',
   'pages.dashboard.modelCreator.card3-content-para6':
     "You haven't chosen the learning algorithm yet!",
   'pages.dashboard.modelCreator.card4-content-button': 'Upload dataset',
