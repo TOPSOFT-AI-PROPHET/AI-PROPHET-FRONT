@@ -13,6 +13,7 @@ export default {
       detail: 'No active account found with the given credentials',
     });
   },
+
   'POST /users/refresh': async (req, res) => {
     const { refresh } = req.body;
     if (refresh === 'valid_token') {
@@ -27,6 +28,7 @@ export default {
       code: 'token_not_valid',
     });
   },
+
   'POST /users/getUserInfo': async (req, res) => {
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
@@ -60,7 +62,7 @@ export default {
   'POST /tasks/getAIM': async (req, res) => {
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        code: 200,
+        code: '200',
         message: 'get success',
         data: {
           total_param: 23,
@@ -354,6 +356,7 @@ export default {
       ],
     });
   },
+
   'POST /users/register': async (req, res) => {
     if (req.body.username !== 'admin') {
       res.send({
@@ -425,6 +428,404 @@ export default {
       return;
     }
 
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  //以下是新增的接口 07.05
+  'POST /tasks/count': async (req, res) => {
+    //统计任务数量
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 200,
+        message: {
+          num_of_task: 'numoftasknumoftasknumoftasknumoftask',
+          num_of_finished_tasks: 'numoffinishedtasksnumoffinishedtasksnumoffinishedtasks',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/details': async (req, res) => {
+    //返回某任务的详细信息
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        details: {
+          task_description: 'aimodelsdetailsaimodelsdetailsaimodelsdetails',
+          ai_json: '{\r\n   "test":""\r\n}',
+          ai_url: 'aiurlaiurlaiurlaiurl',
+          ai_result: 'airesultairesultairesultairesult',
+          status: 1,
+          time_start: '2021-07-05T17:48:21Z',
+          cost: 1,
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/new': async (req, res) => {
+    //添加新任务
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: '200',
+        message: 'bingo',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/del': async (req, res) => {
+    //删除任务列表
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: '200',
+        message: 'success',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/del': async (req, res) => {
+    //新增AI模型
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: '200',
+        message: 'success',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/modelAuthor': async (req, res) => {
+    //返回AI模型作者以及是否公开
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: '200',
+        message: 'get success',
+        author: 'authorauthorauthor',
+        publish: true,
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/updateAIAauthor': async (req, res) => {
+    //修改AI模型作者以及是否公开
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: '200',
+        message: 'AImodel updated',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/updatemodelImage': async (req, res) => {
+    //修改模型头像
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          message: 'Bingo',
+          Etag: 'ETag',
+          uuid: 'uuiduuiduuiduuiduuid',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /users/updateUserProfile': async (req, res) => {
+    //更新用户信息
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          message: 'UserinfoUpdated',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /users/updateUserProfile': async (req, res) => {
+    //获取用户信息
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        messages: 'Bingo',
+        data: {
+          username: 'usernameusernameusername',
+          email: 'emailemailemailemailemail',
+          nickname: 'nicknamenicknamenicknamenickname',
+          credit: 1,
+          contact_number: 1,
+          profile_image_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /users/changePasswd': async (req, res) => {
+    //修改密码
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          message: 'User password is changed',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /users/uploadProfile': async (req, res) => {
+    //上传头像
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          message: 'Profile image is changed',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /files/updateUserProfileImage': async (req, res) => {
+    //修改用户头像
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          Etag: 'Etag',
+          message: 'uuiduuiduuid',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /files/updateUserProfileImage': async (req, res) => {
+    //上传预测文件
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          message: 'Bingo',
+          Etag: 'Etag',
+          message: 'uuiduuiduuid',
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /pay/charge': async (req, res) => {
+    //充值
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'Success!',
+        operation: '+amount',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /pay/deduct': async (req, res) => {
+    //扣费
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'Success!',
+        operation: '-amount',
+      });
+      return;
+    }
     res.status(401).send({
       detail: 'Given token not valid for any token type',
       code: 'token_not_valid',
