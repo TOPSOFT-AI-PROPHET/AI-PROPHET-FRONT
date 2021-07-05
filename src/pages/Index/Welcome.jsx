@@ -463,6 +463,100 @@ class Welcome extends Component {
                   />
                 </div>
               </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername5" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction10" />
+                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction11" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/kql.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername13" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction24" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/xhx.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername15" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction26" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/cmy.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername17" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction28" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/tn.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
               <div className="item">
                 <div className="col-md-4">
                   <div className="features">
@@ -503,29 +597,6 @@ class Welcome extends Component {
                 <div className="col-md-6">
                   <img
                     src="assets/img/ds.jpg"
-                    alt="phone"
-                    className="img-responsive center-block wow fadeIn"
-                    data-wow-duration="2s"
-                    data-wow-delay=".2s"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div className="item">
-                <div className="col-md-4">
-                  <div className="features">
-                    <h3>
-                      <FormattedMessage id="welcomepage.fourthpage.membername5" />
-                    </h3>
-                    <p>
-                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction10" />
-                      <br /> <FormattedMessage id="welcomepage.fourthpage.memberintroduction11" />
-                    </p>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <img
-                    src="assets/img/kql.jpg"
                     alt="phone"
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"
@@ -705,16 +776,39 @@ class Welcome extends Component {
                 <div className="col-md-4">
                   <div className="features">
                     <h3>
-                      <FormattedMessage id="welcomepage.fourthpage.membername13" />
+                      <FormattedMessage id="welcomepage.fourthpage.membername14" />
                     </h3>
                     <p>
-                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction24" />
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction25" />
                     </p>
                   </div>
                 </div>
                 <div className="col-md-6">
                   <img
-                    src="assets/img/xhx.jpg"
+                    src="assets/img/xbw.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername16" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction27" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/matt.jpg"
                     alt="phone"
                     className="img-responsive center-block wow fadeIn"
                     data-wow-duration="2s"

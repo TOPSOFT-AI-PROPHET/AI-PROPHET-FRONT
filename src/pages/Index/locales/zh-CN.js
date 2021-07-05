@@ -73,4 +73,12 @@ export default {
   'welcomepage.fourthpage.memberintroduction23': '先知系统后端部门工程师',
   'welcomepage.fourthpage.membername13': '谢桦渲',
   'welcomepage.fourthpage.memberintroduction24': '先知系统产品部门负责人',
+  'welcomepage.fourthpage.membername14': '许博文',
+  'welcomepage.fourthpage.memberintroduction25': '先知系统后端部门工程师',
+  'welcomepage.fourthpage.membername15': '陈明英',
+  'welcomepage.fourthpage.memberintroduction26': '先知系统产品部门',
+  'welcomepage.fourthpage.membername16': 'Matt Pryer',
+  'welcomepage.fourthpage.memberintroduction27': '先知系统后端部门工程师',
+  'welcomepage.fourthpage.membername17': '陶宁',
+  'welcomepage.fourthpage.memberintroduction28': '先知系统产品部门',
 };

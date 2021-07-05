@@ -75,4 +75,12 @@ export default {
   'welcomepage.fourthpage.memberintroduction23': 'WEB Back Department Developer',
   'welcomepage.fourthpage.membername13': 'Huaxuan Xie',
   'welcomepage.fourthpage.memberintroduction24': 'Head of product department',
+  'welcomepage.fourthpage.membername14': 'Bowen Xu',
+  'welcomepage.fourthpage.memberintroduction25': 'WEB Back Department Developer',
+  'welcomepage.fourthpage.membername15': 'Mingying Chen',
+  'welcomepage.fourthpage.memberintroduction26': 'Product department',
+  'welcomepage.fourthpage.membername16': 'Matt Pryer',
+  'welcomepage.fourthpage.memberintroduction27': 'WEB Back Department Developer',
+  'welcomepage.fourthpage.membername17': 'Ning Tao',
+  'welcomepage.fourthpage.memberintroduction28': 'Product department',
 };
