@@ -93,4 +93,9 @@ export default {
   'basic.list.no': 'No',
   'basic.cdk.success': 'Success',
   'basic.cdk.failed': 'Invalid CDKEY',
+  'basic.modellist.balance': 'My balance',
+  'basic.modellist.modelused': 'Model has been used',
+  'basic.modellist.pageviewed': 'Page has been viewed',
+  'basic.modellist.buildmodel': 'Start build Models',
+  'basic.modellist.mymodel': 'My models',
 };
