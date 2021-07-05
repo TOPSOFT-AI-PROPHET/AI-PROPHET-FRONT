@@ -240,8 +240,8 @@ export default {
   'POST /tasks/list': async (req, res) => {
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        code: 200,
-        message: 'Bingo',
+        status: 1,
+        message: 'success',
         data: {
           totalCount: 6,
           numPerPage: 5,
@@ -442,7 +442,7 @@ export default {
   },
 
   //以下是新增的接口 07.05
-  'POST /tasks/count': async (req, res) => {
+  'POST /tasks/numTask': async (req, res) => {
     //统计任务数量
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
@@ -479,6 +479,7 @@ export default {
           status: 1,
           time_start: '2021-07-05T17:48:21Z',
           cost: 1,
+          ai_params: [{ para_name: 'paranameparaname', para_value: 'paravalue' }],
         },
       });
       return;
@@ -500,7 +501,7 @@ export default {
     //添加新任务
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        status: '200',
+        code: '200',
         message: 'bingo',
       });
       return;
@@ -522,7 +523,7 @@ export default {
     //删除任务列表
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        status: '200',
+        code: '200',
         message: 'success',
       });
       return;
@@ -540,12 +541,57 @@ export default {
     });
   },
 
-  'POST /tasks/del': async (req, res) => {
+  'POST /tasks/addAIM': async (req, res) => {
     //新增AI模型
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        status: '200',
+        code: '200',
         message: 'success',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/incAIMusage': async (req, res) => {
+    //增加AI模型访问次数
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: '200',
+        message: 'OK',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/getAIMusage': async (req, res) => {
+    //获取AI模型访问次数
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: '200',
+        message: 'get success',
+        data: 1,
       });
       return;
     }
@@ -586,12 +632,12 @@ export default {
     });
   },
 
-  'POST /tasks/updateAIAauthor': async (req, res) => {
-    //修改AI模型作者以及是否公开
+  'POST /tasks/updatePublished': async (req, res) => {
+    //修改AI模型是否公开
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
         status: '200',
-        message: 'AImodel updated',
+        message: 'The ai model publish data updated',
       });
       return;
     }
@@ -660,7 +706,7 @@ export default {
     });
   },
 
-  'POST /users/updateUserProfile': async (req, res) => {
+  'POST /users/getUserInfo': async (req, res) => {
     //获取用户信息
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
@@ -766,7 +812,7 @@ export default {
     });
   },
 
-  'POST /files/updateUserProfileImage': async (req, res) => {
+  'POST /files/uploadFile_cos': async (req, res) => {
     //上传预测文件
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
