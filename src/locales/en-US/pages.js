@@ -93,6 +93,68 @@ export default {
   'basic.list.no': 'No',
   'basic.cdk.success': 'Success',
   'basic.cdk.failed': 'Invalid CDKEY',
+  'pages.dashboard.selectedModelPage.labels1': 'Publisher',
+  'pages.dashboard.selectedModelPage.labels2': 'Release time',
+  'pages.dashboard.selectedModelPage.labels3': 'Model type',
+  'pages.dashboard.selectedModelPage.labels4': 'Model algorithm',
+  'pages.dashboard.selectedModelPage.labels5': 'Number of training data sets',
+  'pages.dashboard.selectedModelPage.labels6': 'Output Unit',
+  'pages.dashboard.selectedModelPage.stats1': 'Frequence of use',
+  'pages.dashboard.selectedModelPage.stats2': 'Unit price',
+  'pages.dashboard.selectedModelPage.Menu1': 'Details',
+  'pages.dashboard.selectedModelPage.card1-title': 'Model info',
+  'pages.dashboard.selectedModelPage.card2-title': 'Details of publisher',
+  'pages.dashboard.selectedModelPage.card2-para1': 'This model has been used for',
+  'pages.dashboard.selectedModelPage.card2-para2': 'This page has been visited about',
+  'pages.dashboard.selectedModelPage.card2-paraUnit': 'time',
+  'pages.dashboard.selectedModelPage.card3.button1': 'Online predict',
+  'pages.dashboard.selectedModelPage.card3.button2': 'API predict',
+  'pages.dashboard.selectedModelPage.card3.input-placeholder':
+    'Please add notes to this task here!',
+  'pages.dashboard.modelCreator.headerContent-textpara1':
+    'Before you start making the model, Please read',
+  'pages.dashboard.modelCreator.headerContent-textpara2':
+    ' "Prophet system model making manual and related protocols" ',
+  'pages.dashboard.modelCreator.headerContent-textpara3':
+    'carefully. You must upload relevant data according to requirements',
+  'pages.dashboard.modelCreator.card1-title': 'Editing model',
+  'pages.dashboard.modelCreator.card2-title': 'Model configuration',
+  'pages.dashboard.modelCreator.card4-title': 'Upload dataset',
+  'pages.dashboard.modelCreator.card1-content-input1': 'Model name',
+  'pages.dashboard.modelCreator.card1-content-input2': 'Price for one',
+  'pages.dashboard.modelCreator.card1-content-input3': 'Introduction',
+  'pages.dashboard.modelCreator.card1-content-input4':
+    'The model will arrive on the store automatically after the completion of making model',
+  'pages.dashboard.modelCreator.card2-content-input1': 'Number of characteristic parameters',
+  'pages.dashboard.modelCreator.card2-content-input2': 'Output unit',
+  'pages.dashboard.modelCreator.card2-content-input3': 'Algorithm',
+  'pages.dashboard.modelCreator.card1-content-input1-placeHolder': 'Please input model name!',
+  'pages.dashboard.modelCreator.card1-content-input2-placeHolder': 'Please input price for one!',
+  'pages.dashboard.modelCreator.card1-content-input3-placeHolder':
+    'please fill in the model introduction',
+  'pages.dashboard.modelCreator.card2-content-input1-placeHolder':
+    'Please input number of characteristic parameters!',
+  'pages.dashboard.modelCreator.card2-content-input2-placeHolder': 'Please make sure the output',
+  'pages.dashboard.modelCreator.card2-content-input3-placeHolder':
+    'Please input algorithm which you want to use',
+  'pages.dashboard.modelCreator.card3-content-treeSelect-title': 'Learning algorithm',
+  'pages.dashboard.modelCreator.card3-content-treeSelect-placeholder':
+    'Please select specific algorithm',
+  'pages.dashboard.modelCreator.card3-content-treeSelect1': 'Traditional machine learning',
+  'pages.dashboard.modelCreator.card3-content-treeSelect1-1': 'Decision tree',
+  'pages.dashboard.modelCreator.card3-content-treeSelect1-2': 'Random forest',
+  'pages.dashboard.modelCreator.card3-content-para1': 'You have chosen ',
+  'pages.dashboard.modelCreator.card3-content-para2': ' ,please check',
+  'pages.dashboard.modelCreator.card3-content-para3': ' "',
+  'pages.dashboard.modelCreator.card3-content-para4':
+    ' Data Upload Specification of Prophet System" ',
+  'pages.dashboard.modelCreator.card3-content-para5': ' ,before you upload datasets',
+  'pages.dashboard.modelCreator.card3-content-para6':
+    "You haven't chosen the learning algorithm yet!",
+  'pages.dashboard.modelCreator.card4-content-button': 'Upload dataset',
+  'pages.dashboard.modelCreator.card4-content-uploadNote': 'Please upload a file less than 800MB',
+  'pages.dashboard.modelCreator.card4-content-footer':
+    'Please check the progress in Workplace-AI-All predictions.',
   'basic.modellist.balance': 'My balance',
   'basic.modellist.modelused': 'Model has been used',
   'basic.modellist.pageviewed': 'Page has been viewed',
