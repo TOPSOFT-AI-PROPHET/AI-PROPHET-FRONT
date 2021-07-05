@@ -137,4 +137,9 @@ export default {
   'pages.dashboard.modelCreator.card4-content-button': '点击上传',
   'pages.dashboard.modelCreator.card4-content-uploadNote': '请上传小于800MB的文件',
   'pages.dashboard.modelCreator.card4-content-footer': '训练进度请在 工作台-AI-我的任务 查看。',
+  'basic.modellist.balance': '我的余额',
+  'basic.modellist.modelused': '模型被使用了',
+  'basic.modellist.pageviewed': '主页被浏览了',
+  'basic.modellist.buildmodel': '开始制作模型',
+  'basic.modellist.mymodel': '我的模型',
 };

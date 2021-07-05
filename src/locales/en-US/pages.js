@@ -155,4 +155,9 @@ export default {
   'pages.dashboard.modelCreator.card4-content-uploadNote': 'Please upload a file less than 800MB',
   'pages.dashboard.modelCreator.card4-content-footer':
     'Please check the progress in Workplace-AI-All predictions.',
+  'basic.modellist.balance': 'My balance',
+  'basic.modellist.modelused': 'Model has been used',
+  'basic.modellist.pageviewed': 'Page has been viewed',
+  'basic.modellist.buildmodel': 'Start build Models',
+  'basic.modellist.mymodel': 'My models',
 };

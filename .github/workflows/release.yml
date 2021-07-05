@@ -1,9 +1,9 @@
-name: AUTODEPLOY INSIDER
+name: AUTODEPLOY RELEASE
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - v*
 
 jobs:
   web-deploy:
@@ -20,15 +20,14 @@ jobs:
       
     - name: 🔨 Build Project
       run: |
-        echo "insider.topsoftaiprophet.com" > public/CNAME
         npm install
         yarn
         npm run build
-        
-    - name: 🎉 GitHub Pages INSIDER
+
+    - name: 🎉 GitHub Pages RELEASE
       uses: crazy-max/ghaction-github-pages@v2.2.0
       with:
-        repo: TOPSOFT-AI-PROPHET/TOPSOFT-AI-PROPHET-INSIDER
+        repo: TOPSOFT-AI-PROPHET/TOPSOFT-AI-PROPHET
         build_dir: dist/
         committer: Silent YANG <568875138@qq.com>
         author: Silent YANG <568875138@qq.com>
