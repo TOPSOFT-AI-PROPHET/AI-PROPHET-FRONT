@@ -86,7 +86,7 @@ export default {
   'accountandsettings.settings.close': 'Close',
   'accountandsettings.headerContent':
     'The prophet system AI model market gathers data sets with various fields form all over the world. Relies on TSAI model ecology, you could select your favorite machine learning / neural network model here for online model prediction or access the API of the model to your own independent application.',
-  'accountandsettings.option1': 'Online Predict',
+  'accountandsettings.option1': 'Create new task',
   'accountandsettings.option2': 'API Predict',
   'accountandsettings.areaCodeCN': '+86 CN',
   'accountandsettings.areaCodeUK': '+44 UK',

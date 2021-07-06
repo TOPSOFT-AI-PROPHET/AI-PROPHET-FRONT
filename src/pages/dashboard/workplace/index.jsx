@@ -61,10 +61,9 @@ const ExtraContent = ({ currentUser, value }) => (
         title={
           <FormattedMessage
             id="pages.dashboardandworkplace.workplace.balance"
-            defaultMessage="Balance"
+            defaultMessage="Credit"
           />
         }
-        prefix="￥"
         value={currentUser.credit}
       />
     </div>
