@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
 import React from 'react';
-import { connect } from 'umi';
+import { connect, history } from 'umi';
 import numeral from 'numeral';
 import stylesApplications from './index.less';
 
@@ -98,7 +98,11 @@ const Applications = (props) => {
                 <DownloadOutlined />
               </Tooltip>,
               <Tooltip title="编辑" key="edit">
-                <EditOutlined />
+                <EditOutlined
+                  onClick={() => {
+                    history.push(`/dash/model/editor/${item.id}`);
+                  }}
+                />
               </Tooltip>,
               <Tooltip title="分享" key="share">
                 <ShareAltOutlined />

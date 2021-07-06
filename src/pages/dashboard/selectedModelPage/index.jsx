@@ -14,18 +14,35 @@ import {
   Col,
 } from 'antd';
 import styles from './index.less';
-import { FormattedMessage, formatMessage } from 'umi';
+import { FormattedMessage, formatMessage, history } from 'umi';
 import { FileTextOutlined } from '@ant-design/icons';
+import request from '@/utils/request';
 
 export default class TransitionPg extends React.Component {
-  state = {
-    current: 'mail',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      current: 'mail',
+      validateCode: 0,
+      creditModalVisible: false,
+    };
+  }
 
   handleClick = (e) => {
     console.log('click ', e);
     this.setState({ current: e.key });
   };
+
+  componentDidMount() {
+    request('/tasks/validate', {
+      method: 'POST',
+      data: { ai_id: this.props.match.params.id },
+    }).then((result) => {
+      this.setState({
+        validateCode: result.code,
+      });
+    });
+  }
 
   render() {
     const { current } = this.state;
@@ -86,7 +103,6 @@ export default class TransitionPg extends React.Component {
         <div className={styles.statItem}>
           <Statistic
             title={<FormattedMessage id="pages.dashboard.selectedModelPage.stats2" />}
-            prefix="￥"
             value={0}
           />
         </div>
@@ -160,7 +176,19 @@ export default class TransitionPg extends React.Component {
             <Col xs={24} sm={24} md={14} lg={14} xl={16}>
               <div style={{ lineHeight: '120px', textAlign: 'center', alignItems: 'center' }}>
                 <Space size={50}>
-                  <Button type="primary" shape="round">
+                  <Button
+                    type="primary"
+                    shape="round"
+                    onClick={() => {
+                      if (this.state.validateCode === 200) {
+                        history.push(
+                          `/dash/prediction/newprediction/${this.props.match.params.id}`,
+                        );
+                      } else {
+                        this.setcreditModalVisible(true);
+                      }
+                    }}
+                  >
                     {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button1' })}
                   </Button>
                   <Button type="primary" shape="round">

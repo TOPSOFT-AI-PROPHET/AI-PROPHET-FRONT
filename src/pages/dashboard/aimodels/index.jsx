@@ -95,7 +95,7 @@ class CardList extends Component {
                             data: { ai_id: item.pk },
                           }).then((result) => {
                             if (result.code === 200) {
-                              history.push(`/dash/prediction/newprediction/${item.pk}`);
+                              history.push(`/dash/prediction/modelinfo/${item.pk}`);
                             } else {
                               this.setcreditModalVisible(true);
                             }
@@ -103,9 +103,6 @@ class CardList extends Component {
                         }}
                       >
                         <FormattedMessage id="accountandsettings.option1" />
-                      </a>,
-                      <a key="option2">
-                        <FormattedMessage id="accountandsettings.option2" />
                       </a>,
                     ]}
                   >
@@ -125,7 +122,7 @@ class CardList extends Component {
                                 data: { ai_id: item.pk },
                               }).then((result) => {
                                 if (result.code === 200) {
-                                  history.push(`/dash/prediction/newprediction/${item.pk}`);
+                                  history.push(`/dash/prediction/modelinfo/${item.pk}`);
                                 } else {
                                   this.setcreditModalVisible(true);
                                 }

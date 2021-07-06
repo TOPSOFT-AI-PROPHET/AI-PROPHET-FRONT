@@ -96,7 +96,7 @@ export default class ModelCreator extends React.Component {
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-2',
             }),
             value: 'b',
-            link: 'https://www.huawei.com',
+            link: 'http://example.com/',
           },
         ],
       },
@@ -254,6 +254,13 @@ export default class ModelCreator extends React.Component {
                 </Card>
               );
             })}
+            <div className={styles.bottomDiv}>
+              <Form.Item>
+                <Button type="primary" style={{ float: 'right' }}>
+                  提交
+                </Button>
+              </Form.Item>
+            </div>
           </Form>
         </div>
       </PageContainer>

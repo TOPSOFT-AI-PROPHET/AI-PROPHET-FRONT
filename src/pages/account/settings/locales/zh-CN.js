@@ -81,7 +81,7 @@ export default {
   'accountandsettings.settings.close': '关',
   'accountandsettings.headerContent':
     '先知系统模型市场汇聚来自全球各领域的数据集，依赖于TSAI模型生态，您可在此挑选心仪的机器学习/神经网络模型进行在线模型预测或者获取该模型API接口接入到您的独立应用程序。',
-  'accountandsettings.option1': '在线预测',
+  'accountandsettings.option1': '创建新任务',
   'accountandsettings.option2': 'API预测',
   'accountandsettings.areaCodeCN': '+86 中国',
   'accountandsettings.areaCodeUK': '+44 英国',
