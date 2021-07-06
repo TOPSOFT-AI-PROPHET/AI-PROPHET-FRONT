@@ -142,4 +142,5 @@ export default {
   'basic.modellist.pageviewed': '主页被浏览了',
   'basic.modellist.buildmodel': '开始制作模型',
   'basic.modellist.mymodel': '我的模型',
+  'basic.modellist.change-model-img': '修改模型头像',
 };

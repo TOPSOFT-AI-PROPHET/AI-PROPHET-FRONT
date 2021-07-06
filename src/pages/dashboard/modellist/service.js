@@ -1,7 +1,7 @@
 import request from 'umi-request';
 
 export async function queryCurrent() {
-  return request('/users/getUserInfo', { method: 'POST' });
+  return request('/api/currentUser');
 }
 export async function queryFakeList(params) {
   return request('/api/fake_list', {

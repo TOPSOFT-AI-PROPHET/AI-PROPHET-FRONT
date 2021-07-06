@@ -160,4 +160,5 @@ export default {
   'basic.modellist.pageviewed': 'Page has been viewed',
   'basic.modellist.buildmodel': 'Start build Models',
   'basic.modellist.mymodel': 'My models',
+  'basic.modellist.change-model-img': "Change model's image",
 };
