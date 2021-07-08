@@ -158,7 +158,7 @@ export const BasicList = (props) => {
               <Col sm={8} xs={24}>
                 <Info
                   title={formatMessage({ id: 'basic.list.balance' })}
-                  value={`¥${balance}`}
+                  value={`${balance}`}
                   bordered
                 />
               </Col>

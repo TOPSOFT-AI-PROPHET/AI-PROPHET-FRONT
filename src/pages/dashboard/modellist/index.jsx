@@ -17,12 +17,12 @@ const state = {
 const PageLeftContent = () => {
   const [inickname, setInickname] = useState([]);
   const [iurl, setIurl] = useState([]);
-  const [ibalance, setIbalance] = useState([1]);
+  const [icredit, setIcredit] = useState([1]);
   useEffect(() => {
     request('/users/getUserInfo', { method: 'POST' }).then((result) => {
       setInickname(result.data.nickname);
-      setIurl(result.data.profile_url);
-      setIbalance(result.data.balance);
+      setIurl(result.data.profile_image_url);
+      setIcredit(result.data.credit);
     });
   }, [1]);
 
@@ -35,7 +35,7 @@ const PageLeftContent = () => {
         <div className={style.tittle}>{inickname}</div>
         <div className={style.tittle2}>
           <FormattedMessage id="basic.modellist.balance" />
-          {`:  ¥${ibalance}`}
+          {`:  ${icredit}`}
         </div>
         <div className={style.tittle2}>
           <FormattedMessage id="basic.modellist.modelused" />: 100次
