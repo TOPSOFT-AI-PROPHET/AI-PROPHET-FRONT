@@ -9,19 +9,21 @@ import Applications from './components/Applications';
 import styles from './Center.less';
 import style from './style.less';
 import request from '@/utils/request';
+import COS from 'cos-js-sdk-v5';
 
 const state = {
   size: 'large',
 };
 
-const PageLeftContent = () => {
+const PageLeftContent = ({ url }) => {
   const [inickname, setInickname] = useState([]);
-  const [iurl, setIurl] = useState([]);
+  // const [iurl, setIurl] = useState([]);
   const [icredit, setIcredit] = useState([1]);
+
   useEffect(() => {
     request('/users/getUserInfo', { method: 'POST' }).then((result) => {
       setInickname(result.data.nickname);
-      setIurl(result.data.profile_image_url);
+      // setIurl(result.data.profile_image_url);
       setIcredit(result.data.credit);
     });
   }, [1]);
@@ -30,7 +32,7 @@ const PageLeftContent = () => {
     <div className={style.lefttab}>
       <div>
         <div className={style.avatar}>
-          <Avatar size="large" src={iurl} />
+          <Avatar size="large" src={url} />
         </div>
         <div className={style.tittle}>{inickname}</div>
         <div className={style.tittle2}>
@@ -116,77 +118,6 @@ const operationTabList = [
   // },
 ];
 
-// const TagList = ({ tags }) => {
-//   const ref = useRef(null);
-//   const [newTags, setNewTags] = useState([]);
-//   const [inputVisible, setInputVisible] = useState(false);
-//   const [inputValue, setInputValue] = useState('');
-
-//   const showInput = () => {
-//     setInputVisible(true);
-
-//     if (ref.current) {
-//       // eslint-disable-next-line no-unused-expressions
-//       ref.current?.focus();
-//     }
-//   };
-
-//   const handleInputChange = (e) => {
-//     setInputValue(e.target.value);
-//   };
-
-//   const handleInputConfirm = () => {
-//     let tempsTags = [...newTags];
-
-//     if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
-//       tempsTags = [
-//         ...tempsTags,
-//         {
-//           key: `new-${tempsTags.length}`,
-//           label: inputValue,
-//         },
-//       ];
-//     }
-
-//     setNewTags(tempsTags);
-//     setInputVisible(false);
-//     setInputValue('');
-//   };
-
-//   return (
-//     <div className={styles.tags}>
-//       <div className={styles.tagsTitle}>标签</div>
-//       {(tags || []).concat(newTags).map((item) => (
-//         <Tag key={item.key}>{item.label}</Tag>
-//       ))}
-//       {inputVisible && (
-//         <Input
-//           ref={ref}
-//           type="text"
-//           size="small"
-//           style={{
-//             width: 78,
-//           }}
-//           value={inputValue}
-//           onChange={handleInputChange}
-//           onBlur={handleInputConfirm}
-//           onPressEnter={handleInputConfirm}
-//         />
-//       )}
-//       {!inputVisible && (
-//         <Tag
-//           onClick={showInput}
-//           style={{
-//             borderStyle: 'dashed',
-//           }}
-//         >
-//           <PlusOutlined />
-//         </Tag>
-//       )}
-//     </div>
-//   );
-// };
-
 class Center extends Component {
   // static getDerivedStateFromProps(
   //   props: accountAndcenterProps,
@@ -207,6 +138,18 @@ class Center extends Component {
     tabKey: 'articles',
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      data_task: {
+        num_of_task: '',
+        num_of_finished_tasks: '',
+      },
+      imageURL: '',
+    };
+  }
+
   input = undefined;
 
   componentDidMount() {
@@ -217,6 +160,36 @@ class Center extends Component {
     dispatch({
       type: 'accountAndcenter/fetch',
     });
+    request('/users/getUserInfo', { method: 'POST' })
+      .then((result) => {
+        this.handleAvatar(result.data.profile_image_uuid);
+      })
+      .catch((e) => console.log(e));
+  }
+
+  handleAvatar(uuid) {
+    if (uuid) {
+      const cos = new COS({
+        SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
+        SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
+      });
+      cos.getObjectUrl(
+        {
+          Bucket: 'prophetsrc-1305001068' /* 必须 */,
+          Region: 'ap-chengdu' /* 必须 */,
+          Key: `${uuid}.jpg` /* 必须 */,
+        },
+        (err, data) => {
+          this.setState({
+            imageURL: data.Url,
+          });
+        },
+      );
+    } else {
+      this.setState({
+        imageURL: 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png',
+      });
+    }
   }
 
   onTabChange = (key) => {
@@ -357,7 +330,6 @@ class Center extends Component {
   }
 }
 
-export default connect(({ loading, accountAndcenter }) => ({
-  currentUser: accountAndcenter.currentUser,
+export default connect(({ loading }) => ({
   currentUserLoading: loading.effects['accountAndcenter/fetchCurrent'],
 }))(Center);
