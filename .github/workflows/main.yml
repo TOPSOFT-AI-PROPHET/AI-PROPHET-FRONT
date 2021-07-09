@@ -21,9 +21,8 @@ jobs:
     - name: 🔨 Build Project
       run: |
         echo "insider.topsoftaiprophet.com" > public/CNAME
-        npm install
         yarn
-        npm run build
+        yarn build
         
     - name: 🎉 GitHub Pages INSIDER
       uses: crazy-max/ghaction-github-pages@v2.2.0
