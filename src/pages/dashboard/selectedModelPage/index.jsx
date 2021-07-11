@@ -25,6 +25,7 @@ export default class TransitionPg extends React.Component {
       current: 'mail',
       validateCode: 0,
       creditModalVisible: false,
+      AIusage: 0,
     };
   }
 
@@ -34,6 +35,14 @@ export default class TransitionPg extends React.Component {
   };
 
   componentDidMount() {
+    request('/tasks/getAIMusage', {
+      method: 'post',
+      data: { ai_id: this.props.match.params.id },
+    }).then((result) => {
+      this.setState({
+        AIusage: result.data,
+      });
+    });
     request('/tasks/validate', {
       method: 'POST',
       data: { ai_id: this.props.match.params.id },
@@ -138,7 +147,7 @@ export default class TransitionPg extends React.Component {
             <div className={styles.sideContent}>
               <p>
                 {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
-                <strong>{100}</strong>{' '}
+                <strong>{this.state.AIusage}</strong>{' '}
                 {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
               </p>
               <p>

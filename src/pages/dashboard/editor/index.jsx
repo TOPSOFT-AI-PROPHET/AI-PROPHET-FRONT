@@ -103,7 +103,7 @@ class Settings extends Component {
 
     switch (selectKey) {
       case 'base':
-        return <EditorView />;
+        return <EditorView {...this.props} />;
 
       default:
         break;

@@ -1,5 +1,5 @@
 import { UploadOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Button, Input, Upload, Form, Space, Radio, Select } from 'antd';
+import { Button, Input, Upload, Form, Space, Checkbox, Select, message } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 import styles from './EditorView.less';
@@ -7,14 +7,63 @@ import defaultSettings from '../../../../../config/defaultSettings';
 import ImgCrop from 'antd-img-crop';
 import 'antd/es/modal/style';
 import 'antd/es/slider/style';
+import request from '@/utils/request';
 
 export default class EditorView extends Component {
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
-      clickState: false,
+      data: {
+        modelname: '',
+        modelprice: undefined,
+        modelinfo: '',
+        modelType: '',
+        stack: undefined,
+      },
     };
   }
+
+  checkBoxOnChange = (e) => {
+    this.setState({
+      stack: !this.state.stack,
+    });
+    console.log(`checked = ${e.target.checked}`);
+    if (e) {
+      this.formRef.current.setFieldsValue({ stack: e.target.checked });
+      console.log(this.formRef.current.getFieldValue());
+    }
+  };
+
+  handleSubmit = async (id) => {
+    console.log(id);
+    const checkboxChoice = () => {
+      if (this.state.stack) {
+        return 1;
+      }
+      return 0;
+    };
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log('Success:', values);
+      request('/tasks/updateAIauthor', {
+        method: 'post',
+        data: {
+          ai_id: this.props.match.params.id,
+          publish: checkboxChoice(),
+        },
+      }).then((result) => {
+        if (result.code === 200) {
+          message.success('success');
+        } else {
+          message.warn('提交失败');
+        }
+      });
+    } catch (errorInfo) {
+      console.log('Failed:', errorInfo);
+      message.warn('提交校验失败');
+    }
+  };
 
   render() {
     const { Option } = Select;
@@ -34,6 +83,7 @@ export default class EditorView extends Component {
               })}
               rules={[
                 {
+                  required: true,
                   message: formatMessage(
                     {
                       id: 'accountandsettings.basic.modelname-message',
@@ -50,7 +100,7 @@ export default class EditorView extends Component {
                 })}
                 onChange={(e) => {
                   if (e) {
-                    this.formRef.current.setFieldsValue({ nickname: e.target.value });
+                    this.formRef.current.setFieldsValue({ modelname: e.target.value });
                   }
                 }}
               />
@@ -60,14 +110,24 @@ export default class EditorView extends Component {
               label={formatMessage({
                 id: 'accountandsettings.basic.modelprice',
               })}
+              onChange={(e) => {
+                if (e) {
+                  this.formRef.current.setFieldsValue({ modelprice: e.target.value });
+                }
+              }}
               rules={[
                 {
+                  required: true,
                   message: formatMessage(
                     {
                       id: 'accountandsettings.basic.modelprice-message',
                     },
                     {},
                   ),
+                },
+                {
+                  pattern: /^[1-9][0-9]*$/,
+                  message: 'it should be a whole number',
                 },
               ]}
             >
@@ -88,8 +148,14 @@ export default class EditorView extends Component {
               label={formatMessage({
                 id: 'accountandsettings.basic.modelinfo',
               })}
+              onChange={(e) => {
+                if (e) {
+                  this.formRef.current.setFieldsValue({ modelinfo: e.target.value });
+                }
+              }}
               rules={[
                 {
+                  required: true,
                   message: formatMessage(
                     {
                       id: 'accountandsettings.basic.modelinfo-message',
@@ -115,11 +181,17 @@ export default class EditorView extends Component {
             </Form.Item>
             <Form.Item
               name="modelType"
+              onChange={(e) => {
+                if (e) {
+                  this.formRef.current.setFieldsValue({ modeType: e.target.value });
+                }
+              }}
               label={formatMessage({
                 id: 'accountandsettings.basic.modeltype',
               })}
               rules={[
                 {
+                  required: true,
                   message: formatMessage(
                     {
                       id: 'accountandsettings.basic.modeltype-message',
@@ -129,7 +201,7 @@ export default class EditorView extends Component {
                 },
               ]}
             >
-              <Select defaultValue="jack">
+              <Select>
                 <Option value="jack">
                   {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption1' })}
                 </Option>
@@ -144,12 +216,19 @@ export default class EditorView extends Component {
                 id: 'accountandsettings.basic.stack',
               })}
             >
-              <Radio checked={this.state.clickState} />
+              <Checkbox onChange={this.checkBoxOnChange}></Checkbox>
             </Form.Item>
             <br />
             <Form.Item>
               <Space size="middle">
-                <Button style={{ width: 68 }} htmlType="submit" onClick={this.handleSubmit}>
+                <Button
+                  style={{ width: 68 }}
+                  htmlType="submit"
+                  type="primary"
+                  onClick={() => {
+                    this.handleSubmit(this.props.match.params.id);
+                  }}
+                >
                   <FormattedMessage
                     id="accountandsettings.basic.save"
                     // defaultMessage="Update Information"
