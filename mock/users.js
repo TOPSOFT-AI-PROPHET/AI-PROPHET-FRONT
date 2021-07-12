@@ -586,7 +586,7 @@ export default {
     //新增AI模型
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        code: '200',
+        code: 200,
         message: 'success',
       });
       return;

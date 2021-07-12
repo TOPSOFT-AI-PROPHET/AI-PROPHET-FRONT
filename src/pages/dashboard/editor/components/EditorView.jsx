@@ -1,13 +1,13 @@
 import { UploadOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Button, Input, Upload, Form, Space, Checkbox, Select, message } from 'antd';
+import { Button, Input, Upload, Form, Space, Checkbox, Select, message, Modal } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 import styles from './EditorView.less';
 import defaultSettings from '../../../../../config/defaultSettings';
-import ImgCrop from 'antd-img-crop';
 import 'antd/es/modal/style';
 import 'antd/es/slider/style';
 import request from '@/utils/request';
+// import Cropper from 'react-easy-crop'
 
 export default class EditorView extends Component {
   constructor(props) {
@@ -20,9 +20,16 @@ export default class EditorView extends Component {
         modelinfo: '',
         modelType: '',
         stack: undefined,
+        modalVisible: false,
       },
     };
   }
+
+  setModalVisible = (boolean) => {
+    this.setState({
+      modalVisible: boolean,
+    });
+  };
 
   checkBoxOnChange = (e) => {
     this.setState({
@@ -67,6 +74,7 @@ export default class EditorView extends Component {
 
   render() {
     const { Option } = Select;
+
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
         <div className={styles.left}>
@@ -255,34 +263,43 @@ export default class EditorView extends Component {
             </div>
 
             <>
-              <ImgCrop grid rotate shape={'rect'} beforeCrop={this.beforeCrop} aspect={10 / 1}>
-                <Upload
-                  showUploadList={false}
-                  name="avatar"
-                  className="avatar-uploader"
-                  beforeUpload={this.beforeUpload}
-                  onChange={this.handleAvaterChange}
-                  action={
-                    process.env.NODE_ENV !== 'development'
-                      ? `${defaultSettings.backURL}/users/updateUserProfileImage`
-                      : `/users/updateUserProfileImage`
-                  }
-                  method="POST"
-                  headers={{
-                    authorization: `Bearer ${this.state.code}`,
-                  }}
-                >
-                  <div className={styles.button_view}>
-                    <Button>
-                      {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
-                      <FormattedMessage
-                        id="accountandsettings.basic.change-cover"
-                        defaultMessage="Change cover"
-                      />
-                    </Button>
-                  </div>
-                </Upload>
-              </ImgCrop>
+              <Upload
+                showUploadList={false}
+                name="avatar"
+                className="avatar-uploader"
+                beforeUpload={this.beforeUpload}
+                onChange={this.handleAvaterChange}
+                action={
+                  process.env.NODE_ENV !== 'development'
+                    ? `${defaultSettings.backURL}/users/updateUserProfileImage`
+                    : `/users/updateUserProfileImage`
+                }
+                method="POST"
+                headers={{
+                  authorization: `Bearer ${this.state.code}`,
+                }}
+              >
+                <div className={styles.button_view}>
+                  <Button
+                    onClick={() => {
+                      this.setModalVisible(true);
+                    }}
+                  >
+                    {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
+                    <FormattedMessage
+                      id="accountandsettings.basic.change-cover"
+                      defaultMessage="Change cover"
+                    />
+                  </Button>
+                </div>
+              </Upload>
+              <Modal
+                visible={this.state.modalVisible}
+                onCancel={() => {
+                  this.setModalVisible(false);
+                }}
+                onOk={() => {}}
+              ></Modal>
             </>
           </>
         </div>

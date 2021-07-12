@@ -42,6 +42,7 @@ export default class ModelCreator extends React.Component {
       loading: false,
       UploadYN: false,
       creditModalVisible: false,
+      checkBox: false,
     };
   }
 
@@ -84,24 +85,18 @@ export default class ModelCreator extends React.Component {
         method: 'POST',
         data: {
           ai_name: this.formRef.current.getFieldValue('modelName'),
-          ai_url: 'sdfsf',
-          ai_status: 0,
-          ai_description: {
-            total_param: 0,
-            detais: [
-              {
-                name: 'sdfsf',
-                data_type: this.formRef.current.getFieldValue('JSONData'),
-                ai_description: this.formRef.current.getFieldValue('intro'),
-              },
-            ],
-          },
-          ai_type: '',
-          ai_credit: this.formRef.current.getFieldValue('price'),
+          ai_price: this.formRef.current.getFieldValue('price'),
+          ai_true_desc: this.formRef.current.getFieldValue('intro'),
+          ai_desc: this.formRef.current.getFieldValue('JSONData'),
+          ai_opUnit: this.formRef.current.getFieldValue('Unit'),
+          ai_type: this.formRef.current.getFieldValue('algorithm'),
+          auto_active: this.state.checkBox ? 1 : 0,
         },
       }).then((result) => {
+        console.log(result.code);
         if (result.code === 200) {
-          message.success('success');
+          message.success('Success');
+          console.log('success');
         } else {
           message.warn('fail to submit');
         }
@@ -122,6 +117,9 @@ export default class ModelCreator extends React.Component {
     console.log(`checked = ${e.target.checked}`);
     if (e) {
       this.formRef.current.setFieldsValue({ checkBox: e.target.checked });
+      this.setState({
+        checkBox: !this.state.checkBox,
+      });
       console.log(this.formRef.current.getFieldValue());
     }
   };
@@ -191,21 +189,21 @@ export default class ModelCreator extends React.Component {
     const treeData = [
       {
         title: formatMessage({ id: 'pages.dashboard.modelCreator.card3-content-treeSelect1' }),
-        value: '0',
+        value: 'a',
         selectable: false,
         children: [
           {
             title: formatMessage({
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-1',
             }),
-            value: 'DecisionTree',
+            value: '0',
             link: 'https://www.baidu.com',
           },
           {
             title: formatMessage({
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-2',
             }),
-            value: 'RandomForest',
+            value: '1',
             link: 'http://example.com/',
           },
         ],
