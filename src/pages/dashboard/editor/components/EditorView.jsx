@@ -7,6 +7,8 @@ import defaultSettings from '../../../../../config/defaultSettings';
 import 'antd/es/modal/style';
 import 'antd/es/slider/style';
 import request from '@/utils/request';
+import Cropper from 'react-easy-crop';
+import { Slider } from 'antd';
 // import Cropper from 'react-easy-crop'
 
 export default class EditorView extends Component {
@@ -20,15 +22,48 @@ export default class EditorView extends Component {
         modelinfo: '',
         modelType: '',
         stack: undefined,
-        modalVisible: false,
       },
+      loading: false,
+      modalVisible: false,
+      imgSrc: '',
+      zoom: 1,
+      crop: { x: 0, y: 0 },
+      Rotation: 0,
+      croppedImage: undefined,
     };
   }
+
+  onRotationChange = (Rotation) => {
+    this.setState({
+      Rotation,
+    });
+  };
+
+  onZoomChange = (zoom) => {
+    this.setState({ zoom });
+  };
+
+  onCropChange = (crop) => {
+    this.setState({ crop });
+  };
 
   setModalVisible = (boolean) => {
     this.setState({
       modalVisible: boolean,
     });
+  };
+
+  beforeUpload = (file) => {
+    console.log(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    console.log(reader);
+    reader.onload = (e) => {
+      this.setState({
+        imgSrc: e.target.result,
+        modalVisible: true,
+      });
+    };
   };
 
   checkBoxOnChange = (e) => {
@@ -282,7 +317,9 @@ export default class EditorView extends Component {
                 <div className={styles.button_view}>
                   <Button
                     onClick={() => {
-                      this.setModalVisible(true);
+                      this.setState({
+                        loading: true,
+                      });
                     }}
                   >
                     {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
@@ -293,14 +330,55 @@ export default class EditorView extends Component {
                   </Button>
                 </div>
               </Upload>
-              <Modal
-                visible={this.state.modalVisible}
-                onCancel={() => {
-                  this.setModalVisible(false);
-                }}
-                onOk={() => {}}
-              ></Modal>
             </>
+            <Modal
+              bodyStyle={{ height: 600, width: 600 }}
+              width={600}
+              title="Cropper"
+              visible={this.state.modalVisible}
+              onCancel={() => {
+                this.setModalVisible(false);
+              }}
+              onOk={() => {
+                console.log(this.cropper);
+                this.setState({
+                  modalVisible: false,
+                });
+              }}
+            >
+              <div style={{ position: 'relative', width: '100%', height: '85%' }}>
+                <Cropper
+                  ref={(cropper) => {
+                    this.cropper = cropper;
+                  }}
+                  zoom={this.state.zoom}
+                  crop={this.state.crop}
+                  image={this.state.imgSrc}
+                  onCropChange={this.onCropChange}
+                  onZoomChange={this.onZoomChange}
+                  cropSize={{ width: 225, height: 400 }}
+                  rotation={this.state.Rotation}
+                  onRotationChange={this.onRotationChange}
+                />
+              </div>
+
+              <strong>Zoom</strong>
+              <Slider
+                min={1}
+                max={3}
+                step={0.1}
+                onChange={this.onZoomChange}
+                value={this.state.zoom}
+              />
+              <strong>Rotation</strong>
+              <Slider
+                value={this.state.Rotation}
+                min={0}
+                max={360}
+                step={1}
+                onChange={this.onRotationChange}
+              />
+            </Modal>
           </>
         </div>
       </div>
