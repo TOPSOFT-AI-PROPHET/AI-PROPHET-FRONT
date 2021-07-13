@@ -118,7 +118,12 @@ export default class ModelCreator extends React.Component {
   };
 
   beforeUpload = (file) => {
-    // console.log(file)
+    console.log(file);
+    const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
+    if (!isLt800M) {
+      message.error('文件应当小于800MB');
+      // error message for valid size
+    }
     const reader = new FileReader();
     reader.readAsBinaryString(file);
     // console.log(reader)
@@ -128,6 +133,7 @@ export default class ModelCreator extends React.Component {
         dataSet: e.target.result,
       });
     };
+    return isLt800M;
   };
 
   setcreditModalVisible(creditModalVisible) {
