@@ -12,10 +12,11 @@ import {
   Button,
   Row,
   Col,
+  Modal,
 } from 'antd';
 import styles from './index.less';
 import { FormattedMessage, formatMessage, history } from 'umi';
-import { FileTextOutlined } from '@ant-design/icons';
+import { FileTextOutlined, ImportOutlined, DollarOutlined } from '@ant-design/icons';
 import request from '@/utils/request';
 
 export default class TransitionPg extends React.Component {
@@ -33,6 +34,10 @@ export default class TransitionPg extends React.Component {
     console.log('click ', e);
     this.setState({ current: e.key });
   };
+
+  setcreditModalVisible(creditModalVisible) {
+    this.setState({ creditModalVisible });
+  }
 
   componentDidMount() {
     request('/tasks/getAIMusage', {
@@ -189,14 +194,28 @@ export default class TransitionPg extends React.Component {
                     type="primary"
                     shape="round"
                     onClick={() => {
-                      if (this.state.validateCode === 200) {
-                        history.push(
-                          `/dash/prediction/newprediction/${this.props.match.params.id}`,
-                        );
-                      } else {
-                        this.setcreditModalVisible(true);
-                      }
+                      request('/tasks/validate', {
+                        method: 'POST',
+                        data: { ai_id: this.props.match.params.id },
+                      }).then(() => {
+                        if (this.state.validateCode === 200) {
+                          history.push(
+                            `/dash/prediction/newprediction/${this.props.match.params.id}`,
+                          );
+                        } else {
+                          this.setcreditModalVisible(true);
+                        }
+                      });
                     }}
+                    // onClick={() => {
+                    //   if (this.state.validateCode === 200) {
+                    //     history.push(
+                    //       `/dash/prediction/newprediction/${this.props.match.params.id}`,
+                    //     );
+                    //   } else {
+                    //     this.setcreditModalVisible(true);
+                    //   }
+                    // }}
                   >
                     {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button1' })}
                   </Button>
@@ -208,6 +227,50 @@ export default class TransitionPg extends React.Component {
             </Col>
           </Row>
         </Card>
+        <Modal
+          title={formatMessage({
+            id: 'pages.dashboard.aimodels.cardModal.title',
+          })}
+          centered
+          visible={this.state.creditModalVisible}
+          onOk={() => this.setcreditModalVisible(false)}
+          onCancel={() => this.setcreditModalVisible(false)}
+          footer={[
+            <Button
+              key="back"
+              onClick={() => {
+                this.setcreditModalVisible(false);
+              }}
+            >
+              <ImportOutlined />
+              {formatMessage({
+                id: 'pages.dashboard.aimodels.button1',
+              })}
+            </Button>,
+            <Button
+              key="TopUp"
+              onClick={() => {
+                history.push(`/dash/account/topup`);
+              }}
+            >
+              <DollarOutlined />
+              {formatMessage({
+                id: 'accountandsettings.basic.topup',
+              })}
+            </Button>,
+          ]}
+        >
+          <p>
+            {formatMessage({
+              id: 'pages.dashboard.aimodels.modalcontent1',
+            })}
+          </p>
+          <p>
+            {formatMessage({
+              id: 'pages.dashboard.aimodels.modalcontent2',
+            })}
+          </p>
+        </Modal>
       </PageContainer>
     );
   }

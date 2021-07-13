@@ -75,7 +75,7 @@ export default {
   'dashboardandworkplace.workplace.balance': 'Balance',
   'dashboard.pred.prediction': 'processd prediction',
   'basic.list.prediction': 'processd prediction',
-  'basic.list.balance': 'balance',
+  'basic.list.balance': 'credit',
   'basic.list.numtask': 'total tasks',
   'basic.list.tasklist': 'Tasks',
   'basic.list.add': 'ADD',
@@ -154,7 +154,7 @@ export default {
   'pages.dashboard.modelCreator.card4-content-uploadNote': 'Please upload a file less than 800MB',
   'pages.dashboard.modelCreator.card4-content-footer':
     'Please check the progress in Workplace-AI-All predictions.',
-  'basic.modellist.balance': 'My balance',
+  'basic.modellist.balance': 'My credit',
   'basic.modellist.modelused': 'Model has been used',
   'basic.modellist.pageviewed': 'Page has been viewed',
   'basic.modellist.buildmodel': 'Start build Models',

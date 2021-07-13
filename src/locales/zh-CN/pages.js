@@ -69,7 +69,7 @@ export default {
   'pages.dashboardandworkplace.workplace.extratxt': '全部预测',
   'pages.dash.dashboard.list.card-list.contentlink': 'TOPSOFT AI 先知系统 ｜ AI模型使用白皮书',
   'basic.list.prediction': '已完成的预测',
-  'basic.list.balance': '余额',
+  'basic.list.balance': '积分',
   'basic.list.numtask': '全部任务',
   'basic.list.tasklist': '所有任务',
   'basic.list.add': '添加',

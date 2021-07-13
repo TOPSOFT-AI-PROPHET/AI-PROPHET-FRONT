@@ -1,10 +1,10 @@
-import { Card, List, Typography, Modal, Button } from 'antd';
+import { Card, List, Typography } from 'antd';
 import React, { Component } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { connect, history, formatMessage, FormattedMessage } from 'umi';
 import request from '@/utils/request';
 import styles from './style.less';
-import { CoffeeOutlined, DollarOutlined, ImportOutlined } from '@ant-design/icons';
+import { CoffeeOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
 
 const { Paragraph } = Typography;
@@ -93,12 +93,13 @@ class CardList extends Component {
                           request('/tasks/validate', {
                             method: 'POST',
                             data: { ai_id: item.pk },
-                          }).then((result) => {
-                            if (result.code === 200) {
-                              history.push(`/dash/prediction/modelinfo/${item.pk}`);
-                            } else {
-                              this.setcreditModalVisible(true);
-                            }
+                          }).then(() => {
+                            // if (result.code === 200) {
+                            //   history.push(`/dash/prediction/modelinfo/${item.pk}`);
+                            // } else {
+                            //   this.setcreditModalVisible(true);
+                            // }
+                            history.push(`/dash/prediction/modelinfo/${item.pk}`);
                           });
                         }}
                       >
@@ -149,7 +150,7 @@ class CardList extends Component {
               );
             }}
           />
-          <Modal
+          {/* <Modal
             title={formatMessage({
               id: 'pages.dashboard.aimodels.cardModal.title',
             })}
@@ -192,7 +193,7 @@ class CardList extends Component {
                 id: 'pages.dashboard.aimodels.modalcontent2',
               })}
             </p>
-          </Modal>
+          </Modal> */}
         </div>
       </PageContainer>
     );
