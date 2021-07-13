@@ -119,7 +119,7 @@ export default class ModelCreator extends React.Component {
 
   beforeUpload = (file) => {
     console.log(file);
-    const isLt800M = file.size / 1024 / 1024 < 2; // limited picture size(not using)
+    const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
     if (!isLt800M) {
       message.error('文件应当小于800MB');
       // error message for valid size
