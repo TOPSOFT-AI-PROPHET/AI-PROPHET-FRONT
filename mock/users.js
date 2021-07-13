@@ -466,6 +466,47 @@ export default {
       ],
     });
   },
+  //以下是新增的接口 07.05
+  'POST /tasks/validate': async (req, res) => {
+    //统计任务数量
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/updateAIauthor': async (req, res) => {
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
 
   'POST /tasks/details': async (req, res) => {
     //返回某任务的详细信息
@@ -541,11 +582,11 @@ export default {
     });
   },
 
-  'POST /tasks/addAIM': async (req, res) => {
+  'POST /tasks/train': async (req, res) => {
     //新增AI模型
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
-        code: '200',
+        code: 200,
         message: 'success',
       });
       return;
