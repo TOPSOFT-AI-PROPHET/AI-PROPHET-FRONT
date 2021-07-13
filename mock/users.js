@@ -582,7 +582,7 @@ export default {
     });
   },
 
-  'POST /tasks/addAIM': async (req, res) => {
+  'POST /tasks/train': async (req, res) => {
     //新增AI模型
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({

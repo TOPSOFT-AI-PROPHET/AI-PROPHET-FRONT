@@ -22,6 +22,7 @@ const { confirm } = Modal;
 
 function showConfirm() {
   confirm({
+    style: { top: '30%' },
     title: '你确定要退出么？',
     icon: <ExclamationCircleOutlined />,
     content: '点击确定将返回我的模型管理',
@@ -43,6 +44,7 @@ export default class ModelCreator extends React.Component {
       UploadYN: false,
       creditModalVisible: false,
       checkBox: false,
+      dataSet: undefined,
     };
   }
 
@@ -56,13 +58,19 @@ export default class ModelCreator extends React.Component {
   };
 
   uploadOnChange = (e) => {
+    console.log(e);
     // 验证上传操作
-    if (e.file.status === 'done') {
-      console.log(123);
+    if (e.fileList.length === 1) {
+      console.log('done');
       this.setState({
         UploadYN: true,
       });
+    } else {
+      this.setState({
+        UploadYN: false,
+      });
     }
+    // console.log(e)
   };
 
   onchangeInTreeSelect = (value) => {
@@ -72,6 +80,7 @@ export default class ModelCreator extends React.Component {
   };
 
   onCheck = async () => {
+    console.log(this.state);
     try {
       const values = await this.formRef.current.validateFields();
       if (!this.state.UploadYN) {
@@ -81,7 +90,7 @@ export default class ModelCreator extends React.Component {
         return;
       }
       console.log('Success:', values);
-      request('/tasks/addAIM', {
+      request('/tasks/train', {
         method: 'POST',
         data: {
           ai_name: this.formRef.current.getFieldValue('modelName'),
@@ -91,6 +100,7 @@ export default class ModelCreator extends React.Component {
           ai_opUnit: this.formRef.current.getFieldValue('Unit'),
           ai_type: this.formRef.current.getFieldValue('algorithm'),
           auto_active: this.state.checkBox ? 1 : 0,
+          dataset: this.state.dataSet,
         },
       }).then((result) => {
         console.log(result.code);
@@ -107,7 +117,18 @@ export default class ModelCreator extends React.Component {
     }
   };
 
-  beforeUpload = () => {};
+  beforeUpload = (file) => {
+    // console.log(file)
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    // console.log(reader)
+    reader.onload = (e) => {
+      console.log(e);
+      this.setState({
+        dataSet: e.target.result,
+      });
+    };
+  };
 
   setcreditModalVisible(creditModalVisible) {
     this.setState({ creditModalVisible });
@@ -399,7 +420,7 @@ export default class ModelCreator extends React.Component {
         content: (
           <div id={'Upload'} className={styles.content}>
             <div className={styles.upload}>
-              <Upload beforeUpload={this.beforeUpload} onChange={this.uploadOnChange}>
+              <Upload maxCount={1} beforeUpload={this.beforeUpload} onChange={this.uploadOnChange}>
                 <Button className={styles.button}>
                   {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}
                   {formatMessage({ id: 'pages.dashboard.modelCreator.card4-content-button' })}

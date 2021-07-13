@@ -1,6 +1,6 @@
-import { UploadOutlined, LoadingOutlined } from '@ant-design/icons';
+import { UploadOutlined, LoadingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { Button, Input, Upload, Form, Space, Checkbox, Select, message, Modal } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi';
+import { FormattedMessage, formatMessage, history } from 'umi';
 import React, { Component } from 'react';
 import styles from './EditorView.less';
 import defaultSettings from '../../../../../config/defaultSettings';
@@ -30,8 +30,65 @@ export default class EditorView extends Component {
       crop: { x: 0, y: 0 },
       Rotation: 0,
       croppedImage: undefined,
+      croppedAreaPixels: undefined,
     };
   }
+
+  saveCroppedImg = () => {
+    // const croppedImg = this.getCroppedImg(this.state.imageSrc, this.state.croppedAreaPixels, this.state.Rotation)
+    // console.log('done',{croppedImg})
+  };
+
+  getCroppedImg = async (imageSrc, pixelCrop, rotation = 0) => {
+    function getRadianAngle(degreeValue) {
+      return (degreeValue * Math.PI) / 180;
+    }
+    const createImage = (url) =>
+      new Promise((resolve, reject) => {
+        const image = new Image();
+        image.addEventListener('load', () => resolve(image));
+        image.addEventListener('error', (error) => reject(error));
+        image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
+        image.src = url;
+      });
+    const image = await createImage(imageSrc);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const maxSize = Math.max(image.width, image.height);
+    const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2));
+    canvas.width = safeArea;
+    canvas.height = safeArea;
+    ctx.translate(safeArea / 2, safeArea / 2);
+    ctx.rotate(getRadianAngle(rotation));
+    ctx.translate(-safeArea / 2, -safeArea / 2);
+    // draw rotated image and store data.
+    ctx.drawImage(image, safeArea / 2 - image.width * 0.5, safeArea / 2 - image.height * 0.5);
+    const data = ctx.getImageData(0, 0, safeArea, safeArea);
+
+    // set canvas width to final desired crop size - this will clear existing context
+    canvas.width = pixelCrop.width;
+    canvas.height = pixelCrop.height;
+
+    ctx.putImageData(
+      data,
+      Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
+      Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
+    );
+
+    return canvas.toBlob((file) => {
+      console.log(file);
+    }, 'image/jpeg');
+  };
+
+  onCropComplete = (croppedAreaPixels) => {
+    this.setState({
+      croppedAreaPixels,
+    });
+  };
+
+  handleAvaterChange = (e) => {
+    console.log(e.fileList);
+  };
 
   onRotationChange = (Rotation) => {
     this.setState({
@@ -64,6 +121,7 @@ export default class EditorView extends Component {
         modalVisible: true,
       });
     };
+    return false;
   };
 
   checkBoxOnChange = (e) => {
@@ -109,6 +167,7 @@ export default class EditorView extends Component {
 
   render() {
     const { Option } = Select;
+    const { confirm } = Modal;
 
     return (
       <div className={styles.baseView} ref={this.getViewDom}>
@@ -266,10 +325,16 @@ export default class EditorView extends Component {
               <Space size="middle">
                 <Button
                   style={{ width: 68 }}
-                  htmlType="submit"
                   type="primary"
                   onClick={() => {
-                    this.handleSubmit(this.props.match.params.id);
+                    confirm({
+                      style: { top: '30%' },
+                      title: '你确定要保存么？',
+                      icon: <ExclamationCircleOutlined />,
+                      content: '点击确定将上传表单',
+                      onOk: this.handleSubmit,
+                      onCancel() {},
+                    });
                   }}
                 >
                   <FormattedMessage
@@ -277,7 +342,21 @@ export default class EditorView extends Component {
                     // defaultMessage="Update Information"
                   />
                 </Button>
-                <Button style={{ width: 68 }}>
+                <Button
+                  style={{ width: 68 }}
+                  onClick={() => {
+                    confirm({
+                      style: { top: '30%' },
+                      title: '你确定要返回么？',
+                      icon: <ExclamationCircleOutlined />,
+                      content: '点击确定返回模型列表',
+                      onOk() {
+                        history.push('/dash/model/model');
+                      },
+                      onCancel() {},
+                    });
+                  }}
+                >
                   <FormattedMessage
                     id="accountandsettings.basic.back"
                     // defaultMessage="Update Information"
@@ -299,6 +378,7 @@ export default class EditorView extends Component {
 
             <>
               <Upload
+                maxCount={1}
                 showUploadList={false}
                 name="avatar"
                 className="avatar-uploader"
@@ -340,7 +420,15 @@ export default class EditorView extends Component {
                 this.setModalVisible(false);
               }}
               onOk={() => {
-                console.log(this.cropper);
+                // console.log(this.cropper);
+                this.saveCroppedImg();
+                request('/tasks/updatemodelImage', {
+                  method: 'post',
+                  data: {
+                    modelprofile: '',
+                    ai_id: this.props.match.params.id,
+                  },
+                });
                 this.setState({
                   modalVisible: false,
                 });
@@ -359,6 +447,7 @@ export default class EditorView extends Component {
                   cropSize={{ width: 225, height: 400 }}
                   rotation={this.state.Rotation}
                   onRotationChange={this.onRotationChange}
+                  onCropComplete={this.onCropComplete}
                 />
               </div>
 
