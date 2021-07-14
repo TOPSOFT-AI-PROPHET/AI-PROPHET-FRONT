@@ -123,6 +123,7 @@ export default class ModelCreator extends React.Component {
     if (!isLt800M) {
       message.error('文件应当小于800MB');
       // error message for valid size
+      return false;
     }
     const reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -133,7 +134,7 @@ export default class ModelCreator extends React.Component {
         dataSet: e.target.result,
       });
     };
-    return isLt800M;
+    return false;
   };
 
   setcreditModalVisible(creditModalVisible) {
