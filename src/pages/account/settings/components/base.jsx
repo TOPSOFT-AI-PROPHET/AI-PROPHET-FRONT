@@ -109,7 +109,6 @@ class BaseView extends Component {
         loading: false,
         // imageUrl,
       });
-      window.location.reload();
     }
   };
 
@@ -235,7 +234,6 @@ class BaseView extends Component {
               ref={this.formRef}
               layout="vertical"
               // onFinish={this.handleFinish}
-              initialValues={this.state.data}
               hideRequiredMark
             >
               {/* <Form.Item

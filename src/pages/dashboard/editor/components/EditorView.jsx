@@ -34,12 +34,8 @@ export default class EditorView extends Component {
     };
   }
 
-  saveCroppedImg = () => {
-    // const croppedImg = this.getCroppedImg(this.state.imageSrc, this.state.croppedAreaPixels, this.state.Rotation)
-    // console.log('done',{croppedImg})
-  };
-
   getCroppedImg = async (imageSrc, pixelCrop, rotation = 0) => {
+    const { confirm } = Modal;
     function getRadianAngle(degreeValue) {
       return (degreeValue * Math.PI) / 180;
     }
@@ -51,6 +47,7 @@ export default class EditorView extends Component {
         image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
         image.src = url;
       });
+
     const image = await createImage(imageSrc);
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -61,28 +58,42 @@ export default class EditorView extends Component {
     ctx.translate(safeArea / 2, safeArea / 2);
     ctx.rotate(getRadianAngle(rotation));
     ctx.translate(-safeArea / 2, -safeArea / 2);
-    // draw rotated image and store data.
     ctx.drawImage(image, safeArea / 2 - image.width * 0.5, safeArea / 2 - image.height * 0.5);
     const data = ctx.getImageData(0, 0, safeArea, safeArea);
-
     // set canvas width to final desired crop size - this will clear existing context
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
+    canvas.width = 225;
+    canvas.height = 400;
 
+    // paste generated rotate image with correct offsets for x,y crop values.
     ctx.putImageData(
       data,
       Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
       Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
     );
 
-    return canvas.toBlob((file) => {
-      console.log(file);
-    }, 'image/jpeg');
+    let fileContent = '';
+    canvas.toBlob(function (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        console.log(e);
+        fileContent = e.target.result;
+        confirm({
+          title: 'sdfs',
+          content: <img src={fileContent}></img>,
+        });
+      };
+    }, 'image/png');
+
+    this.setState({
+      croppedImage: fileContent,
+    });
   };
 
-  onCropComplete = (croppedAreaPixels) => {
+  onCropComplete = (croppedArea, croppedAreaPixels) => {
     this.setState({
       croppedAreaPixels,
+      croppedArea,
     });
   };
 
@@ -421,7 +432,11 @@ export default class EditorView extends Component {
               }}
               onOk={() => {
                 // console.log(this.cropper);
-                this.saveCroppedImg();
+                this.getCroppedImg(
+                  this.state.imgSrc,
+                  this.state.croppedAreaPixels,
+                  this.state.Rotation,
+                );
                 request('/tasks/updatemodelImage', {
                   method: 'post',
                   data: {
