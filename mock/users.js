@@ -786,6 +786,34 @@ export default {
     });
   },
 
+  'POST /tasks/updateAIauthor': async (req, res) => {
+    //修改AI是否公开
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'The AI model publish data cannot changed',
+      });
+      return;
+    }
+    res.code(400).send({
+      message: 'Invalid request',
+    });
+  },
+
+  'POST /tasks/updatePublished': async (req, res) => {
+    //是否更新AI模型
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'The AI model publish data update',
+      });
+      return;
+    }
+    res.code(400).send({
+      message: 'Invalid request',
+    });
+  },
+
   'POST /users/updateUserProfile': async (req, res) => {
     //更新用户信息
     if (req.headers.authorization === 'Bearer valid_token') {
