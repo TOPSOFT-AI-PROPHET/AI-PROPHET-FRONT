@@ -722,6 +722,111 @@ export default {
     });
   },
 
+  'POST /tasks/modeldetail': async (req, res) => {
+    //返回某模型详情
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        data: {
+          modelname: 'modelname',
+          model_intro: 'model_intro',
+          model_json: '{\r\n    "test":""\r\n}',
+          model_price: 1,
+          model_useage: 1,
+          author_id: 1, //id of author
+          publish_date: '2021-03-29T11:20:53Z',
+          algorithm_type: 1,
+          instance_num: 1, //new attribute
+          opunit: 'opunit', //new attribute
+        },
+      });
+      return;
+    }
+    res.status(404).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/modifyAIattri': async (req, res) => {
+    //修改AI模型属性
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'bingo!',
+      });
+      return;
+    }
+    res.code(404).send({
+      message: 'failed',
+    });
+  },
+
+  'POST /users/train': async (req, res) => {
+    //新建AI训练任务
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'Success!',
+      });
+      return;
+    }
+    res.code(500).send({
+      message: 'failed',
+    });
+  },
+
+  'POST /tasks/trainingMaterialCount': async (req, res) => {
+    //返回并更新AI模型训练数据量
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'AImodel updated',
+      });
+      return;
+    }
+    res.status(404).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'POST /tasks/unlockedModel': async (req, res) => {
+    //解锁、恢复已经被强制下架的AI模型
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'The AI model is successfully unfrozen',
+      });
+      return;
+    }
+    res.status(404).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
   'POST /users/updateUserProfile': async (req, res) => {
     //更新用户信息
     if (req.headers.authorization === 'Bearer valid_token') {
