@@ -94,7 +94,7 @@ export default class ModelCreator extends React.Component {
         method: 'POST',
         data: {
           ai_name: this.formRef.current.getFieldValue('modelName'),
-          ai_price: this.formRef.current.getFieldValue('price'),
+          ai_price: Number(this.formRef.current.getFieldValue('price')),
           ai_true_desc: this.formRef.current.getFieldValue('intro'),
           ai_desc: this.formRef.current.getFieldValue('JSONData'),
           ai_opUnit: this.formRef.current.getFieldValue('Unit'),
@@ -224,14 +224,14 @@ export default class ModelCreator extends React.Component {
             title: formatMessage({
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-1',
             }),
-            value: '0',
+            value: 0,
             link: 'https://www.baidu.com',
           },
           {
             title: formatMessage({
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-2',
             }),
-            value: '1',
+            value: 1,
             link: 'http://example.com/',
           },
         ],
