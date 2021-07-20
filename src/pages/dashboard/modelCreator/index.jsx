@@ -76,6 +76,7 @@ export default class ModelCreator extends React.Component {
   onchangeInTreeSelect = (value) => {
     this.setState({
       selectValue: value,
+      selected: true,
     });
   };
 
@@ -155,7 +156,9 @@ export default class ModelCreator extends React.Component {
   card3RenderPara = (treeData) => {
     let crtTitle = '';
     let crtLink = '';
-    if (this.state.selectValue) {
+    console.log(this.state.selectValue);
+
+    if (this.state.selected) {
       treeData.map((item) => {
         item.children.map((item1) => {
           if (item1.value === this.state.selectValue) {
