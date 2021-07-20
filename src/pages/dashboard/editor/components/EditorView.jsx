@@ -1,5 +1,5 @@
 import { UploadOutlined, LoadingOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Input, Upload, Form, Space, Checkbox, Select, message, Modal } from 'antd';
+import { Button, Input, Upload, Form, Space, Checkbox, Select, message, Modal, Empty } from 'antd';
 import { FormattedMessage, formatMessage, history } from 'umi';
 import React, { Component } from 'react';
 import styles from './EditorView.less';
@@ -16,13 +16,6 @@ export default class EditorView extends Component {
     super(props);
     this.formRef = React.createRef();
     this.state = {
-      data: {
-        modelname: '',
-        modelprice: undefined,
-        modelinfo: '',
-        modelType: '',
-        stack: undefined,
-      },
       loading: false,
       modalVisible: false,
       imgSrc: '',
@@ -32,6 +25,32 @@ export default class EditorView extends Component {
       croppedImage: undefined,
       croppedAreaPixels: undefined,
     };
+  }
+
+  componentDidMount() {
+    let back = false;
+    request('/tasks/modelAuthor', {
+      method: 'POST',
+      data: {
+        ai_id: this.props.match.params.id,
+      },
+    }).then((result) => {
+      back = result.publish;
+      console.log(back);
+    });
+
+    request('/tasks/modeldetail', {
+      method: 'POST',
+      data: {
+        ai_id: this.props.match.params.id,
+      },
+    }).then((result) => {
+      this.setState({
+        data: result.data,
+        stack: back,
+      });
+      this.formRef.current.setFieldsValue({ stack: back });
+    });
   }
 
   saveCroppedImg = () => {
@@ -125,9 +144,6 @@ export default class EditorView extends Component {
   };
 
   checkBoxOnChange = (e) => {
-    this.setState({
-      stack: !this.state.stack,
-    });
     console.log(`checked = ${e.target.checked}`);
     if (e) {
       this.formRef.current.setFieldsValue({ stack: e.target.checked });
@@ -138,7 +154,7 @@ export default class EditorView extends Component {
   handleSubmit = async (id) => {
     console.log(id);
     const checkboxChoice = () => {
-      if (this.state.stack) {
+      if (this.formRef.current.getFieldValue('stack')) {
         return 1;
       }
       return 0;
@@ -159,6 +175,17 @@ export default class EditorView extends Component {
           message.warn('提交失败');
         }
       });
+      request('/tasks/modifyAlattri', {
+        method: 'POST',
+        data: {
+          ai_id: this.props.match.params.id,
+          ai_name: this.formRef.current.getFieldValue('modelname'),
+          model_intro: this.formRef.current.getFieldValue('model_intro'), // description of model
+          model_price: Number(this.formRef.current.getFieldValue('model_price')),
+          model_type: this.formRef.current.getFieldValue('algorithm_type'),
+          is_published: checkboxChoice(), // 1-Y 0-N
+        },
+      });
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
       message.warn('提交校验失败');
@@ -169,308 +196,309 @@ export default class EditorView extends Component {
     const { Option } = Select;
     const { confirm } = Modal;
 
-    return (
-      <div className={styles.baseView} ref={this.getViewDom}>
-        <div className={styles.left}>
-          <Form
-            ref={this.formRef}
-            layout="vertical"
-            initialValues={this.state.data}
-            hideRequiredMark
-          >
-            <Form.Item
-              name="modelname"
-              label={formatMessage({
-                id: 'accountandsettings.basic.modelname',
-              })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.modelname-message',
-                    },
-                    {},
-                  ),
-                },
-              ]}
+    if (this.state.data) {
+      return (
+        <div className={styles.baseView} ref={this.getViewDom}>
+          <div className={styles.left}>
+            <Form
+              ref={this.formRef}
+              layout="vertical"
+              hideRequiredMark
+              initialValues={this.state.data}
             >
-              <Input
-                maxLength={18}
-                placeholder={formatMessage({
-                  id: 'accountandsettings.basic.modelname-placeHolder',
+              <Form.Item
+                name="modelname"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.modelname',
                 })}
-                onChange={(e) => {
-                  if (e) {
-                    this.formRef.current.setFieldsValue({ modelname: e.target.value });
-                  }
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-              name="modelprice"
-              label={formatMessage({
-                id: 'accountandsettings.basic.modelprice',
-              })}
-              onChange={(e) => {
-                if (e) {
-                  this.formRef.current.setFieldsValue({ modelprice: e.target.value });
-                }
-              }}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.modelprice-message',
-                    },
-                    {},
-                  ),
-                },
-                {
-                  pattern: /^[1-9][0-9]*$/,
-                  message: 'it should be a whole number',
-                },
-              ]}
-            >
-              <Input
-                maxLength={18}
-                placeholder={formatMessage({
-                  id: 'accountandsettings.basic.modelprice-placeHolder',
-                })}
-                onChange={(e) => {
-                  if (e) {
-                    this.formRef.current.setFieldsValue({ nickname: e.target.value });
-                  }
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-              name="modelinfo"
-              label={formatMessage({
-                id: 'accountandsettings.basic.modelinfo',
-              })}
-              onChange={(e) => {
-                if (e) {
-                  this.formRef.current.setFieldsValue({ modelinfo: e.target.value });
-                }
-              }}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.modelinfo-message',
-                    },
-                    {},
-                  ),
-                },
-              ]}
-            >
-              <Input.TextArea
-                showCount
-                maxLength={50}
-                placeholder={formatMessage({
-                  id: 'accountandsettings.basic.modelinfo-placeHolder',
-                })}
-                rows={4}
-                onChange={(e) => {
-                  if (e) {
-                    this.formRef.current.setFieldsValue({ modelinfo: e.target.value });
-                  }
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-              name="modelType"
-              onChange={(e) => {
-                if (e) {
-                  this.formRef.current.setFieldsValue({ modeType: e.target.value });
-                }
-              }}
-              label={formatMessage({
-                id: 'accountandsettings.basic.modeltype',
-              })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage(
-                    {
-                      id: 'accountandsettings.basic.modeltype-message',
-                    },
-                    {},
-                  ),
-                },
-              ]}
-            >
-              <Select>
-                <Option value="jack">
-                  {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption1' })}
-                </Option>
-                <Option value="lucy">
-                  {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption2' })}
-                </Option>
-              </Select>
-            </Form.Item>
-            <Form.Item
-              name="stack"
-              label={formatMessage({
-                id: 'accountandsettings.basic.stack',
-              })}
-            >
-              <Checkbox onChange={this.checkBoxOnChange}></Checkbox>
-            </Form.Item>
-            <br />
-            <Form.Item>
-              <Space size="middle">
-                <Button
-                  style={{ width: 68 }}
-                  type="primary"
-                  onClick={() => {
-                    confirm({
-                      style: { top: '30%' },
-                      title: '你确定要保存么？',
-                      icon: <ExclamationCircleOutlined />,
-                      content: '点击确定将上传表单',
-                      onOk: this.handleSubmit,
-                      onCancel() {},
-                    });
-                  }}
-                >
-                  <FormattedMessage
-                    id="accountandsettings.basic.save"
-                    // defaultMessage="Update Information"
-                  />
-                </Button>
-                <Button
-                  style={{ width: 68 }}
-                  onClick={() => {
-                    confirm({
-                      style: { top: '30%' },
-                      title: '你确定要返回么？',
-                      icon: <ExclamationCircleOutlined />,
-                      content: '点击确定返回模型列表',
-                      onOk() {
-                        history.push('/dash/model/model');
+                rules={[
+                  {
+                    required: true,
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.modelname-message',
                       },
-                      onCancel() {},
-                    });
-                  }}
-                >
-                  <FormattedMessage
-                    id="accountandsettings.basic.back"
-                    // defaultMessage="Update Information"
-                  />
-                </Button>
-              </Space>
-            </Form.Item>
-          </Form>
-        </div>
-
-        <div className={styles.right}>
-          <>
-            <div className={styles.avatar_title}>
-              <FormattedMessage id="accountandsettings.basic.modelAvatar" defaultMessage="Avatar" />
-            </div>
-            <div className={styles.avatar}>
-              <img src={this.state.imageURL} alt="cover" />
-            </div>
-
-            <>
-              <Upload
-                maxCount={1}
-                showUploadList={false}
-                name="avatar"
-                className="avatar-uploader"
-                beforeUpload={this.beforeUpload}
-                onChange={this.handleAvaterChange}
-                action={
-                  process.env.NODE_ENV !== 'development'
-                    ? `${defaultSettings.backURL}/users/updateUserProfileImage`
-                    : `/users/updateUserProfileImage`
-                }
-                method="POST"
-                headers={{
-                  authorization: `Bearer ${this.state.code}`,
-                }}
+                      {},
+                    ),
+                  },
+                ]}
               >
-                <div className={styles.button_view}>
+                <Input
+                  maxLength={18}
+                  placeholder={formatMessage({
+                    id: 'accountandsettings.basic.modelname-placeHolder',
+                  })}
+                  onChange={(e) => {
+                    if (e) {
+                      this.formRef.current.setFieldsValue({ modelname: e.target.value });
+                    }
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                name="model_price"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.modelprice',
+                })}
+                rules={[
+                  {
+                    required: true,
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.modelprice-message',
+                      },
+                      {},
+                    ),
+                  },
+                  {
+                    pattern: /^[1-9][0-9]*$/,
+                    message: 'it should be a whole number',
+                  },
+                ]}
+              >
+                <Input
+                  type="number"
+                  placeholder={formatMessage({
+                    id: 'accountandsettings.basic.modelprice-placeHolder',
+                  })}
+                  onChange={(e) => {
+                    if (e) {
+                      console.log(e.target);
+                      console.log(this.formRef.current.getFieldValue());
+                      this.formRef.current.setFieldsValue({ model_price: e.target.value });
+                    }
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                name="model_intro"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.modelinfo',
+                })}
+                rules={[
+                  {
+                    required: true,
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.modelinfo-message',
+                      },
+                      {},
+                    ),
+                  },
+                ]}
+              >
+                <Input.TextArea
+                  showCount
+                  maxLength={50}
+                  placeholder={formatMessage({
+                    id: 'accountandsettings.basic.modelinfo-placeHolder',
+                  })}
+                  rows={4}
+                  onChange={(e) => {
+                    if (e) {
+                      this.formRef.current.setFieldsValue({ model_intro: e.target.value });
+                    }
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                name="algorithm_type"
+                onChange={(e) => {
+                  if (e) {
+                    this.formRef.current.setFieldsValue({ algorithm_type: e.target.value });
+                  }
+                }}
+                label={formatMessage({
+                  id: 'accountandsettings.basic.modeltype',
+                })}
+                rules={[
+                  {
+                    required: true,
+                    message: formatMessage(
+                      {
+                        id: 'accountandsettings.basic.modeltype-message',
+                      },
+                      {},
+                    ),
+                  },
+                ]}
+              >
+                <Select>
+                  <Option value={1}>
+                    {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption1' })}
+                  </Option>
+                  <Option value={2}>
+                    {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption2' })}
+                  </Option>
+                </Select>
+              </Form.Item>
+              <Form.Item
+                name="stack"
+                label={formatMessage({
+                  id: 'accountandsettings.basic.stack',
+                })}
+              >
+                <Checkbox
+                  defaultChecked={this.state.stack}
+                  onChange={this.checkBoxOnChange}
+                ></Checkbox>
+              </Form.Item>
+              <br />
+              <Form.Item>
+                <Space size="middle">
                   <Button
+                    style={{ width: 68 }}
+                    type="primary"
                     onClick={() => {
-                      this.setState({
-                        loading: true,
+                      confirm({
+                        style: { top: '30%' },
+                        title: '你确定要保存么？',
+                        icon: <ExclamationCircleOutlined />,
+                        content: '点击确定将上传表单',
+                        onOk: this.handleSubmit,
+                        onCancel() {},
                       });
                     }}
                   >
-                    {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
                     <FormattedMessage
-                      id="accountandsettings.basic.change-cover"
-                      defaultMessage="Change cover"
+                      id="accountandsettings.basic.save"
+                      // defaultMessage="Update Information"
                     />
                   </Button>
-                </div>
-              </Upload>
-            </>
-            <Modal
-              bodyStyle={{ height: 600, width: 600 }}
-              width={600}
-              title="Cropper"
-              visible={this.state.modalVisible}
-              onCancel={() => {
-                this.setModalVisible(false);
-              }}
-              onOk={() => {
-                // console.log(this.cropper);
-                this.saveCroppedImg();
-                request('/tasks/updatemodelImage', {
-                  method: 'post',
-                  data: {
-                    modelprofile: '',
-                    ai_id: this.props.match.params.id,
-                  },
-                });
-                this.setState({
-                  modalVisible: false,
-                });
-              }}
-            >
-              <div style={{ position: 'relative', width: '100%', height: '85%' }}>
-                <Cropper
-                  ref={(cropper) => {
-                    this.cropper = cropper;
-                  }}
-                  zoom={this.state.zoom}
-                  crop={this.state.crop}
-                  image={this.state.imgSrc}
-                  onCropChange={this.onCropChange}
-                  onZoomChange={this.onZoomChange}
-                  cropSize={{ width: 225, height: 400 }}
-                  rotation={this.state.Rotation}
-                  onRotationChange={this.onRotationChange}
-                  onCropComplete={this.onCropComplete}
+                  <Button
+                    style={{ width: 68 }}
+                    onClick={() => {
+                      confirm({
+                        style: { top: '30%' },
+                        title: '你确定要返回么？',
+                        icon: <ExclamationCircleOutlined />,
+                        content: '点击确定返回模型列表',
+                        onOk() {
+                          history.push('/dash/model/model');
+                        },
+                        onCancel() {},
+                      });
+                    }}
+                  >
+                    <FormattedMessage
+                      id="accountandsettings.basic.back"
+                      // defaultMessage="Update Information"
+                    />
+                  </Button>
+                </Space>
+              </Form.Item>
+            </Form>
+          </div>
+
+          <div className={styles.right}>
+            <>
+              <div className={styles.avatar_title}>
+                <FormattedMessage
+                  id="accountandsettings.basic.modelAvatar"
+                  defaultMessage="Avatar"
                 />
               </div>
+              <div className={styles.avatar}>
+                <img src={this.state.imageURL} alt="cover" />
+              </div>
 
-              <strong>Zoom</strong>
-              <Slider
-                min={1}
-                max={3}
-                step={0.1}
-                onChange={this.onZoomChange}
-                value={this.state.zoom}
-              />
-              <strong>Rotation</strong>
-              <Slider
-                value={this.state.Rotation}
-                min={0}
-                max={360}
-                step={1}
-                onChange={this.onRotationChange}
-              />
-            </Modal>
-          </>
+              <>
+                <Upload
+                  maxCount={1}
+                  showUploadList={false}
+                  name="avatar"
+                  className="avatar-uploader"
+                  beforeUpload={this.beforeUpload}
+                  onChange={this.handleAvaterChange}
+                  action={
+                    process.env.NODE_ENV !== 'development'
+                      ? `${defaultSettings.backURL}/users/updateUserProfileImage`
+                      : `/users/updateUserProfileImage`
+                  }
+                  method="POST"
+                  headers={{
+                    authorization: `Bearer ${this.state.code}`,
+                  }}
+                >
+                  <div className={styles.button_view}>
+                    <Button
+                      onClick={() => {
+                        this.setState({
+                          loading: true,
+                        });
+                      }}
+                    >
+                      {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}{' '}
+                      <FormattedMessage
+                        id="accountandsettings.basic.change-cover"
+                        defaultMessage="Change cover"
+                      />
+                    </Button>
+                  </div>
+                </Upload>
+              </>
+              <Modal
+                bodyStyle={{ height: 600, width: 600 }}
+                width={600}
+                title="Cropper"
+                visible={this.state.modalVisible}
+                onCancel={() => {
+                  this.setModalVisible(false);
+                }}
+                onOk={() => {
+                  // console.log(this.cropper);
+                  this.saveCroppedImg();
+                  request('/tasks/updatemodelImage', {
+                    method: 'post',
+                    data: {
+                      modelprofile: '',
+                      ai_id: this.props.match.params.id,
+                    },
+                  });
+                  this.setState({
+                    modalVisible: false,
+                  });
+                }}
+              >
+                <div style={{ position: 'relative', width: '100%', height: '85%' }}>
+                  <Cropper
+                    ref={(cropper) => {
+                      this.cropper = cropper;
+                    }}
+                    zoom={this.state.zoom}
+                    crop={this.state.crop}
+                    image={this.state.imgSrc}
+                    onCropChange={this.onCropChange}
+                    onZoomChange={this.onZoomChange}
+                    cropSize={{ width: 225, height: 400 }}
+                    rotation={this.state.Rotation}
+                    onRotationChange={this.onRotationChange}
+                    onCropComplete={this.onCropComplete}
+                  />
+                </div>
+
+                <strong>Zoom</strong>
+                <Slider
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  onChange={this.onZoomChange}
+                  value={this.state.zoom}
+                />
+                <strong>Rotation</strong>
+                <Slider
+                  value={this.state.Rotation}
+                  min={0}
+                  max={360}
+                  step={1}
+                  onChange={this.onRotationChange}
+                />
+              </Modal>
+            </>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <Empty />;
   }
 }
