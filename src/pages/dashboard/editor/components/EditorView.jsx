@@ -50,7 +50,18 @@ export default class EditorView extends Component {
         stack: back,
       });
       this.formRef.current.setFieldsValue({ stack: back });
+      this.handleAvatar(false);
     });
+  }
+
+  handleAvatar(uuid) {
+    if (uuid) {
+      console.log(11);
+    } else {
+      this.setState({
+        imageURL: 'https://www.topsoftaiprophet.com/assets/img/model-emp.jpg',
+      });
+    }
   }
 
   saveCroppedImg = () => {
@@ -323,11 +334,11 @@ export default class EditorView extends Component {
                   },
                 ]}
               >
-                <Select>
-                  <Option value={1}>
+                <Select disabled>
+                  <Option value={0}>
                     {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption1' })}
                   </Option>
-                  <Option value={2}>
+                  <Option value={1}>
                     {formatMessage({ id: 'accountandsettings.basic.modeltype-selectOption2' })}
                   </Option>
                 </Select>
@@ -448,13 +459,7 @@ export default class EditorView extends Component {
                 onOk={() => {
                   // console.log(this.cropper);
                   this.saveCroppedImg();
-                  request('/tasks/updatemodelImage', {
-                    method: 'post',
-                    data: {
-                      modelprofile: '',
-                      ai_id: this.props.match.params.id,
-                    },
-                  });
+
                   this.setState({
                     modalVisible: false,
                   });
