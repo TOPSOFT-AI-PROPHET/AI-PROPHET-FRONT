@@ -179,6 +179,12 @@ export default defineConfig({
                   path: '/dash/account/topup',
                   component: './account/topup',
                 },
+                {
+                  name: 'myBill',
+                  icon: 'smile',
+                  path: '/dash/account/myBill',
+                  component: './account/myBill',
+                },
               ],
             },
             {
