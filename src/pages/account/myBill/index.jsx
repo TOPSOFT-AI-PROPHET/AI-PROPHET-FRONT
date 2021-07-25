@@ -1,25 +1,37 @@
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Table } from 'antd';
+import { Card, Table, Popconfirm, Button } from 'antd';
 import React from 'react';
 import styles from './index.less';
 
 export default class MyBill extends React.Component {
-  render() {
-    const data = [
-      {
-        key: '1',
-        statement: '500',
-        description: 'sdsfdsdf',
-        time: '2021-07-140',
-      },
-      {
-        key: '2',
-        statement: '500',
-        description: 'sdsfdsdf',
-        time: '2021-07-140',
-      },
-    ];
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: [
+        {
+          key: '1',
+          statement: '500',
+          description: 'sdsfdsdf',
+          time: '2021-07-14',
+        },
+        {
+          key: '2',
+          statement: '500',
+          description: 'sdsfdsdf',
+          time: '2021-07-14',
+        },
+      ],
+    };
+  }
 
+  handleDelete = (key) => {
+    const dataSource = [...this.state.dataSource];
+    this.setState({
+      dataSource: dataSource.filter((item) => item.key !== key),
+    });
+  };
+
+  render() {
     const columns = [
       {
         title: '收支',
@@ -42,14 +54,27 @@ export default class MyBill extends React.Component {
       {
         title: '操作',
         key: 'action',
-        render: () => <a>Delect</a>,
+        render: (_, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
       },
     ];
 
+    const { dataSource } = this.state;
     const cards = [
       {
         key: 1,
-        content: <div className={styles.card1.content}></div>,
+        content: (
+          <div className={styles.content}>
+            <div className={styles.div}>当前积分余额：</div>
+            <Button type={'primary'} className={styles.button}>
+              提现
+            </Button>
+          </div>
+        ),
         style: styles.card1,
       },
       {
@@ -57,7 +82,7 @@ export default class MyBill extends React.Component {
         title: '账单详情',
         content: (
           <div className={styles.card2.content}>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={dataSource} />
           </div>
         ),
         style: styles.card2,
