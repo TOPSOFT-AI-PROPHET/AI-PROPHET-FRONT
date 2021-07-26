@@ -817,6 +817,52 @@ class Welcome extends Component {
                   />
                 </div>
               </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername18" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction29" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/Aidar.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="col-md-4">
+                  <div className="features">
+                    <h3>
+                      <FormattedMessage id="welcomepage.fourthpage.membername19" />
+                    </h3>
+                    <p>
+                      <FormattedMessage id="welcomepage.fourthpage.memberintroduction30" />
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <img
+                    src="assets/img/lbz.jpg"
+                    alt="phone"
+                    className="img-responsive center-block wow fadeIn"
+                    data-wow-duration="2s"
+                    data-wow-delay=".2s"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
