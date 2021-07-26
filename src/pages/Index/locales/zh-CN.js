@@ -81,4 +81,8 @@ export default {
   'welcomepage.fourthpage.memberintroduction27': '先知系统后端部门工程师',
   'welcomepage.fourthpage.membername17': '陶宁',
   'welcomepage.fourthpage.memberintroduction28': '先知系统产品部门',
+  'welcomepage.fourthpage.membername18': 'Aidar Garifullin',
+  'welcomepage.fourthpage.memberintroduction29': '先知系统AI部门工程师',
+  'welcomepage.fourthpage.membername19': '卢柏璋',
+  'welcomepage.fourthpage.memberintroduction30': '先知系统AI部门工程师',
 };

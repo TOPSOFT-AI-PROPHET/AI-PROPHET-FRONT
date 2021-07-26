@@ -29,44 +29,51 @@ const PageLeftContent = ({ url }) => {
   }, [1]);
 
   return (
-    <div className={style.lefttab}>
-      <div>
-        <div className={style.avatar}>
-          <Avatar size="large" src={url} />
-        </div>
-        <div className={style.tittle}>{inickname}</div>
-        <div className={style.tittle2}>
-          <FormattedMessage id="basic.modellist.balance" />
-          {`:  ${icredit}`}
-        </div>
-        <div className={style.tittle2}>
-          <FormattedMessage id="basic.modellist.modelused" />: 100次
-        </div>
-        <div className={style.tittle2}>
-          <FormattedMessage id="basic.modellist.pageviewed" />: 100次
-        </div>
+    <Card
+      bordered={false}
+      style={{
+        marginBottom: 24,
+      }}
+    >
+      <div className={style.lefttab}>
         <div>
-          <Button
-            type="primary"
-            shape="round"
-            size={state.size}
-            style={{ marginTop: '20px', marginLeft: '75px', height: '50px', width: '200px' }}
-            onClick={() => {
-              history.push('/dash/model/creator');
-            }}
-          >
-            <FormattedMessage id="basic.modellist.buildmodel" />
-          </Button>
-        </div>
-        <div className={style.tittle2} style={{ padding: ' 100px 0 0 0' }}>
-          先世界，而知万物
-        </div>
-        <div style={{ fontSize: '12px', textAlign: 'center', width: '80%', marginLeft: '40px' }}>
-          We believe our diversity is our stength. With people from every background, gender, creed
-          and religion
+          <div className={style.avatar}>
+            <Avatar size="large" src={url} />
+          </div>
+          <div className={style.tittle}>{inickname}</div>
+          <div className={style.tittle2}>
+            <FormattedMessage id="basic.modellist.balance" />
+            {`:  ${icredit}`}
+          </div>
+          <div className={style.tittle2}>
+            <FormattedMessage id="basic.modellist.modelused" />: 100次
+          </div>
+          <div className={style.tittle2}>
+            <FormattedMessage id="basic.modellist.pageviewed" />: 100次
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+            <Button
+              type="primary"
+              shape="round"
+              size={state.size}
+              style={{ width: '200px', height: '50px' }}
+              onClick={() => {
+                history.push('/dash/model/creator');
+              }}
+            >
+              <FormattedMessage id="basic.modellist.buildmodel" />
+            </Button>
+          </div>
+          <div className={style.tittle2} style={{ padding: ' 100px 0 0 0' }}>
+            先世界，而知万物
+          </div>
+          <div style={{ fontSize: '12px', textAlign: 'center', width: '80%', marginLeft: '40px' }}>
+            We believe our diversity is our stength. With people from every background, gender,
+            creed and religion
+          </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

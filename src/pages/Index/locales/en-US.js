@@ -83,4 +83,6 @@ export default {
   'welcomepage.fourthpage.memberintroduction27': 'WEB Back Department Developer',
   'welcomepage.fourthpage.membername17': 'Ning Tao',
   'welcomepage.fourthpage.memberintroduction28': 'Product department',
+  'welcomepage.fourthpage.membername18': 'Joey Lu',
+  'welcomepage.fourthpage.memberintroduction29': 'AI Department Developer',
 };
