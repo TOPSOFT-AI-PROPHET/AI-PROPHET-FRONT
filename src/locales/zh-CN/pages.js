@@ -149,4 +149,12 @@ export default {
   'basic.modellist.application': '我的模型',
   'basic.modellist.share': '分享',
   'basic.modellist.edit': '编辑',
+  'pages.account.myBill.card1.content.div': '当前积分余额：',
+  'pages.account.myBill.card1.content.button': '提现',
+  'pages.account.myBill.card2.title': '账单详情',
+  'pages.account.myBill.card2.table.title1': '收支',
+  'pages.account.myBill.card2.table.title2': '描述',
+  'pages.account.myBill.card2.table.title3': '时间',
+  'pages.account.myBill.card2.table.title4': '操作',
+  'pages.account.myBill.card2.table.title4.button': '删除',
 };

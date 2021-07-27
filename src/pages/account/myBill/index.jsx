@@ -2,6 +2,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { Card, Table, Popconfirm, Button } from 'antd';
 import React from 'react';
 import styles from './index.less';
+import { formatMessage } from 'umi';
 
 export default class MyBill extends React.Component {
   constructor(props) {
@@ -34,30 +35,30 @@ export default class MyBill extends React.Component {
   render() {
     const columns = [
       {
-        title: '收支',
+        title: formatMessage({ id: 'pages.account.myBill.card2.table.title1' }),
         dataIndex: 'statement',
         key: 'statement',
         // render: text => <a>{text}</a>,
       },
       {
-        title: '描述',
+        title: formatMessage({ id: 'pages.account.myBill.card2.table.title2' }),
         dataIndex: 'description',
         key: 'description',
         // render: text => <a>{text}</a>,
       },
       {
-        title: '时间',
+        title: formatMessage({ id: 'pages.account.myBill.card2.table.title3' }),
         dataIndex: 'time',
         key: 'time',
         // render: text => <a>{text}</a>,
       },
       {
-        title: '操作',
+        title: formatMessage({ id: 'pages.account.myBill.card2.table.title4' }),
         key: 'action',
         render: (_, record) =>
           this.state.dataSource.length >= 1 ? (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-              <a>Delete</a>
+              <a>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</a>
             </Popconfirm>
           ) : null,
       },
@@ -69,9 +70,15 @@ export default class MyBill extends React.Component {
         key: 1,
         content: (
           <div className={styles.content}>
-            <div className={styles.div}>当前积分余额：</div>
+            <div className={styles.div}>
+              {formatMessage({
+                id: 'pages.account.myBill.card1.content.div',
+              })}
+            </div>
             <Button type={'primary'} className={styles.button}>
-              提现
+              {formatMessage({
+                id: 'pages.account.myBill.card1.content.button',
+              })}
             </Button>
           </div>
         ),
@@ -79,7 +86,7 @@ export default class MyBill extends React.Component {
       },
       {
         key: 2,
-        title: '账单详情',
+        title: formatMessage({ id: 'pages.account.myBill.card2.title' }),
         content: (
           <div className={styles.card2.content}>
             <Table columns={columns} dataSource={dataSource} />

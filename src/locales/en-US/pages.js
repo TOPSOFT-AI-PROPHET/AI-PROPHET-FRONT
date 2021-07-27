@@ -166,4 +166,12 @@ export default {
   'basic.modellist.application': 'My Models',
   'basic.modellist.share': 'Share',
   'basic.modellist.edit': 'Edit',
+  'pages.account.myBill.card1.content.button': 'withdraw',
+  'pages.account.myBill.card1.content.div': 'Current credit: ',
+  'pages.account.myBill.card2.title': 'Bill details',
+  'pages.account.myBill.card2.table.title1': 'Income & expense details',
+  'pages.account.myBill.card2.table.title2': 'Description',
+  'pages.account.myBill.card2.table.title3': 'Time',
+  'pages.account.myBill.card2.table.title4': 'Action',
+  'pages.account.myBill.card2.table.title4.button': 'Delete',
 };
