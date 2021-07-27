@@ -160,4 +160,10 @@ export default {
   'basic.modellist.buildmodel': 'Start build Models',
   'basic.modellist.mymodel': 'My models',
   'basic.modellist.change-model-img': "Change model's image",
+  'basic.modellist.price': 'Price:',
+  'basic.modellist.usage': 'Usage:',
+  'basic.modellist.per': '/time',
+  'basic.modellist.application': 'My Models',
+  'basic.modellist.share': 'Share',
+  'basic.modellist.edit': 'Edit',
 };

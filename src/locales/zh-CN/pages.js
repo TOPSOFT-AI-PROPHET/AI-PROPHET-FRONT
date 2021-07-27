@@ -143,4 +143,10 @@ export default {
   'basic.modellist.buildmodel': '开始制作模型',
   'basic.modellist.mymodel': '我的模型',
   'basic.modellist.change-model-img': '修改模型头像',
+  'basic.modellist.price': '定价:',
+  'basic.modellist.usage': '使用次数:',
+  'basic.modellist.per': '/次',
+  'basic.modellist.application': '我的模型',
+  'basic.modellist.share': '分享',
+  'basic.modellist.edit': '编辑',
 };

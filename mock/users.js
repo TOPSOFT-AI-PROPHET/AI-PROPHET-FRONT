@@ -755,6 +755,76 @@ export default {
     });
   },
 
+  'POST /tasks/personalAImodel': async (req, res) => {
+    //返回某用户AI模型
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        message: 'get success',
+        data: {
+          list: [
+            {
+              model: 'tasks.aimodel',
+              pk: 1,
+              fields: {
+                ai_name: 'lalala',
+                ai_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
+                ai_status: 1,
+                ai_description: 'lalalalalala',
+                ai_type: 1,
+                // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
+                ai_credit: 5,
+                ai_true_description: 'aaaaaaaaaaaa',
+                ai_author: 'paul',
+                ai_published: 1,
+                ai_model_profile: '(str)',
+                ai_usage: 2,
+                ai_training_material_count: 1,
+                ai_frozen: 1,
+                ai_output_unit: '(str)',
+                user_id: 11,
+              },
+            },
+            {
+              model: 'tasks.aimodel',
+              pk: 2,
+              fields: {
+                ai_name: 'lalala2',
+                ai_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
+                ai_status: 1,
+                ai_description: 'lalalalalala',
+                ai_type: 1,
+                // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
+                ai_credit: 5,
+                ai_true_description: 'aaaaaaaaaaaa',
+                ai_author: 'paul',
+                ai_published: 1,
+                ai_model_profile: '(str)',
+                ai_usage: 1,
+                ai_training_material_count: 1,
+                ai_frozen: 1,
+                ai_output_unit: '(str)',
+                user_id: 11,
+              },
+            },
+          ],
+        },
+      });
+      return;
+    }
+    res.status(404).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
   'POST /tasks/modifyAIattri': async (req, res) => {
     //修改AI模型属性
     if (req.headers.authorization === 'Bearer valid_token') {
