@@ -1,14 +1,10 @@
-import {
-  DownloadOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  ShareAltOutlined,
-} from '@ant-design/icons';
-import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
-import React from 'react';
-import { connect, history } from 'umi';
-import numeral from 'numeral';
+import { EditOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { Avatar, Card, List, Tooltip } from 'antd';
+import { React, useState, useEffect } from 'react';
+import { connect, history, FormattedMessage } from 'umi';
+// import numeral from 'numeral';
 import stylesApplications from './index.less';
+import request from '@/utils/request';
 
 export function formatWan(val) {
   const v = val * 1;
@@ -37,36 +33,49 @@ export function formatWan(val) {
   return result;
 }
 
-const Applications = (props) => {
-  const { list } = props;
-  const itemMenu = (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
-          3d menu item
-        </a>
-      </Menu.Item>
-    </Menu>
-  );
+const Applications = () => {
+  const [ilist, setIlist] = useState([]);
+  useEffect(() => {
+    request('/tasks/personalAImodel', { method: 'POST' }).then((result) => {
+      setIlist(result.data.list);
+    });
+  }, [1]);
+
+  // const itemMenu = (
+  //   <Menu>
+  //     <Menu.Item>
+  //       <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
+  //         1st menu item
+  //       </a>
+  //     </Menu.Item>
+  //     <Menu.Item>
+  //       <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
+  //         2nd menu item
+  //       </a>
+  //     </Menu.Item>
+  //     <Menu.Item>
+  //       <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
+  //         3d menu item
+  //       </a>
+  //     </Menu.Item>
+  //   </Menu>
+  // );
 
   const CardInfo = ({ activeUser, newUser }) => (
     <div className={stylesApplications.cardInfo}>
       <div>
-        <p>活跃用户</p>
-        <p>{activeUser}</p>
+        <p>
+          <FormattedMessage id="basic.modellist.price" />
+        </p>
+        <p>
+          {activeUser}
+          <FormattedMessage id="basic.modellist.per" />
+        </p>
       </div>
       <div>
-        <p>新增用户</p>
+        <p>
+          <FormattedMessage id="basic.modellist.usage" />
+        </p>
         <p>{newUser}</p>
       </div>
     </div>
@@ -96,39 +105,33 @@ const Applications = (props) => {
         xl: 4,
         xxl: 4,
       }}
-      dataSource={list}
+      dataSource={ilist}
       renderItem={(item) => (
-        <List.Item key={item.id}>
+        <List.Item key={item.fields.pk}>
           <Card
             hoverable
             bodyStyle={{
               paddingBottom: 20,
             }}
             actions={[
-              <Tooltip key="download" title="下载">
-                <DownloadOutlined />
-              </Tooltip>,
-              <Tooltip title="编辑" key="edit">
+              <Tooltip title={<FormattedMessage id="basic.modellist.edit" />} key="edit">
                 <EditOutlined
                   onClick={() => {
                     history.push(`/dash/model/editor/${item.id}`);
                   }}
                 />
               </Tooltip>,
-              <Tooltip title="分享" key="share">
+              <Tooltip title={<FormattedMessage id="basic.modellist.share" />} key="share">
                 <ShareAltOutlined />
               </Tooltip>,
-              <Dropdown overlay={itemMenu} key="ellipsis">
-                <EllipsisOutlined />
-              </Dropdown>,
             ]}
           >
-            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+            <Card.Meta
+              avatar={<Avatar size="small" src={item.fields.ai_url} />}
+              title={item.fields.ai_name}
+            />
             <div className={stylesApplications.cardItemContent}>
-              <CardInfo
-                activeUser={formatWan(item.activeUser)}
-                newUser={numeral(item.newUser).format('0,0')}
-              />
+              <CardInfo activeUser={item.fields.ai_credit} newUser={item.fields.ai_usage} />
             </div>
           </Card>
         </List.Item>

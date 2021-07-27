@@ -97,14 +97,12 @@ const operationTabList = [
     key: 'applications',
     tab: (
       <span>
-        应用{' '}
+        <FormattedMessage id="basic.modellist.application" />{' '}
         <span
           style={{
             fontSize: 14,
           }}
-        >
-          (8)
-        </span>
+        ></span>
       </span>
     ),
   },
@@ -328,7 +326,8 @@ class Center extends Component {
               activeTabKey={tabKey}
               onTabChange={this.onTabChange}
             >
-              {this.renderChildrenByTabKey(tabKey)}
+              {/* {this.renderChildrenByTabKey(tabKey)} */}
+              <Applications />
             </Card>
           </Col>
         </Row>
