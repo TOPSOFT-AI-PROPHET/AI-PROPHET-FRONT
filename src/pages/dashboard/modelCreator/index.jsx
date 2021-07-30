@@ -43,6 +43,7 @@ export default class ModelCreator extends React.Component {
       loading: false,
       UploadYN: false,
       creditModalVisible: false,
+      JSONModalVisible: false,
       checkBox: false,
       dataSet: undefined,
     };
@@ -142,6 +143,10 @@ export default class ModelCreator extends React.Component {
     this.setState({ creditModalVisible });
   }
 
+  setJSONModalVisible(JSONModalVisible) {
+    this.setState({ JSONModalVisible });
+  }
+
   checkBoxOnChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
     if (e) {
@@ -228,7 +233,7 @@ export default class ModelCreator extends React.Component {
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-1',
             }),
             value: 0,
-            link: 'https://www.baidu.com',
+            link: 'https://www.example1.com',
           },
           {
             title: formatMessage({
@@ -343,21 +348,17 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: 'cant be blank',
+                      message: "You haven't generate JSON data",
                     },
                   ]}
                 >
-                  <Input
-                    onChange={(e) => {
-                      if (e) {
-                        this.formRef.current.setFieldsValue({ JSONData: e.target.value });
-                        console.log(this.formRef.current.getFieldValue());
-                      }
+                  <Button
+                    onClick={() => {
+                      this.setJSONModalVisible(true);
                     }}
-                    placeholder={formatMessage({
-                      id: 'pages.dashboard.modelCreator.card2-content-input1-placeHolder',
-                    })}
-                  />
+                  >
+                    生成JSON
+                  </Button>
                 </Form.Item>
               </Col>
               <Col xs={18} sm={16} md={12} lg={8} xl={8}>
@@ -515,6 +516,34 @@ export default class ModelCreator extends React.Component {
             ]}
           >
             <p>你确认提交么？</p>
+          </Modal>
+          <Modal
+            title={'JSON生成器'}
+            centered
+            width={888}
+            visible={this.state.JSONModalVisible}
+            onOk={() => this.setJSONModalVisible(false)}
+            onCancel={() => this.setJSONModalVisible(false)}
+            footer={[
+              <Button
+                key="back"
+                onClick={() => {
+                  this.setJSONModalVisible(false);
+                }}
+              >
+                Back
+              </Button>,
+              <Button
+                key="submit"
+                onClick={() => {
+                  this.setJSONModalVisible(false);
+                }}
+              >
+                Submit
+              </Button>,
+            ]}
+          >
+            {/* content */}
           </Modal>
         </div>
       </PageContainer>
