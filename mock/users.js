@@ -1005,6 +1005,54 @@ export default {
     });
   },
 
+  'POST /users/returnUsrID': async (req, res) => {
+    //返回用户user_id
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 'HTTP_200_OK',
+        data: {
+          code: 200,
+          user_id: 12,
+        },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
+  'GET /tasks/personalAImodelUsage': async (req, res) => {
+    //返回某用户AI模型使用次数
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        status: 200,
+        message: 'get success',
+        ai_model_usage: { ai_model_usage: 22 },
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
   'POST /users/uploadProfile': async (req, res) => {
     //上传头像
     if (req.headers.authorization === 'Bearer valid_token') {
