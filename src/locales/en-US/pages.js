@@ -156,6 +156,7 @@ export default {
     'Please check the progress in Workplace-AI-All predictions.',
   'basic.modellist.balance': 'My credit',
   'basic.modellist.modelused': 'Model has been used',
+  'basic.modellist.times': 'times',
   'basic.modellist.pageviewed': 'Page has been viewed',
   'basic.modellist.buildmodel': 'Start build Models',
   'basic.modellist.mymodel': 'My models',

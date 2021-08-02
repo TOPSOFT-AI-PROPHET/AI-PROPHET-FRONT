@@ -17,8 +17,23 @@ const state = {
 
 const PageLeftContent = ({ url }) => {
   const [inickname, setInickname] = useState([]);
-  // const [iurl, setIurl] = useState([]);
   const [icredit, setIcredit] = useState([1]);
+  const [iuserid, setIuserid] = useState([1]);
+  const [iusage, setIusage] = useState([1]);
+
+  useEffect(() => {
+    request('/users/returnUsrID', { method: 'POST' }).then((result) => {
+      setIuserid(result.data.user_id);
+    });
+  }, [1]);
+
+  useEffect(() => {
+    request('/tasks/personalAImodelUsage', { method: 'GET', data: { user_id: iuserid } }).then(
+      (result) => {
+        setIusage(result.ai_model_usage.ai_model_usage);
+      },
+    );
+  }, [1]);
 
   useEffect(() => {
     request('/users/getUserInfo', { method: 'POST' }).then((result) => {
@@ -46,7 +61,9 @@ const PageLeftContent = ({ url }) => {
             {`:  ${icredit}`}
           </div>
           <div className={style.tittle2}>
-            <FormattedMessage id="basic.modellist.modelused" />: 100次
+            <FormattedMessage id="basic.modellist.modelused" />
+            {`: ${iusage}`}
+            <FormattedMessage id="basic.modellist.times" />
           </div>
           <div className={style.tittle2}>
             <FormattedMessage id="basic.modellist.pageviewed" />: 100次
