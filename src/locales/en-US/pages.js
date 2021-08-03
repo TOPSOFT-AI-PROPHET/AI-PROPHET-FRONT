@@ -125,7 +125,7 @@ export default {
   'pages.dashboard.modelCreator.card1-content-input3': 'Introduction',
   'pages.dashboard.modelCreator.card1-content-input4':
     'The model will arrive on the store automatically after the completion of making model',
-  'pages.dashboard.modelCreator.card2-content-input1': 'Model JSON data',
+  'pages.dashboard.modelCreator.card2-content-input1': 'JSON Structure editor',
   'pages.dashboard.modelCreator.card2-content-input2': 'Output unit',
   'pages.dashboard.modelCreator.card2-content-input3': 'Algorithm',
   'pages.dashboard.modelCreator.card1-content-input1-placeHolder': 'Please input model name!',

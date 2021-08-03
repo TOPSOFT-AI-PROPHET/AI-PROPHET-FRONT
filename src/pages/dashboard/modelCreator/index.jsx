@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { formatMessage, history } from 'umi';
 import {
@@ -17,187 +17,9 @@ import {
 import styles from './index.less';
 import { ExclamationCircleOutlined, LoadingOutlined, UploadOutlined } from '@ant-design/icons';
 import request from '@/utils/request';
+import MyComponents from './JsonGenerator';
 
 const { confirm } = Modal;
-
-const ParameterField = ({ index, parameter, onChange, onDelete }) => {
-  const optionsAddHandler = () => {
-    const newOptions = [...parameter.options, { name: '', value: '' }];
-    onChange('options', newOptions);
-  };
-
-  const optionsDeleteHandler = (idx) => {
-    const newOptions = parameter.options.filter((el, elIdx) => elIdx !== idx);
-    onChange('options', newOptions);
-  };
-
-  const optionChangeHandler = (idx, key, value) => {
-    const newOptions = parameter.options.map((el, elIdx) =>
-      elIdx === idx ? { ...el, [key]: value } : el,
-    );
-    onChange('options', newOptions);
-  };
-
-  return (
-    <div className="parameterGroup">
-      <div className="parameterHeader">
-        <h2>Parameter {index}</h2>
-        <button onClick={onDelete}>Delete</button>
-      </div>
-      <div className="formRow" style={{ marginBottom: '1.25rem' }}>
-        <div className="formGroup">
-          <label>Parameter Name:</label>
-          <input
-            type="text"
-            name="name"
-            onChange={(e) => onChange(e.target.name, e.target.value)}
-            value={parameter.name}
-            autoComplete="off"
-          />
-        </div>
-        <div className="formGroup">
-          <label>Parameter Description:</label>
-          <input
-            type="text"
-            name="description"
-            onChange={(e) => onChange(e.target.name, e.target.value)}
-            value={parameter.description}
-            autoComplete="off"
-          />
-        </div>
-      </div>
-      <div className="optionsGroup">
-        {parameter.options.map((option, idx) => (
-          <div className="formRow" key={idx}>
-            <div className="formGroup">
-              <label>Option Name:</label>
-              <input
-                type="text"
-                name="name"
-                onChange={(e) => optionChangeHandler(idx, e.target.name, e.target.value)}
-                value={option.name}
-              />
-            </div>
-            <div className="formGroup">
-              <label>Options Value:</label>
-              <input
-                type="text"
-                name="value"
-                onChange={(e) => optionChangeHandler(idx, e.target.name, e.target.value)}
-                value={option.value}
-                autoComplete="off"
-              />
-            </div>
-            <button onClick={() => optionsDeleteHandler(idx)} className="formRowButton">
-              Delete
-            </button>
-          </div>
-        ))}
-        <button onClick={optionsAddHandler}>Add Option</button>
-      </div>
-    </div>
-  );
-};
-
-const MyComponents = () => {
-  const initialData = {
-    count: 2,
-    parameters: [
-      {
-        name: 'gender',
-        description: 'What is your gender?',
-        options: [
-          {
-            name: 'Male',
-            value: 'male',
-          },
-          {
-            name: 'Female',
-            value: 'female',
-          },
-        ],
-      },
-      {
-        name: 'breakfast',
-        description: 'What do you most often eat for breakfast?',
-        options: [
-          {
-            name: 'Healthy (cereal, fruit)',
-            value: 'healthy',
-          },
-          {
-            name: 'Unhealthy (donuts, pancakes)',
-            value: 'unhealthy',
-          },
-        ],
-      },
-    ],
-  };
-
-  const [parameters, setParameters] = useState(initialData.parameters);
-  const [json, setJson] = useState({});
-  const [ifile, setFile] = useState('');
-
-  useEffect(() => {
-    setJson({
-      count: parameters.length,
-      parameters,
-    });
-  }, [parameters]);
-
-  useEffect(() => {
-    const file = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(json))}`;
-    setFile(file);
-  }, [json]);
-
-  const parameterAddHandler = () => {
-    setParameters((prev) => [
-      ...prev,
-      { name: '', description: '', options: [{ name: '', value: '' }] },
-    ]);
-  };
-
-  const parameterDeleteHandler = (idx) => {
-    setParameters((prev) => prev.filter((el, elIdx) => elIdx !== idx));
-  };
-
-  const parameterChangeHandler = (idx, key, value) => {
-    setParameters((prev) =>
-      prev.map((el, elIdx) => (elIdx === idx ? { ...el, [key]: value } : el)),
-    );
-  };
-
-  return (
-    <div>
-      <div className="container">
-        <div>
-          <h1>Parameter Fields</h1>
-          <div>
-            {parameters.map((parameter, idx) => (
-              <ParameterField
-                key={idx}
-                index={idx}
-                parameter={parameter}
-                onChange={parameterChangeHandler.bind(null, idx)}
-                onDelete={parameterDeleteHandler.bind(null, idx)}
-              />
-            ))}
-          </div>
-          <button onClick={parameterAddHandler}>Add Parameter</button>
-        </div>
-        <div>
-          <h1>JSON Preview</h1>
-          <div>
-            <pre>{JSON.stringify(json, null, 2)}</pre>
-          </div>
-        </div>
-      </div>
-      <a href={ifile} className="downloadLink" download="test.json">
-        Download as JSON
-      </a>
-    </div>
-  );
-};
 
 function showConfirm() {
   confirm({
@@ -216,7 +38,9 @@ export default class ModelCreator extends React.Component {
   constructor(props) {
     super(props);
     this.formRef = React.createRef();
+    this.parentRef = React.createRef();
     this.state = {
+      JSONData: undefined,
       selectValue: undefined,
       card3Para: undefined,
       loading: false,
@@ -261,7 +85,7 @@ export default class ModelCreator extends React.Component {
   };
 
   onCheck = async () => {
-    console.log(this.state);
+    // console.log(this.state);
     try {
       const values = await this.formRef.current.validateFields();
       if (!this.state.UploadYN) {
@@ -284,10 +108,10 @@ export default class ModelCreator extends React.Component {
           dataset: this.state.dataSet,
         },
       }).then((result) => {
-        console.log(result.code);
+        // console.log(result.code);
         if (result.code === 200) {
           message.success('Success');
-          console.log('success');
+          // console.log('success');
         } else {
           message.warn('fail to submit');
         }
@@ -299,7 +123,7 @@ export default class ModelCreator extends React.Component {
   };
 
   beforeUpload = (file) => {
-    console.log(file);
+    // console.log(file);
     const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
     if (!isLt800M) {
       message.error('文件应当小于800MB');
@@ -310,7 +134,7 @@ export default class ModelCreator extends React.Component {
     reader.readAsBinaryString(file);
     // console.log(reader)
     reader.onload = (e) => {
-      console.log(e);
+      // console.log(e);
       this.setState({
         dataSet: e.target.result,
       });
@@ -333,14 +157,14 @@ export default class ModelCreator extends React.Component {
       this.setState({
         checkBox: !this.state.checkBox,
       });
-      console.log(this.formRef.current.getFieldValue());
+      // console.log(this.formRef.current.getFieldValue());
     }
   };
 
   card3RenderPara = (treeData) => {
     let crtTitle = '';
     let crtLink = '';
-    console.log(this.state.selectValue);
+    // console.log(this.state.selectValue);
 
     if (this.state.selected) {
       treeData.map((item) => {
@@ -466,7 +290,7 @@ export default class ModelCreator extends React.Component {
                     onChange={(e) => {
                       if (e) {
                         this.formRef.current.setFieldsValue({ price: e.target.value });
-                        console.log(this.formRef.current.getFieldValue());
+                        // console.log(this.formRef.current.getFieldValue());
                       }
                     }}
                     placeholder={formatMessage({
@@ -490,7 +314,7 @@ export default class ModelCreator extends React.Component {
                     onChange={(e) => {
                       if (e) {
                         this.formRef.current.setFieldsValue({ intro: e.target.value });
-                        console.log(this.formRef.current.getFieldValue());
+                        // console.log(this.formRef.current.getFieldValue());
                       }
                     }}
                     autoSize={{ minRows: 4, maxRows: 6 }}
@@ -536,7 +360,7 @@ export default class ModelCreator extends React.Component {
                       this.setJSONModalVisible(true);
                     }}
                   >
-                    生成JSON
+                    编辑器
                   </Button>
                 </Form.Item>
               </Col>
@@ -553,7 +377,7 @@ export default class ModelCreator extends React.Component {
                 >
                   <Input
                     onChange={() => {
-                      console.log(this.formRef.current.getFieldValue());
+                      // console.log(this.formRef.current.getFieldValue());
                     }}
                     placeholder={formatMessage({
                       id: 'pages.dashboard.modelCreator.card2-content-input2-placeHolder',
@@ -698,7 +522,7 @@ export default class ModelCreator extends React.Component {
             <p>你确认提交么？</p>
           </Modal>
           <Modal
-            title={'JSON生成器'}
+            title={'编辑器'}
             centered
             width={888}
             visible={this.state.JSONModalVisible}
@@ -716,6 +540,10 @@ export default class ModelCreator extends React.Component {
               <Button
                 key="submit"
                 onClick={() => {
+                  this.formRef.current.setFieldsValue({
+                    JSONData: this.parentRef.current.innerHTML,
+                  });
+                  // console.log(this.formRef.current.getFieldsValue());
                   this.setJSONModalVisible(false);
                 }}
               >
@@ -723,7 +551,7 @@ export default class ModelCreator extends React.Component {
               </Button>,
             ]}
           >
-            <MyComponents />
+            <MyComponents ref={this.parentRef} />
           </Modal>
         </div>
       </PageContainer>
