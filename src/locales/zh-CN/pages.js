@@ -114,7 +114,7 @@ export default {
   'pages.dashboard.modelCreator.card1-content-input2': '定价',
   'pages.dashboard.modelCreator.card1-content-input3': '介绍',
   'pages.dashboard.modelCreator.card1-content-input4': '制作完成后自动上架模型市场',
-  'pages.dashboard.modelCreator.card2-content-input1': '模型JSON数据',
+  'pages.dashboard.modelCreator.card2-content-input1': '模型结构编辑',
   'pages.dashboard.modelCreator.card2-content-input2': '输出单位',
   'pages.dashboard.modelCreator.card2-content-input3': '算法种类',
   'pages.dashboard.modelCreator.card1-content-input1-placeHolder': '请输入模型名称',
