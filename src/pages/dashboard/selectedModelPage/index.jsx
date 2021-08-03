@@ -40,12 +40,17 @@ export default class TransitionPg extends React.Component {
   }
 
   componentDidMount() {
-    request('/tasks/getAIMusage', {
-      method: 'post',
-      data: { ai_id: this.props.match.params.id },
+    let userID;
+    request('/users/returnUsrID', { method: 'POST' }).then((result) => {
+      userID = result.data.user_id;
+    });
+
+    request('/tasks/personalAImodelUsage', {
+      method: 'GET',
+      data: { user_id: userID },
     }).then((result) => {
       this.setState({
-        AIusage: result.data,
+        AIusage: result.ai_model_usage.ai_model_usage,
       });
     });
     request('/tasks/validate', {
