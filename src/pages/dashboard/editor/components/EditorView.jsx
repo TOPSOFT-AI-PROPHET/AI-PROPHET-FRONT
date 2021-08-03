@@ -29,6 +29,7 @@ export default class EditorView extends Component {
 
   componentDidMount() {
     let back = false;
+    // let userID;
     request('/tasks/modelAuthor', {
       method: 'POST',
       data: {
@@ -45,6 +46,7 @@ export default class EditorView extends Component {
         ai_id: this.props.match.params.id,
       },
     }).then((result) => {
+      // userID = result.data.user_id;
       this.setState({
         data: result.data,
         stack: back,
@@ -56,7 +58,7 @@ export default class EditorView extends Component {
 
   handleAvatar(uuid) {
     if (uuid) {
-      console.log(11);
+      console.log('exist uuid');
     } else {
       this.setState({
         imageURL: 'https://www.topsoftaiprophet.com/assets/img/model-emp.jpg',
@@ -162,14 +164,14 @@ export default class EditorView extends Component {
     }
   };
 
-  handleSubmit = async (id) => {
-    console.log(id);
+  handleSubmit = async () => {
     const checkboxChoice = () => {
       if (this.formRef.current.getFieldValue('stack')) {
         return 1;
       }
       return 0;
     };
+
     try {
       const values = await this.formRef.current.validateFields();
       console.log('Success:', values);
@@ -186,14 +188,14 @@ export default class EditorView extends Component {
           message.warn('提交失败');
         }
       });
-      request('/tasks/modifyAlattri', {
+      request('/tasks/updateAIM', {
         method: 'POST',
         data: {
           ai_id: this.props.match.params.id,
-          ai_name: this.formRef.current.getFieldValue('modelname'),
-          model_intro: this.formRef.current.getFieldValue('model_intro'), // description of model
-          model_price: Number(this.formRef.current.getFieldValue('model_price')),
-          model_type: this.formRef.current.getFieldValue('algorithm_type'),
+          ai_name: this.formRef.current.getFieldValue('ai_name'),
+          model_intro: this.formRef.current.getFieldValue('ai_true_description'), // description of model
+          model_price: Number(this.formRef.current.getFieldValue('ai_credit')),
+          model_type: this.formRef.current.getFieldValue('ai_type'),
           is_published: checkboxChoice(), // 1-Y 0-N
         },
       });
@@ -218,7 +220,7 @@ export default class EditorView extends Component {
               initialValues={this.state.data}
             >
               <Form.Item
-                name="modelname"
+                name="ai_name"
                 label={formatMessage({
                   id: 'accountandsettings.basic.modelname',
                 })}
@@ -241,13 +243,13 @@ export default class EditorView extends Component {
                   })}
                   onChange={(e) => {
                     if (e) {
-                      this.formRef.current.setFieldsValue({ modelname: e.target.value });
+                      this.formRef.current.setFieldsValue({ ai_name: e.target.value });
                     }
                   }}
                 />
               </Form.Item>
               <Form.Item
-                name="model_price"
+                name="ai_credit"
                 label={formatMessage({
                   id: 'accountandsettings.basic.modelprice',
                 })}
@@ -276,13 +278,13 @@ export default class EditorView extends Component {
                     if (e) {
                       console.log(e.target);
                       console.log(this.formRef.current.getFieldValue());
-                      this.formRef.current.setFieldsValue({ model_price: e.target.value });
+                      this.formRef.current.setFieldsValue({ ai_credit: e.target.value });
                     }
                   }}
                 />
               </Form.Item>
               <Form.Item
-                name="model_intro"
+                name="ai_true_description"
                 label={formatMessage({
                   id: 'accountandsettings.basic.modelinfo',
                 })}
@@ -307,16 +309,16 @@ export default class EditorView extends Component {
                   rows={4}
                   onChange={(e) => {
                     if (e) {
-                      this.formRef.current.setFieldsValue({ model_intro: e.target.value });
+                      this.formRef.current.setFieldsValue({ ai_true_description: e.target.value });
                     }
                   }}
                 />
               </Form.Item>
               <Form.Item
-                name="algorithm_type"
+                name="ai_type"
                 onChange={(e) => {
                   if (e) {
-                    this.formRef.current.setFieldsValue({ algorithm_type: e.target.value });
+                    this.formRef.current.setFieldsValue({ ai_type: e.target.value });
                   }
                 }}
                 label={formatMessage({

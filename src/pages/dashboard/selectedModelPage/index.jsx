@@ -26,7 +26,9 @@ export default class TransitionPg extends React.Component {
       current: 'mail',
       validateCode: 0,
       creditModalVisible: false,
-      AIusage: 0,
+      AIVisit: 0,
+      author: '',
+      data: {},
     };
   }
 
@@ -40,19 +42,20 @@ export default class TransitionPg extends React.Component {
   }
 
   componentDidMount() {
-    let userID;
-    request('/users/returnUsrID', { method: 'POST' }).then((result) => {
-      userID = result.data.user_id;
-    });
+    // let userID;
+    // request('/users/returnUsrID', { method: 'POST' }).then((result) => {
+    //   userID = result.data.user_id;
+    // });
 
-    request('/tasks/personalAImodelUsage', {
-      method: 'GET',
-      data: { user_id: userID },
+    request('/tasks/modelAuthor', {
+      method: 'post',
+      data: { ai_id: Number(this.props.match.params.id) },
     }).then((result) => {
       this.setState({
-        AIusage: result.ai_model_usage.ai_model_usage,
+        author: result.author,
       });
     });
+
     request('/tasks/validate', {
       method: 'POST',
       data: { ai_id: this.props.match.params.id },
@@ -61,6 +64,35 @@ export default class TransitionPg extends React.Component {
         validateCode: result.code,
       });
     });
+
+    request('/tasks/getAIMusage', {
+      // 获取模型访问次数
+      method: 'post',
+      data: { ai_id: Number(this.props.match.params.id) },
+    }).then((result) => {
+      this.setState({
+        AIVisit: result.data,
+      });
+    });
+
+    request('/tasks/modeldetail', {
+      method: 'POST',
+      data: { ai_id: this.props.match.params.id },
+    })
+      .then((result) => {
+        console.log(result);
+        this.setState({
+          data: result.data,
+        });
+      })
+      .catch((e) => console.log(e));
+  }
+
+  handleModelType() {
+    if (this.state.data.ai_type === 0 || this.state.data.ai_type === 1) {
+      return '数据集模型';
+    }
+    return '图片集模型';
   }
 
   render() {
@@ -69,32 +101,35 @@ export default class TransitionPg extends React.Component {
       {
         key: 1,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels1' }),
-        content: '',
+        content: this.state.author,
       },
       {
         key: 2,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels2' }),
-        content: '',
+        content: this.state.data.time_start,
       },
       {
         key: 3,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels3' }),
-        content: '',
+        content: this.handleModelType(),
       },
       {
         key: 4,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels4' }),
-        content: '',
+        content:
+          this.state.data.ai_type === 0
+            ? 'Traditional ML Decision Tree'
+            : 'Traditional ML Random Forest',
       },
       {
         key: 5,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels5' }),
-        content: '',
+        content: this.state.data.ai_training_material_count,
       },
       {
         key: 6,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels6' }),
-        content: '',
+        content: this.state.data.ai_output_unit,
       },
     ];
     const content = (
@@ -116,13 +151,13 @@ export default class TransitionPg extends React.Component {
         <div className={styles.statItem}>
           <Statistic
             title={<FormattedMessage id="pages.dashboard.selectedModelPage.stats1" />}
-            value={0}
+            value={this.state.data.ai_useage}
           />
         </div>
         <div className={styles.statItem}>
           <Statistic
             title={<FormattedMessage id="pages.dashboard.selectedModelPage.stats2" />}
-            value={0}
+            value={this.state.data.ai_credit}
           />
         </div>
       </div>
@@ -140,7 +175,7 @@ export default class TransitionPg extends React.Component {
           title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card1-title' })}
           style={{ margin: '0px 0px 24px 0px' }}
         >
-          <p>underdevelopment</p>
+          <p>{this.state.data.ai_true_description}</p>
         </Card>
         <Card
           title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-title' })}
@@ -151,18 +186,18 @@ export default class TransitionPg extends React.Component {
               <Avatar size={48} />
             </div>
             <div className={styles.content}>
-              <div className={styles.contentTitle}>大帅比</div>
-              <div>黄小薇永远的神</div>
+              <div className={styles.contentTitle}>{this.state.author}</div>
+              <div>underdevelopment</div>
             </div>
             <div className={styles.sideContent}>
               <p>
                 {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
-                <strong>{this.state.AIusage}</strong>{' '}
+                <strong>{this.state.data.ai_useage}</strong>{' '}
                 {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
               </p>
               <p>
                 {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para2' })}{' '}
-                <strong>{100}</strong>{' '}
+                <strong>{this.state.AIVisit}</strong>{' '}
                 {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
               </p>
             </div>
