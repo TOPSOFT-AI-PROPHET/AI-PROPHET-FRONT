@@ -85,7 +85,7 @@ export default class ModelCreator extends React.Component {
   };
 
   onCheck = async () => {
-    console.log(this.state);
+    // console.log(this.state);
     try {
       const values = await this.formRef.current.validateFields();
       if (!this.state.UploadYN) {
@@ -108,10 +108,10 @@ export default class ModelCreator extends React.Component {
           dataset: this.state.dataSet,
         },
       }).then((result) => {
-        console.log(result.code);
+        // console.log(result.code);
         if (result.code === 200) {
           message.success('Success');
-          console.log('success');
+          // console.log('success');
         } else {
           message.warn('fail to submit');
         }
@@ -123,7 +123,7 @@ export default class ModelCreator extends React.Component {
   };
 
   beforeUpload = (file) => {
-    console.log(file);
+    // console.log(file);
     const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
     if (!isLt800M) {
       message.error('文件应当小于800MB');
@@ -134,7 +134,7 @@ export default class ModelCreator extends React.Component {
     reader.readAsBinaryString(file);
     // console.log(reader)
     reader.onload = (e) => {
-      console.log(e);
+      // console.log(e);
       this.setState({
         dataSet: e.target.result,
       });
@@ -157,7 +157,7 @@ export default class ModelCreator extends React.Component {
       this.setState({
         checkBox: !this.state.checkBox,
       });
-      console.log(this.formRef.current.getFieldValue());
+      // console.log(this.formRef.current.getFieldValue());
     }
   };
 
@@ -207,13 +207,6 @@ export default class ModelCreator extends React.Component {
       </div>
     );
   };
-
-  handleJsonField(props) {
-    console.log(props);
-    // this.setState({
-    //   JSONData:value,
-    // })
-  }
 
   render() {
     const content = (
@@ -297,7 +290,7 @@ export default class ModelCreator extends React.Component {
                     onChange={(e) => {
                       if (e) {
                         this.formRef.current.setFieldsValue({ price: e.target.value });
-                        console.log(this.formRef.current.getFieldValue());
+                        // console.log(this.formRef.current.getFieldValue());
                       }
                     }}
                     placeholder={formatMessage({
@@ -321,7 +314,7 @@ export default class ModelCreator extends React.Component {
                     onChange={(e) => {
                       if (e) {
                         this.formRef.current.setFieldsValue({ intro: e.target.value });
-                        console.log(this.formRef.current.getFieldValue());
+                        // console.log(this.formRef.current.getFieldValue());
                       }
                     }}
                     autoSize={{ minRows: 4, maxRows: 6 }}
@@ -384,7 +377,7 @@ export default class ModelCreator extends React.Component {
                 >
                   <Input
                     onChange={() => {
-                      console.log(this.formRef.current.getFieldValue());
+                      // console.log(this.formRef.current.getFieldValue());
                     }}
                     placeholder={formatMessage({
                       id: 'pages.dashboard.modelCreator.card2-content-input2-placeHolder',
@@ -547,11 +540,10 @@ export default class ModelCreator extends React.Component {
               <Button
                 key="submit"
                 onClick={() => {
-                  // console.log(this.parentRef.current.innerHTML)
                   this.formRef.current.setFieldsValue({
                     JSONData: this.parentRef.current.innerHTML,
                   });
-                  console.log(this.formRef.current.getFieldsValue());
+                  // console.log(this.formRef.current.getFieldsValue());
                   this.setJSONModalVisible(false);
                 }}
               >
