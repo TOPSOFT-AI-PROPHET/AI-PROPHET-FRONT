@@ -127,7 +127,7 @@ const Applications = () => {
               <Tooltip title={<FormattedMessage id="basic.modellist.edit" />} key="edit">
                 <EditOutlined
                   onClick={() => {
-                    history.push(`/dash/model/editor/${item.id}`);
+                    history.push(`/dash/model/editor/${item.pk}`);
                   }}
                 />
               </Tooltip>,

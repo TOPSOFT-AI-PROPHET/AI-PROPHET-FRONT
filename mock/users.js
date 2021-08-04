@@ -656,7 +656,7 @@ export default {
         status: '200',
         message: 'get success',
         author: 'authorauthorauthor',
-        publish: true,
+        publish: false,
       });
       return;
     }
@@ -728,16 +728,17 @@ export default {
       res.send({
         code: 200,
         data: {
-          modelname: 'modelname',
-          model_intro: 'model_intro',
-          model_json: '{\r\n    "test":""\r\n}',
-          model_price: 1,
-          model_useage: 1,
-          author_id: 1, //id of author
-          publish_date: '2021-03-29T11:20:53Z',
-          algorithm_type: 1,
-          instance_num: 1, //new attribute
-          opunit: 'opunit', //new attribute
+          ai_name: 'name',
+          ai_true_description: 'description', // description of model
+          ai_description: '', // model json data
+          ai_credit: 15,
+          ai_useage: 223,
+          user_id: 12, //id of author
+          time_start: '123132',
+          ai_type: 1,
+          // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
+          ai_training_material_count: 10000, //new attribute
+          ai_output_unit: 'unit', //new attribute
         },
       });
       return;
