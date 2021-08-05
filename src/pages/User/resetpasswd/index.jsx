@@ -1,6 +1,6 @@
 import { Form, Button, Input, Popover, Progress, message } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { Link, connect, history, FormattedMessage, formatMessage } from 'umi';
+import { connect, history, FormattedMessage, formatMessage } from 'umi';
 import styles from './style.less';
 
 const FormItem = Form.Item;
@@ -44,7 +44,7 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     if (userAndregister.code === 200) {
       // eslint-disable-next-line
       userAndregister.code = undefined;
-      message.success('注册成功！');
+      message.success('密码修改成功！');
       history.push({
         pathname: '/user/login',
       });
@@ -178,30 +178,6 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
           </FormItem>
         </InputGroup>
 
-        <FormItem
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: formatMessage({
-                id: 'userandregister.email.required',
-              }),
-            },
-            {
-              type: 'email',
-              message: formatMessage({
-                id: 'userandregister.email.wrong-format',
-              }),
-            },
-          ]}
-        >
-          <Input
-            size="large"
-            placeholder={formatMessage({
-              id: 'userandregister.email.placeholder',
-            })}
-          />
-        </FormItem>
         <Popover
           getPopupContainer={(node) => {
             if (node && node.parentNode) {
@@ -288,11 +264,8 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
             type="primary"
             htmlType="submit"
           >
-            <FormattedMessage id="userandregister.register.register" />
+            <FormattedMessage id="userandregister.register.resetpasswd" />
           </Button>
-          <Link className={styles.login} to="/user/login">
-            <FormattedMessage id="userandregister.register.sign-in" />
-          </Link>
         </FormItem>
       </Form>
     </div>
