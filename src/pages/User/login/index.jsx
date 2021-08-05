@@ -141,6 +141,18 @@ const Login = (props) => {
           >
             <FormattedMessage id="pages.login.register" defaultMessage="注册" />
           </a>
+          <a
+            id="pages.login.forgetpasswd"
+            onClick={() => {
+              history.push('/user/forgetpasswd');
+            }}
+            style={{
+              float: 'right',
+              marginRight: 15,
+            }}
+          >
+            <FormattedMessage id="pages.login.forgetpasswd" defaultMessage="忘记密码" />
+          </a>
         </div>
       </ProForm>
     </div>
