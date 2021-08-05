@@ -145,7 +145,7 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
   return (
     <div className={styles.main}>
       <h3>
-        <FormattedMessage id="userandregister.register.register" />
+        <FormattedMessage id="userandregister.register.resetpasswd" />
       </h3>
       <Form form={form} name="UserRegister" onFinish={onFinish}>
         <InputGroup compact>
