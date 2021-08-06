@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { formatMessage } from 'umi';
 import styles from './index.less';
 
 const ParameterField = ({ index, parameter, onChange, onDelete }) => {
@@ -22,12 +23,25 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
   return (
     <div className={styles.parameterGroup}>
       <div className={styles.parameterHeader}>
-        <h2>Parameter {index}</h2>
-        <button onClick={onDelete}>Delete</button>
+        <h2>
+          {formatMessage({
+            id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.parameterHeader',
+          })}
+          {index}
+        </h2>
+        <button onClick={onDelete}>
+          {formatMessage({
+            id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.parameterHeader.button',
+          })}
+        </button>
       </div>
       <div className={styles.formRow} style={{ marginBottom: '1.25rem' }}>
         <div className={styles.formGroup}>
-          <label>Parameter Name:</label>
+          <label>
+            {formatMessage({
+              id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.formRow.formGroup1',
+            })}
+          </label>
           <input
             type="text"
             name="name"
@@ -37,7 +51,11 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Parameter Description:</label>
+          <label>
+            {formatMessage({
+              id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.formRow.formGroup2',
+            })}
+          </label>
           <input
             type="text"
             name="description"
@@ -49,9 +67,13 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
       </div>
       <div className={styles.optionsGroup}>
         {parameter.options.map((option, idx) => (
-          <div className="formRow" key={idx}>
-            <div className="formGroup">
-              <label>Option Name:</label>
+          <div className={styles.formRow} key={idx}>
+            <div className={styles.formGroup}>
+              <label>
+                {formatMessage({
+                  id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.formGroup1',
+                })}
+              </label>
               <input
                 type="text"
                 name="name"
@@ -60,7 +82,11 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
               />
             </div>
             <div className={styles.formGroup}>
-              <label>Options Value:</label>
+              <label>
+                {formatMessage({
+                  id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.formGroup2',
+                })}
+              </label>
               <input
                 type="text"
                 name="value"
@@ -69,12 +95,16 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
                 autoComplete="off"
               />
             </div>
-            <button onClick={() => optionsDeleteHandler(idx)} className="formRowButton">
-              Delete
+            <button onClick={() => optionsDeleteHandler(idx)} className={styles.formRowButton}>
+              {formatMessage({
+                id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.button',
+              })}
             </button>
           </div>
         ))}
-        <button onClick={optionsAddHandler}>Add Option</button>
+        <button onClick={optionsAddHandler}>
+          {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.button' })}
+        </button>
       </div>
     </div>
   );
@@ -156,7 +186,9 @@ const MyComponents = React.forwardRef((props, ref) => {
     <div>
       <div className={styles.container}>
         <div>
-          <h1>Parameter Fields</h1>
+          <h1>
+            {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.header1' })}
+          </h1>
           <div>
             {parameters.map((parameter, idx) => (
               <ParameterField
@@ -168,10 +200,14 @@ const MyComponents = React.forwardRef((props, ref) => {
               />
             ))}
           </div>
-          <button onClick={parameterAddHandler}>Add Parameter</button>
+          <button onClick={parameterAddHandler}>
+            {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.button' })}
+          </button>
         </div>
         <div>
-          <h1>JSON Preview</h1>
+          <h1>
+            {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.header2' })}
+          </h1>
           <div>
             <pre ref={ref}>{JSON.stringify(json, null, 2)}</pre>
           </div>
@@ -179,10 +215,12 @@ const MyComponents = React.forwardRef((props, ref) => {
       </div>
       <div className={styles.footer}>
         <a href={ifile} className={styles.downloadLink} download="test.json">
-          Download as JSON
+          {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.footer' })}
         </a>
         <button className={styles.resetButton} onClick={resetForm.bind(this)}>
-          Reset
+          {formatMessage({
+            id: 'pages.dashboard.modelCreator.JsonGenerator.container.footer.button',
+          })}
         </button>
       </div>
     </div>

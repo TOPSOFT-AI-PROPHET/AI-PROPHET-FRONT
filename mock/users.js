@@ -840,6 +840,51 @@ export default {
     });
   },
 
+  'GET /pay/personaltrans': async (req, res) => {
+    //修改AI模型属性
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        code: 200,
+        data: {
+          list: [
+            {
+              model: 'pay.t',
+              pk: 2,
+              fields: {
+                user_id: 2,
+                uuid: 'uuid',
+                status: 22,
+                method: '2323',
+                order: 'sdfs',
+                credit: 12,
+                create_time: 'sds',
+                done_time: 'sdf',
+              },
+            },
+            {
+              model: 'pay.tsdfsf',
+              pk: 3,
+              fields: {
+                user_id: 2,
+                uuid: 'uuid',
+                status: 22,
+                method: '2323',
+                order: 'sdfs',
+                credit: 12,
+                create_time: 'sds',
+                done_time: 'sdf',
+              },
+            },
+          ],
+        },
+      });
+      return;
+    }
+    res.code(404).send({
+      message: 'failed',
+    });
+  },
+
   'POST /users/train': async (req, res) => {
     //新建AI训练任务
     if (req.headers.authorization === 'Bearer valid_token') {
