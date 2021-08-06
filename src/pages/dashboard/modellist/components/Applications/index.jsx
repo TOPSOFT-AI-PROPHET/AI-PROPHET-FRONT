@@ -35,20 +35,16 @@ export function formatWan(val) {
 
 const Applications = () => {
   const [ilist, setIlist] = useState([]);
-  const [iuserid, setIuserid] = useState([1]);
 
   useEffect(() => {
     request('/users/returnUsrID', { method: 'POST' }).then((result) => {
-      setIuserid(result.data.user_id);
+      request('/tasks/personalAImodel', {
+        method: 'POST',
+        data: { user_id: result.data.user_id },
+      }).then((result2) => {
+        setIlist(result2.data.list);
+      });
     });
-  }, [1]);
-
-  useEffect(() => {
-    request('/tasks/personalAImodel', { method: 'POST', data: { user_id: iuserid } }).then(
-      (result) => {
-        setIlist(result.data.list);
-      },
-    );
   }, [1]);
 
   // const itemMenu = (

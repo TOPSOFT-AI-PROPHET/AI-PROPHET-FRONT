@@ -3,26 +3,47 @@ import { Card, Table, Popconfirm, Button } from 'antd';
 import React from 'react';
 import styles from './index.less';
 import { formatMessage } from 'umi';
+import request from '@/utils/request';
 
 export default class MyBill extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dataSource: [
-        {
-          key: '1',
-          statement: '500',
-          description: 'sdsfdsdf',
-          time: '2021-07-14',
-        },
-        {
-          key: '2',
-          statement: '500',
-          description: 'sdsfdsdf',
-          time: '2021-07-14',
-        },
+        // {
+        //   key: '1',
+        //   statement: '500',
+        //   description: 'sdsfdsdf',
+        //   time: '2021-07-14',
+        // },
+        // {
+        //   key: '2',
+        //   statement: '500',
+        //   description: 'sdsfdsdf',
+        //   time: '2021-07-14',
+        // },
       ],
+      data: [],
     };
+  }
+
+  componentDidMount() {
+    request('/users/returnUsrID', {
+      method: 'post',
+    }).then((result) => {
+      console.log(result.data.user_id);
+      request('/pay/personaltrans', {
+        method: 'GET',
+        data: {
+          user_id: result.data.user_id,
+        },
+      }).then((result2) => {
+        console.log(result2.data.list);
+        this.setState({
+          data: result2.data.list,
+        });
+      });
+    });
   }
 
   handleDelete = (key) => {
@@ -65,6 +86,7 @@ export default class MyBill extends React.Component {
     ];
 
     const { dataSource } = this.state;
+
     const cards = [
       {
         key: 1,

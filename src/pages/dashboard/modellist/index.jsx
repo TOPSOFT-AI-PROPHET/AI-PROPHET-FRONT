@@ -18,21 +18,18 @@ const state = {
 const PageLeftContent = ({ url }) => {
   const [inickname, setInickname] = useState([]);
   const [icredit, setIcredit] = useState([1]);
-  const [iuserid, setIuserid] = useState([1]);
+
   const [iusage, setIusage] = useState([1]);
 
   useEffect(() => {
     request('/users/returnUsrID', { method: 'POST' }).then((result) => {
-      setIuserid(result.data.user_id);
+      request('/tasks/personalAImodelUsage', {
+        method: 'GET',
+        data: { user_id: result.data.user_id },
+      }).then((result2) => {
+        setIusage(result2.ai_model_usage.ai_model_usage);
+      });
     });
-  }, [1]);
-
-  useEffect(() => {
-    request('/tasks/personalAImodelUsage', { method: 'GET', data: { user_id: iuserid } }).then(
-      (result) => {
-        setIusage(result.ai_model_usage.ai_model_usage);
-      },
-    );
   }, [1]);
 
   useEffect(() => {

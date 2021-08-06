@@ -154,6 +154,37 @@ export default {
   'pages.dashboard.modelCreator.card4-content-uploadNote': 'Please upload a file less than 800MB',
   'pages.dashboard.modelCreator.card4-content-footer':
     'Please check the progress in Workplace-AI-All predictions.',
+  'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.parameterHeader': 'Parameter ',
+  'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.parameterHeader.button': 'Delete',
+  'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.formRow.formGroup1': 'Parameter Name:',
+  'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.formRow.formGroup2':
+    'Parameter Description:',
+  'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.formGroup1': 'Option Name:',
+  'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.formGroup2': 'Options Value:',
+  'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.button': 'Delete',
+  'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.button': 'Add Option',
+  'pages.dashboard.modelCreator.JsonGenerator.container.header1': 'Parameter Fields',
+  'pages.dashboard.modelCreator.JsonGenerator.container.button': 'Add Parameter',
+  'pages.dashboard.modelCreator.JsonGenerator.container.header2': 'JSON Preview',
+  'pages.dashboard.modelCreator.JsonGenerator.container.footer': 'Download as JSON',
+  'pages.dashboard.modelCreator.JsonGenerator.container.footer.button': 'Reset',
+  'pages.dashboard.modelCreator.Modal1.footer.button1': 'Back',
+  'pages.dashboard.modelCreator.Modal2.footer.button1': 'Back',
+  'pages.dashboard.modelCreator.Modal1.footer.button2': 'Submit',
+  'pages.dashboard.modelCreator.Modal2.footer.button2': 'Submit',
+  'pages.dashboard.modelCreator.Modal2.title': 'Editor',
+  'pages.dashboard.modelCreator.Form.FormItem.Button.submit': 'Submit',
+  'pages.dashboard.modelCreator.Form.FormItem.Button.cancel': 'Cancel',
+  'pages.dashboard.modelCreator.Form.FormItem.showConfirm.title': 'Are you sure to quit?',
+  'pages.dashboard.modelCreator.Form.FormItem.showConfirm.content':
+    'Click OK to return to my model',
+  'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.upload':
+    "You haven't upload dataset!",
+  'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit': 'Failed to submit!',
+  'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit.success':
+    'Submitted successfully!',
+  'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error':
+    'The file should be less than 800MB!',
   'basic.modellist.balance': 'My credit',
   'basic.modellist.modelused': 'Model has been used',
   'basic.modellist.times': 'times',

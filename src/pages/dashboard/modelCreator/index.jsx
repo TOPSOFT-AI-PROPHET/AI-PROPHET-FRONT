@@ -24,9 +24,9 @@ const { confirm } = Modal;
 function showConfirm() {
   confirm({
     style: { top: '30%' },
-    title: '你确定要退出么？',
+    title: formatMessage({ id: 'pages.dashboard.modelCreator.Form.FormItem.showConfirm.title' }),
     icon: <ExclamationCircleOutlined />,
-    content: '点击确定将返回我的模型管理',
+    content: formatMessage({ id: 'pages.dashboard.modelCreator.Form.FormItem.showConfirm.title' }),
     onOk() {
       history.push('/dash/model/model');
     },
@@ -45,7 +45,7 @@ export default class ModelCreator extends React.Component {
       card3Para: undefined,
       loading: false,
       UploadYN: false,
-      creditModalVisible: false,
+      submitModalVisible: false,
       JSONModalVisible: false,
       checkBox: false,
       dataSet: undefined,
@@ -90,7 +90,11 @@ export default class ModelCreator extends React.Component {
       const values = await this.formRef.current.validateFields();
       if (!this.state.UploadYN) {
         // 上传验证尚未完善
-        message.warn('未上传数据集');
+        message.warn(
+          formatMessage({
+            id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.upload',
+          }),
+        );
         this.scrollToAnchor('Upload');
         return;
       }
@@ -110,15 +114,28 @@ export default class ModelCreator extends React.Component {
       }).then((result) => {
         // console.log(result.code);
         if (result.code === 200) {
-          message.success('Success');
+          message.success(
+            formatMessage({
+              id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit.success',
+            }),
+          );
+          history.push('/dash/model/model');
           // console.log('success');
         } else {
-          message.warn('fail to submit');
+          message.warn(
+            formatMessage({
+              id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit',
+            }),
+          );
         }
       });
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
-      message.warn('提交校验失败');
+      message.warn(
+        formatMessage({
+          id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit',
+        }),
+      );
     }
   };
 
@@ -126,9 +143,13 @@ export default class ModelCreator extends React.Component {
     // console.log(file);
     const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
     if (!isLt800M) {
-      message.error('文件应当小于800MB');
+      message.error(
+        formatMessage({
+          id: 'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error',
+        }),
+      );
       // error message for valid size
-      return false;
+      return Upload.LIST_IGNORE;
     }
     const reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -142,8 +163,14 @@ export default class ModelCreator extends React.Component {
     return false;
   };
 
-  setcreditModalVisible(creditModalVisible) {
-    this.setState({ creditModalVisible });
+  uploadOnRemove = () => {
+    console.log('removed');
+    // this.setState({
+    // })
+  };
+
+  setSubmitModalVisible(submitModalVisible) {
+    this.setState({ submitModalVisible });
   }
 
   setJSONModalVisible(JSONModalVisible) {
@@ -360,7 +387,7 @@ export default class ModelCreator extends React.Component {
                       this.setJSONModalVisible(true);
                     }}
                   >
-                    编辑器
+                    {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.title' })}
                   </Button>
                 </Form.Item>
               </Col>
@@ -434,7 +461,12 @@ export default class ModelCreator extends React.Component {
         content: (
           <div id={'Upload'} className={styles.content}>
             <div className={styles.upload}>
-              <Upload maxCount={1} beforeUpload={this.beforeUpload} onChange={this.uploadOnChange}>
+              <Upload
+                maxCount={1}
+                beforeUpload={this.beforeUpload}
+                onRemove={this.uploadOnRemove}
+                onChange={this.uploadOnChange}
+              >
                 <Button className={styles.button}>
                   {this.state.loading ? <LoadingOutlined /> : <UploadOutlined />}
                   {formatMessage({ id: 'pages.dashboard.modelCreator.card4-content-button' })}
@@ -472,10 +504,12 @@ export default class ModelCreator extends React.Component {
                   type="primary"
                   style={{ float: 'right' }}
                   onClick={() => {
-                    this.setcreditModalVisible(true);
+                    this.setSubmitModalVisible(true);
                   }}
                 >
-                  提交
+                  {formatMessage({
+                    id: 'pages.dashboard.modelCreator.Form.FormItem.Button.submit',
+                  })}
                 </Button>
                 <Button
                   type="primary"
@@ -484,7 +518,9 @@ export default class ModelCreator extends React.Component {
                     showConfirm();
                   }}
                 >
-                  取消
+                  {formatMessage({
+                    id: 'pages.dashboard.modelCreator.Form.FormItem.Button.cancel',
+                  })}
                 </Button>
               </Form.Item>
             </div>
@@ -494,17 +530,17 @@ export default class ModelCreator extends React.Component {
               id: 'pages.dashboard.aimodels.cardModal.title',
             })}
             centered
-            visible={this.state.creditModalVisible}
-            onOk={() => this.setcreditModalVisible(false)}
-            onCancel={() => this.setcreditModalVisible(false)}
+            visible={this.state.submitModalVisible}
+            onOk={() => this.setSubmitModalVisible(false)}
+            onCancel={() => this.setSubmitModalVisible(false)}
             footer={[
               <Button
                 key="back"
                 onClick={() => {
-                  this.setcreditModalVisible(false);
+                  this.setSubmitModalVisible(false);
                 }}
               >
-                Back
+                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal1.footer.button1' })}
               </Button>,
               <Button
                 key="submit"
@@ -512,17 +548,17 @@ export default class ModelCreator extends React.Component {
                 type="primary"
                 onClick={() => {
                   this.onCheck();
-                  this.setcreditModalVisible(false);
+                  this.setSubmitModalVisible(false);
                 }}
               >
-                Submit
+                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal1.footer.button2' })}
               </Button>,
             ]}
           >
             <p>你确认提交么？</p>
           </Modal>
           <Modal
-            title={'编辑器'}
+            title={formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.title' })}
             centered
             width={888}
             visible={this.state.JSONModalVisible}
@@ -535,7 +571,7 @@ export default class ModelCreator extends React.Component {
                   this.setJSONModalVisible(false);
                 }}
               >
-                Back
+                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.footer.button1' })}
               </Button>,
               <Button
                 key="submit"
@@ -547,7 +583,7 @@ export default class ModelCreator extends React.Component {
                   this.setJSONModalVisible(false);
                 }}
               >
-                Submit
+                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.footer.button2' })}
               </Button>,
             ]}
           >
