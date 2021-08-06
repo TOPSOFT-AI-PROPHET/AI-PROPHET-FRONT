@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from './index.less';
 
 const ParameterField = ({ index, parameter, onChange, onDelete }) => {
   const optionsAddHandler = () => {
@@ -19,13 +20,13 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
   };
 
   return (
-    <div className="parameterGroup">
-      <div className="parameterHeader">
+    <div className={styles.parameterGroup}>
+      <div className={styles.parameterHeader}>
         <h2>Parameter {index}</h2>
         <button onClick={onDelete}>Delete</button>
       </div>
-      <div className="formRow" style={{ marginBottom: '1.25rem' }}>
-        <div className="formGroup">
+      <div className={styles.formRow} style={{ marginBottom: '1.25rem' }}>
+        <div className={styles.formGroup}>
           <label>Parameter Name:</label>
           <input
             type="text"
@@ -35,7 +36,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
             autoComplete="off"
           />
         </div>
-        <div className="formGroup">
+        <div className={styles.formGroup}>
           <label>Parameter Description:</label>
           <input
             type="text"
@@ -46,7 +47,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
           />
         </div>
       </div>
-      <div className="optionsGroup">
+      <div className={styles.optionsGroup}>
         {parameter.options.map((option, idx) => (
           <div className="formRow" key={idx}>
             <div className="formGroup">
@@ -58,7 +59,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
                 value={option.name}
               />
             </div>
-            <div className="formGroup">
+            <div className={styles.formGroup}>
               <label>Options Value:</label>
               <input
                 type="text"
@@ -153,7 +154,7 @@ const MyComponents = React.forwardRef((props, ref) => {
 
   return (
     <div>
-      <div className="container">
+      <div className={styles.container}>
         <div>
           <h1>Parameter Fields</h1>
           <div>
@@ -176,11 +177,14 @@ const MyComponents = React.forwardRef((props, ref) => {
           </div>
         </div>
       </div>
-      <a href={ifile} className="downloadLink" download="test.json">
-        Download as JSON
-      </a>
-      <br />
-      <button onClick={resetForm.bind(this)}>Reset</button>
+      <div className={styles.footer}>
+        <a href={ifile} className={styles.downloadLink} download="test.json">
+          Download as JSON
+        </a>
+        <button className={styles.resetButton} onClick={resetForm.bind(this)}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 });
