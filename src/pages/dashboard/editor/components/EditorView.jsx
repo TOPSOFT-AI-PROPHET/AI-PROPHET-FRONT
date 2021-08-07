@@ -186,7 +186,7 @@ export default class EditorView extends Component {
         if (result.code === 200) {
           message.success('success');
         } else {
-          message.warn('提交失败');
+          message.warn('fail');
         }
       });
       request('/tasks/updateAIM', {
@@ -199,6 +199,12 @@ export default class EditorView extends Component {
           model_type: this.formRef.current.getFieldValue('ai_type'),
           is_published: checkboxChoice(), // 1-Y 0-N
         },
+      }).then((result) => {
+        if (result.code === 200) {
+          message.success('success');
+        } else {
+          message.warn('fail');
+        }
       });
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
