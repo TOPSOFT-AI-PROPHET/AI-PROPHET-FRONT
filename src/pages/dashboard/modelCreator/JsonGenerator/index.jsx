@@ -111,6 +111,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
 };
 
 const MyComponents = React.forwardRef((props, ref) => {
+  console.log(props);
   const initialData = {
     count: 2,
     parameters: [

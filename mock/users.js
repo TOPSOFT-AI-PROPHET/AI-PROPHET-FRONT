@@ -845,7 +845,7 @@ export default {
     });
   },
 
-  'POST /pay/personaltrans': async (req, res) => {
+  'POST /pay/personalTrans': async (req, res) => {
     //修改AI模型属性
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
@@ -859,7 +859,7 @@ export default {
                 user_id: 2,
                 uuid: 'uuid',
                 status: 22,
-                method: '2323',
+                method: 'charge',
                 order: 'sdfs',
                 credit: 12,
                 create_time: 'sds',
@@ -873,7 +873,7 @@ export default {
                 user_id: 2,
                 uuid: 'uuid',
                 status: 22,
-                method: '2323',
+                method: 'deduction',
                 order: 'sdfs',
                 credit: 12,
                 create_time: 'sds',

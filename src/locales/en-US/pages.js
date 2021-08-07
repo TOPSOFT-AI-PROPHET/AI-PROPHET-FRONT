@@ -185,6 +185,8 @@ export default {
     'Submitted successfully!',
   'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error':
     'The file should be less than 800MB!',
+  'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error.fileType':
+    'The file should be in .CSV format!',
   'basic.modellist.balance': 'My credit',
   'basic.modellist.modelused': 'Model has been used',
   'basic.modellist.times': 'times',
