@@ -141,7 +141,9 @@ export default class ModelCreator extends React.Component {
   };
 
   beforeUpload = (file) => {
-    const suffix = file.name.split('.')[1];
+    const Array = file.name.split('.');
+    const suffix = file.name.split('.')[Array.length - 1];
+    console.log(suffix);
     const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
     const isCSV = suffix.toLowerCase() === 'csv';
     if (!isLt800M) {
