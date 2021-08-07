@@ -9,21 +9,8 @@ export default class MyBill extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: [
-        // {
-        //   key: '1',
-        //   statement: '500',
-        //   description: 'sdsfdsdf',
-        //   time: '2021-07-14',
-        // },
-        // {
-        //   key: '2',
-        //   statement: '500',
-        //   description: 'sdsfdsdf',
-        //   time: '2021-07-14',
-        // },
-      ],
       data: [],
+      credit: 0,
     };
   }
 
@@ -44,12 +31,19 @@ export default class MyBill extends React.Component {
         });
       });
     });
+
+    request('/users/getUserInfo', { method: 'POST' })
+      .then((result) => {
+        this.setState({ credit: result.data.credit });
+      })
+      .catch((e) => console.log(e));
   }
 
-  handleDelete = (key) => {
-    const dataSource = [...this.state.dataSource];
+  handleDelete = (pk) => {
+    const data = [...this.state.data];
+    console.log(data);
     this.setState({
-      dataSource: dataSource.filter((item) => item.key !== key),
+      data: data.filter((item) => item.pk !== pk),
     });
   };
 
@@ -57,35 +51,37 @@ export default class MyBill extends React.Component {
     const columns = [
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title1' }),
-        dataIndex: 'statement',
+        dataIndex: ['fields', 'credit'],
         key: 'statement',
         // render: text => <a>{text}</a>,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title2' }),
-        dataIndex: 'description',
+        dataIndex: ['fields', 'order'],
         key: 'description',
         // render: text => <a>{text}</a>,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title3' }),
-        dataIndex: 'time',
+        dataIndex: ['fields', 'create_time'],
         key: 'time',
         // render: text => <a>{text}</a>,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title4' }),
         key: 'action',
-        render: (_, record) =>
-          this.state.dataSource.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+        render: (_, record) => {
+          // console.log(record)
+          return this.state.data.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.pk)}>
               <a>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</a>
             </Popconfirm>
-          ) : null,
+          ) : null;
+        },
       },
     ];
 
-    const { dataSource } = this.state;
+    const { data } = this.state;
 
     const cards = [
       {
@@ -96,6 +92,7 @@ export default class MyBill extends React.Component {
               {formatMessage({
                 id: 'pages.account.myBill.card1.content.div',
               })}
+              {this.state.credit}
             </div>
             <Button type={'primary'} className={styles.button}>
               {formatMessage({
@@ -111,7 +108,7 @@ export default class MyBill extends React.Component {
         title: formatMessage({ id: 'pages.account.myBill.card2.title' }),
         content: (
           <div className={styles.card2.content}>
-            <Table columns={columns} dataSource={dataSource} />
+            <Table columns={columns} dataSource={data} />
           </div>
         ),
         style: styles.card2,

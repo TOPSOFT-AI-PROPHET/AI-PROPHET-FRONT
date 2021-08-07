@@ -24,6 +24,7 @@ export default class EditorView extends Component {
       Rotation: 0,
       croppedImage: undefined,
       croppedAreaPixels: undefined,
+      data: [],
     };
   }
 
@@ -209,7 +210,7 @@ export default class EditorView extends Component {
     const { Option } = Select;
     const { confirm } = Modal;
 
-    if (this.state.data) {
+    if (this.state.data[0]) {
       return (
         <div className={styles.baseView} ref={this.getViewDom}>
           <div className={styles.left}>
@@ -217,7 +218,7 @@ export default class EditorView extends Component {
               ref={this.formRef}
               layout="vertical"
               hideRequiredMark
-              initialValues={this.state.data}
+              initialValues={this.state.data[0].fields}
             >
               <Form.Item
                 name="ai_name"

@@ -13,6 +13,7 @@ import {
   Row,
   Col,
   Modal,
+  Empty,
 } from 'antd';
 import styles from './index.less';
 import { FormattedMessage, formatMessage, history } from 'umi';
@@ -28,7 +29,11 @@ export default class TransitionPg extends React.Component {
       creditModalVisible: false,
       AIVisit: 0,
       author: '',
-      data: {},
+      data: [
+        {
+          fields: {},
+        },
+      ],
     };
   }
 
@@ -89,7 +94,10 @@ export default class TransitionPg extends React.Component {
   }
 
   handleModelType() {
-    if (this.state.data.ai_type === 0 || this.state.data.ai_type === 1) {
+    if (!this.state.data[0]) {
+      return '';
+    }
+    if (this.state.data[0].fields.ai_type === 0 || this.state.data[0].fields.ai_type === 1) {
       return '数据集模型';
     }
     return '图片集模型';
@@ -106,7 +114,7 @@ export default class TransitionPg extends React.Component {
       {
         key: 2,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels2' }),
-        content: this.state.data.time_start,
+        content: this.state.data[0].fields.time_start,
       },
       {
         key: 3,
@@ -117,19 +125,19 @@ export default class TransitionPg extends React.Component {
         key: 4,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels4' }),
         content:
-          this.state.data.ai_type === 0
+          this.state.data[0].fields.ai_type === 0
             ? 'Traditional ML Decision Tree'
             : 'Traditional ML Random Forest',
       },
       {
         key: 5,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels5' }),
-        content: this.state.data.ai_training_material_count,
+        content: this.state.data[0].fields.ai_training_material_count,
       },
       {
         key: 6,
         label: formatMessage({ id: 'pages.dashboard.selectedModelPage.labels6' }),
-        content: this.state.data.ai_output_unit,
+        content: this.state.data[0].fields.ai_output_unit,
       },
     ];
     const content = (
@@ -151,167 +159,171 @@ export default class TransitionPg extends React.Component {
         <div className={styles.statItem}>
           <Statistic
             title={<FormattedMessage id="pages.dashboard.selectedModelPage.stats1" />}
-            value={this.state.data.ai_useage}
+            value={this.state.data[0].fields.ai_usage}
           />
         </div>
         <div className={styles.statItem}>
           <Statistic
             title={<FormattedMessage id="pages.dashboard.selectedModelPage.stats2" />}
-            value={this.state.data.ai_credit}
+            value={this.state.data[0].fields.ai_credit}
           />
         </div>
       </div>
     );
-    return (
-      <PageContainer content={content} extraContent={extraContent}>
-        <div style={{ margin: '-24px -24px 24px -24px' }}>
-          <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
-            <Menu.Item key="mail" icon={<FileTextOutlined />} style={{ left: '6px' }}>
-              {formatMessage({ id: 'pages.dashboard.selectedModelPage.Menu1' })}
-            </Menu.Item>
-          </Menu>
-        </div>
-        <Card
-          title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card1-title' })}
-          style={{ margin: '0px 0px 24px 0px' }}
-        >
-          <p>{this.state.data.ai_true_description}</p>
-        </Card>
-        <Card
-          title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-title' })}
-          style={{ margin: '0px 0px 24px 0px' }}
-        >
-          <div className={styles.card2Content}>
-            <div className={styles.cardAvatar}>
-              <Avatar size={48} />
-            </div>
-            <div className={styles.content}>
-              <div className={styles.contentTitle}>{this.state.author}</div>
-              <div>underdevelopment</div>
-            </div>
-            <div className={styles.sideContent}>
-              <p>
-                {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
-                <strong>{this.state.data.ai_useage}</strong>{' '}
-                {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
-              </p>
-              <p>
-                {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para2' })}{' '}
-                <strong>{this.state.AIVisit}</strong>{' '}
-                {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
-              </p>
-            </div>
+
+    if (this.state.data[0]) {
+      return (
+        <PageContainer content={content} extraContent={extraContent}>
+          <div style={{ margin: '-24px -24px 24px -24px' }}>
+            <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal">
+              <Menu.Item key="mail" icon={<FileTextOutlined />} style={{ left: '6px' }}>
+                {formatMessage({ id: 'pages.dashboard.selectedModelPage.Menu1' })}
+              </Menu.Item>
+            </Menu>
           </div>
-        </Card>
-        <Card>
-          <Row justify="space-around" align="middle">
-            <Col xs={16} sm={16} md={10} lg={10} xl={8}>
-              <div>
-                <Form ref={this.formRef}>
-                  <Form.Item>
-                    <Input.TextArea
-                      style={{ width: 'auto' }}
-                      showCount
-                      maxLength={50}
-                      placeholder={formatMessage({
-                        id: 'pages.dashboard.selectedModelPage.card3.input-placeholder',
-                      })}
-                      rows={5}
-                      onChange={(e) => {
-                        if (e) {
-                          this.formRef.current.setFieldsValue({ modelinfo: e.target.value });
-                        }
+          <Card
+            title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card1-title' })}
+            style={{ margin: '0px 0px 24px 0px' }}
+          >
+            <p>{this.state.data[0].fields.ai_true_description}</p>
+          </Card>
+          <Card
+            title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-title' })}
+            style={{ margin: '0px 0px 24px 0px' }}
+          >
+            <div className={styles.card2Content}>
+              <div className={styles.cardAvatar}>
+                <Avatar size={48} />
+              </div>
+              <div className={styles.content}>
+                <div className={styles.contentTitle}>{this.state.author}</div>
+                <div>underdevelopment</div>
+              </div>
+              <div className={styles.sideContent}>
+                <p>
+                  {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
+                  <strong>{this.state.data[0].fields.ai_usage}</strong>{' '}
+                  {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
+                </p>
+                <p>
+                  {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para2' })}{' '}
+                  <strong>{this.state.AIVisit}</strong>{' '}
+                  {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
+                </p>
+              </div>
+            </div>
+          </Card>
+          <Card>
+            <Row justify="space-around" align="middle">
+              <Col xs={16} sm={16} md={10} lg={10} xl={8}>
+                <div>
+                  <Form ref={this.formRef}>
+                    <Form.Item>
+                      <Input.TextArea
+                        style={{ width: 'auto' }}
+                        showCount
+                        maxLength={50}
+                        placeholder={formatMessage({
+                          id: 'pages.dashboard.selectedModelPage.card3.input-placeholder',
+                        })}
+                        rows={5}
+                        onChange={(e) => {
+                          if (e) {
+                            this.formRef.current.setFieldsValue({ modelinfo: e.target.value });
+                          }
+                        }}
+                      />
+                    </Form.Item>
+                  </Form>
+                </div>
+              </Col>
+              <Col xs={24} sm={24} md={14} lg={14} xl={16}>
+                <div style={{ lineHeight: '120px', textAlign: 'center', alignItems: 'center' }}>
+                  <Space size={50}>
+                    <Button
+                      type="primary"
+                      shape="round"
+                      onClick={() => {
+                        request('/tasks/validate', {
+                          method: 'POST',
+                          data: { ai_id: this.props.match.params.id },
+                        }).then(() => {
+                          if (this.state.validateCode === 200) {
+                            history.push(
+                              `/dash/prediction/newprediction/${this.props.match.params.id}`,
+                            );
+                          } else {
+                            this.setcreditModalVisible(true);
+                          }
+                        });
                       }}
-                    />
-                  </Form.Item>
-                </Form>
-              </div>
-            </Col>
-            <Col xs={24} sm={24} md={14} lg={14} xl={16}>
-              <div style={{ lineHeight: '120px', textAlign: 'center', alignItems: 'center' }}>
-                <Space size={50}>
-                  <Button
-                    type="primary"
-                    shape="round"
-                    onClick={() => {
-                      request('/tasks/validate', {
-                        method: 'POST',
-                        data: { ai_id: this.props.match.params.id },
-                      }).then(() => {
-                        if (this.state.validateCode === 200) {
-                          history.push(
-                            `/dash/prediction/newprediction/${this.props.match.params.id}`,
-                          );
-                        } else {
-                          this.setcreditModalVisible(true);
-                        }
-                      });
-                    }}
-                    // onClick={() => {
-                    //   if (this.state.validateCode === 200) {
-                    //     history.push(
-                    //       `/dash/prediction/newprediction/${this.props.match.params.id}`,
-                    //     );
-                    //   } else {
-                    //     this.setcreditModalVisible(true);
-                    //   }
-                    // }}
-                  >
-                    {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button1' })}
-                  </Button>
-                  <Button type="primary" shape="round">
-                    {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button2' })}
-                  </Button>
-                </Space>
-              </div>
-            </Col>
-          </Row>
-        </Card>
-        <Modal
-          title={formatMessage({
-            id: 'pages.dashboard.aimodels.cardModal.title',
-          })}
-          centered
-          visible={this.state.creditModalVisible}
-          onOk={() => this.setcreditModalVisible(false)}
-          onCancel={() => this.setcreditModalVisible(false)}
-          footer={[
-            <Button
-              key="back"
-              onClick={() => {
-                this.setcreditModalVisible(false);
-              }}
-            >
-              <ImportOutlined />
-              {formatMessage({
-                id: 'pages.dashboard.aimodels.button1',
-              })}
-            </Button>,
-            <Button
-              key="TopUp"
-              onClick={() => {
-                history.push(`/dash/account/topup`);
-              }}
-            >
-              <DollarOutlined />
-              {formatMessage({
-                id: 'accountandsettings.basic.topup',
-              })}
-            </Button>,
-          ]}
-        >
-          <p>
-            {formatMessage({
-              id: 'pages.dashboard.aimodels.modalcontent1',
+                      // onClick={() => {
+                      //   if (this.state.validateCode === 200) {
+                      //     history.push(
+                      //       `/dash/prediction/newprediction/${this.props.match.params.id}`,
+                      //     );
+                      //   } else {
+                      //     this.setcreditModalVisible(true);
+                      //   }
+                      // }}
+                    >
+                      {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button1' })}
+                    </Button>
+                    <Button type="primary" shape="round">
+                      {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button2' })}
+                    </Button>
+                  </Space>
+                </div>
+              </Col>
+            </Row>
+          </Card>
+          <Modal
+            title={formatMessage({
+              id: 'pages.dashboard.aimodels.cardModal.title',
             })}
-          </p>
-          <p>
-            {formatMessage({
-              id: 'pages.dashboard.aimodels.modalcontent2',
-            })}
-          </p>
-        </Modal>
-      </PageContainer>
-    );
+            centered
+            visible={this.state.creditModalVisible}
+            onOk={() => this.setcreditModalVisible(false)}
+            onCancel={() => this.setcreditModalVisible(false)}
+            footer={[
+              <Button
+                key="back"
+                onClick={() => {
+                  this.setcreditModalVisible(false);
+                }}
+              >
+                <ImportOutlined />
+                {formatMessage({
+                  id: 'pages.dashboard.aimodels.button1',
+                })}
+              </Button>,
+              <Button
+                key="TopUp"
+                onClick={() => {
+                  history.push(`/dash/account/topup`);
+                }}
+              >
+                <DollarOutlined />
+                {formatMessage({
+                  id: 'accountandsettings.basic.topup',
+                })}
+              </Button>,
+            ]}
+          >
+            <p>
+              {formatMessage({
+                id: 'pages.dashboard.aimodels.modalcontent1',
+              })}
+            </p>
+            <p>
+              {formatMessage({
+                id: 'pages.dashboard.aimodels.modalcontent2',
+              })}
+            </p>
+          </Modal>
+        </PageContainer>
+      );
+    }
+    return <Empty />;
   }
 }
