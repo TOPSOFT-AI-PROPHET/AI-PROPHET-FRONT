@@ -9,20 +9,6 @@ export default class MyBill extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: [
-        // {
-        //   key: '1',
-        //   statement: '500',
-        //   description: 'sdsfdsdf',
-        //   time: '2021-07-14',
-        // },
-        // {
-        //   key: '2',
-        //   statement: '500',
-        //   description: 'sdsfdsdf',
-        //   time: '2021-07-14',
-        // },
-      ],
       data: [],
     };
   }
@@ -47,9 +33,9 @@ export default class MyBill extends React.Component {
   }
 
   handleDelete = (key) => {
-    const dataSource = [...this.state.dataSource];
+    const data = [...this.state.dataSource];
     this.setState({
-      dataSource: dataSource.filter((item) => item.key !== key),
+      data: data.filter((item) => item.key !== key),
     });
   };
 
@@ -57,19 +43,19 @@ export default class MyBill extends React.Component {
     const columns = [
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title1' }),
-        dataIndex: 'statement',
+        dataIndex: ['fields', 'credit'],
         key: 'statement',
         // render: text => <a>{text}</a>,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title2' }),
-        dataIndex: 'description',
+        dataIndex: ['fields', 'order'],
         key: 'description',
         // render: text => <a>{text}</a>,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title3' }),
-        dataIndex: 'time',
+        dataIndex: ['fields', 'create_time'],
         key: 'time',
         // render: text => <a>{text}</a>,
       },
@@ -77,7 +63,7 @@ export default class MyBill extends React.Component {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title4' }),
         key: 'action',
         render: (_, record) =>
-          this.state.dataSource.length >= 1 ? (
+          this.state.data.length >= 1 ? (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
               <a>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</a>
             </Popconfirm>
@@ -85,7 +71,7 @@ export default class MyBill extends React.Component {
       },
     ];
 
-    const { dataSource } = this.state;
+    const { data } = this.state;
 
     const cards = [
       {
@@ -111,7 +97,7 @@ export default class MyBill extends React.Component {
         title: formatMessage({ id: 'pages.account.myBill.card2.title' }),
         content: (
           <div className={styles.card2.content}>
-            <Table columns={columns} dataSource={dataSource} />
+            <Table columns={columns} dataSource={data} />
           </div>
         ),
         style: styles.card2,
