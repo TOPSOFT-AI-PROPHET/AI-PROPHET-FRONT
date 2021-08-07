@@ -18,14 +18,14 @@ export default class MyBill extends React.Component {
     request('/users/returnUsrID', {
       method: 'post',
     }).then((result) => {
-      console.log(result.data.user_id);
-      request('/pay/personaltrans', {
+      // console.log(result.data.user_id);
+      request('/pay/personalTrans', {
         method: 'post',
         data: {
           user_id: result.data.user_id,
         },
       }).then((result2) => {
-        console.log(result2.data.list);
+        // console.log(result2.data.list);
         this.setState({
           data: result2.data.list,
         });
@@ -41,7 +41,7 @@ export default class MyBill extends React.Component {
 
   handleDelete = (pk) => {
     const data = [...this.state.data];
-    console.log(data);
+    // console.log(data);
     this.setState({
       data: data.filter((item) => item.pk !== pk),
     });
@@ -53,19 +53,37 @@ export default class MyBill extends React.Component {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title1' }),
         dataIndex: ['fields', 'credit'],
         key: 'statement',
-        // render: text => <a>{text}</a>,
+        render: (_, record) => {
+          // console.log(_)
+          // console.log(record)
+          if (record.fields.method === 'charge') {
+            return `+${_}`;
+          }
+          if (record.fields.method === 'deduction') {
+            return `-${_}`;
+          }
+          return 'unknown';
+        },
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title2' }),
-        dataIndex: ['fields', 'order'],
+        dataIndex: ['fields', 'method'],
         key: 'description',
-        // render: text => <a>{text}</a>,
+        render: (text) => {
+          if (text === 'charge') {
+            return '充值';
+          }
+          if (text === 'deduction') {
+            return '扣费';
+          }
+          return 'unknown';
+        },
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title3' }),
         dataIndex: ['fields', 'create_time'],
         key: 'time',
-        // render: text => <a>{text}</a>,
+        render: (text) => `${text}`,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title4' }),

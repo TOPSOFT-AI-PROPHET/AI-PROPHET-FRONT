@@ -162,6 +162,8 @@ export default {
   'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit': '提交失败!',
   'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit.success': '提交成功!',
   'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error': '文件应当小于800MB ！',
+  'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error.fileType':
+    '文件应当为.CSV格式!',
   'pages.dashboard.modelCreator.Modal2.title': '编辑器',
   'basic.modellist.balance': '我的余额',
   'basic.modellist.modelused': '模型被使用了',

@@ -47,7 +47,7 @@ export default class ModelCreator extends React.Component {
       UploadYN: false,
       submitModalVisible: false,
       JSONModalVisible: false,
-      checkBox: false,
+      checkBox: true,
       dataSet: undefined,
     };
   }
@@ -88,6 +88,7 @@ export default class ModelCreator extends React.Component {
     // console.log(this.state);
     try {
       const values = await this.formRef.current.validateFields();
+      console.log(values);
       if (!this.state.UploadYN) {
         // 上传验证尚未完善
         message.warn(
@@ -120,7 +121,7 @@ export default class ModelCreator extends React.Component {
             }),
           );
           history.push('/dash/model/model');
-          // console.log('success');
+          console.log('success');
         } else {
           message.warn(
             formatMessage({
@@ -140,8 +141,9 @@ export default class ModelCreator extends React.Component {
   };
 
   beforeUpload = (file) => {
-    // console.log(file);
+    const suffix = file.name.split('.')[1];
     const isLt800M = file.size / 1024 / 1024 < 800; // limited picture size(not using)
+    const isCSV = suffix.toLowerCase() === 'csv';
     if (!isLt800M) {
       message.error(
         formatMessage({
@@ -151,8 +153,19 @@ export default class ModelCreator extends React.Component {
       // error message for valid size
       return Upload.LIST_IGNORE;
     }
+
+    if (!isCSV) {
+      message.error(
+        formatMessage({
+          id: 'pages.dashboard.modelCreator.Form.FormItem.beforeUpload.message.error.fileType',
+        }),
+      );
+      // error message for valid size
+      return Upload.LIST_IGNORE;
+    }
+
     const reader = new FileReader();
-    reader.readAsBinaryString(file);
+    reader.readAsDataURL(file);
     // console.log(reader)
     reader.onload = (e) => {
       // console.log(e);
@@ -160,6 +173,7 @@ export default class ModelCreator extends React.Component {
         dataSet: e.target.result,
       });
     };
+
     return false;
   };
 
@@ -180,13 +194,19 @@ export default class ModelCreator extends React.Component {
   checkBoxOnChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
     if (e) {
-      this.formRef.current.setFieldsValue({ checkBox: e.target.checked });
+      // this.formRef.current.setFieldsValue({ checkBox: e.target.checked });
       this.setState({
         checkBox: !this.state.checkBox,
       });
       // console.log(this.formRef.current.getFieldValue());
     }
   };
+
+  resetJsonData() {
+    // this.formRef.current.setFieldsValue({
+    //   JSONData: undefined,
+    // })
+  }
 
   card3RenderPara = (treeData) => {
     let crtTitle = '';
@@ -287,7 +307,8 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: 'cant be blank',
+                      min: 5,
+                      message: '名称至少为 5 个字符',
                     },
                   ]}
                   name="modelName"
@@ -305,12 +326,13 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: 'cant be blank',
+                      message: "Can't be blank",
                     },
                     {
                       pattern: /^[1-9][0-9]*$/,
-                      message: 'only can be number',
+                      message: 'Only can be number',
                     },
+                    {},
                   ]}
                 >
                   <Input
@@ -333,7 +355,8 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: 'cant be blank',
+                      min: 10,
+                      message: '模型介绍至少为 10 个字符',
                     },
                   ]}
                 >
@@ -355,7 +378,7 @@ export default class ModelCreator extends React.Component {
               </Col>
               <Col xs={18} sm={16} md={12} lg={8} xl={8}>
                 <Form.Item name="checkBox">
-                  <Checkbox onChange={this.checkBoxOnChange}>
+                  <Checkbox defaultChecked onChange={this.checkBoxOnChange}>
                     {formatMessage({ id: 'pages.dashboard.modelCreator.card1-content-input4' })}
                   </Checkbox>
                 </Form.Item>
@@ -398,7 +421,7 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: 'cant be blank',
+                      message: "Can't be blank",
                     },
                   ]}
                 >
@@ -431,7 +454,7 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: 'cant be blank',
+                      message: "Can't be blank",
                     },
                   ]}
                 >
@@ -525,7 +548,7 @@ export default class ModelCreator extends React.Component {
               </Form.Item>
             </div>
           </Form>
-          <Modal
+          <Modal // 防误触确认提交modal
             title={formatMessage({
               id: 'pages.dashboard.aimodels.cardModal.title',
             })}
