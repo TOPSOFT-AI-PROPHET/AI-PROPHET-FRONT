@@ -24,7 +24,7 @@ const PageLeftContent = ({ url }) => {
   useEffect(() => {
     request('/users/returnUsrID', { method: 'POST' }).then((result) => {
       request('/tasks/personalAImodelUsage', {
-        method: 'GET',
+        method: 'POST',
         data: { user_id: result.data.user_id },
       }).then((result2) => {
         setIusage(result2.ai_model_usage.ai_model_usage);

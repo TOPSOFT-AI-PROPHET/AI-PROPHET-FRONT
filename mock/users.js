@@ -845,7 +845,7 @@ export default {
     });
   },
 
-  'GET /pay/personaltrans': async (req, res) => {
+  'POST /pay/personaltrans': async (req, res) => {
     //修改AI模型属性
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
@@ -1081,7 +1081,7 @@ export default {
     });
   },
 
-  'GET /tasks/personalAImodelUsage': async (req, res) => {
+  'POST /tasks/personalAImodelUsage': async (req, res) => {
     //返回某用户AI模型使用次数
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
