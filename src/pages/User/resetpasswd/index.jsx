@@ -1,7 +1,8 @@
 import { Form, Button, Input, Popover, Progress, message } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { connect, history, FormattedMessage, formatMessage } from 'umi';
+import { connect, history, FormattedMessage, formatMessage, useIntl } from 'umi';
 import styles from './style.less';
+import { ProFormCaptcha, ProFormText } from '@ant-design/pro-form';
 
 const FormItem = Form.Item;
 const InputGroup = Input.Group;
@@ -33,6 +34,7 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
   const [prefix] = useState('86');
   const [popover, setpopover] = useState(false);
   const confirmDirty = false;
+  const intl = useIntl();
   let interval;
   const [form] = Form.useForm();
   useEffect(() => {
@@ -254,6 +256,81 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
               id: 'userandregister.confirm-password.placeholder',
             })}
           />
+        </FormItem>
+
+        <FormItem>
+          {/* {status === 'error' && !submitting && (
+            <LoginMessage content="验证码错误" />
+          )} */}
+          <>
+            <ProFormText
+              name="email"
+              placeholder={intl.formatMessage({
+                id: 'pages.login.email.placeholder',
+                defaultMessage: '请输入邮箱',
+              })}
+              rules={[
+                {
+                  required: true,
+                  message: (
+                    <FormattedMessage
+                      id="pages.login.email.required"
+                      defaultMessage="请输入邮箱！"
+                    />
+                  ),
+                },
+                {
+                  pattern: /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/,
+                  message: (
+                    <FormattedMessage id="pages.login.email.invalid" defaultMessage="格式错误！" />
+                  ),
+                },
+              ]}
+            />
+            <ProFormCaptcha
+              captchaProps={{
+                size: 'large',
+              }}
+              placeholder={intl.formatMessage({
+                id: 'pages.login.captcha.placeholder',
+                defaultMessage: '请输入验证码',
+              })}
+              captchaTextRender={(timing, count) => {
+                if (timing) {
+                  return `${count} ${intl.formatMessage({
+                    id: 'pages.getCaptchaSecondText',
+                    defaultMessage: '获取验证码',
+                  })}`;
+                }
+
+                return intl.formatMessage({
+                  id: 'pages.login.phoneLogin.getVerificationCode',
+                  defaultMessage: '获取验证码',
+                });
+              }}
+              name="captcha"
+              rules={[
+                {
+                  required: true,
+                  message: (
+                    <FormattedMessage
+                      id="pages.login.captcha.required"
+                      defaultMessage="请输入验证码！"
+                    />
+                  ),
+                },
+              ]}
+              // onGetCaptcha={async ( ) => {
+              //   const result = await getFakeCaptcha( );
+
+              //   if (result === false) {
+              //     return;
+              //   }
+
+              //   message.success('获取验证码成功！验证码为：1234');
+              // }}
+            />
+          </>
         </FormItem>
 
         <FormItem>

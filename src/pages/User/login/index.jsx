@@ -144,7 +144,7 @@ const Login = (props) => {
           <a
             id="pages.login.forgetpasswd"
             onClick={() => {
-              history.push('/user/forgetpasswd');
+              history.push('/user/resetpasswd');
             }}
             style={{
               float: 'right',
