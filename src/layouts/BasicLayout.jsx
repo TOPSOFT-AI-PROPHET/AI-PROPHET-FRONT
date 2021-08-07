@@ -3,7 +3,7 @@
  * You can view component api by:
  * https://github.com/ant-design/ant-design-pro-layout
  */
-import ProLayout, { DefaultFooter, SettingDrawer } from '@ant-design/pro-layout';
+import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
 import { Result, Button } from 'antd';
@@ -86,17 +86,22 @@ const BasicLayout = (props) => {
         {...props}
         {...settings}
         onCollapse={handleMenuCollapse}
-        menuHeaderRender={() => (
-          <div
-            id="customize_menu_header"
-            onClick={() => {
-              history.push('/dash/dashboard/workplace');
-            }}
-            style={{ width: '100%' }}
-          >
-            <img src={logo} style={{ height: '65px' }} />
-          </div>
-        )}
+        menuHeaderRender={() => {
+          if (!props.collapsed) {
+            return (
+              <div
+                id="customize_menu_header"
+                onClick={() => {
+                  history.push('/dash/dashboard/workplace');
+                }}
+                style={{ width: '100%' }}
+              >
+                <img src={logo} style={{ height: '65px' }} />
+              </div>
+            );
+          }
+          return <span></span>;
+        }}
         menuItemRender={(menuItemProps, defaultDom) => {
           if (
             menuItemProps.isUrl ||
