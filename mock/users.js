@@ -727,19 +727,24 @@ export default {
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
         code: 200,
-        data: {
-          ai_name: 'name',
-          ai_true_description: 'description', // description of model
-          ai_description: '', // model json data
-          ai_credit: 15,
-          ai_useage: 223,
-          user_id: 12, //id of author
-          time_start: '123132',
-          ai_type: 1,
-          // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
-          ai_training_material_count: 10000, //new attribute
-          ai_output_unit: 'unit', //new attribute
-        },
+        data: [
+          {
+            model: 'sdfs',
+            fields: {
+              ai_name: 'name',
+              ai_true_description: 'description', // description of model
+              ai_description: '', // model json data
+              ai_credit: 15,
+              ai_usage: 223,
+              user_id: 12, //id of author
+              time_start: '123132',
+              ai_type: 1,
+              // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
+              ai_training_material_count: 10000, //new attribute
+              ai_output_unit: 'unit', //new attribute
+            },
+          },
+        ],
       });
       return;
     }

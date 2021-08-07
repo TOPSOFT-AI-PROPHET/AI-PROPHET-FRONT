@@ -10,6 +10,7 @@ export default class MyBill extends React.Component {
     super(props);
     this.state = {
       data: [],
+      credit: 0,
     };
   }
 
@@ -30,12 +31,19 @@ export default class MyBill extends React.Component {
         });
       });
     });
+
+    request('/users/getUserInfo', { method: 'POST' })
+      .then((result) => {
+        this.setState({ credit: result.data.credit });
+      })
+      .catch((e) => console.log(e));
   }
 
-  handleDelete = (key) => {
-    const data = [...this.state.dataSource];
+  handleDelete = (pk) => {
+    const data = [...this.state.data];
+    console.log(data);
     this.setState({
-      data: data.filter((item) => item.key !== key),
+      data: data.filter((item) => item.pk !== pk),
     });
   };
 
@@ -62,12 +70,14 @@ export default class MyBill extends React.Component {
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title4' }),
         key: 'action',
-        render: (_, record) =>
-          this.state.data.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+        render: (_, record) => {
+          // console.log(record)
+          return this.state.data.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.pk)}>
               <a>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</a>
             </Popconfirm>
-          ) : null,
+          ) : null;
+        },
       },
     ];
 
@@ -82,6 +92,7 @@ export default class MyBill extends React.Component {
               {formatMessage({
                 id: 'pages.account.myBill.card1.content.div',
               })}
+              {this.state.credit}
             </div>
             <Button type={'primary'} className={styles.button}>
               {formatMessage({
