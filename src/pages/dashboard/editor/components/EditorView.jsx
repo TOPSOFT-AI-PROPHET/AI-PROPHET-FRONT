@@ -176,19 +176,7 @@ export default class EditorView extends Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log('Success:', values);
-      request('/tasks/updateAIauthor', {
-        method: 'post',
-        data: {
-          ai_id: this.props.match.params.id,
-          publish: checkboxChoice(),
-        },
-      }).then((result) => {
-        if (result.code === 200) {
-          message.success('success');
-        } else {
-          message.warn('fail');
-        }
-      });
+
       request('/tasks/updateAIM', {
         method: 'POST',
         data: {
@@ -310,7 +298,7 @@ export default class EditorView extends Component {
               >
                 <Input.TextArea
                   showCount
-                  maxLength={50}
+                  maxLength={100}
                   placeholder={formatMessage({
                     id: 'accountandsettings.basic.modelinfo-placeHolder',
                   })}

@@ -87,17 +87,6 @@ const Applications = () => {
     </div>
   );
 
-  // const [iainame, setIainame] = useState([]);
-  // const [iurl, setIurl]
-
-  // useEffect(() => {
-  //   request('/users/personalAImodel', { method: 'POST' }).then((result) => {
-  //     setIainame(result.data.list.fields.ai_name);
-  //     setIurl(result.data.list.fields.ai_url);
-  //   });
-
-  // }, [1]);
-
   return (
     <List
       rowKey="id"

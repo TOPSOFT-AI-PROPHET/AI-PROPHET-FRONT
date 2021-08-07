@@ -19,6 +19,7 @@ import styles from './index.less';
 import { FormattedMessage, formatMessage, history } from 'umi';
 import { FileTextOutlined, ImportOutlined, DollarOutlined } from '@ant-design/icons';
 import request from '@/utils/request';
+import COS from 'cos-js-sdk-v5';
 
 export default class TransitionPg extends React.Component {
   constructor(props) {
@@ -28,7 +29,10 @@ export default class TransitionPg extends React.Component {
       validateCode: 0,
       creditModalVisible: false,
       AIVisit: 0,
-      author: '',
+      author: undefined,
+      author_id: undefined,
+      author_uuid: undefined,
+      author_sing: undefined,
       data: [
         {
           fields: {},
@@ -57,8 +61,12 @@ export default class TransitionPg extends React.Component {
       data: { ai_id: Number(this.props.match.params.id) },
     }).then((result) => {
       this.setState({
+        author_id: result.user_id,
+        author_uuid: result.uuid,
         author: result.author,
+        author_sing: result.user_singnature,
       });
+      this.handleAvatar(result.uuid);
     });
 
     request('/tasks/validate', {
@@ -91,6 +99,32 @@ export default class TransitionPg extends React.Component {
         });
       })
       .catch((e) => console.log(e));
+  }
+
+  handleAvatar(uuid) {
+    if (uuid) {
+      const cos = new COS({
+        SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
+        SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
+      });
+      cos.getObjectUrl(
+        {
+          Bucket: 'prophetsrc-1305001068' /* 必须 */,
+          Region: 'ap-chengdu' /* 必须 */,
+          Key: `${uuid}.jpg` /* 必须 */,
+        },
+        (err, data) => {
+          this.setState({
+            author_profile_url: data.Url,
+          });
+        },
+      );
+    } else {
+      this.setState({
+        author_profile_url:
+          'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png',
+      });
+    }
   }
 
   handleModelType() {
@@ -193,11 +227,11 @@ export default class TransitionPg extends React.Component {
           >
             <div className={styles.card2Content}>
               <div className={styles.cardAvatar}>
-                <Avatar size={48} />
+                <Avatar size={48} src={this.state.author_profile_url} />
               </div>
               <div className={styles.content}>
                 <div className={styles.contentTitle}>{this.state.author}</div>
-                <div>underdevelopment</div>
+                <div>{this.state.author_sing}</div>
               </div>
               <div className={styles.sideContent}>
                 <p>

@@ -656,7 +656,10 @@ export default {
         status: '200',
         message: 'get success',
         author: 'authorauthorauthor',
+        user_singnature: 'sdfsdf',
         publish: false,
+        user_id: 2,
+        uuid: '',
       });
       return;
     }
@@ -845,7 +848,7 @@ export default {
     });
   },
 
-  'GET /pay/personalTrans': async (req, res) => {
+  'POST /pay/personalTrans': async (req, res) => {
     //修改AI模型属性
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({

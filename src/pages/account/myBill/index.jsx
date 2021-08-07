@@ -20,7 +20,7 @@ export default class MyBill extends React.Component {
     }).then((result) => {
       // console.log(result.data.user_id);
       request('/pay/personalTrans', {
-        method: 'GET',
+        method: 'POST',
         data: {
           user_id: result.data.user_id,
         },
