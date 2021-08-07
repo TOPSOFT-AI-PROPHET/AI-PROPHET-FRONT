@@ -202,6 +202,7 @@ export default class EditorView extends Component {
       }).then((result) => {
         if (result.code === 200) {
           message.success('success');
+          history.push('/dash/model/model');
         } else {
           message.warn('fail');
         }
