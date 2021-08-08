@@ -88,19 +88,19 @@ export default class ModelCreator extends React.Component {
   onCheck = async () => {
     // console.log(this.state);
     try {
-      // const values = await this.formRef.current.validateFields();
-      // console.log(values);
-      // if (!this.state.UploadYN) {
-      //   // 上传验证尚未完善
-      //   message.warn(
-      //     formatMessage({
-      //       id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.upload',
-      //     }),
-      //   );
-      //   this.scrollToAnchor('Upload');
-      //   return;
-      // }
-      // console.log('Success:', values);
+      const values = await this.formRef.current.validateFields();
+      console.log(values);
+      if (!this.state.UploadYN) {
+        // 上传验证尚未完善
+        message.warn(
+          formatMessage({
+            id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.upload',
+          }),
+        );
+        this.scrollToAnchor('Upload');
+        return;
+      }
+      console.log('Success:', values);
       request('/tasks/train', {
         method: 'POST',
         data: {
