@@ -76,4 +76,6 @@ export default {
   'userandregister.option.B': 'Colleague B',
   'userandregister.option.C': 'Colleague C',
   'userandregister.navBar.lang': 'Languages',
+  'userandregister.successful.register': 'Register Successfully!',
+  'userandregister.invalid.usernameoremail': 'Invalid Username or Email address',
 };
