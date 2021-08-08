@@ -29,7 +29,7 @@ export default class EditorView extends Component {
   }
 
   componentDidMount() {
-    let back = false;
+    let stack = false;
     // let userID;
     request('/tasks/modelAuthor', {
       method: 'POST',
@@ -37,8 +37,8 @@ export default class EditorView extends Component {
         ai_id: this.props.match.params.id,
       },
     }).then((result) => {
-      back = result.publish;
-      console.log(back);
+      stack = result.publish;
+      console.log(stack);
     });
 
     request('/tasks/modeldetail', {
@@ -50,9 +50,9 @@ export default class EditorView extends Component {
       // userID = result.data.user_id;
       this.setState({
         data: result.data,
-        stack: back,
+        stack,
       });
-      this.formRef.current.setFieldsValue({ stack: back });
+      this.formRef.current.setFieldsValue({ stack });
       this.handleAvatar(false);
     });
   }
@@ -260,20 +260,21 @@ export default class EditorView extends Component {
                     ),
                   },
                   {
-                    pattern: /^[1-9][0-9]*$/,
-                    message: 'it should be a whole number',
+                    pattern: /^([1-9][0-9]*)+(.[0-9]{1,2})?$/,
+                    message: '请填写小数（至多两位）或者整数',
                   },
                 ]}
               >
                 <Input
                   type="number"
+                  step={0.01}
                   placeholder={formatMessage({
                     id: 'accountandsettings.basic.modelprice-placeHolder',
                   })}
                   onChange={(e) => {
                     if (e) {
-                      console.log(e.target);
-                      console.log(this.formRef.current.getFieldValue());
+                      // console.log(e.target);
+                      // console.log(this.formRef.current.getFieldValue());
                       this.formRef.current.setFieldsValue({ ai_credit: e.target.value });
                     }
                   }}
