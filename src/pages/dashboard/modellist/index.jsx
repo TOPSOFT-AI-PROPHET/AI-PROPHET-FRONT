@@ -63,7 +63,7 @@ const PageLeftContent = ({ url }) => {
             <FormattedMessage id="basic.modellist.times" />
           </div>
           <div className={style.tittle2}>
-            <FormattedMessage id="basic.modellist.pageviewed" />: 100次
+            <FormattedMessage id="basic.modellist.pageviewed" />: -次
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
             <Button
