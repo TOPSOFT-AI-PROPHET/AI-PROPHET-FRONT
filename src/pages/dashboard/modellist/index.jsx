@@ -27,7 +27,7 @@ const PageLeftContent = ({ url }) => {
         method: 'POST',
         data: { user_id: result.data.user_id },
       }).then((result2) => {
-        setIusage(result2.ai_model_usage.ai_model_usage);
+        setIusage(result2.ai_model_usage);
       });
     });
   }, [1]);
