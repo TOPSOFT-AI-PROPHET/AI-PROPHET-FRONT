@@ -656,7 +656,7 @@ export default {
         status: '200',
         message: 'get success',
         author: 'authorauthorauthor',
-        user_singnature: 'sdfsdf',
+        user_singnature: 'sdsdsdssd',
         publish: false,
         user_id: 2,
         uuid: '',

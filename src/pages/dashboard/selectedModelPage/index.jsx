@@ -266,7 +266,11 @@ export default class TransitionPg extends React.Component {
               </div>
               <div className={styles.content}>
                 <div className={styles.contentTitle}>{this.state.author}</div>
-                <div>{this.state.author_sing}</div>
+                <div>
+                  {this.state.author_sing
+                    ? this.state.author_sing
+                    : '仰天大笑出门去，我辈岂是蓬蒿人。'}
+                </div>
               </div>
               <div className={styles.sideContent}>
                 <p>
