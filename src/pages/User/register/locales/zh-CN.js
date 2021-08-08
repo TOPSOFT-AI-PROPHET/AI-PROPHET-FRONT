@@ -72,4 +72,6 @@ export default {
   'userandregister.option.B': '同事乙',
   'userandregister.option.C': '同事丙',
   'userandregister.navBar.lang': '语言',
+  'userandregister.successful.register': '注册成功!',
+  'userandregister.invalid.usernameoremail': '用户名或邮箱不可用',
 };

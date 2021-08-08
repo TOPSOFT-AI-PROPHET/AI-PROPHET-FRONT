@@ -44,12 +44,12 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     if (userAndregister.code === 200) {
       // eslint-disable-next-line
       userAndregister.code = undefined;
-      message.success('注册成功！');
+      message.success('userandregister.successful.register');
       history.push({
         pathname: '/user/login',
       });
     } else if (userAndregister.code === 403) {
-      message.error('用户名或邮箱不可用');
+      message.error('userandregister.invalid.usernameoremail');
       history.push({
         pathname: '/user/register',
       });

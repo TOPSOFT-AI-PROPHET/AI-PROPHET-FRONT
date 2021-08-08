@@ -61,7 +61,7 @@ const Login = (props) => {
             key="account"
             tab={intl.formatMessage({
               id: 'pages.login.accountLogin.tab',
-              defaultMessage: '账户密码登录',
+              defaultMessage: 'Sign In',
             })}
           />
         </Tabs>
@@ -84,17 +84,11 @@ const Login = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.username.placeholder',
-                defaultMessage: '用户名或邮箱:',
               })}
               rules={[
                 {
                   required: true,
-                  message: (
-                    <FormattedMessage
-                      id="pages.login.username.required"
-                      defaultMessage="请输入用户名或邮箱!"
-                    />
-                  ),
+                  message: <FormattedMessage id="pages.login.username.required" />,
                 },
               ]}
             />
@@ -106,17 +100,11 @@ const Login = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.password.placeholder',
-                defaultMessage: '密码:',
               })}
               rules={[
                 {
                   required: true,
-                  message: (
-                    <FormattedMessage
-                      id="pages.login.password.required"
-                      defaultMessage="请输入密码！"
-                    />
-                  ),
+                  message: <FormattedMessage id="pages.login.password.required" />,
                 },
               ]}
             />
@@ -128,7 +116,7 @@ const Login = (props) => {
           }}
         >
           <ProFormCheckbox noStyle name="autoLogin">
-            <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
+            <FormattedMessage id="pages.login.rememberMe" />
           </ProFormCheckbox>
           <a
             id="pages.login.register"
@@ -139,7 +127,7 @@ const Login = (props) => {
               float: 'right',
             }}
           >
-            <FormattedMessage id="pages.login.register" defaultMessage="注册" />
+            <FormattedMessage id="pages.login.register" />
           </a>
           <a
             id="pages.login.forgetpasswd"
@@ -151,7 +139,7 @@ const Login = (props) => {
               marginRight: 15,
             }}
           >
-            <FormattedMessage id="pages.login.forgetpasswd" defaultMessage="忘记密码" />
+            <FormattedMessage id="pages.login.forgetpasswd" />
           </a>
         </div>
       </ProForm>

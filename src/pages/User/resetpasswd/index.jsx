@@ -46,12 +46,20 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
     if (userAndregister.code === 200) {
       // eslint-disable-next-line
       userAndregister.code = undefined;
-      message.success('密码修改成功！');
+      message.success(
+        formatMessage({
+          id: 'resetpasswd.reset.successfully',
+        }),
+      );
       history.push({
         pathname: '/user/login',
       });
     } else if (userAndregister.code === 403) {
-      message.error('用户名或邮箱不可用');
+      message.error(
+        formatMessage({
+          id: 'resetpasswd.reset.usernameoremailinvalid',
+        }),
+      );
       history.push({
         pathname: '/user/register',
       });
@@ -267,7 +275,6 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
               name="email"
               placeholder={intl.formatMessage({
                 id: 'pages.login.email.placeholder',
-                defaultMessage: '请输入邮箱',
               })}
               rules={[
                 {
@@ -293,31 +300,23 @@ const Register = ({ submitting, dispatch, userAndregister }) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.captcha.placeholder',
-                defaultMessage: '请输入验证码',
               })}
               captchaTextRender={(timing, count) => {
                 if (timing) {
                   return `${count} ${intl.formatMessage({
                     id: 'pages.getCaptchaSecondText',
-                    defaultMessage: '获取验证码',
                   })}`;
                 }
 
                 return intl.formatMessage({
                   id: 'pages.login.phoneLogin.getVerificationCode',
-                  defaultMessage: '获取验证码',
                 });
               }}
               name="captcha"
               rules={[
                 {
                   required: true,
-                  message: (
-                    <FormattedMessage
-                      id="pages.login.captcha.required"
-                      defaultMessage="请输入验证码！"
-                    />
-                  ),
+                  message: <FormattedMessage id="pages.login.captcha.required" />,
                 },
               ]}
               // onGetCaptcha={async ( ) => {
