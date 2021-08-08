@@ -125,7 +125,7 @@ const Applications = () => {
               // avatar={<Avatar size="small" src={item.fields.ai_url} />}
               avatar={
                 <Avatar
-                  size="small"
+                  size="large"
                   src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
                 />
               }
