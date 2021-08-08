@@ -41,7 +41,6 @@ export default class ModelCreator extends React.Component {
     this.parentRef = React.createRef();
     this.state = {
       submitState: false,
-      JSONData: undefined,
       selectValue: undefined,
       card3Para: undefined,
       loading: false,
@@ -139,7 +138,7 @@ export default class ModelCreator extends React.Component {
                   },
                 })
                 .then(() => {
-                  history.push('/dash/model/model');
+                  // history.push('/dash/model/model');
                 });
             });
           console.log('success');
@@ -214,6 +213,14 @@ export default class ModelCreator extends React.Component {
     this.setState({ JSONModalVisible });
   }
 
+  setParentState(state) {
+    this.setState(state);
+  }
+
+  setParentFormField(value) {
+    this.formRef.current.setFieldsValue(value);
+  }
+
   checkBoxOnChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
     if (e) {
@@ -224,12 +231,6 @@ export default class ModelCreator extends React.Component {
       // console.log(this.formRef.current.getFieldValue());
     }
   };
-
-  resetJsonData() {
-    // this.formRef.current.setFieldsValue({
-    //   JSONData: undefined,
-    // })
-  }
 
   card3RenderPara = (treeData) => {
     let crtTitle = '';
@@ -352,8 +353,8 @@ export default class ModelCreator extends React.Component {
                       message: "Can't be blank",
                     },
                     {
-                      pattern: /^[1-9][0-9]*$/,
-                      message: 'Only can be number',
+                      pattern: /^([1-9][0-9]*)+(.[0-9]{1,2})?$/,
+                      message: '请填写小数（至多两位）或者整数',
                     },
                     {},
                   ]}
@@ -392,7 +393,7 @@ export default class ModelCreator extends React.Component {
                     }}
                     autoSize={{ minRows: 4, maxRows: 6 }}
                     showCount
-                    maxLength={50}
+                    maxLength={150}
                     placeholder={formatMessage({
                       id: 'pages.dashboard.modelCreator.card1-content-input3-placeHolder',
                     })}
@@ -605,38 +606,12 @@ export default class ModelCreator extends React.Component {
           >
             <p>你确认提交么？</p>
           </Modal>
-          <Modal
-            title={formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.title' })}
-            centered
-            width={888}
+          <MyComponents
+            ref={this.parentRef}
             visible={this.state.JSONModalVisible}
-            onOk={() => this.setJSONModalVisible(false)}
-            onCancel={() => this.setJSONModalVisible(false)}
-            footer={[
-              <Button
-                key="back"
-                onClick={() => {
-                  this.setJSONModalVisible(false);
-                }}
-              >
-                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.footer.button1' })}
-              </Button>,
-              <Button
-                key="submit"
-                onClick={() => {
-                  this.formRef.current.setFieldsValue({
-                    JSONData: this.parentRef.current.innerHTML,
-                  });
-                  // console.log(this.formRef.current.getFieldsValue());
-                  this.setJSONModalVisible(false);
-                }}
-              >
-                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.footer.button2' })}
-              </Button>,
-            ]}
-          >
-            <MyComponents ref={this.parentRef} />
-          </Modal>
+            setParentState={this.setParentState.bind(this)}
+            setParentFormField={this.setParentFormField.bind(this)}
+          />
         </div>
       </PageContainer>
     );

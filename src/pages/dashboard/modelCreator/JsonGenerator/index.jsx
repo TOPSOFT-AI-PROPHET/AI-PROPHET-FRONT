@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { formatMessage } from 'umi';
-import styles from './index.less';
+import { Button, Modal, Popconfirm } from 'antd';
+import './index.css';
 
 const ParameterField = ({ index, parameter, onChange, onDelete }) => {
   const optionsAddHandler = () => {
@@ -21,8 +22,8 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
   };
 
   return (
-    <div className={styles.parameterGroup}>
-      <div className={styles.parameterHeader}>
+    <div className={'parametergroup'}>
+      <div className={'parameterHeader'}>
         <h2>
           {formatMessage({
             id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.parameterHeader',
@@ -35,8 +36,8 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
           })}
         </button>
       </div>
-      <div className={styles.formRow} style={{ marginBottom: '1.25rem' }}>
-        <div className={styles.formGroup}>
+      <div className={'formRow'} style={{ marginBottom: '1.25rem' }}>
+        <div className={'formGroup'}>
           <label>
             {formatMessage({
               id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.formRow.formGroup1',
@@ -50,7 +51,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
             autoComplete="off"
           />
         </div>
-        <div className={styles.formGroup}>
+        <div className={'formGroup'}>
           <label>
             {formatMessage({
               id: 'pages.dashboard.modelCreator.JsonGenerator.parameterGroup.formRow.formGroup2',
@@ -65,10 +66,10 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
           />
         </div>
       </div>
-      <div className={styles.optionsGroup}>
+      <div className={'optionsGroup'}>
         {parameter.options.map((option, idx) => (
-          <div className={styles.formRow} key={idx}>
-            <div className={styles.formGroup}>
+          <div className={'formRow'} key={idx}>
+            <div className={'formGroup'}>
               <label>
                 {formatMessage({
                   id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.formGroup1',
@@ -81,7 +82,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
                 value={option.name}
               />
             </div>
-            <div className={styles.formGroup}>
+            <div className={'formGroup'}>
               <label>
                 {formatMessage({
                   id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.formGroup2',
@@ -95,7 +96,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
                 autoComplete="off"
               />
             </div>
-            <button onClick={() => optionsDeleteHandler(idx)} className={styles.formRowButton}>
+            <button onClick={() => optionsDeleteHandler(idx)} className={'formRowButton'}>
               {formatMessage({
                 id: 'pages.dashboard.modelCreator.JsonGenerator.optionsGroup.formRow.button',
               })}
@@ -110,8 +111,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
   );
 };
 
-const MyComponents = React.forwardRef((props, ref) => {
-  console.log(props);
+const MyComponents = React.forwardRef((props) => {
   const initialData = {
     count: 2,
     parameters: [
@@ -184,47 +184,91 @@ const MyComponents = React.forwardRef((props, ref) => {
   };
 
   return (
-    <div>
-      <div className={styles.container}>
-        <div>
-          <h1>
-            {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.header1' })}
-          </h1>
+    <Modal
+      title={formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.title' })}
+      centered
+      width={888}
+      onCancel={() => {
+        props.setParentState({ JSONModalVisible: false });
+      }}
+      visible={props.visible}
+      footer={[
+        <Button
+          key="back"
+          onClick={() => {
+            props.setParentState({ JSONModalVisible: false });
+          }}
+        >
+          {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.footer.button1' })}
+        </Button>,
+        <Button
+          key="submit"
+          onClick={() => {
+            console.log(json);
+            props.setParentFormField({ JSONData: JSON.stringify(json) });
+            props.setParentState({ JSONModalVisible: false });
+          }}
+        >
+          {formatMessage({ id: 'pages.dashboard.modelCreator.Modal2.footer.button2' })}
+        </Button>,
+      ]}
+    >
+      <div>
+        <div className={'container'}>
           <div>
-            {parameters.map((parameter, idx) => (
-              <ParameterField
-                key={idx}
-                index={idx}
-                parameter={parameter}
-                onChange={parameterChangeHandler.bind(null, idx)}
-                onDelete={parameterDeleteHandler.bind(null, idx)}
-              />
-            ))}
+            <h1>
+              {formatMessage({
+                id: 'pages.dashboard.modelCreator.JsonGenerator.container.header1',
+              })}
+            </h1>
+            <div>
+              {parameters.map((parameter, idx) => (
+                <ParameterField
+                  key={idx}
+                  index={idx}
+                  parameter={parameter}
+                  onChange={parameterChangeHandler.bind(null, idx)}
+                  onDelete={parameterDeleteHandler.bind(null, idx)}
+                />
+              ))}
+            </div>
+            <button onClick={parameterAddHandler}>
+              {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.button' })}
+            </button>
           </div>
-          <button onClick={parameterAddHandler}>
-            {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.button' })}
-          </button>
-        </div>
-        <div>
-          <h1>
-            {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.header2' })}
-          </h1>
           <div>
-            <pre ref={ref}>{JSON.stringify(json, null, 2)}</pre>
+            <h1>
+              {formatMessage({
+                id: 'pages.dashboard.modelCreator.JsonGenerator.container.header2',
+              })}
+            </h1>
+            <div>
+              <pre>{JSON.stringify(json, null, 2)}</pre>
+            </div>
+            <div className={'footer'}>
+              <a href={ifile} className={'downloadLink'} download="test.json">
+                {formatMessage({
+                  id: 'pages.dashboard.modelCreator.JsonGenerator.container.footer',
+                })}
+              </a>
+              <Popconfirm
+                title="Sure to Reset?"
+                onConfirm={() => {
+                  resetForm();
+                  props.setParentFormField({ JSONData: '' });
+                }}
+              >
+                <button className={'resetButton'}>
+                  {formatMessage({
+                    id: 'pages.dashboard.modelCreator.JsonGenerator.container.footer.button',
+                  })}
+                </button>
+              </Popconfirm>
+            </div>
           </div>
         </div>
       </div>
-      <div className={styles.footer}>
-        <a href={ifile} className={styles.downloadLink} download="test.json">
-          {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.footer' })}
-        </a>
-        <button className={styles.resetButton} onClick={resetForm.bind(this)}>
-          {formatMessage({
-            id: 'pages.dashboard.modelCreator.JsonGenerator.container.footer.button',
-          })}
-        </button>
-      </div>
-    </div>
+    </Modal>
   );
 });
 
