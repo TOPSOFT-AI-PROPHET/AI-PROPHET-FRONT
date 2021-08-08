@@ -14,12 +14,15 @@ const Step3 = (props) => {
       obj.value = data.values[item.name];
       newilist.push(obj);
     });
+
+    // console.log(props.modelid)
     request('/tasks/prediction', {
       method: 'POST',
       data: {
         ai_id: parseInt(props.modelid.id, 10),
         total_para: data.ilist.length,
         data: newilist,
+        task_desc: props.modelid.notes,
       },
     }).then(() => {});
     return function clearup() {

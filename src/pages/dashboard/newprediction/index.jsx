@@ -33,6 +33,7 @@ const getCurrentStepAndComponent = (current) => {
 };
 
 const StepForm = (props) => {
+  // console.log(props)
   const [stepComponent, setStepComponent] = useState();
   const [currentStep, setCurrentStep] = useState(0);
   const { dispatch } = props;
@@ -44,6 +45,7 @@ const StepForm = (props) => {
         type: 'formAndstepForm/saveMid',
         payload: {
           id: props.match.params.id,
+          notes: props.match.params.notes,
         },
       });
     }

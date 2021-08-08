@@ -24,6 +24,7 @@ import COS from 'cos-js-sdk-v5';
 export default class TransitionPg extends React.Component {
   constructor(props) {
     super(props);
+    this.formRef = React.createRef();
     this.state = {
       current: 'mail',
       validateCode: 0,
@@ -137,6 +138,40 @@ export default class TransitionPg extends React.Component {
     return '图片集模型';
   }
 
+  scrollToAnchor = (anchorName) => {
+    if (anchorName) {
+      const anchorElement = document.getElementById(anchorName);
+      if (anchorElement) {
+        anchorElement.scrollIntoView();
+      }
+    }
+  };
+
+  onCheck = async () => {
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log('Success:', values);
+
+      request('/tasks/validate', {
+        method: 'POST',
+        data: { ai_id: this.props.match.params.id },
+      }).then(() => {
+        if (this.state.validateCode === 200) {
+          history.push(
+            `/dash/prediction/newprediction/${
+              this.props.match.params.id
+            }/${this.formRef.current.getFieldValue('notes')}`,
+          );
+        } else {
+          this.setcreditModalVisible(true);
+        }
+      });
+    } catch (e) {
+      console.log('Fail', e);
+      this.scrollToAnchor('notes');
+    }
+  };
+
   render() {
     const { current } = this.state;
     const labels = [
@@ -231,7 +266,11 @@ export default class TransitionPg extends React.Component {
               </div>
               <div className={styles.content}>
                 <div className={styles.contentTitle}>{this.state.author}</div>
-                <div>{this.state.author_sing}</div>
+                <div>
+                  {this.state.author_sing
+                    ? this.state.author_sing
+                    : '仰天大笑出门去，我辈岂是蓬蒿人。'}
+                </div>
               </div>
               <div className={styles.sideContent}>
                 <p>
@@ -252,7 +291,16 @@ export default class TransitionPg extends React.Component {
               <Col xs={16} sm={16} md={10} lg={10} xl={8}>
                 <div>
                   <Form ref={this.formRef}>
-                    <Form.Item>
+                    <Form.Item
+                      id={'notes'}
+                      name="notes"
+                      rules={[
+                        {
+                          required: true,
+                          message: "can't be blank",
+                        },
+                      ]}
+                    >
                       <Input.TextArea
                         style={{ width: 'auto' }}
                         showCount
@@ -278,18 +326,7 @@ export default class TransitionPg extends React.Component {
                       type="primary"
                       shape="round"
                       onClick={() => {
-                        request('/tasks/validate', {
-                          method: 'POST',
-                          data: { ai_id: this.props.match.params.id },
-                        }).then(() => {
-                          if (this.state.validateCode === 200) {
-                            history.push(
-                              `/dash/prediction/newprediction/${this.props.match.params.id}`,
-                            );
-                          } else {
-                            this.setcreditModalVisible(true);
-                          }
-                        });
+                        this.onCheck();
                       }}
                       // onClick={() => {
                       //   if (this.state.validateCode === 200) {

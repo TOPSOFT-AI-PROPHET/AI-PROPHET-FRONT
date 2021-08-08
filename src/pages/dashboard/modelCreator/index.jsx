@@ -40,6 +40,7 @@ export default class ModelCreator extends React.Component {
     this.formRef = React.createRef();
     this.parentRef = React.createRef();
     this.state = {
+      submitState: false,
       JSONData: undefined,
       selectValue: undefined,
       card3Para: undefined,
@@ -115,12 +116,32 @@ export default class ModelCreator extends React.Component {
       }).then((result) => {
         // console.log(result.code);
         if (result.code === 200) {
-          message.success(
-            formatMessage({
-              id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit.success',
-            }),
-          );
-          history.push('/dash/model/model');
+          this.setState({
+            submitState: true,
+          });
+          message
+            .loading({
+              duration: 2,
+              content: '训练进行中..',
+              style: {
+                marginTop: '42vh',
+              },
+            })
+            .then(() => {
+              message
+                .success({
+                  duration: 0.5,
+                  content: formatMessage({
+                    id: 'pages.dashboard.modelCreator.Form.FormItem.onCheck.message.warn.submit.success',
+                  }),
+                  style: {
+                    marginTop: '42vh',
+                  },
+                })
+                .then(() => {
+                  history.push('/dash/model/model');
+                });
+            });
           console.log('success');
         } else {
           message.warn(
@@ -528,6 +549,7 @@ export default class ModelCreator extends React.Component {
                 <Button
                   type="primary"
                   style={{ float: 'right' }}
+                  disabled={this.state.submitState}
                   onClick={() => {
                     this.setSubmitModalVisible(true);
                   }}
@@ -538,6 +560,7 @@ export default class ModelCreator extends React.Component {
                 </Button>
                 <Button
                   type="primary"
+                  disabled={this.state.submitState}
                   style={{ float: 'right', marginRight: '20px' }}
                   onClick={() => {
                     showConfirm();

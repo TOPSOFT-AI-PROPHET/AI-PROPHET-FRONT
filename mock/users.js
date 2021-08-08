@@ -656,7 +656,7 @@ export default {
         status: '200',
         message: 'get success',
         author: 'authorauthorauthor',
-        user_singnature: 'sdfsdf',
+        user_singnature: 'sdsdsdssd',
         publish: false,
         user_id: 2,
         uuid: '',
@@ -1084,13 +1084,13 @@ export default {
     });
   },
 
-  'GET /tasks/personalAImodelUsage': async (req, res) => {
+  'POST /tasks/personalAImodelUsage': async (req, res) => {
     //返回某用户AI模型使用次数
     if (req.headers.authorization === 'Bearer valid_token') {
       res.send({
         status: 200,
         message: 'get success',
-        ai_model_usage: { ai_model_usage: 22 },
+        ai_model_usage: 22,
       });
       return;
     }
