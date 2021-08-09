@@ -203,7 +203,7 @@ export const BasicList = (props) => {
                 <List.Item
                   actions={[
                     <a
-                      key={formatMessage({ id: 'basic.list.keydetails' })}
+                      key="details"
                       onClick={() => {
                         history.push(`/dash/prediction/details/${item.pk}`);
                       }}
@@ -211,7 +211,7 @@ export const BasicList = (props) => {
                       <FormattedMessage id="basic.list.details" />
                     </a>,
                     <a
-                      key={formatMessage({ id: 'basic.list.delete' })}
+                      key="delete"
                       onClick={() => {
                         confirm({
                           title: `${formatMessage({ id: 'basic.list.suredelete' })}`,

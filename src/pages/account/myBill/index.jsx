@@ -91,7 +91,10 @@ export default class MyBill extends React.Component {
         render: (_, record) => {
           // console.log(record)
           return this.state.data.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.pk)}>
+            <Popconfirm
+              title={formatMessage({ id: 'pages.account.myBill.card2.table.wanttodelete' })}
+              onConfirm={() => this.handleDelete(record.pk)}
+            >
               <a>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</a>
             </Popconfirm>
           ) : null;

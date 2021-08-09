@@ -209,5 +209,5 @@ export default {
   'pages.account.myBill.card2.table.title3': 'Time',
   'pages.account.myBill.card2.table.title4': 'Action',
   'pages.account.myBill.card2.table.title4.button': 'Delete',
-  'pages.account.myBill.card2.table.wanttodelete?': 'Sure to delete?',
+  'pages.account.myBill.card2.table.wanttodelete': 'Sure to delete?',
 };
