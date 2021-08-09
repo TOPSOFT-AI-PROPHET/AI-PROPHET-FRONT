@@ -74,6 +74,7 @@ export default {
   'basic.list.tasklist': '所有任务',
   'basic.list.add': '添加',
   'basic.list.details': '详情',
+  'basic.list.keydetails': '详情',
   'basic.list.delete': '删除',
   'basic.list.starttime': '开始时间',
   'pages.profile.basic.activationcode': 'CDK',
@@ -186,4 +187,5 @@ export default {
   'pages.account.myBill.card2.table.title3': '时间',
   'pages.account.myBill.card2.table.title4': '操作',
   'pages.account.myBill.card2.table.title4.button': '删除',
+  'pages.account.myBill.card2.table.wanttodelete?': '确定要删除吗?',
 };

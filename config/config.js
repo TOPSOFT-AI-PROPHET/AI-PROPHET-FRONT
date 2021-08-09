@@ -57,12 +57,6 @@ export default defineConfig({
               component: './User/register',
             },
             {
-              name: 'forgetpasswd',
-              icon: 'smile',
-              path: '/user/forgetpasswd',
-              component: './User/forgetpasswd',
-            },
-            {
               name: 'resetpasswd',
               icon: 'smile',
               path: '/user/resetpasswd',
