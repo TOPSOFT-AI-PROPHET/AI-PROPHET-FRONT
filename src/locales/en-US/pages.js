@@ -80,6 +80,7 @@ export default {
   'basic.list.tasklist': 'Tasks',
   'basic.list.add': 'ADD',
   'basic.list.details': 'Details',
+  'basic.list.keydetails': 'Details',
   'basic.list.delete': 'Delete',
   'basic.list.starttime': 'Start Time',
   'pages.profile.basic.activationcode': 'CDK',
@@ -208,4 +209,5 @@ export default {
   'pages.account.myBill.card2.table.title3': 'Time',
   'pages.account.myBill.card2.table.title4': 'Action',
   'pages.account.myBill.card2.table.title4.button': 'Delete',
+  'pages.account.myBill.card2.table.wanttodelete?': 'Sure to delete?',
 };
