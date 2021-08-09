@@ -16,6 +16,7 @@ export default {
   'menu.prediction.aimodels': '模型市场',
   'menu.prediction.newprediction': '开始预测',
   'menu.prediction.modelinfo': '模型信息',
+  'menu.prediction.details': '详情',
   'menu.exception.403': '403',
   'menu.exception.404': '404',
   'menu.exception.500': '500',
