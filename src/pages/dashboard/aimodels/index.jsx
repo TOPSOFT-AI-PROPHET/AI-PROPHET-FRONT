@@ -36,7 +36,7 @@ class CardList extends Component {
   }
 
   handleAvatar(aiid) {
-    request('/tasks/modelAuthor', { method: 'post', data: { aiid } }).then((result) => {
+    request('/tasks/modelAuthor', { method: 'post', data: { ai_id: aiid } }).then((result) => {
       if (result.uuid) {
         // console.log('exist uuid')
         const cos = new COS({
