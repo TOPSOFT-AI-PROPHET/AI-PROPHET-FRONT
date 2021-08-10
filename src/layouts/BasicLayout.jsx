@@ -86,6 +86,9 @@ const BasicLayout = (props) => {
         {...props}
         {...settings}
         onCollapse={handleMenuCollapse}
+        menu={{
+          defaultOpenAll: true,
+        }}
         menuHeaderRender={() => {
           if (!props.collapsed) {
             return (
