@@ -63,6 +63,9 @@ export default class MyBill extends React.Component {
           if (record.fields.method === 'deduction') {
             return `-${_}`;
           }
+          if (record.fields.method === 'income') {
+            return `+${_}`;
+          }
           return 'unknown';
         },
       },
@@ -70,12 +73,15 @@ export default class MyBill extends React.Component {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title2' }),
         dataIndex: ['fields', 'method'],
         key: 'description',
-        render: (text) => {
-          if (text === 'charge') {
-            return '充值';
+        render: (_, text) => {
+          if (_ === 'charge') {
+            return `充值`;
           }
-          if (text === 'deduction') {
-            return '扣费';
+          if (_ === 'deduction') {
+            return `扣费 (${text.fields.order})`;
+          }
+          if (_ === 'income') {
+            return `收入 (${text.fields.order})`;
           }
           return 'unknown';
         },

@@ -29,7 +29,7 @@ export default class TransitionPg extends React.Component {
       current: 'mail',
       validateCode: 0,
       creditModalVisible: false,
-      ai_model_usage: 0,
+      personal_ai_model_usage: 0,
       AIVisit: '-',
       author: undefined,
       author_id: undefined,
@@ -71,12 +71,12 @@ export default class TransitionPg extends React.Component {
       this.handleAvatar(result.uuid);
     });
 
-    request('/tasks/getAIMusage', {
+    request('/tasks/personalAImodelUsage', {
       method: 'post',
       data: { ai_id: Number(this.props.match.params.id) },
     }).then((result) => {
       this.setState({
-        ai_model_usage: result.data,
+        personal_ai_model_usage: result.ai_model_usage,
       });
     });
 
@@ -275,7 +275,7 @@ export default class TransitionPg extends React.Component {
               <div className={styles.sideContent}>
                 <p>
                   {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
-                  <strong>{this.state.ai_model_usage}</strong>{' '}
+                  <strong>{this.state.personal_ai_model_usage}</strong>{' '}
                   {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
                 </p>
                 <p>
