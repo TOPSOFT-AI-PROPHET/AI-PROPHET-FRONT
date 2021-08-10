@@ -72,9 +72,9 @@ export default class TransitionPg extends React.Component {
     });
 
     request('/users/returnUsrID', { method: 'POST' }).then((result) => {
-      request('/tasks/personalAImodel', {
+      request('/tasks/personalAImodelUsage', {
         method: 'POST',
-        data: { user_id: result.data.user_id },
+        data: { user_id: Number(result.data.user_id) },
       }).then((result2) => {
         this.setState({
           personal_ai_model_usage: result2.ai_model_usage,
