@@ -573,39 +573,39 @@ export default class ModelCreator extends React.Component {
                 </Button>
               </Form.Item>
             </div>
+            <Modal // 防误触确认提交modal
+              title={formatMessage({
+                id: 'pages.dashboard.aimodels.cardModal.title',
+              })}
+              centered
+              visible={this.state.submitModalVisible}
+              onOk={() => this.setSubmitModalVisible(false)}
+              onCancel={() => this.setSubmitModalVisible(false)}
+              footer={[
+                <Button
+                  key="back"
+                  onClick={() => {
+                    this.setSubmitModalVisible(false);
+                  }}
+                >
+                  {formatMessage({ id: 'pages.dashboard.modelCreator.Modal1.footer.button1' })}
+                </Button>,
+                <Button
+                  key="submit"
+                  htmlType="submit"
+                  type="primary"
+                  onClick={() => {
+                    this.onCheck();
+                    this.setSubmitModalVisible(false);
+                  }}
+                >
+                  {formatMessage({ id: 'pages.dashboard.modelCreator.Modal1.footer.button2' })}
+                </Button>,
+              ]}
+            >
+              <p>你确认提交么？</p>
+            </Modal>
           </Form>
-          <Modal // 防误触确认提交modal
-            title={formatMessage({
-              id: 'pages.dashboard.aimodels.cardModal.title',
-            })}
-            centered
-            visible={this.state.submitModalVisible}
-            onOk={() => this.setSubmitModalVisible(false)}
-            onCancel={() => this.setSubmitModalVisible(false)}
-            footer={[
-              <Button
-                key="back"
-                onClick={() => {
-                  this.setSubmitModalVisible(false);
-                }}
-              >
-                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal1.footer.button1' })}
-              </Button>,
-              <Button
-                key="submit"
-                htmlType="submit"
-                type="primary"
-                onClick={() => {
-                  this.onCheck();
-                  this.setSubmitModalVisible(false);
-                }}
-              >
-                {formatMessage({ id: 'pages.dashboard.modelCreator.Modal1.footer.button2' })}
-              </Button>,
-            ]}
-          >
-            <p>你确认提交么？</p>
-          </Modal>
           <MyComponents
             ref={this.parentRef}
             visible={this.state.JSONModalVisible}

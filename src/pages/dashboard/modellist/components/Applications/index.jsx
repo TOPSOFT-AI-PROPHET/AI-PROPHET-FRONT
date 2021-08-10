@@ -1,5 +1,5 @@
-import { EditOutlined, ShareAltOutlined } from '@ant-design/icons';
-import { Avatar, Card, List, Tooltip } from 'antd';
+import { EditOutlined, ShareAltOutlined, LoadingOutlined, LoginOutlined } from '@ant-design/icons';
+import { Avatar, Card, List, message, Tooltip } from 'antd';
 import { React, useState, useEffect } from 'react';
 import { connect, history, FormattedMessage } from 'umi';
 // import numeral from 'numeral';
@@ -36,6 +36,8 @@ export function formatWan(val) {
 const Applications = () => {
   const [ilist, setIlist] = useState([]);
 
+  let timerID = null;
+
   useEffect(() => {
     request('/users/returnUsrID', { method: 'POST' }).then((result) => {
       request('/tasks/personalAImodel', {
@@ -47,6 +49,22 @@ const Applications = () => {
     });
   }, [1]);
 
+  useEffect(() => {
+    timerID = setInterval(() => {
+      request('/users/returnUsrID', { method: 'POST' }).then((result) => {
+        request('/tasks/personalAImodel', {
+          method: 'POST',
+          data: { user_id: result.data.user_id },
+        }).then((result2) => {
+          setIlist(result2.data.list);
+        });
+      });
+    }, 6000);
+
+    return () => {
+      clearInterval(timerID);
+    };
+  }, []);
   // const itemMenu = (
   //   <Menu>
   //     <Menu.Item>
@@ -87,6 +105,66 @@ const Applications = () => {
     </div>
   );
 
+  const getActions = (item) => {
+    if (item.fields.status === 0) {
+      return [
+        <Tooltip key={'entrance'}>
+          <LoginOutlined
+            onClick={() => {
+              message.warn({
+                content: '模型正在训练中....',
+                // style:{marginTop:'42vh'}
+              });
+            }}
+          />
+        </Tooltip>,
+        <Tooltip title={<FormattedMessage id="basic.modellist.edit" />} key="edit">
+          <EditOutlined
+            onClick={() => {
+              message.warn({
+                content: '模型正在训练中....',
+                // style:{marginTop:'42vh'}
+              });
+            }}
+          />
+        </Tooltip>,
+        <Tooltip title={<FormattedMessage id="basic.modellist.share" />} key="share">
+          <ShareAltOutlined />
+        </Tooltip>,
+        <LoadingOutlined key={'loading'} />,
+      ];
+    }
+    return [
+      <Tooltip key={'entrance'}>
+        <LoginOutlined
+          onClick={() => {
+            request('/tasks/validate', {
+              method: 'POST',
+              data: { ai_id: item.pk },
+            }).then(() => {
+              // if (result.code === 200) {
+              //   history.push(`/dash/prediction/modelinfo/${item.pk}`);
+              // } else {
+              //   this.setcreditModalVisible(true);
+              // }
+              history.push(`/dash/prediction/modelinfo/${item.pk}`);
+            });
+          }}
+        />
+      </Tooltip>,
+      <Tooltip title={<FormattedMessage id="basic.modellist.edit" />} key="edit">
+        <EditOutlined
+          onClick={() => {
+            history.push(`/dash/model/editor/${item.pk}`);
+          }}
+        />
+      </Tooltip>,
+      <Tooltip title={<FormattedMessage id="basic.modellist.share" />} key="share">
+        <ShareAltOutlined />
+      </Tooltip>,
+    ];
+  };
+
   return (
     <List
       rowKey="id"
@@ -94,32 +172,22 @@ const Applications = () => {
       grid={{
         gutter: 16,
         xs: 1,
-        sm: 2,
-        md: 3,
-        lg: 3,
-        xl: 4,
-        xxl: 4,
+        sm: 1,
+        md: 2,
+        lg: 2,
+        xl: 2,
+        xxl: 2,
       }}
       dataSource={ilist}
       renderItem={(item) => (
         <List.Item key={item.fields.pk}>
           <Card
-            hoverable
+            onClick={() => {}}
+            hoverable={item.fields.status !== 0}
             bodyStyle={{
               paddingBottom: 20,
             }}
-            actions={[
-              <Tooltip title={<FormattedMessage id="basic.modellist.edit" />} key="edit">
-                <EditOutlined
-                  onClick={() => {
-                    history.push(`/dash/model/editor/${item.pk}`);
-                  }}
-                />
-              </Tooltip>,
-              <Tooltip title={<FormattedMessage id="basic.modellist.share" />} key="share">
-                <ShareAltOutlined />
-              </Tooltip>,
-            ]}
+            actions={getActions(item)}
           >
             <Card.Meta
               // avatar={<Avatar size="small" src={item.fields.ai_url} />}

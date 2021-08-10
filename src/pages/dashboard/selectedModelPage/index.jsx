@@ -29,7 +29,8 @@ export default class TransitionPg extends React.Component {
       current: 'mail',
       validateCode: 0,
       creditModalVisible: false,
-      AIVisit: 0,
+      ai_model_usage: 0,
+      AIVisit: '-',
       author: undefined,
       author_id: undefined,
       author_uuid: undefined,
@@ -70,22 +71,21 @@ export default class TransitionPg extends React.Component {
       this.handleAvatar(result.uuid);
     });
 
+    request('/tasks/getAIMusage', {
+      method: 'post',
+      data: { ai_id: Number(this.props.match.params.id) },
+    }).then((result) => {
+      this.setState({
+        ai_model_usage: result.data,
+      });
+    });
+
     request('/tasks/validate', {
       method: 'POST',
       data: { ai_id: this.props.match.params.id },
     }).then((result) => {
       this.setState({
         validateCode: result.code,
-      });
-    });
-
-    request('/tasks/getAIMusage', {
-      // 获取模型访问次数
-      method: 'post',
-      data: { ai_id: Number(this.props.match.params.id) },
-    }).then((result) => {
-      this.setState({
-        AIVisit: result.data,
       });
     });
 
@@ -275,7 +275,7 @@ export default class TransitionPg extends React.Component {
               <div className={styles.sideContent}>
                 <p>
                   {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
-                  <strong>{this.state.data[0].fields.ai_usage}</strong>{' '}
+                  <strong>{this.state.ai_model_usage}</strong>{' '}
                   {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
                 </p>
                 <p>
