@@ -106,7 +106,7 @@ const Applications = () => {
   );
 
   const getActions = (item) => {
-    if (item.fields.status === 0) {
+    if (item.fields.ai_status === 0) {
       return [
         <Tooltip key={'entrance'}>
           <LoginOutlined
@@ -183,7 +183,7 @@ const Applications = () => {
         <List.Item key={item.fields.pk}>
           <Card
             onClick={() => {}}
-            hoverable={item.fields.status !== 0}
+            hoverable={item.fields.ai_status !== 0}
             bodyStyle={{
               paddingBottom: 20,
             }}
