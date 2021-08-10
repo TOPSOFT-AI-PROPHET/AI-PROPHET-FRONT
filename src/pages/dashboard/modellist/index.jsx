@@ -78,10 +78,15 @@ const PageLeftContent = ({ url }) => {
               <FormattedMessage id="basic.modellist.buildmodel" />
             </Button>
           </div>
-          <div className={style.tittle2} style={{ padding: ' 100px 0 0 0' }}>
-            先世界，而知万物
-          </div>
-          <div style={{ fontSize: '12px', textAlign: 'center', width: '80%', marginLeft: '40px' }}>
+          <div className={style.tittle2}>先世界，而知万物</div>
+          <div
+            style={{
+              fontSize: '12px',
+              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
             We believe our diversity is our stength. With people from every background, gender,
             creed and religion
           </div>
