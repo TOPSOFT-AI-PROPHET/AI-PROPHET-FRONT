@@ -41,6 +41,8 @@ export default {
           balance: '666',
           profile_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
           total_tasks: '',
+          contact_number: '86-13952661390',
+          user_sing: 'sfdsfsfdsfd',
         },
       });
       return;
@@ -792,6 +794,7 @@ export default {
                 ai_frozen: 1,
                 ai_output_unit: '(str)',
                 user_id: 11,
+                status: 0,
               },
             },
             {
@@ -814,6 +817,7 @@ export default {
                 ai_frozen: 1,
                 ai_output_unit: '(str)',
                 user_id: 11,
+                status: 100,
               },
             },
           ],

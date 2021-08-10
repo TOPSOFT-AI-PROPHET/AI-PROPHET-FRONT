@@ -109,7 +109,7 @@ class BaseView extends Component {
         loading: false,
         // imageUrl,
       });
-      window.location.reload();
+      // window.location.reload();
     }
   };
 
