@@ -6,6 +6,7 @@ import request from '@/utils/request';
 import styles from './style.less';
 import { CoffeeOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
+import COS from 'cos-js-sdk-v5';
 
 const { Paragraph } = Typography;
 
@@ -32,6 +33,33 @@ class CardList extends Component {
 
   setcreditModalVisible(creditModalVisible) {
     this.setState({ creditModalVisible });
+  }
+
+  handleAvatar(aiid) {
+    request('/tasks/modelAuthor', { method: 'post', data: { aiid } }).then((result) => {
+      if (result.uuid) {
+        // console.log('exist uuid')
+        const cos = new COS({
+          SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
+          SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
+        });
+        cos.getObjectUrl(
+          {
+            Bucket: 'prophetsrc-1305001068' /* 必须 */,
+            Region: 'ap-chengdu' /* 必须 */,
+            Key: `${result.uuid}.jpg` /* 必须 */,
+          },
+          (err, data) => {
+            console.log(data);
+            return data.Url;
+          },
+        );
+      } else {
+        console.log('return default');
+        return 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png';
+      }
+      return '';
+    });
   }
 
   render() {
@@ -110,12 +138,7 @@ class CardList extends Component {
                     <Card.Meta
                       title={
                         <div className={styles.cardAvatar}>
-                          <Avatar
-                            size={'large'}
-                            src={
-                              'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png'
-                            }
-                          />
+                          <Avatar size={'large'} src={this.handleAvatar(item.pk)} />
                           <a
                             onClick={() => {
                               request('/tasks/validate', {
