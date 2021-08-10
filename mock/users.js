@@ -794,7 +794,7 @@ export default {
                 ai_frozen: 1,
                 ai_output_unit: '(str)',
                 user_id: 11,
-                status: 0,
+                ai_status: 0,
               },
             },
             {
@@ -817,7 +817,7 @@ export default {
                 ai_frozen: 1,
                 ai_output_unit: '(str)',
                 user_id: 11,
-                status: 100,
+                ai_status: 100,
               },
             },
           ],
