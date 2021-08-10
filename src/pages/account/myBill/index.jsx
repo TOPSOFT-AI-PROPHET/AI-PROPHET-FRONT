@@ -4,6 +4,7 @@ import React from 'react';
 import styles from './index.less';
 import { formatMessage } from 'umi';
 import request from '@/utils/request';
+import moment from 'moment';
 
 export default class MyBill extends React.Component {
   constructor(props) {
@@ -83,7 +84,7 @@ export default class MyBill extends React.Component {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title3' }),
         dataIndex: ['fields', 'create_time'],
         key: 'time',
-        render: (text) => `${text}`,
+        render: (text) => <p>{moment(text).format('YYYY-MM-DD HH:mm')}</p>,
       },
       {
         title: formatMessage({ id: 'pages.account.myBill.card2.table.title4' }),
