@@ -71,12 +71,14 @@ export default class TransitionPg extends React.Component {
       this.handleAvatar(result.uuid);
     });
 
-    request('/tasks/personalAImodelUsage', {
-      method: 'post',
-      data: { ai_id: Number(this.props.match.params.id) },
-    }).then((result) => {
-      this.setState({
-        personal_ai_model_usage: result.ai_model_usage,
+    request('/users/returnUsrID', { method: 'POST' }).then((result) => {
+      request('/tasks/personalAImodelUsage', {
+        method: 'POST',
+        data: { user_id: Number(result.data.user_id) },
+      }).then((result2) => {
+        this.setState({
+          personal_ai_model_usage: result2.ai_model_usage,
+        });
       });
     });
 
