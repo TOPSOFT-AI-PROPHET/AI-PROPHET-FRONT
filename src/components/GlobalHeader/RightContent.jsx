@@ -2,6 +2,7 @@ import { Tag, Button } from 'antd';
 import React from 'react';
 import { connect, SelectLang, history, formatMessage } from 'umi';
 import Avatar from './AvatarDropdown';
+import ColorDropdown from './ColorDropdown';
 import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
 import { DollarOutlined } from '@ant-design/icons';
@@ -73,6 +74,7 @@ const GlobalHeaderRight = (props) => {
           })}
         </Button>
       </span>
+      <ColorDropdown />
       <NoticeIconView />
       <Avatar menu />
       {REACT_APP_ENV && (
