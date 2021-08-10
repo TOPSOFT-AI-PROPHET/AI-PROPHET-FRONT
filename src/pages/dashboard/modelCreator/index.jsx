@@ -100,18 +100,23 @@ export default class ModelCreator extends React.Component {
         return;
       }
       console.log('Success:', values);
+
+      const formdata = new FormData();
+
+      formdata.append('ai_name', this.formRef.current.getFieldValue('modelName'));
+      formdata.append('ai_price', Number(this.formRef.current.getFieldValue('price')));
+      formdata.append('ai_true_desc', this.formRef.current.getFieldValue('intro'));
+      formdata.append('ai_desc', this.formRef.current.getFieldValue('JSONData'));
+      formdata.append('ai_opUnit', this.formRef.current.getFieldValue('Unit'));
+      formdata.append('ai_type', this.formRef.current.getFieldValue('algorithm'));
+      formdata.append('auto_active', this.state.checkBox ? 1 : 0);
+      formdata.append('dataset', this.state.dataSet);
+
+      // console.log(formdata)
+
       request('/tasks/train', {
         method: 'POST',
-        data: {
-          ai_name: this.formRef.current.getFieldValue('modelName'),
-          ai_price: Number(this.formRef.current.getFieldValue('price')),
-          ai_true_desc: this.formRef.current.getFieldValue('intro'),
-          ai_desc: this.formRef.current.getFieldValue('JSONData'),
-          ai_opUnit: this.formRef.current.getFieldValue('Unit'),
-          ai_type: this.formRef.current.getFieldValue('algorithm'),
-          auto_active: this.state.checkBox ? 1 : 0,
-          dataset: this.state.dataSet,
-        },
+        data: formdata,
       }).then((result) => {
         // console.log(result.code);
         if (result.code === 200) {
@@ -138,7 +143,7 @@ export default class ModelCreator extends React.Component {
                   },
                 })
                 .then(() => {
-                  // history.push('/dash/model/model');
+                  history.push('/dash/model/model');
                 });
             });
           console.log('success');
@@ -186,15 +191,15 @@ export default class ModelCreator extends React.Component {
       return Upload.LIST_IGNORE;
     }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
     // console.log(reader)
-    reader.onload = (e) => {
-      // console.log(e);
-      this.setState({
-        dataSet: e.target.result,
-      });
-    };
+    // reader.onload = (e) => {
+    //   console.log(e);
+    this.setState({
+      dataSet: file,
+    });
+    // };
 
     return false;
   };
