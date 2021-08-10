@@ -340,6 +340,7 @@ const MyComponents = React.forwardRef((props) => {
               {formatMessage({ id: 'pages.dashboard.modelCreator.JsonGenerator.container.button' })}
             </button>
           </div>
+          <br />
           <div>
             <h1>
               {formatMessage({
