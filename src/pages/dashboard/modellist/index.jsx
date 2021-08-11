@@ -16,10 +16,10 @@ const state = {
 };
 
 const PageLeftContent = ({ url }) => {
-  const [inickname, setInickname] = useState([]);
-  const [icredit, setIcredit] = useState([1]);
+  const [inickname, setInickname] = useState('');
+  const [icredit, setIcredit] = useState(0);
 
-  const [iusage, setIusage] = useState([1]);
+  const [iusage, setIusage] = useState(0);
 
   useEffect(() => {
     request('/users/returnUsrID', { method: 'POST' }).then((result) => {
@@ -27,7 +27,7 @@ const PageLeftContent = ({ url }) => {
         method: 'POST',
         data: { user_id: result.data.user_id },
       }).then((result2) => {
-        setIusage(result2.ai_model_usage);
+        if (result2.ai_model_usage !== 'None') setIusage(result2.ai_model_usage);
       });
     });
   }, [1]);
@@ -59,11 +59,11 @@ const PageLeftContent = ({ url }) => {
           </div>
           <div className={style.tittle2}>
             <FormattedMessage id="basic.modellist.modelused" />
-            {`: ${iusage}`}
-            <FormattedMessage id="basic.modellist.times" />
+            {`: ${iusage}`} <FormattedMessage id="basic.modellist.times" />
           </div>
           <div className={style.tittle2}>
-            <FormattedMessage id="basic.modellist.pageviewed" />: -次
+            <FormattedMessage id="basic.modellist.pageviewed" />: -{' '}
+            <FormattedMessage id="basic.modellist.times" />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
             <Button
