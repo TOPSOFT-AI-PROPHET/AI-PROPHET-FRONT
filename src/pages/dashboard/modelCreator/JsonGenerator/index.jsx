@@ -59,7 +59,7 @@ const ParameterField = ({ index, parameter, onChange, onDelete }) => {
           </label>
           <input
             type="text"
-            name="description"
+            name="ai_description"
             onChange={(e) => onChange(e.target.name, e.target.value)}
             value={parameter.ai_description}
             autoComplete="off"
