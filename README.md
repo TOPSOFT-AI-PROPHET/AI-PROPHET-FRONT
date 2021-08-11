@@ -1,5 +1,7 @@
 # AI-PROPHET-FRONT
 
+[![AUTODEPLOY INSIDER](https://github.com/TOPSOFT-AI-PROPHET/AI-PROPHET-FRONT/actions/workflows/main.yml/badge.svg)](https://github.com/TOPSOFT-AI-PROPHET/AI-PROPHET-FRONT/actions/workflows/main.yml)
+
 ## Environment Prepare
 
 Install `node_modules`:
