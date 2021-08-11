@@ -254,7 +254,9 @@ export default class TransitionPg extends React.Component {
             </Menu>
           </div>
           <Card
-            title={formatMessage({ id: 'pages.dashboard.selectedModelPage.card1-title' })}
+            title={`${formatMessage({ id: 'pages.dashboard.selectedModelPage.card1-title' })}(${
+              this.state.data[0].fields.ai_name
+            })`}
             style={{ margin: '0px 0px 24px 0px' }}
           >
             <p>{this.state.data[0].fields.ai_true_description}</p>
@@ -300,7 +302,9 @@ export default class TransitionPg extends React.Component {
                       rules={[
                         {
                           required: true,
-                          message: "can't be blank",
+                          message: formatMessage({
+                            id: 'pages.dashboard.modelCreator.cantbeblank',
+                          }),
                         },
                       ]}
                     >
