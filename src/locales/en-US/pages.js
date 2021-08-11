@@ -142,7 +142,7 @@ export default {
     'Please select specific algorithm',
   'pages.dashboard.modelCreator.card3-content-treeSelect1': 'Traditional machine learning',
   'pages.dashboard.modelCreator.card3-content-treeSelect1-1': 'Regression dataset (Random forest)',
-  'pages.dashboard.modelCreator.card3-content-treeSelect1-2': 'Classified data set (Random forest)',
+  'pages.dashboard.modelCreator.card3-content-treeSelect1-2': 'Classified dataset (Random forest)',
   'pages.dashboard.modelCreator.card3-content-para1': 'You have chosen ',
   'pages.dashboard.modelCreator.card3-content-para2': ' ,please check',
   'pages.dashboard.modelCreator.card3-content-para3': ' "',
