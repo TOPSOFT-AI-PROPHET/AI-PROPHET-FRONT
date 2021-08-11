@@ -26,7 +26,7 @@ class Basic extends Component {
       <Form content={<PageHeaderContent />} layout="vertical">
         <Form.Item
           name="activation code"
-          style={{ width: '30%' }}
+          style={{ width: '60%' }}
           label={formatMessage({
             id: 'pages.profile.basic.activationcode',
           })}
