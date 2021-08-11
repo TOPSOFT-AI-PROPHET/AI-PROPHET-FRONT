@@ -350,7 +350,7 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: "Can't be blank",
+                      message: formatMessage({ id: 'pages.dashboard.modelCreator.cantbeblank' }),
                     },
                     {
                       pattern: /^([1-9][0-9]*)+(.[0-9]{1,2})?$/,
@@ -445,7 +445,7 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: "Can't be blank",
+                      message: formatMessage({ id: 'pages.dashboard.modelCreator.cantbeblank' }),
                     },
                   ]}
                 >
@@ -478,7 +478,7 @@ export default class ModelCreator extends React.Component {
                   rules={[
                     {
                       required: true,
-                      message: "Can't be blank",
+                      message: formatMessage({ id: 'pages.dashboard.modelCreator.cantbeblank' }),
                     },
                   ]}
                 >

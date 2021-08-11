@@ -6,6 +6,7 @@ import Step1 from './components/Step1';
 import Step2 from './components/Step2';
 import Step3 from './components/Step3';
 import styles from './style.less';
+import request from '@/utils/request';
 
 const { Step } = Steps;
 
@@ -36,8 +37,19 @@ const StepForm = (props) => {
   // console.log(props)
   const [stepComponent, setStepComponent] = useState();
   const [currentStep, setCurrentStep] = useState(0);
+  const [aiName, setAiName] = useState('');
   const { dispatch } = props;
+
   useEffect(() => {
+    request('/tasks/modeldetail', {
+      method: 'POST',
+      data: { ai_id: props.match.params.id },
+    })
+      .then((result) => {
+        setAiName(result.data[0].fields.ai_name);
+      })
+      .catch((e) => console.log(e));
+
     const { step, component } = getCurrentStepAndComponent(props.current);
     setCurrentStep(step);
     if (dispatch) {
@@ -52,7 +64,9 @@ const StepForm = (props) => {
     setStepComponent(component);
   }, [props.current]);
   return (
-    <PageContainer content={formatMessage({ id: 'formandstep-form.getparam.rotation.title' })}>
+    <PageContainer
+      content={`${formatMessage({ id: 'formandstep-form.getparam.rotation.title' })}(${aiName})`}
+    >
       <Card bordered={false}>
         <>
           <Steps current={currentStep} className={styles.steps}>

@@ -118,6 +118,7 @@ export default {
   'pages.dashboard.modelCreator.card2-content-input1': '模型结构编辑',
   'pages.dashboard.modelCreator.card2-content-input2': '输出单位',
   'pages.dashboard.modelCreator.card2-content-input3': '算法种类',
+  'pages.dashboard.modelCreator.cantbeblank': '不可以为空！',
   'pages.dashboard.modelCreator.card1-content-input1-placeHolder': '请输入模型名称',
   'pages.dashboard.modelCreator.card1-content-input2-placeHolder': '请确定定价',
   'pages.dashboard.modelCreator.card1-content-input3-placeHolder': '请写一些简短介绍',

@@ -129,6 +129,7 @@ export default {
   'pages.dashboard.modelCreator.card2-content-input1': 'JSON Structure editor',
   'pages.dashboard.modelCreator.card2-content-input2': 'Output unit',
   'pages.dashboard.modelCreator.card2-content-input3': 'Algorithm',
+  'pages.dashboard.modelCreator.cantbeblank': "Can't be blank!",
   'pages.dashboard.modelCreator.card1-content-input1-placeHolder': 'Please input model name!',
   'pages.dashboard.modelCreator.card1-content-input2-placeHolder': 'Please input price for one!',
   'pages.dashboard.modelCreator.card1-content-input3-placeHolder':

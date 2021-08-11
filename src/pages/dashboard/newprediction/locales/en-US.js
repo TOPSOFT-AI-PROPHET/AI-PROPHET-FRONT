@@ -67,5 +67,6 @@ export default {
   'formandstep-form.getparam.rotation.inputParam': 'Input parameters',
   'formandstep-form.getparam.rotation.checkParam': 'Checking information',
   'formandstep-form.getparam.rotation.complete': 'Completed',
-  'formandstep-form.getparam.rotation.title': 'Enter model parameters',
+  'formandstep-form.getparam.rotation.title':
+    'Enter the option codes for each parameter (1,2,3,...), then click Submit.',
 };
