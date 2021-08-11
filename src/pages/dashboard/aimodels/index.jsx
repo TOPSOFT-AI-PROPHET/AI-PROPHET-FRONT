@@ -8,7 +8,7 @@ import { CoffeeOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
 import COS from 'cos-js-sdk-v5';
 
-const { Paragraph } = Typography;
+const { Paragraph, Link } = Typography;
 
 class CardList extends Component {
   constructor(props) {
@@ -82,10 +82,10 @@ class CardList extends Component {
           <FormattedMessage id="accountandsettings.headerContent" />
         </p>
         <div className={styles.contentLink}>
-          <a>
+          <Link>
             <CoffeeOutlined />{' '}
             {formatMessage({ id: 'pages.dash.dashboard.list.card-list.contentlink' })}
-          </a>
+          </Link>
           {/* <a>
             <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" />{' '}
             产品简介
@@ -159,7 +159,7 @@ class CardList extends Component {
                                 : 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png'
                             }
                           />
-                          <a
+                          <Link
                             onClick={() => {
                               request('/tasks/validate', {
                                 method: 'POST',
@@ -174,7 +174,7 @@ class CardList extends Component {
                             }}
                           >
                             {item.fields.ai_name}
-                          </a>
+                          </Link>
                         </div>
                       }
                       description={
