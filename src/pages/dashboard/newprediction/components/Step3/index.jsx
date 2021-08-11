@@ -16,13 +16,14 @@ const Step3 = (props) => {
     });
 
     // console.log(props.modelid)
+    // console.log(history)
     request('/tasks/prediction', {
       method: 'POST',
       data: {
         ai_id: parseInt(props.modelid.id, 10),
         total_para: data.ilist.length,
         data: newilist,
-        task_desc: props.modelid.notes,
+        task_desc: history.location.query.notes,
       },
     }).then(() => {});
     return function clearup() {
