@@ -159,11 +159,12 @@ export default class TransitionPg extends React.Component {
         data: { ai_id: this.props.match.params.id },
       }).then(() => {
         if (this.state.validateCode === 200) {
-          history.push(
-            `/dash/prediction/newprediction/${
-              this.props.match.params.id
-            }/${this.formRef.current.getFieldValue('notes')}`,
-          );
+          history.push({
+            pathname: `/dash/prediction/newprediction/${this.props.match.params.id}`,
+            query: {
+              notes: `${this.formRef.current.getFieldValue('notes')}`,
+            },
+          });
         } else {
           this.setcreditModalVisible(true);
         }

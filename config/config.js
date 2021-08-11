@@ -134,7 +134,7 @@ export default defineConfig({
                 {
                   name: 'newprediction',
                   hideInMenu: true,
-                  path: '/dash/prediction/newprediction/:id/:notes',
+                  path: '/dash/prediction/newprediction/:id',
                   component: './dashboard/newprediction',
                 },
                 {
