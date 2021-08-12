@@ -68,18 +68,15 @@ export default class TransitionPg extends React.Component {
         author: result.author,
         author_sing: result.user_singnature,
       });
-      this.handleAvatar(result.uuid);
-    });
-
-    request('/users/returnUsrID', { method: 'POST' }).then((result) => {
       request('/tasks/personalAImodelUsage', {
         method: 'POST',
-        data: { user_id: Number(result.data.user_id) },
+        data: { user_id: Number(result.user_id) },
       }).then((result2) => {
         this.setState({
           personal_ai_model_usage: result2.ai_model_usage,
         });
       });
+      this.handleAvatar(result.uuid);
     });
 
     request('/tasks/validate', {
@@ -278,7 +275,11 @@ export default class TransitionPg extends React.Component {
               <div className={styles.sideContent}>
                 <p>
                   {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-para1' })}{' '}
-                  <strong>{this.state.personal_ai_model_usage}</strong>{' '}
+                  <strong>
+                    {this.state.personal_ai_model_usage === 'None'
+                      ? 0
+                      : this.state.personal_ai_model_usage}
+                  </strong>{' '}
                   {formatMessage({ id: 'pages.dashboard.selectedModelPage.card2-paraUnit' })}
                 </p>
                 <p>
