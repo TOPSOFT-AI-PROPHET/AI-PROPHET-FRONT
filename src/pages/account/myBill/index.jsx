@@ -1,10 +1,12 @@
 import { PageContainer } from '@ant-design/pro-layout';
-import { Card, Table, Popconfirm, Button } from 'antd';
+import { Card, Table, Popconfirm, Button, Typography } from 'antd';
 import React from 'react';
 import styles from './index.less';
 import { formatMessage } from 'umi';
 import request from '@/utils/request';
 import moment from 'moment';
+
+const { Link } = Typography;
 
 export default class MyBill extends React.Component {
   constructor(props) {
@@ -102,7 +104,7 @@ export default class MyBill extends React.Component {
               title={formatMessage({ id: 'pages.account.myBill.card2.table.wanttodelete' })}
               onConfirm={() => this.handleDelete(record.pk)}
             >
-              <a>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</a>
+              <Link>{formatMessage({ id: 'pages.account.myBill.card2.table.title4.button' })}</Link>
             </Popconfirm>
           ) : null;
         },

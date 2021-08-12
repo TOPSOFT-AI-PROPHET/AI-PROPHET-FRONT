@@ -1,4 +1,4 @@
-import { Avatar, Card, Skeleton, Statistic } from 'antd';
+import { Avatar, Card, Skeleton, Statistic, Typography } from 'antd';
 import React, { Component } from 'react';
 import { connect, history } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
@@ -8,6 +8,8 @@ import styles from './style.less';
 import request from '@/utils/request';
 import { Empty } from 'antd';
 import COS from 'cos-js-sdk-v5';
+
+const { Link } = Typography;
 
 const PageHeaderContent = ({ currentUser, url }) => {
   const loading = currentUser && Object.keys(currentUser).length;
@@ -164,13 +166,13 @@ class Workplace extends Component {
           title={<FormattedMessage id="pages.dashboardandworkplace.workplace.cardtitle" />}
           bordered={false}
           extra={
-            <a
+            <Link
               onClick={() => {
                 history.push('/dash/prediction/predictions');
               }}
             >
               {formatMessage({ id: 'pages.dashboardandworkplace.workplace.extratxt' })}
-            </a>
+            </Link>
           }
           bodyStyle={{
             padding: 0,
@@ -198,13 +200,13 @@ class Workplace extends Component {
                           size="large"
                           src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
                         />
-                        <a
+                        <Link
                           onClick={() => {
                             history.push(`/dash/prediction/details/${item.pk}`);
                           }}
                         >
                           {item.fields.ai_name}
-                        </a>
+                        </Link>
                       </div>
                     }
                     description={item.fields.description}

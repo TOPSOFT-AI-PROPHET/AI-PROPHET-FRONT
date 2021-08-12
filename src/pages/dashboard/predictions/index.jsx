@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Modal, Button, Card, Col, List, Progress, Row, message } from 'antd';
+import { Modal, Button, Card, Col, List, Progress, Row, message, Typography } from 'antd';
 import { findDOMNode } from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -9,6 +9,8 @@ import moment from 'moment';
 import OperationModal from './components/OperationModal';
 import styles from './style.less';
 import request from '@/utils/request';
+
+const { Link } = Typography;
 
 const Info = ({ title, value, bordered }) => (
   <div className={styles.headerInfo}>
@@ -202,15 +204,15 @@ export const BasicList = (props) => {
               renderItem={(item) => (
                 <List.Item
                   actions={[
-                    <a
+                    <Link
                       key="details"
                       onClick={() => {
                         history.push(`/dash/prediction/details/${item.pk}`);
                       }}
                     >
                       <FormattedMessage id="basic.list.details" />
-                    </a>,
-                    <a
+                    </Link>,
+                    <Link
                       key="delete"
                       onClick={() => {
                         confirm({
@@ -238,7 +240,7 @@ export const BasicList = (props) => {
                       }}
                     >
                       <FormattedMessage id="basic.list.delete" />
-                    </a>,
+                    </Link>,
                   ]}
                 >
                   <List.Item.Meta
