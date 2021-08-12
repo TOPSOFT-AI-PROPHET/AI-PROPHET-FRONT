@@ -219,7 +219,7 @@ class Welcome extends Component {
 
                   <li>
                     <a className="page-scroll" href="#features">
-                      <FormattedMessage id="welcomepage.button.features" />
+                      <FormattedMessage id="welcomepage.button.about" />
                     </a>
                   </li>
 
@@ -288,7 +288,7 @@ class Welcome extends Component {
                     <FormattedMessage id="welcomepage.secondpage.introduction4" />
                   </h3>
                   <p>
-                    <FormattedMessage id="welcomepage.secondpage.introduction5" /> &amp;{' '}
+                    {/* <FormattedMessage id="welcomepage.secondpage.introduction5" /> &amp;{' '} */}
                     <FormattedMessage id="welcomepage.secondpage.introduction6" />
                   </p>
                   <div className="divider center-block"></div>
