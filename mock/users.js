@@ -1108,7 +1108,7 @@ export default {
       res.send({
         status: 200,
         message: 'get success',
-        ai_model_usage: 22,
+        ai_model_usage: 'None',
       });
       return;
     }
