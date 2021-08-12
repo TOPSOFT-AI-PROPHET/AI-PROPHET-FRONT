@@ -5,7 +5,7 @@ export default {
   'app.setting.content-width': '内容区域宽度',
   'app.setting.content-width.fixed': '定宽',
   'app.setting.content-width.fluid': '流式',
-  'app.setting.themecolor': '主题色',
+  'app.setting.themecolor': '主题',
   'app.setting.themecolor.dust': '薄暮',
   'app.setting.themecolor.volcano': '火山',
   'app.setting.themecolor.sunset': '日暮',
