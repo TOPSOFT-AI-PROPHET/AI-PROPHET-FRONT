@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Steps } from 'antd';
+import { Card, Empty, Steps } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import { connect, formatMessage } from 'umi';
 import Step1 from './components/Step1';
@@ -37,6 +37,7 @@ const StepForm = (props) => {
   // console.log(props)
   const [stepComponent, setStepComponent] = useState();
   const [currentStep, setCurrentStep] = useState(0);
+  const [CredictChecker, setCredictChecker] = useState(false);
   const [aiName, setAiName] = useState('');
   const { dispatch } = props;
 
@@ -50,8 +51,6 @@ const StepForm = (props) => {
       })
       .catch((e) => console.log(e));
 
-    const { step, component } = getCurrentStepAndComponent(props.current);
-    setCurrentStep(step);
     if (dispatch) {
       dispatch({
         type: 'formAndstepForm/saveMid',
@@ -61,24 +60,41 @@ const StepForm = (props) => {
         },
       });
     }
-    setStepComponent(component);
+    request('/tasks/validate', { method: 'post', data: { ai_id: props.match.params.id } }).then(
+      (result) => {
+        setCredictChecker(result.code === 200);
+        if (result.code === 200) {
+          const { step, component } = getCurrentStepAndComponent(props.current);
+          setCurrentStep(step);
+          setStepComponent(component);
+        }
+      },
+    );
   }, [props.current]);
-  return (
-    <PageContainer
-      content={`${formatMessage({ id: 'formandstep-form.getparam.rotation.title' })}(${aiName})`}
-    >
-      <Card bordered={false}>
-        <>
-          <Steps current={currentStep} className={styles.steps}>
-            <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.inputParam' })} />
-            <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.checkParam' })} />
-            <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.complete' })} />
-          </Steps>
-          {stepComponent}
-        </>
-      </Card>
-    </PageContainer>
-  );
+
+  if (CredictChecker) {
+    return (
+      <PageContainer
+        content={`${formatMessage({ id: 'formandstep-form.getparam.rotation.title' })}(${aiName})`}
+      >
+        <Card bordered={false}>
+          <>
+            <Steps current={currentStep} className={styles.steps}>
+              <Step
+                title={formatMessage({ id: 'formandstep-form.getparam.rotation.inputParam' })}
+              />
+              <Step
+                title={formatMessage({ id: 'formandstep-form.getparam.rotation.checkParam' })}
+              />
+              <Step title={formatMessage({ id: 'formandstep-form.getparam.rotation.complete' })} />
+            </Steps>
+            {stepComponent}
+          </>
+        </Card>
+      </PageContainer>
+    );
+  }
+  return <Empty />;
 };
 
 export default connect(({ formAndstepForm }) => ({
