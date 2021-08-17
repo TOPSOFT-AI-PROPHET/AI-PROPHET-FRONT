@@ -312,14 +312,14 @@ export default class ModelCreator extends React.Component {
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-1',
             }),
             value: 0,
-            link: 'https://www.example1.com',
+            link: 'https://www.yuque.com/vwhhts/xbq9e5/gniqvo#kV0BZ',
           },
           {
             title: formatMessage({
               id: 'pages.dashboard.modelCreator.card3-content-treeSelect1-2',
             }),
             value: 1,
-            link: 'http://example.com/',
+            link: 'https://www.yuque.com/vwhhts/xbq9e5/gniqvo#o69kG',
           },
         ],
       },
