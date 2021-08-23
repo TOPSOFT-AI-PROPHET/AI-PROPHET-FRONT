@@ -1,0 +1,195 @@
+@import '~antd/es/style/themes/default.less';
+@import './utils/utils.less';
+
+.cardList {
+  background: white;
+  p {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .card {
+    :global {
+      .ant-card-meta-title {
+        margin-bottom: 12px;
+        & > a {
+          display: inline-block;
+          max-width: 100%;
+          color: @heading-color;
+        }
+      }
+      .ant-card-body:hover {
+        .ant-card-meta-title > a {
+          color: @primary-color;
+        }
+      }
+    }
+  }
+  .item {
+    height: 64px;
+  }
+
+  :global {
+    .ant-list .ant-list-item-content-single {
+      max-width: 100%;
+    }
+  }
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  img {
+    padding: 0 20px;
+  }
+}
+
+// .cardList {
+//   background: white;
+//   p{
+//     display: flex;
+//     justify-content: center;
+//     font-size: 14px;
+//   }
+//   .card {
+//     :global {
+//       .ant-card-meta-title {
+//         margin-bottom: 12px;
+//         & > a {
+//           display: inline-block;
+//           max-width: 100%;
+//           color: @heading-color;
+//         }
+//       }
+//       .ant-card-body:hover {
+//         .ant-card-meta-title > a {
+//           color: @primary-color;
+//         }
+//       }
+//     }
+//   }
+//   .item {
+//     height: 64px;
+//     color: grey;
+//   }
+
+//   :global {
+//     .ant-list .ant-list-item-content-single {
+//       max-width: 100%;
+//     }
+//   }
+// }
+
+.pageHeaderContent {
+  display: flex;
+
+  .avatar {
+    display: flex;
+    flex: 0 1 120px;
+    justify-content: center;
+    & > span {
+      width: 120px;
+      height: 120px;
+      border-radius: 120px;
+    }
+  }
+  .content {
+    top: 4px;
+    margin-left: 24px;
+    padding: 20px 0;
+    color: @text-color-secondary;
+    line-height: 22px;
+    .contentTitle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+      color: @heading-color;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 28px;
+      .level {
+        & > span {
+          width: 28px;
+          height: 28px;
+          border-radius: 28px;
+        }
+      }
+    }
+  }
+}
+
+.extraImg {
+  width: 155px;
+  margin-top: -20px;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.newButton {
+  width: 100%;
+  height: 201px;
+  color: @text-color-secondary;
+  background-color: @component-background;
+  border-color: @border-color-base;
+}
+
+.cardAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+}
+
+.cardDescription {
+  .textOverflowMulti();
+}
+
+// .pageHeaderContent {
+//   position: relative;
+// }
+
+.contentLink {
+  margin-top: 16px;
+  a {
+    margin-right: 32px;
+    img {
+      width: 24px;
+    }
+  }
+  img {
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .contentLink {
+    a {
+      margin-right: 16px;
+    }
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .extraImg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .pageHeaderContent {
+    padding-bottom: 30px;
+  }
+  .contentLink {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 1000px;
+    a {
+      margin-right: 16px;
+    }
+    img {
+      margin-right: 4px;
+    }
+  }
+}

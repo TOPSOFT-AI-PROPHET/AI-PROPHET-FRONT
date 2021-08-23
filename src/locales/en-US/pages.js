@@ -211,4 +211,6 @@ export default {
   'pages.account.myBill.card2.table.title4': 'Action',
   'pages.account.myBill.card2.table.title4.button': 'Delete',
   'pages.account.myBill.card2.table.wanttodelete': 'Sure to delete?',
+  'account.center.des': "This user's models have been used in the Prophet system",
+  'account.center.times': 'times',
 };

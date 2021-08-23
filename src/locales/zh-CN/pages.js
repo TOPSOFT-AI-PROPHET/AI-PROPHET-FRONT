@@ -189,4 +189,6 @@ export default {
   'pages.account.myBill.card2.table.title4': '操作',
   'pages.account.myBill.card2.table.title4.button': '删除',
   'pages.account.myBill.card2.table.wanttodelete': '确定要删除吗?',
+  'account.center.des': '该用户的模型在先知系统被使用了',
+  'account.center.times': '次',
 };
