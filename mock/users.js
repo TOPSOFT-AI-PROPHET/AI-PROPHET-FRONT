@@ -780,7 +780,6 @@ export default {
               fields: {
                 ai_name: 'lalala',
                 ai_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
-                ai_status: 1,
                 ai_description: 'lalalalalala',
                 ai_type: 1,
                 // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
@@ -803,14 +802,35 @@ export default {
               fields: {
                 ai_name: 'lalala2',
                 ai_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
-                ai_status: 1,
                 ai_description: 'lalalalalala',
                 ai_type: 1,
                 // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
                 ai_credit: 5,
                 ai_true_description: 'aaaaaaaaaaaa',
                 ai_author: 'paul',
-                ai_published: 1,
+                ai_published: 0,
+                ai_model_profile: '(str)',
+                ai_usage: 1,
+                ai_training_material_count: 1,
+                ai_frozen: 1,
+                ai_output_unit: '(str)',
+                user_id: 11,
+                ai_status: 100,
+              },
+            },
+            {
+              model: 'tasks.aimodel',
+              pk: 2,
+              fields: {
+                ai_name: 'lalala2',
+                ai_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',
+                ai_description: 'lalalalalala',
+                ai_type: 1,
+                // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
+                ai_credit: 5,
+                ai_true_description: 'aaaaaaaaaaaa',
+                ai_author: 'paul',
+                ai_published: 0,
                 ai_model_profile: '(str)',
                 ai_usage: 1,
                 ai_training_material_count: 1,

@@ -1,5 +1,5 @@
 import { EditOutlined, ShareAltOutlined, LoadingOutlined, LoginOutlined } from '@ant-design/icons';
-import { Avatar, Card, List, message, Tooltip } from 'antd';
+import { Avatar, Badge, Card, List, message, Tooltip } from 'antd';
 import { React, useState, useEffect } from 'react';
 import { connect, history, FormattedMessage } from 'umi';
 // import numeral from 'numeral';
@@ -165,6 +165,32 @@ const Applications = () => {
     ];
   };
 
+  const getBadgesColors = (isPublish, status) => {
+    if (status !== 100) {
+      return 'orange';
+    }
+    if (isPublish === 1) {
+      return 'green';
+    }
+    if (isPublish === 0) {
+      return 'blue';
+    }
+    return '';
+  };
+
+  const getBadgesText = (isPublish, status) => {
+    if (status !== 100) {
+      return '训练中';
+    }
+    if (isPublish === 1) {
+      return '上架中';
+    }
+    if (isPublish === 0) {
+      return '未上架';
+    }
+    return '';
+  };
+
   return (
     <List
       rowKey="id"
@@ -181,28 +207,34 @@ const Applications = () => {
       dataSource={ilist}
       renderItem={(item) => (
         <List.Item key={item.fields.pk}>
-          <Card
-            onClick={() => {}}
-            hoverable={item.fields.ai_status !== 0}
-            bodyStyle={{
-              paddingBottom: 20,
-            }}
-            actions={getActions(item)}
+          <Badge.Ribbon
+            text={getBadgesText(item.fields.ai_published, item.fields.ai_status)}
+            color={true ? getBadgesColors(item.fields.ai_published, item.fields.ai_status) : 'red'}
           >
-            <Card.Meta
-              // avatar={<Avatar size="small" src={item.fields.ai_url} />}
-              avatar={
-                <Avatar
-                  size="large"
-                  src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
-                />
-              }
-              title={item.fields.ai_name}
-            />
-            <div className={stylesApplications.cardItemContent}>
-              <CardInfo activeUser={item.fields.ai_credit} newUser={item.fields.ai_usage} />
-            </div>
-          </Card>
+            <Card
+              onClick={() => {}}
+              hoverable={item.fields.ai_status !== 0}
+              bodyStyle={{
+                paddingBottom: 20,
+              }}
+              actions={getActions(item)}
+              // cover={<img src={'https://www.topsoftaiprophet.com/assets/img/model-emp.jpg'}/>}
+            >
+              <Card.Meta
+                // avatar={<Avatar size="small" src={item.fields.ai_url} />}
+                avatar={
+                  <Avatar
+                    size="large"
+                    src="https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png"
+                  />
+                }
+                title={item.fields.ai_name}
+              />
+              <div className={stylesApplications.cardItemContent}>
+                <CardInfo activeUser={item.fields.ai_credit} newUser={item.fields.ai_usage} />
+              </div>
+            </Card>
+          </Badge.Ribbon>
         </List.Item>
       )}
     />

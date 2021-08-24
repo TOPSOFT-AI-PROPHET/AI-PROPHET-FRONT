@@ -20,6 +20,7 @@ import { FormattedMessage, formatMessage, history } from 'umi';
 import { FileTextOutlined, ImportOutlined, DollarOutlined } from '@ant-design/icons';
 import request from '@/utils/request';
 import COS from 'cos-js-sdk-v5';
+import Badges from '@/components/BadgeList/badge';
 
 export default class TransitionPg extends React.Component {
   constructor(props) {
@@ -35,6 +36,7 @@ export default class TransitionPg extends React.Component {
       author_id: undefined,
       author_uuid: undefined,
       author_sing: undefined,
+      author_level: 't5',
       data: [
         {
           fields: {},
@@ -268,7 +270,10 @@ export default class TransitionPg extends React.Component {
                 <Avatar size={48} src={this.state.author_profile_url} />
               </div>
               <div className={styles.content}>
-                <div className={styles.contentTitle}>{this.state.author}</div>
+                <div className={styles.contentTitle}>
+                  {this.state.author}
+                  <Badges level={this.state.author_level} />
+                </div>
                 <div>
                   {this.state.author_sing
                     ? this.state.author_sing
