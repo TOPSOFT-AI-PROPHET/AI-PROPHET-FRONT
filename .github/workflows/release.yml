@@ -20,10 +20,11 @@ jobs:
       
     - name: 🔨 Build Project
       run: |
-        npm install
+        npm config set registry https://mirrors.lengjingyun.com/repo/repository/npm/
+        yarn config set registry https://mirrors.lengjingyun.com/repo/repository/npm/
         yarn
-        npm run build
-
+        yarn build
+        
     - name: 🎉 GitHub Pages RELEASE
       uses: crazy-max/ghaction-github-pages@v2.2.0
       with:
