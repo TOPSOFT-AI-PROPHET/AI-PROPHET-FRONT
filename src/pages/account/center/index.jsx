@@ -133,12 +133,6 @@ class Workplace extends Component {
         }
       })
       .catch((e) => console.log(e));
-
-    request('/users/getUserInfo', { method: 'POST' }) // 非本人id
-      .then((result) => {
-        this.handleAvatar(result.data.profile_image_uuid);
-      })
-      .catch((e) => console.log(e));
   }
 
   componentWillUnmount() {
