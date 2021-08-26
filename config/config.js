@@ -196,6 +196,7 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/dash/account/card-list/:id',
                   component: './account/card-list',
+                  hideInMenu: true,
                 },
               ],
             },
