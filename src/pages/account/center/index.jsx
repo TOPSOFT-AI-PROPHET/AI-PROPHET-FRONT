@@ -59,7 +59,7 @@ const PageHeaderContent = ({ currentUser, url }) => {
           fontSize: '16px',
         }}
       >
-        于2021年8月成为先知用户
+        于2021年八月成为先知用户
       </div>
     </div>
   );
