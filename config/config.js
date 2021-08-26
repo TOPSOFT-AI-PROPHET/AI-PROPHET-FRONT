@@ -196,6 +196,7 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/dash/account/center/:id',
                   component: './account/center',
+                  hideInMenu: true,
                 },
               ],
             },
