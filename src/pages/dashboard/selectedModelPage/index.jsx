@@ -272,7 +272,7 @@ export default class TransitionPg extends React.Component {
                   size={48}
                   src={this.state.author_profile_url}
                   onClick={() => {
-                    history.push(`/dash/account/card-list/${this.props.match.params.id}`);
+                    history.push(`/dash/account/center/${this.props.match.params.id}`);
                   }}
                 />
               </div>
@@ -280,7 +280,7 @@ export default class TransitionPg extends React.Component {
                 <div
                   className={styles.contentTitle}
                   onClick={() => {
-                    history.push(`/dash/account/card-list/${this.props.match.params.id}`);
+                    history.push(`/dash/account/center/${this.props.match.params.id}`);
                   }}
                 >
                   {this.state.author}
