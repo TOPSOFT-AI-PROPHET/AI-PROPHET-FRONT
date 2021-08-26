@@ -70,13 +70,13 @@ class Workplace extends Component {
     super(props);
     this.state = {
       data: [],
-      data2: [],
       data_task: {
         num_of_task: '',
         num_of_finished_tasks: '',
       },
       imageURL: '',
-      usage: 0,
+      usage: '',
+      currentUser: undefined,
     };
   }
 
@@ -86,63 +86,43 @@ class Workplace extends Component {
       type: 'dashboardAndworkplace/init',
     });
 
-    request('/tasks/listAIM', { method: 'POST' })
+    request('/users/returnUsrID', { method: 'POST' })
       .then((result) => {
-        if (result.data) {
-          // console.log(result.data)
-          result.data.list.map((item) => {
-            request('/tasks/modelAuthor', { method: 'post', data: { ai_id: item.pk } }).then(
-              (result2) => {
-                // 1.处理 this.state.data[]
-                // 将 model_url() 加入 data.fields.model_url
-                if (result2.uuid) {
-                  console.log('exist uuid');
-                  const cos = new COS({
-                    SecretId: 'AKID21jLxxXtspX0FC9ax4h2C51kFoCNhWZg',
-                    SecretKey: 'HROJDscqncKP9g0zJMJ7Mo20oHTVJsRr',
-                  });
-                  cos.getObjectUrl(
-                    {
-                      Bucket: 'prophetsrc-1305001068' /* 必须 */,
-                      Region: 'ap-chengdu' /* 必须 */,
-                      Key: `${result2.uuid}.jpg` /* 必须 */,
-                    },
-                    (err, data) => {
-                      const newState = item;
-                      // console.log(newState)
-                      newState.model_url = data.Url; // 添加 model_url 参数
-                      // console.log(newState)
-                      const newDataList = this.state.data.concat(newState);
-                      // console.log(newDataList)
-                      this.setState({
-                        data: newDataList,
-                      });
-                    },
-                  );
-                } else {
-                  // console.log('else')
-                  const newState = item;
-                  const newDataList = this.state.data.concat(newState);
-                  // console.log(newDataList)
-                  this.setState({
-                    data: newDataList,
-                  });
-                }
-              },
-            );
-            return '';
-          });
-        }
+        request('/tasks/personalAImodelUsage', {
+          method: 'POST',
+          data: { user_id: result.data.user_id },
+        }).then((result2) => {
+          if (result2.ai_model_usage !== 'None') {
+            this.setState({
+              usage: result2.ai_model_usage,
+            });
+          }
+        });
       })
       .catch((e) => console.log(e));
 
-    // request('/tasks/list', { method: 'POST', data: { page: 1 } })
-    //   .then((result) => {
-    //     this.setState({
-    //       data: result.data.list.slice(0, 9),
-    //     });
-    //   })
-    //   .catch((e) => console.log(e));
+    request('/tasks/modelAuthor', {
+      method: 'POST',
+      data: { ai_id: this.props.match.params.id },
+    }).then((result) => {
+      request('/tasks/personalAImodel', {
+        method: 'POST',
+        data: { user_id: result.user_id },
+      })
+        .then((result2) => {
+          this.setState({
+            data: result2.data.list,
+          });
+        })
+        .catch((e) => console.log(e));
+
+      this.handleAvatar(result.uuid);
+      this.setState({
+        currentUser: {
+          nickname: result.author,
+        },
+      });
+    });
 
     request('/tasks/numTask', { method: 'POST' })
       .then((result) => {
@@ -154,22 +134,7 @@ class Workplace extends Component {
       })
       .catch((e) => console.log(e));
 
-    request('/users/returnUsrID', { method: 'POST' })
-      .then((result) => {
-        request('/tasks/personalAImodelUsage', {
-          method: 'POST',
-          data2: { user_id: result.data.user_id },
-        }).then((result2) => {
-          if (result2.ai_model_usage !== 'None') {
-            this.setState({
-              usage: result2.ai_model_usage,
-            });
-          }
-        });
-      })
-      .catch((e) => console.log(e));
-
-    request('/users/getUserInfo', { method: 'POST' })
+    request('/users/getUserInfo', { method: 'POST' }) // 非本人id
       .then((result) => {
         this.handleAvatar(result.data.profile_image_uuid);
       })
@@ -215,7 +180,9 @@ class Workplace extends Component {
     }
     return (
       <PageContainer
-        content={<PageHeaderContent currentUser={currentUser} url={this.state.imageURL} />}
+        content={
+          <PageHeaderContent currentUser={this.state.currentUser} url={this.state.imageURL} />
+        }
         // extraContent={<ExtraContent currentUser={currentUser} value={this.state.data_task} />}
       >
         <div className={styles.cardList}>
@@ -277,9 +244,7 @@ class Workplace extends Component {
                           <Avatar
                             size={'large'}
                             src={
-                              item.imageURL
-                                ? item.imageURL
-                                : 'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalutprofile.png'
+                              'https://prophetsrc-1305001068.cos.ap-chengdu.myqcloud.com/defalt.png'
                             }
                           />
                           <Link
