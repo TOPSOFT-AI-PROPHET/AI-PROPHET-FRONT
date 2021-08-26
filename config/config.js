@@ -191,6 +191,12 @@ export default defineConfig({
                   path: '/dash/account/myBill',
                   component: './account/myBill',
                 },
+                {
+                  name: 'center',
+                  icon: 'smile',
+                  path: '/dash/account/card-list',
+                  component: './account/card-list',
+                },
               ],
             },
             {

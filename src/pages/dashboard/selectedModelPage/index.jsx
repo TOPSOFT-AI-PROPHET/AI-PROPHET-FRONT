@@ -267,10 +267,21 @@ export default class TransitionPg extends React.Component {
           >
             <div className={styles.card2Content}>
               <div className={styles.cardAvatar}>
-                <Avatar size={48} src={this.state.author_profile_url} />
+                <Avatar
+                  size={48}
+                  src={this.state.author_profile_url}
+                  onClick={() => {
+                    history.push(`/dash/account/card-list`);
+                  }}
+                />
               </div>
               <div className={styles.content}>
-                <div className={styles.contentTitle}>
+                <div
+                  className={styles.contentTitle}
+                  onClick={() => {
+                    history.push(`/dash/account/card-list`);
+                  }}
+                >
                   {this.state.author}
                   <Badges level={this.state.author_level} />
                 </div>
