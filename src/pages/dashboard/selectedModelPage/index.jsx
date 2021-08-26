@@ -244,6 +244,7 @@ export default class TransitionPg extends React.Component {
     );
 
     if (this.state.data[0]) {
+      console.log(this.state.data[0]);
       return (
         <PageContainer content={content} extraContent={extraContent}>
           <div style={{ margin: '-24px -24px 24px -24px' }}>
@@ -271,7 +272,7 @@ export default class TransitionPg extends React.Component {
                   size={48}
                   src={this.state.author_profile_url}
                   onClick={() => {
-                    history.push(`/dash/account/card-list/${this.state.author_id}`);
+                    history.push(`/dash/account/card-list/${this.props.match.params.id}`);
                   }}
                 />
               </div>
@@ -279,7 +280,7 @@ export default class TransitionPg extends React.Component {
                 <div
                   className={styles.contentTitle}
                   onClick={() => {
-                    history.push(`/dash/account/card-list/${this.state.author_id}`);
+                    history.push(`/dash/account/card-list/${this.props.match.params.id}`);
                   }}
                 >
                   {this.state.author}
