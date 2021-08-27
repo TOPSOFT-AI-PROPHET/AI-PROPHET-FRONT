@@ -366,7 +366,15 @@ export default class TransitionPg extends React.Component {
                     >
                       {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button1' })}
                     </Button>
-                    <Button type="primary" shape="round">
+                    <Button
+                      type="primary"
+                      shape="round"
+                      onClick={() => {
+                        history.push(
+                          `/dash/prediction/modelinfo/${this.props.match.params.id}/apiprediction`,
+                        );
+                      }}
+                    >
                       {formatMessage({ id: 'pages.dashboard.selectedModelPage.card3.button2' })}
                     </Button>
                   </Space>
