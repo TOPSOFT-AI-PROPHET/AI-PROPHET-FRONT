@@ -166,6 +166,12 @@ export default defineConfig({
                   path: '/dash/model/editor/:id',
                   component: './dashboard/editor',
                 },
+                {
+                  name: 'analyzor',
+                  // hideInMenu: true,
+                  path: '/dash/model/analyzor',
+                  component: './dashboard/modelAnalyzePage',
+                },
               ],
             },
             {
