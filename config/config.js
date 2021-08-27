@@ -126,6 +126,12 @@ export default defineConfig({
                   component: './dashboard/selectedModelPage',
                 },
                 {
+                  name: 'apiprediction',
+                  hideInMenu: true,
+                  path: '/dash/prediction/modelinfo/:id/apiprediction',
+                  component: './dashboard/newprediction/APIprediction',
+                },
+                {
                   name: 'predictions',
                   icon: 'smile',
                   path: '/dash/prediction/predictions',
