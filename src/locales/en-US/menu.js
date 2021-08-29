@@ -60,4 +60,5 @@ export default {
   'menu.model': 'My Models',
   'menu.model.model': 'Models',
   'menu.model.creator': 'Create Model',
+  'menu.model.analyzor': 'Model analyzer',
 };

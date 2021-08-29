@@ -1,0 +1,46 @@
+.extraContent {
+  font-size: large;
+  .link {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+.cardBody {
+  display: flex;
+
+  .cardResultPart {
+    width: 300px;
+  }
+  .cardDescsPart {
+    flex: 1;
+  }
+}
+
+.cardBodyBottom {
+  width: 100%;
+}
+
+@media screen and (max-width: 750px) {
+  .cardBody {
+    flex-flow: column;
+    .cardResultPart {
+      order: 1;
+      width: 100%;
+    }
+
+    .cardDescsPart {
+      order: 2;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .extraContent {
+    .link {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+}

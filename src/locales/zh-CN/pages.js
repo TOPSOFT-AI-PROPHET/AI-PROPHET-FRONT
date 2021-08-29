@@ -184,6 +184,7 @@ export default {
   'basic.modellist.per': '/次',
   'basic.modellist.application': '我的模型',
   'basic.modellist.share': '分享',
+  'basic.modellist.analysis': '分析',
   'basic.modellist.edit': '编辑',
   'pages.account.myBill.card1.content.div': '当前积分余额：',
   'pages.account.myBill.card1.content.button': '提现',
