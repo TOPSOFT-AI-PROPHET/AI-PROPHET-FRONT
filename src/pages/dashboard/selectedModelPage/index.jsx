@@ -46,7 +46,7 @@ export default class TransitionPg extends React.Component {
   }
 
   handleClick = (e) => {
-    console.log('click ', e);
+    // console.log('click ', e);
     this.setState({ current: e.key });
   };
 
@@ -96,7 +96,7 @@ export default class TransitionPg extends React.Component {
       data: { ai_id: this.props.match.params.id },
     })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         this.setState({
           data: result.data,
         });
@@ -151,8 +151,9 @@ export default class TransitionPg extends React.Component {
 
   onCheck = async () => {
     try {
+      // eslint-disable-next-line
       const values = await this.formRef.current.validateFields();
-      console.log('Success:', values);
+      // console.log('Success:', values);
 
       request('/tasks/validate', {
         method: 'POST',
@@ -244,7 +245,7 @@ export default class TransitionPg extends React.Component {
     );
 
     if (this.state.data[0]) {
-      console.log(this.state.data[0]);
+      // console.log(this.state.data[0]);
       return (
         <PageContainer content={content} extraContent={extraContent}>
           <div style={{ margin: '-24px -24px 24px -24px' }}>

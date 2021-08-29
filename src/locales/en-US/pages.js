@@ -202,6 +202,7 @@ export default {
   'basic.modellist.application': 'My Models',
   'basic.modellist.share': 'Share',
   'basic.modellist.edit': 'Edit',
+  'basic.modellist.analysis': 'analysis',
   'pages.account.myBill.card1.content.button': 'withdraw',
   'pages.account.myBill.card1.content.div': 'Current credit: ',
   'pages.account.myBill.card2.title': 'Bill details',

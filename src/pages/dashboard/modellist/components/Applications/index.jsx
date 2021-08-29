@@ -1,4 +1,10 @@
-import { EditOutlined, ShareAltOutlined, LoadingOutlined, LoginOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  ShareAltOutlined,
+  LoadingOutlined,
+  LoginOutlined,
+  FundViewOutlined,
+} from '@ant-design/icons';
 import { Avatar, Badge, Card, List, message, Tooltip } from 'antd';
 import { React, useState, useEffect } from 'react';
 import { connect, history, FormattedMessage } from 'umi';
@@ -47,9 +53,7 @@ const Applications = () => {
         setIlist(result2.data.list);
       });
     });
-  }, [1]);
 
-  useEffect(() => {
     timerID = setInterval(() => {
       request('/users/returnUsrID', { method: 'POST' }).then((result) => {
         request('/tasks/personalAImodel', {
@@ -131,6 +135,16 @@ const Applications = () => {
         <Tooltip title={<FormattedMessage id="basic.modellist.share" />} key="share">
           <ShareAltOutlined />
         </Tooltip>,
+        <Tooltip title={<FormattedMessage id="basic.modellist.analysis" />} key="analysis">
+          <FundViewOutlined
+            onClick={() => {
+              message.warn({
+                content: '模型正在训练中....',
+                // style:{marginTop:'42vh'}
+              });
+            }}
+          />
+        </Tooltip>,
         <LoadingOutlined key={'loading'} />,
       ];
     }
@@ -162,6 +176,13 @@ const Applications = () => {
       <Tooltip title={<FormattedMessage id="basic.modellist.share" />} key="share">
         <ShareAltOutlined />
       </Tooltip>,
+      <Tooltip title={<FormattedMessage id="basic.modellist.analysis" />} key="analysis">
+        <FundViewOutlined
+          onClick={() => {
+            history.push(`/dash/model/analyzer/${item.pk}`);
+          }}
+        />
+      </Tooltip>,
     ];
   };
 
@@ -175,7 +196,7 @@ const Applications = () => {
     if (isPublish === 0) {
       return 'blue';
     }
-    return '';
+    return 'red';
   };
 
   const getBadgesText = (isPublish, status) => {
@@ -188,7 +209,7 @@ const Applications = () => {
     if (isPublish === 0) {
       return '未上架';
     }
-    return '';
+    return '未知';
   };
 
   return (

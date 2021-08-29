@@ -60,4 +60,5 @@ export default {
   'menu.model': '我的模型',
   'menu.model.model': '模型管理',
   'menu.model.creator': '创建新模型',
+  'menu.model.analyzor': '模型分析',
 };

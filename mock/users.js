@@ -743,7 +743,7 @@ export default {
               ai_usage: 223,
               user_id: 12, //id of author
               time_start: '123132',
-              ai_type: 1,
+              ai_type: 0,
               // 0-Traditional ML Decision Tree 1-Traditional ML Random Forest
               ai_training_material_count: 10000, //new attribute
               ai_output_unit: 'unit', //new attribute
@@ -820,7 +820,7 @@ export default {
             },
             {
               model: 'tasks.aimodel',
-              pk: 2,
+              pk: 3,
               fields: {
                 ai_name: 'lalala2',
                 ai_url: 'http://m.imeitou.com/uploads/allimg/2020031310/tt42dal51ms.jpeg',

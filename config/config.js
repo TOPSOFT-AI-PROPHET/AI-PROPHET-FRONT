@@ -168,8 +168,8 @@ export default defineConfig({
                 },
                 {
                   name: 'analyzor',
-                  // hideInMenu: true,
-                  path: '/dash/model/analyzor',
+                  hideInMenu: true,
+                  path: '/dash/model/analyzer/:id',
                   component: './dashboard/modelAnalyzePage',
                 },
               ],
