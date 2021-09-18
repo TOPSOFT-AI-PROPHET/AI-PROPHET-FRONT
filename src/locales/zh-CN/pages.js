@@ -197,4 +197,5 @@ export default {
   'pages.account.myBill.card2.table.wanttodelete': '确定要删除吗?',
   'account.center.des': '该用户的模型在先知系统被使用了',
   'account.center.times': '次',
+  'account.center.datejoined': '该用户加入先知系统的日期为: ',
 };

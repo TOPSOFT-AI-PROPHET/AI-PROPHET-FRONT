@@ -218,4 +218,5 @@ export default {
   'pages.account.myBill.card2.table.wanttodelete': 'Sure to delete?',
   'account.center.des': "This user's models have been used in the Prophet system",
   'account.center.times': 'times',
+  'account.center.datejoined': 'The date this user joined the Prophet system is: ',
 };

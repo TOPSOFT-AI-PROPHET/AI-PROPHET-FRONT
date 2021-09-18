@@ -1042,6 +1042,33 @@ export default {
     });
   },
 
+  'POST /users/getProfileInfo': async (req, res) => {
+    //个人主页接口 Profile page
+    if (req.headers.authorization === 'Bearer valid_token') {
+      res.send({
+        User_nickName: 'prophetdev',
+        user_level: 5,
+        user_sing: 'prophetdev',
+        user_weiboLink: 'https://zhoushenpu.com/',
+        user_gitLink: 'http://www.baidu.com',
+        user_dateJoined: '2012-8-12',
+        user_profileUUID: 'asdasf-dsfg-asda-gsd-dgs',
+      });
+      return;
+    }
+    res.status(401).send({
+      detail: 'Given token not valid for any token type',
+      code: 'token_not_valid',
+      messages: [
+        {
+          token_class: 'AccessToken',
+          token_type: 'access',
+          message: 'Token is invalid or expired',
+        },
+      ],
+    });
+  },
+
   'POST /users/getUserInfo': async (req, res) => {
     //获取用户信息
     if (req.headers.authorization === 'Bearer valid_token') {
