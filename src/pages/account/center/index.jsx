@@ -13,7 +13,7 @@ import COS from 'cos-js-sdk-v5';
 // const { Link } = Typography;
 const { Paragraph, Link } = Typography;
 
-const PageHeaderContent = ({ currentUser, url }) => {
+const PageHeaderContent = ({ currentUser, url, date, level, wlink, glink }) => {
   const loading = currentUser && Object.keys(currentUser).length;
   if (!loading) {
     return (
@@ -38,8 +38,9 @@ const PageHeaderContent = ({ currentUser, url }) => {
       <div className={styles.content}>
         <div className={styles.contentTitle}>
           {currentUser.nickname !== '' ? currentUser.nickname : 'John doe'}
+
           <img
-            src="assets/img/t0.png"
+            src={level}
             alt=""
             className={styles.level}
             style={{ width: '50px', height: '26px' }}
@@ -47,8 +48,12 @@ const PageHeaderContent = ({ currentUser, url }) => {
         </div>
       </div>
       <div className={styles.icon}>
-        <img src="assets/img/weibo-logo.png" alt="" />
-        <img src="assets/img/GitHub-logo.png" alt="" />
+        <a href={wlink} title="" target="_blank" rel="noreferrer">
+          <img src="assets/img/weibo-logo.png" alt="" />
+        </a>
+        <a href={glink} title="" target="_blank" rel="noreferrer">
+          <img src="assets/img/GitHub-logo.png" alt="" />
+        </a>
       </div>
       <div
         style={{
@@ -59,7 +64,8 @@ const PageHeaderContent = ({ currentUser, url }) => {
           fontSize: '16px',
         }}
       >
-        于2021年8月成为先知用户
+        <FormattedMessage id="account.center.datejoined" />
+        {date}
       </div>
     </div>
   );
@@ -77,6 +83,10 @@ class Workplace extends Component {
       imageURL: '',
       usage: '',
       currentUser: undefined,
+      dateJoin: '',
+      level: '',
+      weibolink: '',
+      githublink: '',
     };
   }
 
@@ -97,6 +107,22 @@ class Workplace extends Component {
               usage: result2.ai_model_usage,
             });
           }
+        });
+      })
+      .catch((e) => console.log(e));
+
+    request('/users/returnUsrID', { method: 'POST' })
+      .then((result) => {
+        request('/users/getProfileInfo', {
+          method: 'POST',
+          data: { user_id: result.data.user_id },
+        }).then((result2) => {
+          this.setState({
+            dateJoin: result2.user_dateJoined,
+            level: result2.user_level,
+            weibolink: result2.user_weiboLink,
+            githublink: result2.user_gitLink,
+          });
         });
       })
       .catch((e) => console.log(e));
@@ -169,13 +195,39 @@ class Workplace extends Component {
 
   render() {
     const { currentUser } = this.props;
+    let { url2 } = '';
     if (!currentUser || !currentUser.username) {
       return null;
+    }
+    if (this.state.level === 0) {
+      url2 = 'assets/img/t0.png';
+    }
+    if (this.state.level === 1) {
+      url2 = 'assets/img/t1.png';
+    }
+    if (this.state.level === 2) {
+      url2 = 'assets/img/T2.png';
+    }
+    if (this.state.level === 3) {
+      url2 = 'assets/img/t3.png';
+    }
+    if (this.state.level === 4) {
+      url2 = 'assets/img/t4.png';
+    }
+    if (this.state.level === 5) {
+      url2 = 'assets/img/T5.png';
     }
     return (
       <PageContainer
         content={
-          <PageHeaderContent currentUser={this.state.currentUser} url={this.state.imageURL} />
+          <PageHeaderContent
+            currentUser={this.state.currentUser}
+            url={this.state.imageURL}
+            date={this.state.dateJoin}
+            level={url2}
+            wlink={this.state.weibolink}
+            glink={this.state.githublink}
+          />
         }
         // extraContent={<ExtraContent currentUser={currentUser} value={this.state.data_task} />}
       >
